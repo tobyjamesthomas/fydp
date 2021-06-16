@@ -11,6 +11,7 @@ import SceneKit
 import ARKit
 import WebKit
 import SafariServices
+import SwiftyJSON
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
@@ -82,9 +83,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        webView.load(URLRequest(url: URL(string: "https://www.apple.com")!))
-        
+                
         // Setup Design Elements
         eyePositionIndicatorView.layer.cornerRadius = eyePositionIndicatorView.bounds.width / 2
         sceneView.layer.cornerRadius = 28
@@ -113,14 +112,37 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         lookAtTargetEyeLNode.position.z = 1
         lookAtTargetEyeRNode.position.z = 1
         
-        // Load single tweet
+        // Create TweetView to display single tweet
         TweetView.prepare()
-        let tweetView = TweetView(id:"1404974214667550728")
+        var tweetView = TweetView(id: "")
         let width = view.frame.width - 32
         tweetView.frame = CGRect(x: 16, y: (self.view.frame.size.height/2)-(width/4), width: width, height: width)
         tweetView.delegate = self
         self.view.addSubview(tweetView)
         tweetView.load()
+        
+        // Load tweets from user @RenEddie
+        // Set request parameters
+        let url = URL(string: "https://api.twitter.com/2/users/2586980632/tweets")!
+        var request = URLRequest(url: url)
+        request.setValue("Bearer AAAAAAAAAAAAAAAAAAAAAD90QgEAAAAACnAYrzenyOxhmHt9GPYmtrFoqT4%3DXqju5HCcVmSjeEdiBbcpzmehYABeyhSYqonv2jvIgMWQhVMkzs", forHTTPHeaderField: "Authorization")
+        request.setValue(#"guest_id=v1%3A162380693997379186; personalization_id="v1_lPUjY+e3S5t/Kv2bWDrxSA==""#, forHTTPHeaderField: "Cookie")
+    
+        // Send the request
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            do {
+                // Parse the JSON
+                let json = try? JSONSerialization.jsonObject(with: data!, options: [])
+                let json_obj = JSON(json)
+                let tweet_id = json_obj["data"][0]["id"].string!
+                tweetView.id = tweet_id
+                tweetView.load()
+            } catch {
+                print("JSON error: \(error.localizedDescription)")
+            }
+        }
+        task.resume()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
