@@ -3,10 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CC5DE862679B1A800130F5F /* TweetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5DE852679B1A800130F5F /* TweetView.swift */; };
+		2CC5DE882679B21E00130F5F /* WidgetsJSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5DE872679B21E00130F5F /* WidgetsJSManager.swift */; };
+		2CC5DE8B267A66EE00130F5F /* SwiftyJSON.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC5DE8A267A66EE00130F5F /* SwiftyJSON.xcframework */; };
+		2CC5DE8C267A66EE00130F5F /* SwiftyJSON.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC5DE8A267A66EE00130F5F /* SwiftyJSON.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D0D25B8920C80F5500A25627 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D25B8820C80F5500A25627 /* Extensions.swift */; };
 		D0E5847A20C806050052967A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E5847920C806050052967A /* AppDelegate.swift */; };
 		D0E5847E20C806050052967A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E5847D20C806050052967A /* ViewController.swift */; };
@@ -15,7 +19,24 @@
 		D0E5848620C806050052967A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0E5848420C806050052967A /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		2CC5DE8D267A66EE00130F5F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2CC5DE8C267A66EE00130F5F /* SwiftyJSON.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		2CC5DE852679B1A800130F5F /* TweetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetView.swift; sourceTree = "<group>"; };
+		2CC5DE872679B21E00130F5F /* WidgetsJSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsJSManager.swift; sourceTree = "<group>"; };
+		2CC5DE8A267A66EE00130F5F /* SwiftyJSON.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SwiftyJSON.xcframework; path = Carthage/Build/SwiftyJSON.xcframework; sourceTree = "<group>"; };
 		D0D25B8820C80F5500A25627 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D0E5847620C806050052967A /* Eyes Tracking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Eyes Tracking.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0E5847920C806050052967A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -31,17 +52,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CC5DE8B267A66EE00130F5F /* SwiftyJSON.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2CC5DE89267A66EE00130F5F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2CC5DE8A267A66EE00130F5F /* SwiftyJSON.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D0E5846D20C806050052967A = {
 			isa = PBXGroup;
 			children = (
+				2CC5DE872679B21E00130F5F /* WidgetsJSManager.swift */,
+				2CC5DE852679B1A800130F5F /* TweetView.swift */,
 				D0E5847820C806050052967A /* Eyes Tracking */,
 				D0E5847720C806050052967A /* Products */,
+				2CC5DE89267A66EE00130F5F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +110,7 @@
 				D0E5847220C806050052967A /* Sources */,
 				D0E5847320C806050052967A /* Frameworks */,
 				D0E5847420C806050052967A /* Resources */,
+				2CC5DE8D267A66EE00130F5F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -139,7 +173,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0D25B8920C80F5500A25627 /* Extensions.swift in Sources */,
+				2CC5DE882679B21E00130F5F /* WidgetsJSManager.swift in Sources */,
 				D0E5847E20C806050052967A /* ViewController.swift in Sources */,
+				2CC5DE862679B1A800130F5F /* TweetView.swift in Sources */,
 				D0E5847A20C806050052967A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
