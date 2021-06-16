@@ -10,6 +10,7 @@ import UIKit
 import SceneKit
 import ARKit
 import WebKit
+import SafariServices
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
@@ -82,7 +83,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        webView.load(URLRequest(url: URL(string: "https://www.apple.com")!))
+//        webView.load(URLRequest(url: URL(string: "https://www.apple.com")!))
         
         // Setup Design Elements
         eyePositionIndicatorView.layer.cornerRadius = eyePositionIndicatorView.bounds.width / 2
@@ -111,6 +112,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Set LookAtTargetEye at 2 meters away from the center of eyeballs to create segment vector
         lookAtTargetEyeLNode.position.z = 1
         lookAtTargetEyeRNode.position.z = 1
+        
+        // Load single tweet
+        TweetView.prepare()
+        let tweetView = TweetView(id:"1404974214667550728")
+        let width = view.frame.width - 32
+        tweetView.frame = CGRect(x: 16, y: (self.view.frame.size.height/2)-(width/4), width: width, height: width)
+        tweetView.delegate = self
+        self.view.addSubview(tweetView)
+        tweetView.load()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -209,7 +219,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             let directionVertical = smoothEyeLookAtPositionY > 0 ? "down" : "up"
             self.directionLabel.text = "\(directionHorizontal), \(directionVertical)"
         }
-        
     }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
@@ -220,5 +229,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         faceNode.transform = node.transform
         guard let faceAnchor = anchor as? ARFaceAnchor else { return }
         update(withFaceAnchor: faceAnchor)
+    }
+}
+
+
+extension ViewController: TweetViewDelegate {
+    func tweetView(_ tweetView: TweetView, didUpdatedHeight height: CGFloat) {
+        tweetView.frame.size = CGSize(width: tweetView.frame.width, height: height)
+    }
+    
+    func tweetView(_ tweetView: TweetView, shouldOpenURL url: URL) {
+        let vc = SFSafariViewController(url: url)
+        self.showDetailViewController(vc, sender: self)
     }
 }
