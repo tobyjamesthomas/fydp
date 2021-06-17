@@ -1,5 +1,6 @@
 import React, { useState} from 'react';
 import Popup from './Popup';
+import './App.css';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,17 +10,32 @@ function App() {
   }
 
   return <div>
-    <input
+    <input class="button-up"
       type="button"
-      value="Click to Open Popup"
+      value="Look Up"
       onClick={togglePopup}
     />
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <input class="button-right"
+      type="button"
+      value="Look Right"
+      onClick={togglePopup}
+    />
+    <input class="button-left"
+      type="button"
+      value="Look Left"
+      onClick={togglePopup}
+    />
+    <input class="button-down"
+      type="button"
+      value="Look Down"
+      onClick={togglePopup}
+    />
     {isOpen && <Popup
       content={<>
-        <b>Design your Popup</b>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <button>Test button</button>
+        <h1>Confirmation</h1>
+        <b>Are you sure you want to complete this action?</b>
+        <b></b>
+        <button class="button-confirmation">Yes</button>
       </>}
       handleClose={togglePopup}
     />}
