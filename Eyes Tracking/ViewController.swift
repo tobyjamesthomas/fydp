@@ -25,7 +25,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var lookAtPositionXLabel: UILabel!
     @IBOutlet weak var lookAtPositionYLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var directionLabel: UILabel!
+    @IBOutlet weak var gazeLabel: UILabel!
+    @IBOutlet weak var gazeButtonsView: UIView!
+    @IBOutlet weak var leftButton: UIButton!
+    @IBOutlet weak var rightButton: UIButton!
+    @IBOutlet weak var upButton: UIButton!
+    @IBOutlet weak var downButton: UIButton!
     
     var faceNode: SCNNode = SCNNode()
     
@@ -84,6 +89,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     var swifter = Swifter(consumerKey: "QwA8u4qhODLCWKdd5eHR1yQYm", consumerSecret: "4MMG8Vi5pC7Sa22SHj1je6gLuprwdRFwW9uckLBptgqj8eSvTx")
 
+    var gazeButtons: [UIButton] = []
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
@@ -134,6 +141,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 //        self.tweetView.id = "1405216798283284487"
 //        authorizeWithWebLogin(function: "retweet")
         
+        // Group buttons
+        gazeButtons.append(upButton)
+        gazeButtons.append(leftButton)
+        gazeButtons.append(rightButton)
+        gazeButtons.append(downButton)
+        
+        for gazeButton in gazeButtons {
+            gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.25)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -209,13 +225,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             let smoothEyeLookAtPositionX = self.eyeLookAtPositionXs.average!
             let smoothEyeLookAtPositionY = self.eyeLookAtPositionYs.average!
             
+            let gazePositionX = Int(round(smoothEyeLookAtPositionX + self.phoneScreenPointSize.width / 2))
+            let gazePositionY = Int(round(smoothEyeLookAtPositionY + self.phoneScreenPointSize.height / 2))
+            
             // update indicator position
             self.eyePositionIndicatorView.transform = CGAffineTransform(translationX: smoothEyeLookAtPositionX, y: smoothEyeLookAtPositionY)
             
             // update eye look at labels values
-            self.lookAtPositionXLabel.text = "\(Int(round(smoothEyeLookAtPositionX + self.phoneScreenPointSize.width / 2)))"
             
-            self.lookAtPositionYLabel.text = "\(Int(round(smoothEyeLookAtPositionY + self.phoneScreenPointSize.height / 2)))"
+            self.lookAtPositionXLabel.text = "\(gazePositionX)"
+            self.lookAtPositionYLabel.text = "\(gazePositionY)"
             
             // Calculate distance of the eyes to the camera
             let distanceL = self.eyeLNode.worldPosition - SCNVector3Zero
@@ -227,11 +246,36 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             // Update distance label value
             self.distanceLabel.text = "\(Int(round(distance * 100))) cm"
             
-            // Update direction label value
-            let directionHorizontal = smoothEyeLookAtPositionX > 0 ? "right" : "left"
-            let directionVertical = smoothEyeLookAtPositionY > 0 ? "down" : "up"
-            self.directionLabel.text = "\(directionHorizontal), \(directionVertical)"
+            // Detect gaze
+            self.detectGaze(CGPoint(x: gazePositionX, y: gazePositionY - 44))
         }
+        
+    }
+    
+    func detectGaze(_ point: CGPoint) {
+        let view: UIView? = self.gazeButtonsView.hitTest(point, with: nil)
+        
+        guard view is UIButton else {
+            if self.gazeLabel.text != "" {
+                self.gazeLabel.text = ""
+                for gazeButton in gazeButtons {
+                    gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.25)
+                }
+            }
+            return
+        }
+        
+        let button: UIButton = view as! UIButton
+        
+        for gazeButton in self.gazeButtons {
+            if gazeButton == button {
+                gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(1)
+            } else {
+                gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.25)
+            }
+        }
+        
+        self.gazeLabel.text = button.currentTitle
     }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
