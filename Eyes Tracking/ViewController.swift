@@ -77,6 +77,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     var eyeLookAtPositionYs: [CGFloat] = []
     
+    // Tweetview WebView to hold the tweet
+    var tweetView = TweetView(id: "")
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
@@ -112,36 +115,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         lookAtTargetEyeLNode.position.z = 1
         lookAtTargetEyeRNode.position.z = 1
         
-        // Create TweetView to display single tweet
+        // Format TweetView to display single tweet
         TweetView.prepare()
-        var tweetView = TweetView(id: "")
         let width = view.frame.width - 32
-        tweetView.frame = CGRect(x: 16, y: (self.view.frame.size.height/2)-(width/4), width: width, height: width)
+        tweetView.frame = CGRect(x: 16, y: 16, width: width, height: width)
         tweetView.delegate = self
         self.view.addSubview(tweetView)
-        tweetView.load()
         
-        // Load tweets from user @RenEddie
-        // Set request parameters
-        let url = URL(string: "https://api.twitter.com/2/users/2586980632/tweets")!
-        var request = URLRequest(url: url)
-        request.setValue("Bearer AAAAAAAAAAAAAAAAAAAAAD90QgEAAAAACnAYrzenyOxhmHt9GPYmtrFoqT4%3DXqju5HCcVmSjeEdiBbcpzmehYABeyhSYqonv2jvIgMWQhVMkzs", forHTTPHeaderField: "Authorization")
-        request.setValue(#"guest_id=v1%3A162380693997379186; personalization_id="v1_lPUjY+e3S5t/Kv2bWDrxSA==""#, forHTTPHeaderField: "Cookie")
-    
-        // Send the request
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            do {
-                // Parse the JSON
-                let json = try? JSONSerialization.jsonObject(with: data!, options: [])
-                let json_obj = JSON(json)
-                let tweet_id = json_obj["data"][0]["id"].string!
-                tweetView.id = tweet_id
-                tweetView.load()
-            } catch {
-                print("JSON error: \(error.localizedDescription)")
-            }
-        }
-        task.resume()
+        // Get the first tweet from the authenticated user's timeline
+        getTweetFromTimeline()
+        view.bringSubviewToFront(eyePositionIndicatorView)
+
         
     }
     
@@ -251,6 +235,38 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         faceNode.transform = node.transform
         guard let faceAnchor = anchor as? ARFaceAnchor else { return }
         update(withFaceAnchor: faceAnchor)
+    }
+    
+    func getTweetFromTimeline() {
+        // Load tweets from oauth authenticated user (currently @RenEddie)
+        let url = URL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")!
+        var request = URLRequest(url: url)
+        
+        // Authenticate the request, currently using OAuth 1.0 where tokens do NOT expire
+        // Some fields like 'oauth_signature' were generated in a Postman request and then copy pasted. If
+        // we want to use another user's timeline we would have to create a request in Postman then copy over the
+        // generated Authorization headers
+        request.setValue(#"OAuth oauth_consumer_key="VnXK4z0lREQqh0rI1C2JpRrYp",oauth_token="2586980632-NSorMAZQ6CEaBsVafq8zzLr5upK42veWCnmvVdr",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1623889744",oauth_nonce="OSsFiAHLVkp",oauth_version="1.0",oauth_signature="f76CDW24%2FDr2bBbHQsyjCPXK4kI%3D""#, forHTTPHeaderField: "Authorization")
+        request.setValue(#"guest_id=v1%3A162380693997379186; personalization_id="v1_lPUjY+e3S5t/Kv2bWDrxSA=="; lang=en"#, forHTTPHeaderField: "Cookie")
+    
+        // Send the request
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            // Parse the JSON
+            let json = try? JSONSerialization.jsonObject(with: data!, options: [])
+            let json_obj = JSON(json)
+            
+            // We can change the '0' below to get different tweets from the timeline using a Counter
+            let tweet_id = json_obj[0]["id_str"].string!
+            
+            // Update the TweetView
+            DispatchQueue.main.async {
+                self.tweetView.id = tweet_id
+                self.tweetView.load()
+            }
+            
+        }
+        task.resume()
+        
     }
 }
 
