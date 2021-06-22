@@ -134,12 +134,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         self.view.insertSubview(tweetView, belowSubview: gazeButtonsView)
         
         // Get the first tweet from the authenticated user's timeline
-//        authorizeWithWebLogin(function: "home")
-//        view.bringSubviewToFront(eyePositionIndicatorView)
+        authorizeWithWebLogin(function: "home")
+        view.bringSubviewToFront(eyePositionIndicatorView)
         
          // Testing retweet / like functionality
-        self.tweetView.id = "1405216798283284487"
-        authorizeWithWebLogin(function: "retweet")
+//        self.tweetView.id = "1405216798283284487"
+//        authorizeWithWebLogin(function: "retweet")
         
         // Add actions to buttons
         leftButton.addTarget(self, action: #selector(retweetAction), for: .primaryActionTriggered)
