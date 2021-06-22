@@ -11,7 +11,6 @@ import SceneKit
 import ARKit
 import WebKit
 import SafariServices
-import SwiftyJSON
 import SwifteriOS
 import AuthenticationServices
 
