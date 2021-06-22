@@ -134,16 +134,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         self.view.insertSubview(tweetView, belowSubview: gazeButtonsView)
         
         // Get the first tweet from the authenticated user's timeline
-        authorizeWithWebLogin(function: "home")
-        view.bringSubviewToFront(eyePositionIndicatorView)
+//        authorizeWithWebLogin(function: "home")
+//        view.bringSubviewToFront(eyePositionIndicatorView)
         
-        // Testing retweet / like functionality
-//        self.tweetView.id = "1405216798283284487"
-//        authorizeWithWebLogin(function: "retweet")
+         // Testing retweet / like functionality
+        self.tweetView.id = "1405216798283284487"
+        authorizeWithWebLogin(function: "retweet")
         
         // Add actions to buttons
-        leftButton.addTarget(self, action: #selector(retweetTweet), for: .primaryActionTriggered)
-        rightButton.addTarget(self, action: #selector(likeTweet), for: .primaryActionTriggered)
+        leftButton.addTarget(self, action: #selector(retweetAction), for: .primaryActionTriggered)
+        rightButton.addTarget(self, action: #selector(likeAction), for: .primaryActionTriggered)
         
         // Group buttons
         gazeButtons.append(upButton)
@@ -306,9 +306,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 if (function == "home") {
                     self.fetchHomeTimeline()
                 } else if (function == "like") {
-                    self.likeTweet()
+                    self.likeAction()
                 } else {
-                    self.retweetTweet()
+                    self.retweetAction()
                 }
             } failure: { error in
                 print(error.localizedDescription)
@@ -336,19 +336,67 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
     
-    @objc func likeTweet() {
+    @objc func likeAction() {
         // Likes the tweet that is currently visible on the screen
-        swifter.favoriteTweet(forID: self.tweetView.id) { json in
-            print("success!")
+        swifter.getTweet(for: self.tweetView.id) { json in
+            let jsonResult = json.object!
+            let isLiked = jsonResult["favorited"] == true
+            
+            if (isLiked) {
+                self.unfavoriteTweet()
+            } else {
+                self.favoriteTweet()
+            }
+
         } failure: { error in
             print(error.localizedDescription)
         }
     }
     
-    @objc func retweetTweet() {
+    private func unfavoriteTweet() {
+        swifter.unfavoriteTweet(forID: self.tweetView.id) { json in
+            print("unfavorited tweet!")
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func favoriteTweet() {
+        swifter.favoriteTweet(forID: self.tweetView.id) { json in
+            print("favorited tweet!")
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+    
+    @objc func retweetAction() {
         // Retweets the tweet that is currently visible on the screen
+        swifter.getTweet(for: self.tweetView.id) { json in
+            let jsonResult = json.object!
+            let isRetweeted = jsonResult["retweeted"] == true
+            
+            if (isRetweeted) {
+                self.unretweetTweet()
+            } else {
+                self.retweetTweet()
+            }
+
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func unretweetTweet() {
+        swifter.unretweetTweet(forID: self.tweetView.id) { json in
+            print("unretweeted tweet!")
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func retweetTweet() {
         swifter.retweetTweet(forID: self.tweetView.id) { json in
-            print("success!")
+            print("retweeted tweet!")
         } failure: { error in
             print(error.localizedDescription)
         }
