@@ -127,9 +127,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         self.view.addSubview(tweetView)
         
         // Get the first tweet from the authenticated user's timeline
-        getTweetFromTimeline()
+        authorizeWithWebLogin(function: "home")
         view.bringSubviewToFront(eyePositionIndicatorView)
-
+        
+        // Testing retweet / like functionality
+//        self.tweetView.id = "1405216798283284487"
+//        authorizeWithWebLogin(function: "retweet")
         
     }
     
@@ -241,18 +244,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         update(withFaceAnchor: faceAnchor)
     }
     
-    func getTweetFromTimeline() {
-        authorizeWithWebLogin()
-    }
-    
-    private func authorizeWithWebLogin() {
+    // Authorize user using OAuth and call the function specified
+    private func authorizeWithWebLogin(function: String) {
+        
+        // Must specify a callback url
         let callbackUrl = URL(string: "eyestracking://")!
 
         if #available(iOS 13.0, *) {
             swifter.authorize (withProvider: self, callbackURL: callbackUrl) { _, _ in
-                self.fetchHomeTimeline()
+                // Call the function specified by the function parameter
+                if (function == "home") {
+                    self.fetchHomeTimeline()
+                } else if (function == "like") {
+                    self.likeTweet()
+                } else {
+                    self.retweetTweet()
+                }
             } failure: { error in
-                print("ERROR")
                 print(error.localizedDescription)
             }
         } else {
@@ -264,9 +272,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     private func fetchHomeTimeline() {
         // Load tweets from oauth authenticated user (currently @RenEddie)
         swifter.getHomeTimeline(count: 1) { json in
-            // Successfully fetched timeline, so lets create and push the table view
+            // Successfully fetched timeline, we save the tweet id and create the tweet view
             let jsonResult = json.array ?? []
-            print(jsonResult[0]["id_str"])
             let tweet_id = jsonResult[0]["id_str"].string!
             
             // Update the TweetView
@@ -274,20 +281,27 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 self.tweetView.id = tweet_id
                 self.tweetView.load()
             }
-            // self.performSegue(withIdentifier: "showTweets", sender: self)
         } failure: { error in
-            print("ERROR2")
             print(error.localizedDescription)
         }
     }
     
     func likeTweet() {
-        // Get user id for username, hardcoded to RenEddie for now
-        
+        // Likes the tweet that is currently visible on the screen
+        swifter.favoriteTweet(forID: self.tweetView.id) { json in
+            print("success!")
+        } failure: { error in
+            print(error.localizedDescription)
+        }
     }
     
     func retweetTweet() {
-        // Load tweets from oauth authenticated user (currently @RenEddie)
+        // Retweets the tweet that is currently visible on the screen
+        swifter.retweetTweet(forID: self.tweetView.id) { json in
+            print("success!")
+        } failure: { error in
+            print(error.localizedDescription)
+        }
     }
 }
 
