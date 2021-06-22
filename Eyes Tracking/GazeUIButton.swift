@@ -14,10 +14,12 @@ class GazeUIButton : UIButton {
     private var startTime = 0.0
     private var duration = 2.0
     
-    public var isActive = false
-    
     required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
+    }
+    
+    func isActive() -> Bool {
+        return displayLink != nil
     }
     
     func startLink() {
@@ -30,8 +32,6 @@ class GazeUIButton : UIButton {
         displayLink.add(to: .main, forMode: .common)
         
         self.displayLink = displayLink
-        
-        isActive = true
     }
     
     @objc func linkDidFire(_ link: CADisplayLink) {
@@ -39,17 +39,16 @@ class GazeUIButton : UIButton {
         
         if progress == 1.0 {
             stopLink()
-            print(currentTitle!, "done!")
+            sendActions(for: .primaryActionTriggered)
+            return
         }
         
         backgroundColor = backgroundColor?.withAlphaComponent(CGFloat(progress))
     }
     
     func stopLink() {
-        print(currentTitle!, "stopped!")
         backgroundColor = backgroundColor?.withAlphaComponent(0.0)
         displayLink?.invalidate()
         displayLink = nil
-        isActive = false
     }
 }

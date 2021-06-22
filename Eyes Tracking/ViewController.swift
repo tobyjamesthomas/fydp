@@ -131,7 +131,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let width = view.frame.width - 32
         tweetView.frame = CGRect(x: 16, y: 16, width: width, height: width)
         tweetView.delegate = self
-        self.view.addSubview(tweetView)
+        self.view.insertSubview(tweetView, belowSubview: gazeButtonsView)
         
         // Get the first tweet from the authenticated user's timeline
         authorizeWithWebLogin(function: "home")
@@ -140,6 +140,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Testing retweet / like functionality
 //        self.tweetView.id = "1405216798283284487"
 //        authorizeWithWebLogin(function: "retweet")
+        
+        // Add actions to buttons
+        leftButton.addTarget(self, action: #selector(retweetTweet), for: .primaryActionTriggered)
+        rightButton.addTarget(self, action: #selector(likeTweet), for: .primaryActionTriggered)
         
         // Group buttons
         gazeButtons.append(upButton)
@@ -261,7 +265,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             }
             
             for button in gazeButtons {
-                if button.isActive { button.stopLink() }
+                if button.isActive() { button.stopLink() }
             }
             
             return
@@ -270,7 +274,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let button: GazeUIButton = view as! GazeUIButton
         
         for otherButton in gazeButtons {
-            if otherButton != button && otherButton.isActive {
+            if otherButton != button && otherButton.isActive() {
                 otherButton.stopLink()
             }
         }
@@ -332,7 +336,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
     
-    func likeTweet() {
+    @objc func likeTweet() {
         // Likes the tweet that is currently visible on the screen
         swifter.favoriteTweet(forID: self.tweetView.id) { json in
             print("success!")
@@ -341,7 +345,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
     
-    func retweetTweet() {
+    @objc func retweetTweet() {
         // Retweets the tweet that is currently visible on the screen
         swifter.retweetTweet(forID: self.tweetView.id) { json in
             print("success!")
