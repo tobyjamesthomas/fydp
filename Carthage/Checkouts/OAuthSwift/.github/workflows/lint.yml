@@ -1,0 +1,23 @@
+name: Lint
+on: push
+jobs:
+  lint:
+    name: Lint
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+      - name: Install swiftlint
+        run: |
+          if [ -z "$(which swiftlint)" ]; then
+            brew install swiftlint
+          else
+            swiftlint version  
+          fi
+        env:
+          HOMEBREW_NO_INSTALL_CLEANUP: 1
+      - name: Code Lint
+        run: |
+          swiftlint --strict

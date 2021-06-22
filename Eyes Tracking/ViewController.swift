@@ -12,6 +12,9 @@ import ARKit
 import WebKit
 import SafariServices
 import SwiftyJSON
+import SwifteriOS
+import AuthenticationServices
+
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
@@ -79,6 +82,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     // Tweetview WebView to hold the tweet
     var tweetView = TweetView(id: "")
+    
+    var swifter = Swifter(consumerKey: "QwA8u4qhODLCWKdd5eHR1yQYm", consumerSecret: "4MMG8Vi5pC7Sa22SHj1je6gLuprwdRFwW9uckLBptgqj8eSvTx")
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -238,35 +243,52 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     func getTweetFromTimeline() {
-        // Load tweets from oauth authenticated user (currently @RenEddie)
-        let url = URL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")!
-        var request = URLRequest(url: url)
-        
-        // Authenticate the request, currently using OAuth 1.0 where tokens do NOT expire
-        // Some fields like 'oauth_signature' were generated in a Postman request and then copy pasted. If
-        // we want to use another user's timeline we would have to create a request in Postman then copy over the
-        // generated Authorization headers
-        request.setValue(#"OAuth oauth_consumer_key="VnXK4z0lREQqh0rI1C2JpRrYp",oauth_token="2586980632-NSorMAZQ6CEaBsVafq8zzLr5upK42veWCnmvVdr",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1623889744",oauth_nonce="OSsFiAHLVkp",oauth_version="1.0",oauth_signature="f76CDW24%2FDr2bBbHQsyjCPXK4kI%3D""#, forHTTPHeaderField: "Authorization")
-        request.setValue(#"guest_id=v1%3A162380693997379186; personalization_id="v1_lPUjY+e3S5t/Kv2bWDrxSA=="; lang=en"#, forHTTPHeaderField: "Cookie")
+        authorizeWithWebLogin()
+    }
     
-        // Send the request
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            // Parse the JSON
-            let json = try? JSONSerialization.jsonObject(with: data!, options: [])
-            let json_obj = JSON(json)
-            
-            // We can change the '0' below to get different tweets from the timeline using a Counter
-            let tweet_id = json_obj[0]["id_str"].string!
+    private func authorizeWithWebLogin() {
+        let callbackUrl = URL(string: "eyestracking://")!
+
+        if #available(iOS 13.0, *) {
+            swifter.authorize (withProvider: self, callbackURL: callbackUrl) { _, _ in
+                self.fetchHomeTimeline()
+            } failure: { error in
+                print("ERROR")
+                print(error.localizedDescription)
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+
+    
+    private func fetchHomeTimeline() {
+        // Load tweets from oauth authenticated user (currently @RenEddie)
+        swifter.getHomeTimeline(count: 1) { json in
+            // Successfully fetched timeline, so lets create and push the table view
+            let jsonResult = json.array ?? []
+            print(jsonResult[0]["id_str"])
+            let tweet_id = jsonResult[0]["id_str"].string!
             
             // Update the TweetView
             DispatchQueue.main.async {
                 self.tweetView.id = tweet_id
                 self.tweetView.load()
             }
-            
+            // self.performSegue(withIdentifier: "showTweets", sender: self)
+        } failure: { error in
+            print("ERROR2")
+            print(error.localizedDescription)
         }
-        task.resume()
+    }
+    
+    func likeTweet() {
+        // Get user id for username, hardcoded to RenEddie for now
         
+    }
+    
+    func retweetTweet() {
+        // Load tweets from oauth authenticated user (currently @RenEddie)
     }
 }
 
@@ -279,5 +301,19 @@ extension ViewController: TweetViewDelegate {
     func tweetView(_ tweetView: TweetView, shouldOpenURL url: URL) {
         let vc = SFSafariViewController(url: url)
         self.showDetailViewController(vc, sender: self)
+    }
+}
+
+extension ViewController: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+// This is need for ASWebAuthenticationSession
+@available(iOS 13.0, *)
+extension ViewController: ASWebAuthenticationPresentationContextProviding {
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        return self.view.window!
     }
 }
