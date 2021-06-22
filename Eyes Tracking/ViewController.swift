@@ -337,11 +337,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     @objc func likeAction() {
-        // Likes the tweet that is currently visible on the screen
+        // Likes or unlikes the tweet that is currently visible on the screen
         swifter.getTweet(for: self.tweetView.id) { json in
             let jsonResult = json.object!
             let isLiked = jsonResult["favorited"] == true
             
+            // if the user has already liked the tweet then we unlike it, otherwise we like it
             if (isLiked) {
                 self.unfavoriteTweet()
             } else {
@@ -354,6 +355,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     private func unfavoriteTweet() {
+        // Unlike the tweet shown
         swifter.unfavoriteTweet(forID: self.tweetView.id) { json in
             print("unfavorited tweet!")
         } failure: { error in
@@ -362,6 +364,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     private func favoriteTweet() {
+        // Like the tweet shown
         swifter.favoriteTweet(forID: self.tweetView.id) { json in
             print("favorited tweet!")
         } failure: { error in
@@ -375,6 +378,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             let jsonResult = json.object!
             let isRetweeted = jsonResult["retweeted"] == true
             
+            // if the user has already retweeted the tweet then we unretweet it, otherwise we retweet it
             if (isRetweeted) {
                 self.unretweetTweet()
             } else {
@@ -387,6 +391,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     private func unretweetTweet() {
+        // Unretweet the tweet shown
         swifter.unretweetTweet(forID: self.tweetView.id) { json in
             print("unretweeted tweet!")
         } failure: { error in
@@ -395,6 +400,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     private func retweetTweet() {
+        // Retweet the tweet shown
         swifter.retweetTweet(forID: self.tweetView.id) { json in
             print("retweeted tweet!")
         } failure: { error in
