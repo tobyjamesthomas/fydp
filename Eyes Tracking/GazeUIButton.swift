@@ -2,9 +2,6 @@
 //  GazeUIButton.swift
 //  Eyes Tracking
 //
-//  Created by Toby James Thomas on 2021-06-21.
-//  Copyright © 2021 virakri. All rights reserved.
-//
 
 import Foundation
 import UIKit

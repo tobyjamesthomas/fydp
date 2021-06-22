@@ -251,7 +251,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             self.distanceLabel.text = "\(Int(round(distance * 100))) cm"
             
             // Detect gaze
-            self.detectGaze(CGPoint(x: gazePositionX, y: gazePositionY - 44))
+            self.detectGaze(CGPoint(x: gazePositionX, y: gazePositionY - 44)) // -44 for gazeButtonsView y offset
         }
         
     }
