@@ -27,10 +27,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var gazeLabel: UILabel!
     @IBOutlet weak var gazeButtonsView: UIView!
-    @IBOutlet weak var leftButton: UIButton!
-    @IBOutlet weak var rightButton: UIButton!
-    @IBOutlet weak var upButton: UIButton!
-    @IBOutlet weak var downButton: UIButton!
+    @IBOutlet weak var leftButton: GazeUIButton!
+    @IBOutlet weak var rightButton: GazeUIButton!
+    @IBOutlet weak var upButton: GazeUIButton!
+    @IBOutlet weak var downButton: GazeUIButton!
     
     var faceNode: SCNNode = SCNNode()
     
@@ -89,7 +89,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     var swifter = Swifter(consumerKey: "QwA8u4qhODLCWKdd5eHR1yQYm", consumerSecret: "4MMG8Vi5pC7Sa22SHj1je6gLuprwdRFwW9uckLBptgqj8eSvTx")
 
-    var gazeButtons: [UIButton] = []
+    var gazeButtons: [GazeUIButton] = []
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -148,7 +148,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         gazeButtons.append(downButton)
         
         for gazeButton in gazeButtons {
-            gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.25)
+            gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.0)
         }
     }
     
@@ -255,25 +255,27 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     func detectGaze(_ point: CGPoint) {
         let view: UIView? = self.gazeButtonsView.hitTest(point, with: nil)
         
-        guard view is UIButton else {
+        guard view is GazeUIButton else {
             if self.gazeLabel.text != "" {
                 self.gazeLabel.text = ""
-                for gazeButton in gazeButtons {
-                    gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.25)
-                }
             }
+            
+            for button in gazeButtons {
+                if button.isActive { button.stopLink() }
+            }
+            
             return
         }
         
-        let button: UIButton = view as! UIButton
+        let button: GazeUIButton = view as! GazeUIButton
         
-        for gazeButton in self.gazeButtons {
-            if gazeButton == button {
-                gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(1)
-            } else {
-                gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.25)
+        for otherButton in gazeButtons {
+            if otherButton != button && otherButton.isActive {
+                otherButton.stopLink()
             }
         }
+        
+        button.startLink()
         
         self.gazeLabel.text = button.currentTitle
     }
