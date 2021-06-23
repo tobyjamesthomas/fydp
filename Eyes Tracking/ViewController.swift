@@ -25,7 +25,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var lookAtPositionXLabel: UILabel!
     @IBOutlet weak var lookAtPositionYLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var directionLabel: UILabel!
+    @IBOutlet weak var gazeLabel: UILabel!
+    @IBOutlet weak var gazeButtonsView: UIView!
+    @IBOutlet weak var leftButton: GazeUIButton!
+    @IBOutlet weak var rightButton: GazeUIButton!
+    @IBOutlet weak var upButton: GazeUIButton!
+    @IBOutlet weak var downButton: GazeUIButton!
     
     var faceNode: SCNNode = SCNNode()
     
@@ -84,6 +89,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     var swifter = Swifter(consumerKey: "QwA8u4qhODLCWKdd5eHR1yQYm", consumerSecret: "4MMG8Vi5pC7Sa22SHj1je6gLuprwdRFwW9uckLBptgqj8eSvTx")
 
+    var gazeButtons: [GazeUIButton] = []
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
@@ -124,7 +131,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let width = view.frame.width - 32
         tweetView.frame = CGRect(x: 16, y: 16, width: width, height: width)
         tweetView.delegate = self
-        self.view.addSubview(tweetView)
+        self.view.insertSubview(tweetView, belowSubview: gazeButtonsView)
         
         // Get the first tweet from the authenticated user's timeline
         authorizeWithWebLogin(function: "home")
@@ -134,6 +141,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 //        self.tweetView.id = "1405216798283284487"
 //        authorizeWithWebLogin(function: "retweet")
         
+        // Add actions to buttons
+        leftButton.addTarget(self, action: #selector(retweetTweet), for: .primaryActionTriggered)
+        rightButton.addTarget(self, action: #selector(likeTweet), for: .primaryActionTriggered)
+        
+        // Group buttons
+        gazeButtons.append(upButton)
+        gazeButtons.append(leftButton)
+        gazeButtons.append(rightButton)
+        gazeButtons.append(downButton)
+        
+        for gazeButton in gazeButtons {
+            gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.0)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -209,13 +229,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             let smoothEyeLookAtPositionX = self.eyeLookAtPositionXs.average!
             let smoothEyeLookAtPositionY = self.eyeLookAtPositionYs.average!
             
+            let gazePositionX = Int(round(smoothEyeLookAtPositionX + self.phoneScreenPointSize.width / 2))
+            let gazePositionY = Int(round(smoothEyeLookAtPositionY + self.phoneScreenPointSize.height / 2))
+            
             // update indicator position
             self.eyePositionIndicatorView.transform = CGAffineTransform(translationX: smoothEyeLookAtPositionX, y: smoothEyeLookAtPositionY)
             
             // update eye look at labels values
-            self.lookAtPositionXLabel.text = "\(Int(round(smoothEyeLookAtPositionX + self.phoneScreenPointSize.width / 2)))"
             
-            self.lookAtPositionYLabel.text = "\(Int(round(smoothEyeLookAtPositionY + self.phoneScreenPointSize.height / 2)))"
+            self.lookAtPositionXLabel.text = "\(gazePositionX)"
+            self.lookAtPositionYLabel.text = "\(gazePositionY)"
             
             // Calculate distance of the eyes to the camera
             let distanceL = self.eyeLNode.worldPosition - SCNVector3Zero
@@ -227,11 +250,38 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             // Update distance label value
             self.distanceLabel.text = "\(Int(round(distance * 100))) cm"
             
-            // Update direction label value
-            let directionHorizontal = smoothEyeLookAtPositionX > 0 ? "right" : "left"
-            let directionVertical = smoothEyeLookAtPositionY > 0 ? "down" : "up"
-            self.directionLabel.text = "\(directionHorizontal), \(directionVertical)"
+            // Detect gaze
+            self.detectGaze(CGPoint(x: gazePositionX, y: gazePositionY - 44)) // -44 for gazeButtonsView y offset
         }
+        
+    }
+    
+    func detectGaze(_ point: CGPoint) {
+        let view: UIView? = self.gazeButtonsView.hitTest(point, with: nil)
+        
+        guard view is GazeUIButton else {
+            if self.gazeLabel.text != "" {
+                self.gazeLabel.text = ""
+            }
+            
+            for button in gazeButtons {
+                if button.isActive() { button.stopLink() }
+            }
+            
+            return
+        }
+        
+        let button: GazeUIButton = view as! GazeUIButton
+        
+        for otherButton in gazeButtons {
+            if otherButton != button && otherButton.isActive() {
+                otherButton.stopLink()
+            }
+        }
+        
+        button.startLink()
+        
+        self.gazeLabel.text = button.currentTitle
     }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
@@ -286,7 +336,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
     
-    func likeTweet() {
+    @objc func likeTweet() {
         // Likes the tweet that is currently visible on the screen
         swifter.favoriteTweet(forID: self.tweetView.id) { json in
             print("success!")
@@ -295,7 +345,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
     
-    func retweetTweet() {
+    @objc func retweetTweet() {
         // Retweets the tweet that is currently visible on the screen
         swifter.retweetTweet(forID: self.tweetView.id) { json in
             print("success!")
