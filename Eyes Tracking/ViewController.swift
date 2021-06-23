@@ -137,13 +137,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         authorizeWithWebLogin(function: "home")
         view.bringSubviewToFront(eyePositionIndicatorView)
         
-        // Testing retweet / like functionality
+         // Testing retweet / like functionality
 //        self.tweetView.id = "1405216798283284487"
 //        authorizeWithWebLogin(function: "retweet")
         
         // Add actions to buttons
-        leftButton.addTarget(self, action: #selector(retweetTweet), for: .primaryActionTriggered)
-        rightButton.addTarget(self, action: #selector(likeTweet), for: .primaryActionTriggered)
+        leftButton.addTarget(self, action: #selector(retweetAction), for: .primaryActionTriggered)
+        rightButton.addTarget(self, action: #selector(likeAction), for: .primaryActionTriggered)
         
         // Group buttons
         gazeButtons.append(upButton)
@@ -306,9 +306,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 if (function == "home") {
                     self.fetchHomeTimeline()
                 } else if (function == "like") {
-                    self.likeTweet()
+                    self.likeAction()
                 } else {
-                    self.retweetTweet()
+                    self.retweetAction()
                 }
             } failure: { error in
                 print(error.localizedDescription)
@@ -336,19 +336,73 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
     
-    @objc func likeTweet() {
-        // Likes the tweet that is currently visible on the screen
-        swifter.favoriteTweet(forID: self.tweetView.id) { json in
-            print("success!")
+    @objc func likeAction() {
+        // Likes or unlikes the tweet that is currently visible on the screen
+        swifter.getTweet(for: self.tweetView.id) { json in
+            let jsonResult = json.object!
+            let isLiked = jsonResult["favorited"] == true
+            
+            // if the user has already liked the tweet then we unlike it, otherwise we like it
+            if (isLiked) {
+                self.unfavoriteTweet()
+            } else {
+                self.favoriteTweet()
+            }
+
         } failure: { error in
             print(error.localizedDescription)
         }
     }
     
-    @objc func retweetTweet() {
+    private func unfavoriteTweet() {
+        // Unlike the tweet shown
+        swifter.unfavoriteTweet(forID: self.tweetView.id) { json in
+            print("unfavorited tweet!")
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func favoriteTweet() {
+        // Like the tweet shown
+        swifter.favoriteTweet(forID: self.tweetView.id) { json in
+            print("favorited tweet!")
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+    
+    @objc func retweetAction() {
         // Retweets the tweet that is currently visible on the screen
+        swifter.getTweet(for: self.tweetView.id) { json in
+            let jsonResult = json.object!
+            let isRetweeted = jsonResult["retweeted"] == true
+            
+            // if the user has already retweeted the tweet then we unretweet it, otherwise we retweet it
+            if (isRetweeted) {
+                self.unretweetTweet()
+            } else {
+                self.retweetTweet()
+            }
+
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func unretweetTweet() {
+        // Unretweet the tweet shown
+        swifter.unretweetTweet(forID: self.tweetView.id) { json in
+            print("unretweeted tweet!")
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func retweetTweet() {
+        // Retweet the tweet shown
         swifter.retweetTweet(forID: self.tweetView.id) { json in
-            print("success!")
+            print("retweeted tweet!")
         } failure: { error in
             print(error.localizedDescription)
         }
