@@ -348,6 +348,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             } else {
                 self.favoriteTweet()
             }
+            
+            // Update the TweetView
+            DispatchQueue.main.async {
+                self.tweetView.load()
+            }
 
         } failure: { error in
             print(error.localizedDescription)
@@ -383,6 +388,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 self.unretweetTweet()
             } else {
                 self.retweetTweet()
+            }
+            
+            // Update the TweetView
+            DispatchQueue.main.async {
+                self.tweetView.load()
             }
 
         } failure: { error in
