@@ -31,6 +31,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var rightButton: GazeUIButton!
     @IBOutlet weak var upButton: GazeUIButton!
     @IBOutlet weak var downButton: GazeUIButton!
+    @IBOutlet weak var retweetView: UIImageView!
+    @IBOutlet weak var heartView: UIImageView!
     
     var faceNode: SCNNode = SCNNode()
     
@@ -128,8 +130,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         // Format TweetView to display single tweet
         TweetView.prepare()
-        let width = view.frame.width - 32
-        tweetView.frame = CGRect(x: 16, y: 16, width: width, height: width)
+        let width = view.frame.width - 64
+        tweetView.frame = CGRect(x: 32, y: 32, width: width, height: width)
         tweetView.delegate = self
         self.view.insertSubview(tweetView, belowSubview: gazeButtonsView)
         
@@ -154,6 +156,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         for gazeButton in gazeButtons {
             gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.0)
         }
+        
+        let tapLike = UITapGestureRecognizer(target: self, action: #selector(likeAction))
+        heartView.addGestureRecognizer(tapLike)
+        heartView.isUserInteractionEnabled = true
+        
+        let tapRetweet = UITapGestureRecognizer(target: self, action: #selector(retweetAction))
+        retweetView.addGestureRecognizer(tapRetweet)
+        retweetView.isUserInteractionEnabled = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -325,6 +335,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             // Successfully fetched timeline, we save the tweet id and create the tweet view
             let jsonResult = json.array ?? []
             let tweet_id = jsonResult[0]["id_str"].string!
+            let hearted = jsonResult[0]["favorited"] == true
+            let retweeted = jsonResult[0]["retweeted"] == true
+            print("Updating home timeline", jsonResult[0]["favorited"], jsonResult[0]["retweeted"])
+
+            
+            if (hearted) {
+                self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
+            }
+            if (retweeted) {
+                self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
+            }
             
             // Update the TweetView
             DispatchQueue.main.async {
@@ -345,13 +366,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             // if the user has already liked the tweet then we unlike it, otherwise we like it
             if (isLiked) {
                 self.unfavoriteTweet()
+                self.heartView.setImage(UIImage(systemName: "heart"), animated: true)
+
             } else {
                 self.favoriteTweet()
-            }
-            
-            // Update the TweetView
-            DispatchQueue.main.async {
-                self.tweetView.load()
+                self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
             }
 
         } failure: { error in
@@ -386,13 +405,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             // if the user has already retweeted the tweet then we unretweet it, otherwise we retweet it
             if (isRetweeted) {
                 self.unretweetTweet()
+                self.retweetView.setImage(UIImage(named: "retweet_black"), animated: true)
             } else {
                 self.retweetTweet()
-            }
-            
-            // Update the TweetView
-            DispatchQueue.main.async {
-                self.tweetView.load()
+                self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
+
             }
 
         } failure: { error in
@@ -436,6 +453,16 @@ extension ViewController: SFSafariViewControllerDelegate {
         controller.dismiss(animated: true, completion: nil)
     }
 }
+
+extension UIImageView{
+    func setImage(_ image: UIImage?, animated: Bool = true) {
+        let duration = animated ? 0.2 : 0.0
+        UIView.transition(with: self, duration: duration, options: .transitionCrossDissolve, animations: {
+            self.image = image
+        }, completion: nil)
+    }
+}
+ 
 
 // This is need for ASWebAuthenticationSession
 @available(iOS 13.0, *)
