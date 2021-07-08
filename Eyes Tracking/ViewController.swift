@@ -91,7 +91,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                           consumerSecret: "4MMG8Vi5pC7Sa22SHj1je6gLuprwdRFwW9uckLBptgqj8eSvTx")
 
     var gazeButtons: [GazeUIButton] = []
-
+    
+    var isBlinking: Bool = false
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
@@ -203,6 +205,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
         eyeRNode.simdTransform = anchor.rightEyeTransform
         eyeLNode.simdTransform = anchor.leftEyeTransform
+<<<<<<< HEAD
+=======
+        
+        let blendShapes = anchor.blendShapes
+        let eyeBlinkLeft = blendShapes[.eyeBlinkLeft] as! Float
+        let eyeBlinkRight = blendShapes[.eyeBlinkRight] as! Float
+        
+        if (eyeBlinkRight > 0.9 || eyeBlinkLeft > 0.9)  {
+            isBlinking = true
+        }
+        if (eyeBlinkLeft < 0.2 && eyeBlinkRight < 0.2) {
+            if (isBlinking == true) {
+                print("Full blink detected!")
+            }
+            isBlinking = false
+        }
+>>>>>>> Detect and print when user is blinking
 
         var eyeLLookAt = CGPoint()
         var eyeRLookAt = CGPoint()
