@@ -211,7 +211,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             }
         }
     }
-    
+
     // MARK: - ARSCNViewDelegate
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -370,7 +370,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
         fetchHomeTimeline()
     }
-    
+
     func fetchHomeTimeline() {
         // Load tweets from oauth authenticated user (currently @RenEddie)
         swifter.getHomeTimeline(count: self.tweetNum+1, tweetMode: .extended) { json in
