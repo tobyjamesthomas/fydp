@@ -33,7 +33,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var downButton: GazeUIButton!
     @IBOutlet weak var retweetView: UIImageView!
     @IBOutlet weak var heartView: UIImageView!
-    var indx = 1;
     
     var faceNode: SCNNode = SCNNode()
     
@@ -132,8 +131,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Format TweetView to display single tweet
         TweetView.prepare()
         let width = view.frame.width - 64
-        let height = view.frame.height - 64
-        tweetView.frame = CGRect(x: 32, y: 200, width: width, height: height)
+        tweetView.frame = CGRect(x: 32, y: 32, width: width, height: width)
         tweetView.delegate = self
         self.view.insertSubview(tweetView, belowSubview: gazeButtonsView)
         
@@ -148,8 +146,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Add actions to buttons
         leftButton.addTarget(self, action: #selector(retweetAction), for: .primaryActionTriggered)
         rightButton.addTarget(self, action: #selector(likeAction), for: .primaryActionTriggered)
-        downButton.addTarget(self, action: #selector(scrollDown), for: .primaryActionTriggered)
-        //upButton.addTarget(self, action: #selector(scrollUp), for: .primaryActionTriggered)
         
         // Group buttons
         gazeButtons.append(upButton)
@@ -438,77 +434,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             print(error.localizedDescription)
         }
     }
-    
-    @objc func scrollDown() {
-        // Retweets the tweet that is currently visible on the screen
-        swifter.getHomeTimeline(count: 20) { json in
-            // Successfully fetched timeline, we save the tweet id and create the tweet view
-            let jsonResult = json.array ?? []
-            let tweet_id = jsonResult[self.indx]["id_str"].string!
-            let hearted = jsonResult[self.indx]["favorited"] == true
-            let retweeted = jsonResult[self.indx]["retweeted"] == true
-            print("Updating home timeline", jsonResult[self.indx]["favorited"], jsonResult[self.indx]["retweeted"])
-            
-            if (hearted) {
-                self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
-            }
-            if (!hearted) {
-                self.heartView.setImage(UIImage(systemName: "heart"), animated: true)
-            }
-            if (retweeted) {
-                self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
-            }
-            if (!retweeted) {
-                self.retweetView.setImage(UIImage(named: "retweet_black"), animated: true)
-            }
-            
-            // Update the TweetView
-            DispatchQueue.main.async {
-                self.tweetView.id = tweet_id
-                self.tweetView.load()
-            }
-            self.indx = self.indx + 1
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-    /*
-    @objc func scrollUp() {
-        // Retweets the tweet that is currently visible on the screen
-        swifter.getHomeTimeline(count: 20) { json in
-            // Successfully fetched timeline, we save the tweet id and create the tweet view
-            let jsonResult = json.array ?? []
-            let tweet_id = jsonResult[self.indx]["id_str"].string!
-            let hearted = jsonResult[self.indx]["favorited"] == true
-            let retweeted = jsonResult[self.indx]["retweeted"] == true
-            print("Updating home timeline", jsonResult[self.indx]["favorited"], jsonResult[self.indx]["retweeted"])
-            
-            if (hearted) {
-                self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
-            }
-            if (!hearted) {
-                self.heartView.setImage(UIImage(systemName: "heart"), animated: true)
-            }
-            if (retweeted) {
-                self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
-            }
-            if (!retweeted) {
-                self.retweetView.setImage(UIImage(named: "retweet_black"), animated: true)
-            }
-            
-            // Update the TweetView
-            DispatchQueue.main.async {
-                self.tweetView.id = tweet_id
-                self.tweetView.load()
-            }
-            self.indx = self.indx - 1
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
- */
- 
- 
 }
 
 
