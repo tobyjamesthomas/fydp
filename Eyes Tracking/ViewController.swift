@@ -145,7 +145,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         // Add actions to buttons
         leftButton.addTarget(self, action: #selector(retweetAction), for: .primaryActionTriggered)
-        rightButton.addTarget(self, action: #selector(likeAction), for: .primaryActionTriggered)
+        if #available(iOS 13.0, *) {
+            rightButton.addTarget(self, action: #selector(likeAction), for: .primaryActionTriggered)
+        } else {
+            // Fallback on earlier versions
+        }
         
         // Group buttons
         gazeButtons.append(upButton)
@@ -157,8 +161,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.0)
         }
         
-        let tapLike = UITapGestureRecognizer(target: self, action: #selector(likeAction))
-        heartView.addGestureRecognizer(tapLike)
+        if #available(iOS 13.0, *) {
+            let tapLike = UITapGestureRecognizer(target: self, action: #selector(likeAction))
+        } else {
+            // Fallback on earlier versions
+        }
+//        heartView.addGestureRecognizer(tapLike)
         heartView.isUserInteractionEnabled = true
         
         let tapRetweet = UITapGestureRecognizer(target: self, action: #selector(retweetAction))
@@ -341,7 +349,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
             
             if (hearted) {
-                self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
+                if #available(iOS 13.0, *) {
+                    self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
+                } else {
+                    // Fallback on earlier versions
+                }
             }
             if (retweeted) {
                 self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
@@ -357,6 +369,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
     
+    @available(iOS 13.0, *)
     @objc func likeAction() {
         // Likes or unlikes the tweet that is currently visible on the screen
         swifter.getTweet(for: self.tweetView.id) { json in
@@ -370,7 +383,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
             } else {
                 self.favoriteTweet()
-                self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
+                if #available(iOS 13.0, *) {
+                    self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
+                } else {
+                    // Fallback on earlier versions
+                }
             }
 
         } failure: { error in

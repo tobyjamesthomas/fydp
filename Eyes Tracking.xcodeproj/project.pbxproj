@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		12AA28BF2681934600EA2CB4 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AA28B6268192A700EA2CB4 /* SwifteriOS.framework */; };
 		12AA28C02681934600EA2CB4 /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 12AA28B6268192A700EA2CB4 /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		12BF964526A8AE4E0035E74B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 12BF964426A8AE4E0035E74B /* Podfile */; };
 		2CC5DE862679B1A800130F5F /* TweetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5DE852679B1A800130F5F /* TweetView.swift */; };
 		2CC5DE882679B21E00130F5F /* WidgetsJSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5DE872679B21E00130F5F /* WidgetsJSManager.swift */; };
-		99291A0D268157BC00227372 /* GazeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99291A0C268157BC00227372 /* GazeButton.swift */; };
 		99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99291A0C268157BC00227372 /* GazeUIButton.swift */; };
 		D0D25B8920C80F5500A25627 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D25B8820C80F5500A25627 /* Extensions.swift */; };
 		D0E5847A20C806050052967A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E5847920C806050052967A /* AppDelegate.swift */; };
@@ -19,6 +19,7 @@
 		D0E5848120C806050052967A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0E5847F20C806050052967A /* Main.storyboard */; };
 		D0E5848320C806050052967A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0E5848220C806050052967A /* Assets.xcassets */; };
 		D0E5848620C806050052967A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0E5848420C806050052967A /* LaunchScreen.storyboard */; };
+		E7AB3032166C7D7CE2207F31 /* Pods_Eyes_Tracking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9FD544CBEAFBAFBFDFC0945 /* Pods_Eyes_Tracking.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,9 +76,10 @@
 
 /* Begin PBXFileReference section */
 		12AA28AD268192A700EA2CB4 /* Swifter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifter.xcodeproj; path = ../Swifter/Swifter.xcodeproj; sourceTree = "<group>"; };
+		12BF964426A8AE4E0035E74B /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		2CC5DE852679B1A800130F5F /* TweetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetView.swift; sourceTree = "<group>"; };
 		2CC5DE872679B21E00130F5F /* WidgetsJSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsJSManager.swift; sourceTree = "<group>"; };
-		99291A0C268157BC00227372 /* GazeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeButton.swift; sourceTree = "<group>"; };
+		7133DFBF2E2031AA1BDB1BDC /* Pods-Eyes Tracking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyes Tracking.release.xcconfig"; path = "Target Support Files/Pods-Eyes Tracking/Pods-Eyes Tracking.release.xcconfig"; sourceTree = "<group>"; };
 		99291A0C268157BC00227372 /* GazeUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeUIButton.swift; sourceTree = "<group>"; };
 		D0D25B8820C80F5500A25627 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D0E5847620C806050052967A /* Eyes Tracking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Eyes Tracking.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +89,8 @@
 		D0E5848220C806050052967A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0E5848520C806050052967A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0E5848720C806050052967A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9FD544CBEAFBAFBFDFC0945 /* Pods_Eyes_Tracking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eyes_Tracking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F736176A8A1644E0C3B3BB06 /* Pods-Eyes Tracking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyes Tracking.debug.xcconfig"; path = "Target Support Files/Pods-Eyes Tracking/Pods-Eyes Tracking.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12AA28BF2681934600EA2CB4 /* SwifteriOS.framework in Frameworks */,
+				E7AB3032166C7D7CE2207F31 /* Pods_Eyes_Tracking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,18 +122,31 @@
 			isa = PBXGroup;
 			children = (
 				12AA28AD268192A700EA2CB4 /* Swifter.xcodeproj */,
+				E9FD544CBEAFBAFBFDFC0945 /* Pods_Eyes_Tracking.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		65729363EA18056295BC640D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F736176A8A1644E0C3B3BB06 /* Pods-Eyes Tracking.debug.xcconfig */,
+				7133DFBF2E2031AA1BDB1BDC /* Pods-Eyes Tracking.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		D0E5846D20C806050052967A = {
 			isa = PBXGroup;
 			children = (
+				12BF964426A8AE4E0035E74B /* Podfile */,
 				2CC5DE872679B21E00130F5F /* WidgetsJSManager.swift */,
 				2CC5DE852679B1A800130F5F /* TweetView.swift */,
 				D0E5847820C806050052967A /* Eyes Tracking */,
 				D0E5847720C806050052967A /* Products */,
 				2CC5DE89267A66EE00130F5F /* Frameworks */,
+				65729363EA18056295BC640D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,10 +180,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0E5848A20C806060052967A /* Build configuration list for PBXNativeTarget "Eyes Tracking" */;
 			buildPhases = (
+				711AEFB79E0B5330941430F8 /* [CP] Check Pods Manifest.lock */,
 				D0E5847220C806050052967A /* Sources */,
 				D0E5847320C806050052967A /* Frameworks */,
 				D0E5847420C806050052967A /* Resources */,
 				2CC5DE8D267A66EE00130F5F /* Embed Frameworks */,
+				12BF964B26A8AEE20035E74B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -260,11 +280,54 @@
 			files = (
 				D0E5848620C806050052967A /* LaunchScreen.storyboard in Resources */,
 				D0E5848320C806050052967A /* Assets.xcassets in Resources */,
+				12BF964526A8AE4E0035E74B /* Podfile in Resources */,
 				D0E5848120C806050052967A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		12BF964B26A8AEE20035E74B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		711AEFB79E0B5330941430F8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Eyes Tracking-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D0E5847220C806050052967A /* Sources */ = {
@@ -275,7 +338,7 @@
 				2CC5DE882679B21E00130F5F /* WidgetsJSManager.swift in Sources */,
 				D0E5847E20C806050052967A /* ViewController.swift in Sources */,
 				2CC5DE862679B1A800130F5F /* TweetView.swift in Sources */,
-				99291A0D268157BC00227372 /* GazeButton.swift in Sources */,
+				99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */,
 				99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */,
 				D0E5847A20C806050052967A /* AppDelegate.swift in Sources */,
 			);
@@ -421,6 +484,7 @@
 		};
 		D0E5848B20C806060052967A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F736176A8A1644E0C3B3BB06 /* Pods-Eyes Tracking.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -439,6 +503,7 @@
 		};
 		D0E5848C20C806060052967A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7133DFBF2E2031AA1BDB1BDC /* Pods-Eyes Tracking.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
