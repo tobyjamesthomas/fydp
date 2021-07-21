@@ -9,13 +9,13 @@ import Foundation
 
 internal class WidgetsJSManager {
     static let shared = WidgetsJSManager()
-    
+
     // The contents of https://platform.twitter.com/widgets.js
     private(set) var content: String?
-    
+
     public func load() {
         guard content == nil else { return }
-        let task = URLSession.shared.dataTask(with: URL(string: "https://platform.twitter.com/widgets.js")!) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: URL(string: "https://platform.twitter.com/widgets.js")!) { (data, _, _) in
             guard let data = data else {
                 return
             }
@@ -24,4 +24,3 @@ internal class WidgetsJSManager {
         task.resume()
     }
 }
-

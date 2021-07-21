@@ -17,69 +17,69 @@ public protocol TweetViewDelegate: AnyObject {
 }
 
 public class TweetView: UIView {
-    
+
     public static func prepare() {
         WidgetsJSManager.shared.load()
     }
-    
+
     // The WKWebView we'll use to display the Tweet
     private lazy var webView: WKWebView! = {
         let webView = WKWebView()
-        
+
         webView.isOpaque = false
-        
+
         // Set delegates
         webView.navigationDelegate = self
         webView.uiDelegate = self
-        
+
         // Register callbacks
         webView.configuration.userContentController.add(self, name: ClickCallback)
         webView.configuration.userContentController.add(self, name: HeightCallback)
-        
+
         // Set initial frame
         webView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: CGFloat(DefaultCellHeight))
-        
+
         // Prevent scrolling
         webView.scrollView.isScrollEnabled = false
-        
+
         return webView
     }()
-    
+
     /// The TweetView Delegate
     @IBInspectable public weak var delegate: TweetViewDelegate?
-    
+
     /// The Tweet ID
     @IBInspectable public  var id: String
-    
+
     /// The height of the TweetView
     public private(set) var state: State = .idle
-    
+
     /// The height of the TweetView
     public private(set) var height: CGFloat {
         didSet {
             delegate?.tweetView(self, didUpdatedHeight: height)
         }
     }
-    
+
     /// Initializes and returns a newly allocated tweet view object with the specified id
     /// - Parameter id: Tweet's id
     public init(id: String) {
         self.id = id
         self.height = DefaultCellHeight
-        
+
         super.init(frame: CGRect.zero)
     }
-    
+
     public required init?(coder: NSCoder) {
-        
+
         self.id = ""
         self.height = DefaultCellHeight
-                
+
         super.init(coder: coder)
     }
-    
+
     // MARK: Methods
-    
+
     /// Load the Tweet's HTML template
     public func load() {
         guard state != .loading else { return }
@@ -88,30 +88,30 @@ public class TweetView: UIView {
 
         webView.loadHTMLString(HtmlTemplate, baseURL: nil)
     }
-    
+
     fileprivate func addWebViewToSubviews() {
         addSubview(webView)
-        
+
         webView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         webView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         webView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         webView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     }
-    
+
     // Tweet Loader
     private func loadTweetInWebView(_ webView: WKWebView) {
         if let widgetsJSScript = WidgetsJSManager.shared.content {
-            
+
             webView.evaluateJavaScript(widgetsJSScript)
             webView.evaluateJavaScript("twttr.widgets.load();")
-            
+
             var theme = "light"
             if #available(iOS 13.0, *), UITraitCollection.current.userInterfaceStyle == .dark {
                 theme = "dark"
             }
-            
+
             // Documentation:
             // https://developer.twitter.com/en/docs/twitter-for-websites/embedded-tweets/guides/embedded-tweet-javascript-factory-function
             webView.evaluateJavaScript("""
@@ -137,12 +137,12 @@ extension TweetView: WKNavigationDelegate {
             decisionHandler(.allow)
         }
     }
-    
+
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         loadTweetInWebView(webView)
         state = .loaded
     }
-    
+
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         state = .failed
     }
@@ -156,7 +156,7 @@ extension TweetView: WKUIDelegate {
         if let url = navigationAction.request.url, navigationAction.targetFrame == nil {
             delegate?.tweetView(self, shouldOpenURL: url)
         }
-        
+
         return nil
     }
 }
