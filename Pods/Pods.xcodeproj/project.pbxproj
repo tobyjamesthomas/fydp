@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -19,110 +19,142 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		11C9E666BD54BEACA09BAE5321D390E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		1404CF7259D99333F60C96CCFF9B9714 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E152576C0E340FA9ACC6F1A3B84D13B5 /* Socket.swift */; };
-		173CC6AD6334A21B6E570256573471B8 /* Swifter-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FF52A0FD816577D28CA5F92BD8FA29 /* Swifter-dummy.m */; };
+		138D70512AF50F5B03F51F0401CBB8A0 /* SwifterTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DE0D340124516D23F61CD2E7405C58 /* SwifterTag.swift */; };
+		159BE8E3C4EA690BCF00DD7AF9A12575 /* Swifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA88525DF7005927DD9E22ECAC878E5 /* Swifter.swift */; };
 		226A55276466A7C82EF86EEB069DCC6A /* Pods-Eyes Tracking-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B64523567C3E9106085A8E748BB93A3 /* Pods-Eyes Tracking-dummy.m */; };
-		25F5D821614EED49E47CC1816057F3D9 /* Scopes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD5E27F7458384CC49163F7FB73532A /* Scopes.swift */; };
-		2A1C57B3A5D16F19AF0B0E1FF5450294 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFAC3B52FD93B971CF6DC74E229DC1 /* HttpRequest.swift */; };
-		3E2F0824381F0903E32524E7B700B3F1 /* Socket+Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FC00BBC210ACCF54DB78220F2FF2EA /* Socket+Server.swift */; };
-		45299BEC6F8E864DAA4D3F46CC4350D0 /* Errno.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2D9C63CEE4365398E84016A4771AF7 /* Errno.swift */; };
-		50FDCB67F7C77F6A9256A9AEAFA2C159 /* String+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447C048EFA58030E72469F1AAC9ACDB3 /* String+Misc.swift */; };
+		31971C1524223542219AB328FF227395 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		3B831BE7455EBEFF00010826C0773377 /* SwifterMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F22626DDA6DCB5A2446ADCA3E58265 /* SwifterMedia.swift */; };
+		3CC257071A3DC52BB9A46580C1030572 /* SwifterSavedSearches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883A7DC9AE0881B728638D10ED5BA2D /* SwifterSavedSearches.swift */; };
+		3F9A2F7C0897A192C25322855C0BB762 /* SwifterSpam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A319A682F15F16E276E7A774108F490 /* SwifterSpam.swift */; };
+		400B45B56892265559BD7324758FC0EF /* SwifterMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03945425A354918D48C50A87657564B3 /* SwifterMessages.swift */; };
+		47B61E92A72D6E5B5BE502F4892AF6BD /* SwifterPlaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCC6E8A63BAFCAAB3D45740A8194D62 /* SwifterPlaces.swift */; };
+		490C1A2506B522D3F1F5AF44DB6417C2 /* SwifterAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4098E7EAAC3028A8BCE18B5B4142B55 /* SwifterAuth.swift */; };
 		5576E1D4ACD12F967D8FF0B75060287E /* Pods-Eyes Tracking-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 41A950867DBFECBE28A154D6749CAE2C /* Pods-Eyes Tracking-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5B507B65C5776B3B22406DAA78BD693D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		80847029C583EB65720510EF410EF906 /* HttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEEB8D338F444DD99492AA517E1FBED /* HttpResponse.swift */; };
-		864FE0D2F740396DBA4D83AB6CEE3288 /* Process.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE30927257C072FF3579A181BA9898B /* Process.swift */; };
-		9D389666BAED5E01C8FBAC29307ADD44 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F6AB135B0A78A3CD356BCAAD4673A /* Files.swift */; };
-		A714F43DEB2FBB3E858495FAFC1834E8 /* DemoServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469FD531C1166FABA28DC334AABC4859 /* DemoServer.swift */; };
-		ADFD32817294069E030DDC1F237A4753 /* HttpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2040F7E4E738E8847D5DEC145D80F8 /* HttpRouter.swift */; };
-		B6AF320FDE4CCF51C1DA4AA1AA655761 /* WebSockets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619F27C8FF80F451A66EEA615DE453E2 /* WebSockets.swift */; };
-		BAB7E242206CAE29FAD22AC8F27ED36F /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572B4ECBE39063BD1B60D868DA530B6 /* HttpServer.swift */; };
-		BBD7D057ABBF433BBB5BED979D380045 /* String+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A898607F27B6A895CE10B23345904C7 /* String+File.swift */; };
-		BD71D6F472402826856FFC6B32B1F76D /* HttpServerIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EA3B26F9BA5346101920FEA226ADCE /* HttpServerIO.swift */; };
-		C5F44705AB9BD31622C0FE8097BDC6B6 /* HttpParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84D32D0BD67C75EC861AB8CAE29D7B9 /* HttpParser.swift */; };
-		CC3BB156E252DE449B4D37481C903C81 /* Socket+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC1D5795ABB1376161100AF388B8931 /* Socket+File.swift */; };
-		CF686D2E7D8EF669D3B8123E4830462C /* MimeTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97072D5DB6E0CB89BABF04444B9151FC /* MimeTypes.swift */; };
-		DCB9AB96C4F8321CA06ED087C4913192 /* String+SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4C7B51367826EF534CE79C4BF5B41B /* String+SHA1.swift */; };
-		E141D686AD2C582DC31AE0717AE418A8 /* Swifter-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F60ED775B885542CEA485A5AA0479B33 /* Swifter-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FA8A911F3C7571BCE08BA599A170C6A1 /* String+BASE64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F310260872E6068435A61C6D08F5E43 /* String+BASE64.swift */; };
+		5E8633DA98898D5819BA086A7710D469 /* Swifter-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E0FEC8787E7F405B3E9A3E462029A9F2 /* Swifter-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		65B12385F04BF7897C83DF262C203E4D /* SwifterCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FDB97AC43E4E1C3E4BB837306CD84B /* SwifterCredential.swift */; };
+		6A4D2505395101EDFC193821D712BB66 /* SwifterTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C294DE1A3FE9A5E2B95F2250F7164F /* SwifterTweets.swift */; };
+		6CBA9B8D3E0B7BFEF04384A07E6BA165 /* Scanner++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111590B7F245568434CC8FE790EE3370 /* Scanner++.swift */; };
+		6DBEB31F727A502C690413F1609620C9 /* SwifterFollowers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAD4F4FEEF9DE73DF9DBD00896A9BFD /* SwifterFollowers.swift */; };
+		777A41100FA320EF29DD71164F5BFEAC /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ED4F16A1B63F38BB2AF667D5DE1C3B /* JSON.swift */; };
+		7E940F1C6CF1537A0BB49853D81E6AF7 /* SwifterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDCBD7CEDB6F760F771EB22935B0143 /* SwifterError.swift */; };
+		8B227BF51BAEB59A90B4C79DD65DBC5C /* Operator++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAC9AD4C4CD616281540D45F78BA93F /* Operator++.swift */; };
+		8CF687F7BF90914F08EA3078121769F2 /* SwifterTimelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1BFC0FB83DAAD2D87226D3011C63D1 /* SwifterTimelines.swift */; };
+		952F96358DB687D817D00DFE040FF010 /* Data++.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64B0C61B6D07BF138019F9D91FA958B /* Data++.swift */; };
+		9E2112DF52050E6663C36D1C22748B25 /* SwifterOAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59812936A28F19AF0C3A08E032C384ED /* SwifterOAuthClient.swift */; };
+		A0DCAE12EA77C39C8ADB94E842DF9E3F /* SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A0D414B624AE5612AD2EC210FF820 /* SHA1.swift */; };
+		A4F6D20F919AE8323DC5B255D5E7F7CB /* SwifterSuggested.swift in Sources */ = {isa = PBXBuildFile; fileRef = C663A8E39AEE679B0F1F93D503856D7E /* SwifterSuggested.swift */; };
+		A9EA61ABFA32ED31BDF75DB6C0AD3DE6 /* SwifterHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CC6E49C8869129CC68E69D76B79BF8 /* SwifterHelp.swift */; };
+		AACB6A3932347ECB1946878774DFE69C /* SwifterAppOnlyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70D08F2527EA9B2DBD88D28197A0582 /* SwifterAppOnlyClient.swift */; };
+		AB66C8055FEA04F572C71E8EAD2034CB /* SwifterTrends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E710517787D00F9B1C5C8C79A56E8D /* SwifterTrends.swift */; };
+		ACAA28D8958434A206E954722917FC22 /* SwifterClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C31AF8A7C1D548768FC688C496ABFC9 /* SwifterClientProtocol.swift */; };
+		B5F60722FD0DBE19E93BBB1041AB5D65 /* SwifterSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D7DA330BF02B8CC7980BC39AB56C35 /* SwifterSearch.swift */; };
+		B6DDC495580F2ED6122A535B36C72D0B /* Int++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774AD2711025EE7116A2C2AAF48C8D90 /* Int++.swift */; };
+		B858498CBAF470D6EDED6E93935E380B /* Dictionary++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1962543D92075313A611CE18125096EF /* Dictionary++.swift */; };
+		B950515BA68545399DACFFB78C3FBB0E /* URL++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19651B1012C3EC83FAFA1F1872FAF33B /* URL++.swift */; };
+		BA2EE90713B2104A15CF74AC3F9C8834 /* SwifterFavorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C6FCC243B090FDA80F6B5519626C26 /* SwifterFavorites.swift */; };
+		BB8F20223E6AE589FCAF88DA7FD46161 /* String++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD58995C4695CE1DFC49AA403FD0211 /* String++.swift */; };
+		BF6833B5B143BA4CDD2F07F2982FAA09 /* Swifter-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B73F96F48717C92D6913A52B839B32A5 /* Swifter-dummy.m */; };
+		CA7BFF7E21B6695EA9E5398F2BEF70BB /* SwifterLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B9C00712E2C855A8467D4D73793B65 /* SwifterLists.swift */; };
+		CCA505D52CB60E5293479E213F7FBB14 /* SwifterAccountsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8FE12F6AD76F26FB8D4070EC41B24B /* SwifterAccountsClient.swift */; };
+		D8E770CF7D056967AC9C55F11D599D9B /* SwifterHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A0A01003F3014A341FE71554477569 /* SwifterHTTPRequest.swift */; };
+		DDCD9E03273D550E75B1F6176BBFC5BA /* SwifterUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F518E6906BBBC193D0C32E9E7AC62735 /* SwifterUsers.swift */; };
+		EB3E8749A5EF50AC5FA3C436A6B261F6 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B31623FA588D21EA87632BDBD1FC71 /* Utils.swift */; };
+		EE1A4F6F3AB5A314E04493B5FEAC74A4 /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8316AE521369ADC4DCC0E048018C168 /* HMAC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		72C34F54F667C0EC50440E47D48D6B99 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 52B60EC2A583F24ACBB69C113F5488B9;
-			remoteInfo = SwiftLint;
-		};
-		8FF0E10D73423C2C6E95B91CC506C18F /* PBXContainerItemProxy */ = {
+		1B2F60DCC076F1F15A67A30CF86067BF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = CA65059E808391E31616CB3E015A6B24;
 			remoteInfo = Swifter;
 		};
+		C173BEF48E55771DDE7E7F8CCDCE81A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B60EC2A583F24ACBB69C113F5488B9;
+			remoteInfo = SwiftLint;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		187338F5BC4E270E98CCBE52296147A1 /* Swifter-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Swifter-Info.plist"; sourceTree = "<group>"; };
+		03945425A354918D48C50A87657564B3 /* SwifterMessages.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterMessages.swift; path = Sources/SwifterMessages.swift; sourceTree = "<group>"; };
+		0ED9E8DDAE35AE617DA87136BBE626ED /* SwiftLint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.debug.xcconfig; sourceTree = "<group>"; };
+		0FDCBD7CEDB6F760F771EB22935B0143 /* SwifterError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterError.swift; path = Sources/SwifterError.swift; sourceTree = "<group>"; };
+		111590B7F245568434CC8FE790EE3370 /* Scanner++.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Scanner++.swift"; path = "Sources/Scanner++.swift"; sourceTree = "<group>"; };
+		15C6FCC243B090FDA80F6B5519626C26 /* SwifterFavorites.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterFavorites.swift; path = Sources/SwifterFavorites.swift; sourceTree = "<group>"; };
+		1962543D92075313A611CE18125096EF /* Dictionary++.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Dictionary++.swift"; path = "Sources/Dictionary++.swift"; sourceTree = "<group>"; };
+		19651B1012C3EC83FAFA1F1872FAF33B /* URL++.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URL++.swift"; path = "Sources/URL++.swift"; sourceTree = "<group>"; };
 		1B64523567C3E9106085A8E748BB93A3 /* Pods-Eyes Tracking-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Eyes Tracking-dummy.m"; sourceTree = "<group>"; };
+		1C31AF8A7C1D548768FC688C496ABFC9 /* SwifterClientProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterClientProtocol.swift; path = Sources/SwifterClientProtocol.swift; sourceTree = "<group>"; };
+		2320CADABFB13F2A20329785553231A2 /* Swifter-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Swifter-Info.plist"; sourceTree = "<group>"; };
 		265351372FF95444773B4723B70B705A /* Pods-Eyes Tracking.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Eyes Tracking.modulemap"; sourceTree = "<group>"; };
-		2832C34C03DD4FA845723CCA40A3D511 /* Swifter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Swifter.release.xcconfig; sourceTree = "<group>"; };
+		27B9C00712E2C855A8467D4D73793B65 /* SwifterLists.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterLists.swift; path = Sources/SwifterLists.swift; sourceTree = "<group>"; };
 		2A34C71FB588CB68F9CDFED3210501A4 /* Pods-Eyes Tracking-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Eyes Tracking-Info.plist"; sourceTree = "<group>"; };
-		2E4C7B51367826EF534CE79C4BF5B41B /* String+SHA1.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+SHA1.swift"; path = "XCode/Sources/String+SHA1.swift"; sourceTree = "<group>"; };
-		39EA3B26F9BA5346101920FEA226ADCE /* HttpServerIO.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpServerIO.swift; path = XCode/Sources/HttpServerIO.swift; sourceTree = "<group>"; };
-		3C33BA0CB29133BD493026BE50D97D70 /* Swifter-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Swifter-prefix.pch"; sourceTree = "<group>"; };
+		38FDB97AC43E4E1C3E4BB837306CD84B /* SwifterCredential.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterCredential.swift; path = Sources/SwifterCredential.swift; sourceTree = "<group>"; };
+		3EA88525DF7005927DD9E22ECAC878E5 /* Swifter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Swifter.swift; path = Sources/Swifter.swift; sourceTree = "<group>"; };
 		41A950867DBFECBE28A154D6749CAE2C /* Pods-Eyes Tracking-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Eyes Tracking-umbrella.h"; sourceTree = "<group>"; };
-		447C048EFA58030E72469F1AAC9ACDB3 /* String+Misc.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Misc.swift"; path = "XCode/Sources/String+Misc.swift"; sourceTree = "<group>"; };
-		469FD531C1166FABA28DC334AABC4859 /* DemoServer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DemoServer.swift; path = XCode/Sources/DemoServer.swift; sourceTree = "<group>"; };
-		4F310260872E6068435A61C6D08F5E43 /* String+BASE64.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+BASE64.swift"; path = "XCode/Sources/String+BASE64.swift"; sourceTree = "<group>"; };
-		4FD5E27F7458384CC49163F7FB73532A /* Scopes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Scopes.swift; path = XCode/Sources/Scopes.swift; sourceTree = "<group>"; };
+		44E710517787D00F9B1C5C8C79A56E8D /* SwifterTrends.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterTrends.swift; path = Sources/SwifterTrends.swift; sourceTree = "<group>"; };
+		45ED4F16A1B63F38BB2AF667D5DE1C3B /* JSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = Sources/JSON.swift; sourceTree = "<group>"; };
+		57A0A01003F3014A341FE71554477569 /* SwifterHTTPRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterHTTPRequest.swift; path = Sources/SwifterHTTPRequest.swift; sourceTree = "<group>"; };
+		59812936A28F19AF0C3A08E032C384ED /* SwifterOAuthClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterOAuthClient.swift; path = Sources/SwifterOAuthClient.swift; sourceTree = "<group>"; };
 		5A4C3DF670A506C818C8E65E7F5192BF /* Pods-Eyes Tracking-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Eyes Tracking-acknowledgements.markdown"; sourceTree = "<group>"; };
-		619F27C8FF80F451A66EEA615DE453E2 /* WebSockets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSockets.swift; path = XCode/Sources/WebSockets.swift; sourceTree = "<group>"; };
+		5CD58995C4695CE1DFC49AA403FD0211 /* String++.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String++.swift"; path = "Sources/String++.swift"; sourceTree = "<group>"; };
+		5F442F6EC425CA7A64F6AB0AD87D0E9C /* Swifter.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Swifter.modulemap; sourceTree = "<group>"; };
+		66F22626DDA6DCB5A2446ADCA3E58265 /* SwifterMedia.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterMedia.swift; path = Sources/SwifterMedia.swift; sourceTree = "<group>"; };
+		675884AAE3A63286C3935A27782C1E1A /* Swifter-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Swifter-prefix.pch"; sourceTree = "<group>"; };
+		68B31623FA588D21EA87632BDBD1FC71 /* Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Sources/Utils.swift; sourceTree = "<group>"; };
+		72C294DE1A3FE9A5E2B95F2250F7164F /* SwifterTweets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterTweets.swift; path = Sources/SwifterTweets.swift; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		7A898607F27B6A895CE10B23345904C7 /* String+File.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+File.swift"; path = "XCode/Sources/String+File.swift"; sourceTree = "<group>"; };
-		7F2040F7E4E738E8847D5DEC145D80F8 /* HttpRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpRouter.swift; path = XCode/Sources/HttpRouter.swift; sourceTree = "<group>"; };
-		840F6AB135B0A78A3CD356BCAAD4673A /* Files.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Files.swift; path = XCode/Sources/Files.swift; sourceTree = "<group>"; };
+		774AD2711025EE7116A2C2AAF48C8D90 /* Int++.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Int++.swift"; path = "Sources/Int++.swift"; sourceTree = "<group>"; };
+		7BAC9AD4C4CD616281540D45F78BA93F /* Operator++.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Operator++.swift"; path = "Sources/Operator++.swift"; sourceTree = "<group>"; };
+		7C1BFC0FB83DAAD2D87226D3011C63D1 /* SwifterTimelines.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterTimelines.swift; path = Sources/SwifterTimelines.swift; sourceTree = "<group>"; };
+		83D7DA330BF02B8CC7980BC39AB56C35 /* SwifterSearch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterSearch.swift; path = Sources/SwifterSearch.swift; sourceTree = "<group>"; };
 		8713B711A2FA01351B3E080E7685027A /* Pods-Eyes Tracking-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Eyes Tracking-frameworks.sh"; sourceTree = "<group>"; };
-		87AFAC3B52FD93B971CF6DC74E229DC1 /* HttpRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpRequest.swift; path = XCode/Sources/HttpRequest.swift; sourceTree = "<group>"; };
-		887C68318A1B885012B87FD90225925D /* SwiftLint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.release.xcconfig; sourceTree = "<group>"; };
-		8FC1D5795ABB1376161100AF388B8931 /* Socket+File.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Socket+File.swift"; path = "XCode/Sources/Socket+File.swift"; sourceTree = "<group>"; };
-		9572B4ECBE39063BD1B60D868DA530B6 /* HttpServer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpServer.swift; path = XCode/Sources/HttpServer.swift; sourceTree = "<group>"; };
-		97072D5DB6E0CB89BABF04444B9151FC /* MimeTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MimeTypes.swift; path = XCode/Sources/MimeTypes.swift; sourceTree = "<group>"; };
+		8883A7DC9AE0881B728638D10ED5BA2D /* SwifterSavedSearches.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterSavedSearches.swift; path = Sources/SwifterSavedSearches.swift; sourceTree = "<group>"; };
+		9A319A682F15F16E276E7A774108F490 /* SwifterSpam.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterSpam.swift; path = Sources/SwifterSpam.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9EEEB8D338F444DD99492AA517E1FBED /* HttpResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpResponse.swift; path = XCode/Sources/HttpResponse.swift; sourceTree = "<group>"; };
-		A5FF52A0FD816577D28CA5F92BD8FA29 /* Swifter-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Swifter-dummy.m"; sourceTree = "<group>"; };
-		A7FC00BBC210ACCF54DB78220F2FF2EA /* Socket+Server.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Socket+Server.swift"; path = "XCode/Sources/Socket+Server.swift"; sourceTree = "<group>"; };
-		B84D32D0BD67C75EC861AB8CAE29D7B9 /* HttpParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpParser.swift; path = XCode/Sources/HttpParser.swift; sourceTree = "<group>"; };
-		B958CF15C829DCC7D288808782BA2814 /* Swifter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Swifter.debug.xcconfig; sourceTree = "<group>"; };
-		BFE30927257C072FF3579A181BA9898B /* Process.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Process.swift; path = XCode/Sources/Process.swift; sourceTree = "<group>"; };
-		C631F7B031C83A03A7FCD370D99563F7 /* Swifter.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Swifter.modulemap; sourceTree = "<group>"; };
+		A70D08F2527EA9B2DBD88D28197A0582 /* SwifterAppOnlyClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterAppOnlyClient.swift; path = Sources/SwifterAppOnlyClient.swift; sourceTree = "<group>"; };
+		AAAD4F4FEEF9DE73DF9DBD00896A9BFD /* SwifterFollowers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterFollowers.swift; path = Sources/SwifterFollowers.swift; sourceTree = "<group>"; };
+		B73F96F48717C92D6913A52B839B32A5 /* Swifter-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Swifter-dummy.m"; sourceTree = "<group>"; };
+		C64B0C61B6D07BF138019F9D91FA958B /* Data++.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Data++.swift"; path = "Sources/Data++.swift"; sourceTree = "<group>"; };
+		C663A8E39AEE679B0F1F93D503856D7E /* SwifterSuggested.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterSuggested.swift; path = Sources/SwifterSuggested.swift; sourceTree = "<group>"; };
+		CA8FE12F6AD76F26FB8D4070EC41B24B /* SwifterAccountsClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterAccountsClient.swift; path = Sources/SwifterAccountsClient.swift; sourceTree = "<group>"; };
 		CDD9D13EF76BBDB91E1DB65DCF3E0638 /* Pods-Eyes Tracking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Eyes Tracking.debug.xcconfig"; sourceTree = "<group>"; };
+		CFCC6E8A63BAFCAAB3D45740A8194D62 /* SwifterPlaces.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterPlaces.swift; path = Sources/SwifterPlaces.swift; sourceTree = "<group>"; };
+		D07A0D414B624AE5612AD2EC210FF820 /* SHA1.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SHA1.swift; path = Sources/SHA1.swift; sourceTree = "<group>"; };
 		DA0DE63C836B59D6D30CD190710AA14A /* Pods_Eyes_Tracking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Eyes_Tracking.framework; path = "Pods-Eyes Tracking.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E152576C0E340FA9ACC6F1A3B84D13B5 /* Socket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Socket.swift; path = XCode/Sources/Socket.swift; sourceTree = "<group>"; };
+		DAD1C2577909E0BA4F7F8B247F35A7CE /* Swifter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Swifter.debug.xcconfig; sourceTree = "<group>"; };
+		E0FEC8787E7F405B3E9A3E462029A9F2 /* Swifter-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Swifter-umbrella.h"; sourceTree = "<group>"; };
 		E1B84BE9902D81C3D9E497081E649DC8 /* Pods-Eyes Tracking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Eyes Tracking.release.xcconfig"; sourceTree = "<group>"; };
+		E4098E7EAAC3028A8BCE18B5B4142B55 /* SwifterAuth.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterAuth.swift; path = Sources/SwifterAuth.swift; sourceTree = "<group>"; };
+		E7DDA396AC1D6CDD9A949BCD68DD0879 /* Swifter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Swifter.release.xcconfig; sourceTree = "<group>"; };
 		E7E98885A0FEF49E9EE8975449969BEB /* Swifter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Swifter.framework; path = Swifter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB2D9C63CEE4365398E84016A4771AF7 /* Errno.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Errno.swift; path = XCode/Sources/Errno.swift; sourceTree = "<group>"; };
-		EDC53435EA600F9A9BFA813B1379D31D /* SwiftLint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.debug.xcconfig; sourceTree = "<group>"; };
+		E8316AE521369ADC4DCC0E048018C168 /* HMAC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HMAC.swift; path = Sources/HMAC.swift; sourceTree = "<group>"; };
+		EC96AED340BADDDDAFBED387DF2EA9DE /* SwiftLint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.release.xcconfig; sourceTree = "<group>"; };
+		F0CC6E49C8869129CC68E69D76B79BF8 /* SwifterHelp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterHelp.swift; path = Sources/SwifterHelp.swift; sourceTree = "<group>"; };
+		F0DE0D340124516D23F61CD2E7405C58 /* SwifterTag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterTag.swift; path = Sources/SwifterTag.swift; sourceTree = "<group>"; };
 		F4E6F12E88825C9A3A296DABDEEF1173 /* Pods-Eyes Tracking-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Eyes Tracking-acknowledgements.plist"; sourceTree = "<group>"; };
-		F60ED775B885542CEA485A5AA0479B33 /* Swifter-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Swifter-umbrella.h"; sourceTree = "<group>"; };
+		F518E6906BBBC193D0C32E9E7AC62735 /* SwifterUsers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwifterUsers.swift; path = Sources/SwifterUsers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		21128C7E49EF7BB6C688C465B31EA06E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31971C1524223542219AB328FF227395 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		504A80D49A3F29013A52224AA9F0A619 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				5B507B65C5776B3B22406DAA78BD693D /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		70A02B3B11AA8ED5DAD006E23A96C5BD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				11C9E666BD54BEACA09BAE5321D390E2 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,42 +178,23 @@
 			path = "Target Support Files/Pods-Eyes Tracking";
 			sourceTree = "<group>";
 		};
-		2C350155BEC6BC5F06EDB0A44465EE8C /* Pods */ = {
+		2A8D3BE6088616AC6D35F84B7A831774 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				43DD6E33896266ABB7B438469EBF718E /* Swifter */,
-				ABFDA4BDC150E45066DF382F1A007DFC /* SwiftLint */,
+				0ED9E8DDAE35AE617DA87136BBE626ED /* SwiftLint.debug.xcconfig */,
+				EC96AED340BADDDDAFBED387DF2EA9DE /* SwiftLint.release.xcconfig */,
 			);
-			name = Pods;
+			name = "Support Files";
+			path = "../Target Support Files/SwiftLint";
 			sourceTree = "<group>";
 		};
-		43DD6E33896266ABB7B438469EBF718E /* Swifter */ = {
+		2CE8C4BFFDF506E16DA49FC09B784E63 /* SwiftLint */ = {
 			isa = PBXGroup;
 			children = (
-				469FD531C1166FABA28DC334AABC4859 /* DemoServer.swift */,
-				EB2D9C63CEE4365398E84016A4771AF7 /* Errno.swift */,
-				840F6AB135B0A78A3CD356BCAAD4673A /* Files.swift */,
-				B84D32D0BD67C75EC861AB8CAE29D7B9 /* HttpParser.swift */,
-				87AFAC3B52FD93B971CF6DC74E229DC1 /* HttpRequest.swift */,
-				9EEEB8D338F444DD99492AA517E1FBED /* HttpResponse.swift */,
-				7F2040F7E4E738E8847D5DEC145D80F8 /* HttpRouter.swift */,
-				9572B4ECBE39063BD1B60D868DA530B6 /* HttpServer.swift */,
-				39EA3B26F9BA5346101920FEA226ADCE /* HttpServerIO.swift */,
-				97072D5DB6E0CB89BABF04444B9151FC /* MimeTypes.swift */,
-				BFE30927257C072FF3579A181BA9898B /* Process.swift */,
-				4FD5E27F7458384CC49163F7FB73532A /* Scopes.swift */,
-				E152576C0E340FA9ACC6F1A3B84D13B5 /* Socket.swift */,
-				8FC1D5795ABB1376161100AF388B8931 /* Socket+File.swift */,
-				A7FC00BBC210ACCF54DB78220F2FF2EA /* Socket+Server.swift */,
-				4F310260872E6068435A61C6D08F5E43 /* String+BASE64.swift */,
-				7A898607F27B6A895CE10B23345904C7 /* String+File.swift */,
-				447C048EFA58030E72469F1AAC9ACDB3 /* String+Misc.swift */,
-				2E4C7B51367826EF534CE79C4BF5B41B /* String+SHA1.swift */,
-				619F27C8FF80F451A66EEA615DE453E2 /* WebSockets.swift */,
-				E660449330DDA56258934CC7DD3629F2 /* Support Files */,
+				2A8D3BE6088616AC6D35F84B7A831774 /* Support Files */,
 			);
-			name = Swifter;
-			path = Swifter;
+			name = SwiftLint;
+			path = SwiftLint;
 			sourceTree = "<group>";
 		};
 		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
@@ -192,14 +205,49 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		6F2ED97ACAA6F954A66BC7ABFCDC9699 /* Support Files */ = {
+		6B156269C460D55B22BF8D200637B7F3 /* Swifter */ = {
 			isa = PBXGroup;
 			children = (
-				EDC53435EA600F9A9BFA813B1379D31D /* SwiftLint.debug.xcconfig */,
-				887C68318A1B885012B87FD90225925D /* SwiftLint.release.xcconfig */,
+				C64B0C61B6D07BF138019F9D91FA958B /* Data++.swift */,
+				1962543D92075313A611CE18125096EF /* Dictionary++.swift */,
+				E8316AE521369ADC4DCC0E048018C168 /* HMAC.swift */,
+				774AD2711025EE7116A2C2AAF48C8D90 /* Int++.swift */,
+				45ED4F16A1B63F38BB2AF667D5DE1C3B /* JSON.swift */,
+				7BAC9AD4C4CD616281540D45F78BA93F /* Operator++.swift */,
+				111590B7F245568434CC8FE790EE3370 /* Scanner++.swift */,
+				D07A0D414B624AE5612AD2EC210FF820 /* SHA1.swift */,
+				5CD58995C4695CE1DFC49AA403FD0211 /* String++.swift */,
+				3EA88525DF7005927DD9E22ECAC878E5 /* Swifter.swift */,
+				CA8FE12F6AD76F26FB8D4070EC41B24B /* SwifterAccountsClient.swift */,
+				A70D08F2527EA9B2DBD88D28197A0582 /* SwifterAppOnlyClient.swift */,
+				E4098E7EAAC3028A8BCE18B5B4142B55 /* SwifterAuth.swift */,
+				1C31AF8A7C1D548768FC688C496ABFC9 /* SwifterClientProtocol.swift */,
+				38FDB97AC43E4E1C3E4BB837306CD84B /* SwifterCredential.swift */,
+				0FDCBD7CEDB6F760F771EB22935B0143 /* SwifterError.swift */,
+				15C6FCC243B090FDA80F6B5519626C26 /* SwifterFavorites.swift */,
+				AAAD4F4FEEF9DE73DF9DBD00896A9BFD /* SwifterFollowers.swift */,
+				F0CC6E49C8869129CC68E69D76B79BF8 /* SwifterHelp.swift */,
+				57A0A01003F3014A341FE71554477569 /* SwifterHTTPRequest.swift */,
+				27B9C00712E2C855A8467D4D73793B65 /* SwifterLists.swift */,
+				66F22626DDA6DCB5A2446ADCA3E58265 /* SwifterMedia.swift */,
+				03945425A354918D48C50A87657564B3 /* SwifterMessages.swift */,
+				59812936A28F19AF0C3A08E032C384ED /* SwifterOAuthClient.swift */,
+				CFCC6E8A63BAFCAAB3D45740A8194D62 /* SwifterPlaces.swift */,
+				8883A7DC9AE0881B728638D10ED5BA2D /* SwifterSavedSearches.swift */,
+				83D7DA330BF02B8CC7980BC39AB56C35 /* SwifterSearch.swift */,
+				9A319A682F15F16E276E7A774108F490 /* SwifterSpam.swift */,
+				C663A8E39AEE679B0F1F93D503856D7E /* SwifterSuggested.swift */,
+				F0DE0D340124516D23F61CD2E7405C58 /* SwifterTag.swift */,
+				7C1BFC0FB83DAAD2D87226D3011C63D1 /* SwifterTimelines.swift */,
+				44E710517787D00F9B1C5C8C79A56E8D /* SwifterTrends.swift */,
+				72C294DE1A3FE9A5E2B95F2250F7164F /* SwifterTweets.swift */,
+				F518E6906BBBC193D0C32E9E7AC62735 /* SwifterUsers.swift */,
+				19651B1012C3EC83FAFA1F1872FAF33B /* URL++.swift */,
+				68B31623FA588D21EA87632BDBD1FC71 /* Utils.swift */,
+				AA8630C8C22D4A898C034F459F86930B /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/SwiftLint";
+			name = Swifter;
+			path = Swifter;
 			sourceTree = "<group>";
 		};
 		9A1192BF073383C391FC13AF90D675D4 /* Targets Support Files */ = {
@@ -210,13 +258,19 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		ABFDA4BDC150E45066DF382F1A007DFC /* SwiftLint */ = {
+		AA8630C8C22D4A898C034F459F86930B /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				6F2ED97ACAA6F954A66BC7ABFCDC9699 /* Support Files */,
+				5F442F6EC425CA7A64F6AB0AD87D0E9C /* Swifter.modulemap */,
+				B73F96F48717C92D6913A52B839B32A5 /* Swifter-dummy.m */,
+				2320CADABFB13F2A20329785553231A2 /* Swifter-Info.plist */,
+				675884AAE3A63286C3935A27782C1E1A /* Swifter-prefix.pch */,
+				E0FEC8787E7F405B3E9A3E462029A9F2 /* Swifter-umbrella.h */,
+				DAD1C2577909E0BA4F7F8B247F35A7CE /* Swifter.debug.xcconfig */,
+				E7DDA396AC1D6CDD9A949BCD68DD0879 /* Swifter.release.xcconfig */,
 			);
-			name = SwiftLint;
-			path = SwiftLint;
+			name = "Support Files";
+			path = "../Target Support Files/Swifter";
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -224,7 +278,7 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				2C350155BEC6BC5F06EDB0A44465EE8C /* Pods */,
+				E59539765F6E1447B105C6E36BA626BA /* Pods */,
 				F72C97273D01ADE35018871245A24BE7 /* Products */,
 				9A1192BF073383C391FC13AF90D675D4 /* Targets Support Files */,
 			);
@@ -238,19 +292,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E660449330DDA56258934CC7DD3629F2 /* Support Files */ = {
+		E59539765F6E1447B105C6E36BA626BA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C631F7B031C83A03A7FCD370D99563F7 /* Swifter.modulemap */,
-				A5FF52A0FD816577D28CA5F92BD8FA29 /* Swifter-dummy.m */,
-				187338F5BC4E270E98CCBE52296147A1 /* Swifter-Info.plist */,
-				3C33BA0CB29133BD493026BE50D97D70 /* Swifter-prefix.pch */,
-				F60ED775B885542CEA485A5AA0479B33 /* Swifter-umbrella.h */,
-				B958CF15C829DCC7D288808782BA2814 /* Swifter.debug.xcconfig */,
-				2832C34C03DD4FA845723CCA40A3D511 /* Swifter.release.xcconfig */,
+				6B156269C460D55B22BF8D200637B7F3 /* Swifter */,
+				2CE8C4BFFDF506E16DA49FC09B784E63 /* SwiftLint */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/Swifter";
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		F72C97273D01ADE35018871245A24BE7 /* Products */ = {
@@ -265,11 +313,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		7E54E1BB4E4330142BCF07671F664D1D /* Headers */ = {
+		56B0E984292BAFB36082B8DB7D815368 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E141D686AD2C582DC31AE0717AE418A8 /* Swifter-umbrella.h in Headers */,
+				5E8633DA98898D5819BA086A7710D469 /* Swifter-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,8 +344,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				97FD0D3EFCF611DF97D36B3AE8EB2F96 /* PBXTargetDependency */,
-				B00D3EB80F0D3EA39A4E059E66ADC0EA /* PBXTargetDependency */,
+				165AD539221B61767DFB2DA3AB6B78CE /* PBXTargetDependency */,
+				DB8B577434E77032367668F566333AD4 /* PBXTargetDependency */,
 			);
 			name = "Pods-Eyes Tracking";
 			productName = "Pods-Eyes Tracking";
@@ -306,12 +354,12 @@
 		};
 		CA65059E808391E31616CB3E015A6B24 /* Swifter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3DBC78EE96B1DA4043C040FA152A0DF9 /* Build configuration list for PBXNativeTarget "Swifter" */;
+			buildConfigurationList = B034C4E07A2C3A6CA032DD1D16577E6B /* Build configuration list for PBXNativeTarget "Swifter" */;
 			buildPhases = (
-				7E54E1BB4E4330142BCF07671F664D1D /* Headers */,
-				1053D5FECF8941FA066FD551619E52FF /* Sources */,
-				70A02B3B11AA8ED5DAD006E23A96C5BD /* Frameworks */,
-				5271E707D9986844C5B84B6A2A889BA0 /* Resources */,
+				56B0E984292BAFB36082B8DB7D815368 /* Headers */,
+				98772362450500391FF0F63780EF4CC4 /* Sources */,
+				21128C7E49EF7BB6C688C465B31EA06E /* Frameworks */,
+				57776DC1D6D0C6A6E98E135EDB23C944 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -332,7 +380,7 @@
 				LastUpgradeCheck = 1240;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 10.0";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -352,7 +400,7 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5271E707D9986844C5B84B6A2A889BA0 /* Resources */ = {
+		57776DC1D6D0C6A6E98E135EDB23C944 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -369,31 +417,47 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1053D5FECF8941FA066FD551619E52FF /* Sources */ = {
+		98772362450500391FF0F63780EF4CC4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A714F43DEB2FBB3E858495FAFC1834E8 /* DemoServer.swift in Sources */,
-				45299BEC6F8E864DAA4D3F46CC4350D0 /* Errno.swift in Sources */,
-				9D389666BAED5E01C8FBAC29307ADD44 /* Files.swift in Sources */,
-				C5F44705AB9BD31622C0FE8097BDC6B6 /* HttpParser.swift in Sources */,
-				2A1C57B3A5D16F19AF0B0E1FF5450294 /* HttpRequest.swift in Sources */,
-				80847029C583EB65720510EF410EF906 /* HttpResponse.swift in Sources */,
-				ADFD32817294069E030DDC1F237A4753 /* HttpRouter.swift in Sources */,
-				BAB7E242206CAE29FAD22AC8F27ED36F /* HttpServer.swift in Sources */,
-				BD71D6F472402826856FFC6B32B1F76D /* HttpServerIO.swift in Sources */,
-				CF686D2E7D8EF669D3B8123E4830462C /* MimeTypes.swift in Sources */,
-				864FE0D2F740396DBA4D83AB6CEE3288 /* Process.swift in Sources */,
-				25F5D821614EED49E47CC1816057F3D9 /* Scopes.swift in Sources */,
-				CC3BB156E252DE449B4D37481C903C81 /* Socket+File.swift in Sources */,
-				3E2F0824381F0903E32524E7B700B3F1 /* Socket+Server.swift in Sources */,
-				1404CF7259D99333F60C96CCFF9B9714 /* Socket.swift in Sources */,
-				FA8A911F3C7571BCE08BA599A170C6A1 /* String+BASE64.swift in Sources */,
-				BBD7D057ABBF433BBB5BED979D380045 /* String+File.swift in Sources */,
-				50FDCB67F7C77F6A9256A9AEAFA2C159 /* String+Misc.swift in Sources */,
-				DCB9AB96C4F8321CA06ED087C4913192 /* String+SHA1.swift in Sources */,
-				173CC6AD6334A21B6E570256573471B8 /* Swifter-dummy.m in Sources */,
-				B6AF320FDE4CCF51C1DA4AA1AA655761 /* WebSockets.swift in Sources */,
+				952F96358DB687D817D00DFE040FF010 /* Data++.swift in Sources */,
+				B858498CBAF470D6EDED6E93935E380B /* Dictionary++.swift in Sources */,
+				EE1A4F6F3AB5A314E04493B5FEAC74A4 /* HMAC.swift in Sources */,
+				B6DDC495580F2ED6122A535B36C72D0B /* Int++.swift in Sources */,
+				777A41100FA320EF29DD71164F5BFEAC /* JSON.swift in Sources */,
+				8B227BF51BAEB59A90B4C79DD65DBC5C /* Operator++.swift in Sources */,
+				6CBA9B8D3E0B7BFEF04384A07E6BA165 /* Scanner++.swift in Sources */,
+				A0DCAE12EA77C39C8ADB94E842DF9E3F /* SHA1.swift in Sources */,
+				BB8F20223E6AE589FCAF88DA7FD46161 /* String++.swift in Sources */,
+				BF6833B5B143BA4CDD2F07F2982FAA09 /* Swifter-dummy.m in Sources */,
+				159BE8E3C4EA690BCF00DD7AF9A12575 /* Swifter.swift in Sources */,
+				CCA505D52CB60E5293479E213F7FBB14 /* SwifterAccountsClient.swift in Sources */,
+				AACB6A3932347ECB1946878774DFE69C /* SwifterAppOnlyClient.swift in Sources */,
+				490C1A2506B522D3F1F5AF44DB6417C2 /* SwifterAuth.swift in Sources */,
+				ACAA28D8958434A206E954722917FC22 /* SwifterClientProtocol.swift in Sources */,
+				65B12385F04BF7897C83DF262C203E4D /* SwifterCredential.swift in Sources */,
+				7E940F1C6CF1537A0BB49853D81E6AF7 /* SwifterError.swift in Sources */,
+				BA2EE90713B2104A15CF74AC3F9C8834 /* SwifterFavorites.swift in Sources */,
+				6DBEB31F727A502C690413F1609620C9 /* SwifterFollowers.swift in Sources */,
+				A9EA61ABFA32ED31BDF75DB6C0AD3DE6 /* SwifterHelp.swift in Sources */,
+				D8E770CF7D056967AC9C55F11D599D9B /* SwifterHTTPRequest.swift in Sources */,
+				CA7BFF7E21B6695EA9E5398F2BEF70BB /* SwifterLists.swift in Sources */,
+				3B831BE7455EBEFF00010826C0773377 /* SwifterMedia.swift in Sources */,
+				400B45B56892265559BD7324758FC0EF /* SwifterMessages.swift in Sources */,
+				9E2112DF52050E6663C36D1C22748B25 /* SwifterOAuthClient.swift in Sources */,
+				47B61E92A72D6E5B5BE502F4892AF6BD /* SwifterPlaces.swift in Sources */,
+				3CC257071A3DC52BB9A46580C1030572 /* SwifterSavedSearches.swift in Sources */,
+				B5F60722FD0DBE19E93BBB1041AB5D65 /* SwifterSearch.swift in Sources */,
+				3F9A2F7C0897A192C25322855C0BB762 /* SwifterSpam.swift in Sources */,
+				A4F6D20F919AE8323DC5B255D5E7F7CB /* SwifterSuggested.swift in Sources */,
+				138D70512AF50F5B03F51F0401CBB8A0 /* SwifterTag.swift in Sources */,
+				8CF687F7BF90914F08EA3078121769F2 /* SwifterTimelines.swift in Sources */,
+				AB66C8055FEA04F572C71E8EAD2034CB /* SwifterTrends.swift in Sources */,
+				6A4D2505395101EDFC193821D712BB66 /* SwifterTweets.swift in Sources */,
+				DDCD9E03273D550E75B1F6176BBFC5BA /* SwifterUsers.swift in Sources */,
+				B950515BA68545399DACFFB78C3FBB0E /* URL++.swift in Sources */,
+				EB3E8749A5EF50AC5FA3C436A6B261F6 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,21 +472,56 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		97FD0D3EFCF611DF97D36B3AE8EB2F96 /* PBXTargetDependency */ = {
+		165AD539221B61767DFB2DA3AB6B78CE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftLint;
 			target = 52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */;
-			targetProxy = 72C34F54F667C0EC50440E47D48D6B99 /* PBXContainerItemProxy */;
+			targetProxy = C173BEF48E55771DDE7E7F8CCDCE81A3 /* PBXContainerItemProxy */;
 		};
-		B00D3EB80F0D3EA39A4E059E66ADC0EA /* PBXTargetDependency */ = {
+		DB8B577434E77032367668F566333AD4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Swifter;
 			target = CA65059E808391E31616CB3E015A6B24 /* Swifter */;
-			targetProxy = 8FF0E10D73423C2C6E95B91CC506C18F /* PBXContainerItemProxy */;
+			targetProxy = 1B2F60DCC076F1F15A67A30CF86067BF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		26D59C4504161FA2D1EF09D3BBB19AF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DAD1C2577909E0BA4F7F8B247F35A7CE /* Swifter.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Swifter/Swifter-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Swifter/Swifter-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Swifter/Swifter.modulemap";
+				PRODUCT_MODULE_NAME = Swifter;
+				PRODUCT_NAME = Swifter;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		2B9E26EAE2CD392AD762421F663075A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -486,40 +585,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Debug;
-		};
-		2D0E4D19ABCAB49B5E71033190552F75 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B958CF15C829DCC7D288808782BA2814 /* Swifter.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Swifter/Swifter-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Swifter/Swifter-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/Swifter/Swifter.modulemap";
-				PRODUCT_MODULE_NAME = Swifter;
-				PRODUCT_NAME = Swifter;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
@@ -662,7 +727,7 @@
 		};
 		AD81E62ACCB0B7A923FC8AA288F9921E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 887C68318A1B885012B87FD90225925D /* SwiftLint.release.xcconfig */;
+			baseConfigurationReference = EC96AED340BADDDDAFBED387DF2EA9DE /* SwiftLint.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -677,10 +742,11 @@
 			};
 			name = Release;
 		};
-		CD13D1798FC7283C74CA3D3AFEE9D7C1 /* Release */ = {
+		D2296941A8735C5303CA879EA84209CD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2832C34C03DD4FA845723CCA40A3D511 /* Swifter.release.xcconfig */;
+			baseConfigurationReference = E7DDA396AC1D6CDD9A949BCD68DD0879 /* Swifter.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -692,7 +758,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Swifter/Swifter-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Swifter/Swifter-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -704,7 +770,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -714,7 +780,7 @@
 		};
 		EADD1F50ABC8096A0D6CB18822BB4EE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EDC53435EA600F9A9BFA813B1379D31D /* SwiftLint.debug.xcconfig */;
+			baseConfigurationReference = 0ED9E8DDAE35AE617DA87136BBE626ED /* SwiftLint.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -731,15 +797,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3DBC78EE96B1DA4043C040FA152A0DF9 /* Build configuration list for PBXNativeTarget "Swifter" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2D0E4D19ABCAB49B5E71033190552F75 /* Debug */,
-				CD13D1798FC7283C74CA3D3AFEE9D7C1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -763,6 +820,15 @@
 			buildConfigurations = (
 				EADD1F50ABC8096A0D6CB18822BB4EE4 /* Debug */,
 				AD81E62ACCB0B7A923FC8AA288F9921E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B034C4E07A2C3A6CA032DD1D16577E6B /* Build configuration list for PBXNativeTarget "Swifter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26D59C4504161FA2D1EF09D3BBB19AF8 /* Debug */,
+				D2296941A8735C5303CA879EA84209CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -20,21 +20,10 @@
 		E7AB3032166C7D7CE2207F31 /* Pods_Eyes_Tracking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9FD544CBEAFBAFBFDFC0945 /* Pods_Eyes_Tracking.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		2CC5DE8D267A66EE00130F5F /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		12BF964426A8AE4E0035E74B /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		2C7218E326A8BF67006BD7EB /* Swifter */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Swifter; sourceTree = "<group>"; };
+		2C7218E626A8BFF7006BD7EB /* Swifter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Swifter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CC5DE852679B1A800130F5F /* TweetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetView.swift; sourceTree = "<group>"; };
 		2CC5DE872679B21E00130F5F /* WidgetsJSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsJSManager.swift; sourceTree = "<group>"; };
 		7133DFBF2E2031AA1BDB1BDC /* Pods-Eyes Tracking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyes Tracking.release.xcconfig"; path = "Target Support Files/Pods-Eyes Tracking/Pods-Eyes Tracking.release.xcconfig"; sourceTree = "<group>"; };
@@ -66,6 +55,8 @@
 		2CC5DE89267A66EE00130F5F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C7218E626A8BFF7006BD7EB /* Swifter.framework */,
+				2C7218E326A8BF67006BD7EB /* Swifter */,
 				E9FD544CBEAFBAFBFDFC0945 /* Pods_Eyes_Tracking.framework */,
 			);
 			name = Frameworks;
@@ -127,7 +118,6 @@
 				D0E5847220C806050052967A /* Sources */,
 				D0E5847320C806050052967A /* Frameworks */,
 				D0E5847420C806050052967A /* Resources */,
-				2CC5DE8D267A66EE00130F5F /* Embed Frameworks */,
 				12BF964B26A8AEE20035E74B /* ShellScript */,
 				C412EC5257819AF2264330A7 /* [CP] Embed Pods Frameworks */,
 			);
@@ -136,6 +126,8 @@
 			dependencies = (
 			);
 			name = "Eyes Tracking";
+			packageProductDependencies = (
+			);
 			productName = "Eyes Tracking";
 			productReference = D0E5847620C806050052967A /* Eyes Tracking.app */;
 			productType = "com.apple.product-type.application";

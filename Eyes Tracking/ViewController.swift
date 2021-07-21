@@ -11,7 +11,7 @@ import SceneKit
 import ARKit
 import WebKit
 import SafariServices
-import SwifteriOS
+import Swifter
 import AuthenticationServices
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
