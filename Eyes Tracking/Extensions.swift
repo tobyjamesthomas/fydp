@@ -24,11 +24,11 @@ extension Collection where Element == CGFloat, Index == Int {
         guard !isEmpty else {
             return nil
         }
-        
+
         let sum = reduce(CGFloat(0)) { current, next -> CGFloat in
             return current + next
         }
-        
+
         return sum / CGFloat(count)
     }
 }
