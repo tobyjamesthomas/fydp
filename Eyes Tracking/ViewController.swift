@@ -159,13 +159,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         for gazeButton in gazeButtons {
             gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.0)
         }
+        var tapLike = UITapGestureRecognizer()
 
         if #available(iOS 13.0, *) {
-            let tapLike = UITapGestureRecognizer(target: self, action: #selector(likeAction))
+            tapLike = UITapGestureRecognizer(target: self, action: #selector(likeAction))
         } else {
             // Fallback on earlier versions
         }
-//        heartView.addGestureRecognizer(tapLike)
+        heartView.addGestureRecognizer(tapLike)
         heartView.isUserInteractionEnabled = true
 
         let tapRetweet = UITapGestureRecognizer(target: self, action: #selector(retweetAction))
