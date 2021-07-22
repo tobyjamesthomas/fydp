@@ -233,6 +233,47 @@ Position Estimation</string>
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dka-h1-UmX" customClass="TweetUIView" customModule="Eyes_Tracking" customModuleProvider="target">
+                                <rect key="frame" x="41" y="223" width="308" height="408"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WLb-dh-0bp">
+                                        <rect key="frame" x="0.0" y="0.0" width="308" height="408"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8QM-ie-0jI">
+                                                <rect key="frame" x="0.0" y="0.0" width="308" height="204"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rh-QS-cqZ">
+                                                <rect key="frame" x="0.0" y="204" width="308" height="204"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="2Rh-QS-cqZ" firstAttribute="height" secondItem="8QM-ie-0jI" secondAttribute="height" id="9g9-ZL-d3d"/>
+                                            <constraint firstItem="2Rh-QS-cqZ" firstAttribute="width" secondItem="8QM-ie-0jI" secondAttribute="width" id="IoS-ab-WR4"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="WLb-dh-0bp" firstAttribute="leading" secondItem="Dka-h1-UmX" secondAttribute="leading" id="5vc-FD-Mra"/>
+                                    <constraint firstAttribute="width" constant="308" id="6BW-1Z-qlO"/>
+                                    <constraint firstAttribute="height" constant="408" id="Abd-fI-86h"/>
+                                    <constraint firstAttribute="bottom" secondItem="WLb-dh-0bp" secondAttribute="bottom" id="emL-7b-E2p"/>
+                                    <constraint firstItem="WLb-dh-0bp" firstAttribute="top" secondItem="Dka-h1-UmX" secondAttribute="top" id="ga5-LT-GDr"/>
+                                    <constraint firstItem="WLb-dh-0bp" firstAttribute="top" secondItem="Dka-h1-UmX" secondAttribute="top" id="tcE-x6-5A3"/>
+                                    <constraint firstAttribute="trailing" secondItem="WLb-dh-0bp" secondAttribute="trailing" id="uBV-t4-YYP"/>
+                                    <constraint firstItem="WLb-dh-0bp" firstAttribute="leading" secondItem="Dka-h1-UmX" secondAttribute="leading" id="vIZ-iZ-f1x"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="tweetLabel" destination="2Rh-QS-cqZ" id="U3z-8T-7Mq"/>
+                                    <outlet property="usernameLabel" destination="8QM-ie-0jI" id="QHJ-PQ-L6q"/>
+                                </connections>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rlJ-wj-UR6">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                                 <subviews>
@@ -267,6 +308,7 @@ Position Estimation</string>
                             <constraint firstAttribute="trailing" secondItem="vT5-6S-UTW" secondAttribute="trailing" id="2SB-gQ-Lv1"/>
                             <constraint firstItem="saK-eH-dzW" firstAttribute="leading" secondItem="9i0-fu-tQr" secondAttribute="leading" id="2ZC-Fp-hnP"/>
                             <constraint firstItem="rlJ-wj-UR6" firstAttribute="top" secondItem="75x-hB-b3v" secondAttribute="top" id="7GA-Cb-Olq"/>
+                            <constraint firstItem="Dka-h1-UmX" firstAttribute="centerX" secondItem="9i0-fu-tQr" secondAttribute="centerX" id="8Oa-OV-N8O"/>
                             <constraint firstAttribute="bottom" secondItem="3po-Km-irV" secondAttribute="bottom" id="A0i-nG-krs"/>
                             <constraint firstItem="Aaq-uW-sX7" firstAttribute="leading" secondItem="9i0-fu-tQr" secondAttribute="leading" constant="24" id="CFb-fd-ubf"/>
                             <constraint firstItem="3po-Km-irV" firstAttribute="leading" secondItem="9i0-fu-tQr" secondAttribute="leading" id="FXE-B8-B7W"/>
@@ -277,6 +319,7 @@ Position Estimation</string>
                             <constraint firstItem="rlJ-wj-UR6" firstAttribute="leading" secondItem="75x-hB-b3v" secondAttribute="leading" id="Lv9-Dd-jUJ"/>
                             <constraint firstAttribute="trailing" secondItem="saK-eH-dzW" secondAttribute="trailing" id="W76-Ug-zLd"/>
                             <constraint firstItem="3po-Km-irV" firstAttribute="top" secondItem="75x-hB-b3v" secondAttribute="top" constant="44" id="XOh-fv-1if"/>
+                            <constraint firstItem="Dka-h1-UmX" firstAttribute="centerY" secondItem="9i0-fu-tQr" secondAttribute="centerY" id="YE7-ND-C0l"/>
                             <constraint firstItem="Wol-sx-K7a" firstAttribute="centerY" secondItem="75x-hB-b3v" secondAttribute="centerY" id="ZYK-RP-cx2"/>
                             <constraint firstItem="Aaq-uW-sX7" firstAttribute="top" secondItem="W9c-Gg-veJ" secondAttribute="top" id="a81-FD-F9y"/>
                             <constraint firstItem="vT5-6S-UTW" firstAttribute="leading" secondItem="75x-hB-b3v" secondAttribute="leading" id="bjE-73-Gct"/>
@@ -303,6 +346,7 @@ Position Estimation</string>
                         <outlet property="retweetView" destination="tO8-a1-4k8" id="Jha-dj-f50"/>
                         <outlet property="rightButton" destination="Lau-LN-wqR" id="KY8-HF-704"/>
                         <outlet property="sceneView" destination="W9c-Gg-veJ" id="MwD-uf-Osc"/>
+                        <outlet property="tweetUIView" destination="Dka-h1-UmX" id="Bsf-EJ-cAn"/>
                         <outlet property="upButton" destination="OHF-vT-SOc" id="okQ-0a-ps9"/>
                         <outlet property="webView" destination="saK-eH-dzW" id="phT-GD-Fie"/>
                     </connections>
@@ -315,6 +359,9 @@ Position Estimation</string>
     <resources>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="retweet_black" width="170.66667175292969" height="170.66667175292969"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

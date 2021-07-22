@@ -33,6 +33,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var downButton: GazeUIButton!
     @IBOutlet weak var retweetView: UIImageView!
     @IBOutlet weak var heartView: UIImageView!
+    @IBOutlet weak var tweetUIView: TweetUIView!
 
     var faceNode: SCNNode = SCNNode()
 
@@ -340,13 +341,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     func fetchHomeTimeline() {
         // Load tweets from oauth authenticated user (currently @RenEddie)
-        swifter.getHomeTimeline(count: 1) { json in
+        swifter.getHomeTimeline(count: 1, tweetMode: .extended) { json in
             // Successfully fetched timeline, we save the tweet id and create the tweet view
+
             let jsonResult = json.array ?? []
             let tweetId = jsonResult[0]["id_str"].string!
             let hearted = jsonResult[0]["favorited"] == true
             let retweeted = jsonResult[0]["retweeted"] == true
             print("Updating home timeline", jsonResult[0]["favorited"], jsonResult[0]["retweeted"])
+
+            self.tweetUIView.update(jsonResult[0])
 
             if hearted {
                 if #available(iOS 13.0, *) {
