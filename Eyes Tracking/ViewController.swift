@@ -87,9 +87,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     var eyeLookAtPositionYs: [CGFloat] = []
 
-    // Tweetview WebView to hold the tweet
-    var tweetView = TweetView(tweetId: "")
-
     var swifter = Swifter(consumerKey: "QwA8u4qhODLCWKdd5eHR1yQYm",
                           consumerSecret: "4MMG8Vi5pC7Sa22SHj1je6gLuprwdRFwW9uckLBptgqj8eSvTx")
 
@@ -135,12 +132,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
 
     func setupTwitter() {
-        TweetView.prepare()
-        let width = view.frame.width - 64
-        tweetView.frame = CGRect(x: 32, y: 32, width: width, height: width)
-        tweetView.delegate = self
-        self.view.insertSubview(tweetView, belowSubview: gazeButtonsView)
-
         // Get the first tweet from the authenticated user's timeline
         authorizeWithWebLogin()
         view.bringSubviewToFront(eyePositionIndicatorView)
@@ -345,7 +336,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             // Successfully fetched timeline, we save the tweet id and create the tweet view
 
             let jsonResult = json.array ?? []
-            let tweetId = jsonResult[0]["id_str"].string!
             let hearted = jsonResult[0]["favorited"] == true
             let retweeted = jsonResult[0]["retweeted"] == true
             print("Updating home timeline", jsonResult[0]["favorited"], jsonResult[0]["retweeted"])
@@ -363,11 +353,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
             }
 
-            // Update the TweetView
-            DispatchQueue.main.async {
-                self.tweetView.tweetId = tweetId
-                self.tweetView.load()
-            }
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -376,7 +361,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @available(iOS 13.0, *)
     @objc func likeAction() {
         // Likes or unlikes the tweet that is currently visible on the screen
-        swifter.getTweet(for: self.tweetView.tweetId) { json in
+        swifter.getTweet(for: self.tweetUIView.id) { json in
             let jsonResult = json.object!
             let isLiked = jsonResult["favorited"] == true
 
@@ -397,7 +382,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     private func unfavoriteTweet() {
         // Unlike the tweet shown
-        swifter.unfavoriteTweet(forID: self.tweetView.tweetId) { _ in
+        swifter.unfavoriteTweet(forID: self.tweetUIView.id) { _ in
             print("unfavorited tweet!")
         } failure: { error in
             print(error.localizedDescription)
@@ -406,7 +391,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     private func favoriteTweet() {
         // Like the tweet shown
-        swifter.favoriteTweet(forID: self.tweetView.tweetId) { _ in
+        swifter.favoriteTweet(forID: self.tweetUIView.id) { _ in
             print("favorited tweet!")
         } failure: { error in
             print(error.localizedDescription)
@@ -415,7 +400,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @objc func retweetAction() {
         // Retweets the tweet that is currently visible on the screen
-        swifter.getTweet(for: self.tweetView.tweetId) { json in
+        swifter.getTweet(for: self.tweetUIView.id) { json in
             let jsonResult = json.object!
             let isRetweeted = jsonResult["retweeted"] == true
 
@@ -436,7 +421,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     private func unretweetTweet() {
         // Unretweet the tweet shown
-        swifter.unretweetTweet(forID: self.tweetView.tweetId) { _ in
+        swifter.unretweetTweet(forID: self.tweetUIView.id) { _ in
             print("unretweeted tweet!")
         } failure: { error in
             print(error.localizedDescription)
@@ -445,22 +430,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     private func retweetTweet() {
         // Retweet the tweet shown
-        swifter.retweetTweet(forID: self.tweetView.tweetId) { _ in
+        swifter.retweetTweet(forID: self.tweetUIView.id) { _ in
             print("retweeted tweet!")
         } failure: { error in
             print(error.localizedDescription)
         }
-    }
-}
-
-extension ViewController: TweetViewDelegate {
-    func tweetView(_ tweetView: TweetView, didUpdatedHeight height: CGFloat) {
-        tweetView.frame.size = CGSize(width: tweetView.frame.width, height: height)
-    }
-
-    func tweetView(_ tweetView: TweetView, shouldOpenURL url: URL) {
-        let viewController = SFSafariViewController(url: url)
-        self.showDetailViewController(viewController, sender: self)
     }
 }
 
