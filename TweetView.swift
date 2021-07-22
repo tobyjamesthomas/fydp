@@ -3,12 +3,17 @@ import UIKit
 import WebKit
 import SafariServices
 
-private let DefaultCellHeight: CGFloat = 20
-private let TweetPadding: CGFloat = 40
+private let defaultCellHeight: CGFloat = 20
+private let tweetPadding: CGFloat = 40
 
-private let HeightCallback = "heightCallback"
-private let ClickCallback = "clickCallback"
-private let HtmlTemplate = "<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'><style>* { margin: 0; padding: 0; } </style></head><body><div id='wrapper'></div></body></html>"
+private let heightCallback = "heightCallback"
+private let clickCallback = "clickCallback"
+private let htmlTemplate =
+    """
+    <html><head><meta name='viewport' content='width=device-width, initial-scale=1.0, \
+    maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'><style>* { margin: 0; padding: 0; } \
+    </style></head><body><div id='wrapper'></div></body></html>
+    """
 
 @objc
 public protocol TweetViewDelegate: AnyObject {
@@ -33,11 +38,11 @@ public class TweetView: UIView {
         webView.uiDelegate = self
 
         // Register callbacks
-        webView.configuration.userContentController.add(self, name: ClickCallback)
-        webView.configuration.userContentController.add(self, name: HeightCallback)
+        webView.configuration.userContentController.add(self, name: clickCallback)
+        webView.configuration.userContentController.add(self, name: heightCallback)
 
         // Set initial frame
-        webView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: CGFloat(DefaultCellHeight))
+        webView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: CGFloat(defaultCellHeight))
 
         // Prevent scrolling
         webView.scrollView.isScrollEnabled = false
@@ -46,10 +51,11 @@ public class TweetView: UIView {
     }()
 
     /// The TweetView Delegate
+    // swiftlint:disable:next valid_ibinspectable
     @IBInspectable public weak var delegate: TweetViewDelegate?
 
     /// The Tweet ID
-    @IBInspectable public  var id: String
+    @IBInspectable public  var tweetId: String
 
     /// The height of the TweetView
     public private(set) var state: State = .idle
@@ -63,17 +69,17 @@ public class TweetView: UIView {
 
     /// Initializes and returns a newly allocated tweet view object with the specified id
     /// - Parameter id: Tweet's id
-    public init(id: String) {
-        self.id = id
-        self.height = DefaultCellHeight
+    public init(tweetId: String) {
+        self.tweetId = tweetId
+        self.height = defaultCellHeight
 
         super.init(frame: CGRect.zero)
     }
 
     public required init?(coder: NSCoder) {
 
-        self.id = ""
-        self.height = DefaultCellHeight
+        self.tweetId = ""
+        self.height = defaultCellHeight
 
         super.init(coder: coder)
     }
@@ -86,7 +92,7 @@ public class TweetView: UIView {
         state = .loading
         addWebViewToSubviews()
 
-        webView.loadHTMLString(HtmlTemplate, baseURL: nil)
+        webView.loadHTMLString(htmlTemplate, baseURL: nil)
     }
 
     fileprivate func addWebViewToSubviews() {
@@ -113,10 +119,11 @@ public class TweetView: UIView {
             }
 
             // Documentation:
+            // swiftlint:disable:next line_length
             // https://developer.twitter.com/en/docs/twitter-for-websites/embedded-tweets/guides/embedded-tweet-javascript-factory-function
             webView.evaluateJavaScript("""
                 twttr.widgets.createTweet(
-                    '\(id)',
+                    '\(tweetId)',
                     document.getElementById('wrapper'),
                     { align: 'center', theme: '\(theme)' }
                 ).then(el => {
@@ -129,7 +136,8 @@ public class TweetView: UIView {
 
 // MARK: - WKNavigationDelegate
 extension TweetView: WKNavigationDelegate {
-    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
+                        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url, navigationAction.navigationType == .linkActivated {
             delegate?.tweetView(self, shouldOpenURL: url)
             decisionHandler(.cancel)
@@ -150,7 +158,8 @@ extension TweetView: WKNavigationDelegate {
 
 // MARK: - WKUIDelegate
 extension TweetView: WKUIDelegate {
-    public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+    public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration,
+                        for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         // Allow links with target="_blank" to open in SafariViewController
         //   (includes clicks on the background of Embedded Tweets
         if let url = navigationAction.request.url, navigationAction.targetFrame == nil {
@@ -163,11 +172,12 @@ extension TweetView: WKUIDelegate {
 
 // MARK: - WKScriptMessageHandler
 extension TweetView: WKScriptMessageHandler {
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+    public func userContentController(_ userContentController: WKUserContentController,
+                                      didReceive message: WKScriptMessage) {
         switch message.name {
-        case HeightCallback:
+        case heightCallback:
             guard let message = message.body as? String, let intHeight = Int(message) else { return }
-            self.height = CGFloat(intHeight) + TweetPadding
+            self.height = CGFloat(intHeight) + tweetPadding
         default:
             print("Unhandled callback")
         }

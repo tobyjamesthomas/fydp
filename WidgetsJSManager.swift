@@ -15,7 +15,8 @@ internal class WidgetsJSManager {
 
     public func load() {
         guard content == nil else { return }
-        let task = URLSession.shared.dataTask(with: URL(string: "https://platform.twitter.com/widgets.js")!) { (data, _, _) in
+        let task = URLSession.shared.dataTask(with: URL(
+                                                string: "https://platform.twitter.com/widgets.js")!) { (data, _, _) in
             guard let data = data else {
                 return
             }

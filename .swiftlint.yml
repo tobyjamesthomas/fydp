@@ -1,0 +1,6 @@
+excluded:
+  - Pods/
+  - 'Eyes Tracking/Products/'
+  - 'Eyes Tracking/Frameworks/'
+  - 'Eyes Tracking/Pods/'
+

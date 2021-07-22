@@ -221,9 +221,9 @@ public extension Swifter {
 			return
 		}
 
-        self.prepareUpload(data: data, type: .gif, category: .gif, success: { json, response in
+        self.prepareUpload(data: data, type: .gif, category: .gif, success: { json, _ in
             if let media_id = json["media_id_string"].string {
-                self.appendUpload(media_id, data: data, name: attachmentUrl.lastPathComponent, index: 0, success: { json, _ in
+                self.appendUpload(media_id, data: data, name: attachmentUrl.lastPathComponent, index: 0, success: { _, _ in
                     self.finalizeUpload(mediaId: media_id, success: { _, _ in
                         self.postTweet(status: text, mediaIDs: [media_id], success: success, failure: failure)
                     }, failure: failure)
@@ -266,7 +266,7 @@ public extension Swifter {
                             category: MediaCategory,
                             success: SuccessHandler? = nil,
                             failure: FailureHandler? = nil) {
-        self.prepareUpload(data: media, type: type, category: category, success: { json, response in
+        self.prepareUpload(data: media, type: type, category: category, success: { json, _ in
             if let media_id = json["media_id_string"].string {
                 self.appendUpload(media_id, data: media, name: name, index: 0, success: { json, _ in
                     self.finalizeUpload(mediaId: media_id, success: { (json, _) in

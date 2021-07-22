@@ -14,6 +14,7 @@ import SafariServices
 import Swifter
 import AuthenticationServices
 
+// swiftlint:disable type_body_length file_length
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @IBOutlet weak var webView: WKWebView!
@@ -86,9 +87,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var eyeLookAtPositionYs: [CGFloat] = []
 
     // Tweetview WebView to hold the tweet
-    var tweetView = TweetView(id: "")
+    var tweetView = TweetView(tweetId: "")
 
-    var swifter = Swifter(consumerKey: "QwA8u4qhODLCWKdd5eHR1yQYm", consumerSecret: "4MMG8Vi5pC7Sa22SHj1je6gLuprwdRFwW9uckLBptgqj8eSvTx")
+    var swifter = Swifter(consumerKey: "QwA8u4qhODLCWKdd5eHR1yQYm",
+                          consumerSecret: "4MMG8Vi5pC7Sa22SHj1je6gLuprwdRFwW9uckLBptgqj8eSvTx")
 
     var gazeButtons: [GazeUIButton] = []
 
@@ -128,6 +130,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         lookAtTargetEyeRNode.position.z = 1
 
         // Format TweetView to display single tweet
+        self.setupTwitter()
+    }
+
+    func setupTwitter() {
         TweetView.prepare()
         let width = view.frame.width - 64
         tweetView.frame = CGRect(x: 32, y: 32, width: width, height: width)
@@ -135,12 +141,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         self.view.insertSubview(tweetView, belowSubview: gazeButtonsView)
 
         // Get the first tweet from the authenticated user's timeline
-        authorizeWithWebLogin(function: "home")
+        authorizeWithWebLogin()
         view.bringSubviewToFront(eyePositionIndicatorView)
-
-         // Testing retweet / like functionality
-//        self.tweetView.id = "1405216798283284487"
-//        authorizeWithWebLogin(function: "retweet")
 
         // Add actions to buttons
         leftButton.addTarget(self, action: #selector(retweetAction), for: .primaryActionTriggered)
@@ -217,24 +219,31 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
         DispatchQueue.main.async {
 
-            // Perform Hit test using the ray segments that are drawn by the center of the eyeballs to somewhere two meters away at direction of where users look at to the virtual plane that place at the same orientation of the phone screen
+            // Perform Hit test using the ray segments that are drawn by the center of the eyeballs to somewhere two
+            // meters away at direction of where users look at to the virtual plane that place at the same orientation
+            // of the phone screen
+            let phoneScreenEyeRHitTestResults = self.virtualPhoneNode.hitTestWithSegment(
+                from: self.lookAtTargetEyeRNode.worldPosition, to: self.eyeRNode.worldPosition, options: nil)
 
-            let phoneScreenEyeRHitTestResults = self.virtualPhoneNode.hitTestWithSegment(from: self.lookAtTargetEyeRNode.worldPosition, to: self.eyeRNode.worldPosition, options: nil)
-
-            let phoneScreenEyeLHitTestResults = self.virtualPhoneNode.hitTestWithSegment(from: self.lookAtTargetEyeLNode.worldPosition, to: self.eyeLNode.worldPosition, options: nil)
+            let phoneScreenEyeLHitTestResults = self.virtualPhoneNode.hitTestWithSegment(
+                from: self.lookAtTargetEyeLNode.worldPosition, to: self.eyeLNode.worldPosition, options: nil)
 
             for result in phoneScreenEyeRHitTestResults {
 
-                eyeRLookAt.x = CGFloat(result.localCoordinates.x) / (self.phoneScreenSize.width / 2) * self.phoneScreenPointSize.width
+                eyeRLookAt.x = CGFloat(result.localCoordinates.x) / (self.phoneScreenSize.width / 2)
+                    * self.phoneScreenPointSize.width
 
-                eyeRLookAt.y = CGFloat(result.localCoordinates.y) / (self.phoneScreenSize.height / 2) * self.phoneScreenPointSize.height + heightCompensation
+                eyeRLookAt.y = CGFloat(result.localCoordinates.y) / (self.phoneScreenSize.height / 2)
+                    * self.phoneScreenPointSize.height + heightCompensation
             }
 
             for result in phoneScreenEyeLHitTestResults {
 
-                eyeLLookAt.x = CGFloat(result.localCoordinates.x) / (self.phoneScreenSize.width / 2) * self.phoneScreenPointSize.width
+                eyeLLookAt.x = CGFloat(result.localCoordinates.x) / (self.phoneScreenSize.width / 2)
+                    * self.phoneScreenPointSize.width
 
-                eyeLLookAt.y = CGFloat(result.localCoordinates.y) / (self.phoneScreenSize.height / 2) * self.phoneScreenPointSize.height + heightCompensation
+                eyeLLookAt.y = CGFloat(result.localCoordinates.y) / (self.phoneScreenSize.height / 2)
+                    * self.phoneScreenPointSize.height + heightCompensation
             }
 
             // Add the latest position and keep up to 8 recent position to smooth with.
@@ -251,10 +260,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             let gazePositionY = Int(round(smoothEyeLookAtPositionY + self.phoneScreenPointSize.height / 2))
 
             // update indicator position
-            self.eyePositionIndicatorView.transform = CGAffineTransform(translationX: smoothEyeLookAtPositionX, y: smoothEyeLookAtPositionY)
+            self.eyePositionIndicatorView.transform = CGAffineTransform(translationX: smoothEyeLookAtPositionX,
+                                                                        y: smoothEyeLookAtPositionY)
 
             // update eye look at labels values
-
             self.lookAtPositionXLabel.text = "\(gazePositionX)"
             self.lookAtPositionYLabel.text = "\(gazePositionY)"
 
@@ -289,7 +298,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             return
         }
 
-        let button: GazeUIButton = view as! GazeUIButton
+        let button: GazeUIButton = (view as? GazeUIButton)!
 
         for otherButton in gazeButtons {
             if otherButton != button && otherButton.isActive() {
@@ -313,21 +322,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
 
     // Authorize user using OAuth and call the function specified
-    private func authorizeWithWebLogin(function: String) {
+    private func authorizeWithWebLogin() {
 
         // Must specify a callback url
         let callbackUrl = URL(string: "eyestracking://")!
 
         if #available(iOS 13.0, *) {
             swifter.authorize(withProvider: self, callbackURL: callbackUrl) { _, _ in
-                // Call the function specified by the function parameter
-                if function == "home" {
-                    self.fetchHomeTimeline()
-                } else if function == "like" {
-                    self.likeAction()
-                } else {
-                    self.retweetAction()
-                }
+                self.fetchHomeTimeline()
             } failure: { error in
                 print(error.localizedDescription)
             }
@@ -336,12 +338,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
 
-    private func fetchHomeTimeline() {
+    func fetchHomeTimeline() {
         // Load tweets from oauth authenticated user (currently @RenEddie)
         swifter.getHomeTimeline(count: 1) { json in
             // Successfully fetched timeline, we save the tweet id and create the tweet view
             let jsonResult = json.array ?? []
-            let tweet_id = jsonResult[0]["id_str"].string!
+            let tweetId = jsonResult[0]["id_str"].string!
             let hearted = jsonResult[0]["favorited"] == true
             let retweeted = jsonResult[0]["retweeted"] == true
             print("Updating home timeline", jsonResult[0]["favorited"], jsonResult[0]["retweeted"])
@@ -359,7 +361,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
             // Update the TweetView
             DispatchQueue.main.async {
-                self.tweetView.id = tweet_id
+                self.tweetView.tweetId = tweetId
                 self.tweetView.load()
             }
         } failure: { error in
@@ -370,7 +372,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @available(iOS 13.0, *)
     @objc func likeAction() {
         // Likes or unlikes the tweet that is currently visible on the screen
-        swifter.getTweet(for: self.tweetView.id) { json in
+        swifter.getTweet(for: self.tweetView.tweetId) { json in
             let jsonResult = json.object!
             let isLiked = jsonResult["favorited"] == true
 
@@ -381,11 +383,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
             } else {
                 self.favoriteTweet()
-                if #available(iOS 13.0, *) {
-                    self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
-                } else {
-                    // Fallback on earlier versions
-                }
+                self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
             }
 
         } failure: { error in
@@ -395,7 +393,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     private func unfavoriteTweet() {
         // Unlike the tweet shown
-        swifter.unfavoriteTweet(forID: self.tweetView.id) { _ in
+        swifter.unfavoriteTweet(forID: self.tweetView.tweetId) { _ in
             print("unfavorited tweet!")
         } failure: { error in
             print(error.localizedDescription)
@@ -404,7 +402,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     private func favoriteTweet() {
         // Like the tweet shown
-        swifter.favoriteTweet(forID: self.tweetView.id) { _ in
+        swifter.favoriteTweet(forID: self.tweetView.tweetId) { _ in
             print("favorited tweet!")
         } failure: { error in
             print(error.localizedDescription)
@@ -413,7 +411,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @objc func retweetAction() {
         // Retweets the tweet that is currently visible on the screen
-        swifter.getTweet(for: self.tweetView.id) { json in
+        swifter.getTweet(for: self.tweetView.tweetId) { json in
             let jsonResult = json.object!
             let isRetweeted = jsonResult["retweeted"] == true
 
@@ -434,7 +432,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     private func unretweetTweet() {
         // Unretweet the tweet shown
-        swifter.unretweetTweet(forID: self.tweetView.id) { _ in
+        swifter.unretweetTweet(forID: self.tweetView.tweetId) { _ in
             print("unretweeted tweet!")
         } failure: { error in
             print(error.localizedDescription)
@@ -443,7 +441,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     private func retweetTweet() {
         // Retweet the tweet shown
-        swifter.retweetTweet(forID: self.tweetView.id) { _ in
+        swifter.retweetTweet(forID: self.tweetView.tweetId) { _ in
             print("retweeted tweet!")
         } failure: { error in
             print(error.localizedDescription)
@@ -457,8 +455,8 @@ extension ViewController: TweetViewDelegate {
     }
 
     func tweetView(_ tweetView: TweetView, shouldOpenURL url: URL) {
-        let vc = SFSafariViewController(url: url)
-        self.showDetailViewController(vc, sender: self)
+        let viewController = SFSafariViewController(url: url)
+        self.showDetailViewController(viewController, sender: self)
     }
 }
 
