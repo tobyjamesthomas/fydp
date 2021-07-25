@@ -7,33 +7,28 @@ on:
     branches: [ master ]
 
 jobs:
-  setup:
-      runs-on: macos-latest
-    
-      steps:
-       - uses: actions/checkout@v2
-       - name: Install Cocoapods
-         # You may pin to the exact commit or the version.
-         # uses: maxim-lobanov/setup-cocoapods@d66547b1b8cc1d342527a50a39f425281442afd5
-         uses: maxim-lobanov/setup-cocoapods@v1
-         with:
-           # Path to Podfile.lock file to determine Cocoapods version
-           podfile-path: Podfile.lock
-  
   lint:
+    name: Run Linter
     runs-on: macos-latest
-    needs: setup
 
     steps:
     - uses: actions/checkout@v2
-    - name: Run Linter
+    - name: Setup Cocoapods
+      uses: maxim-lobanov/setup-cocoapods@v1
+      with:
+       podfile-path: Podfile.lock
+    - name: Run Swiftlint
       run: ./Pods/SwiftLint/swiftlint
  
   build:
+    name: Build
     runs-on: macos-latest
-    needs: setup
 
     steps:
     - uses: actions/checkout@v2
+    - name: Setup Cocoapods
+      uses: maxim-lobanov/setup-cocoapods@v1
+      with:
+       podfile-path: Podfile.lock
     - name: Build
       run: swift build -v
