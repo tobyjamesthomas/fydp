@@ -16,6 +16,8 @@ class TweetUIView: UIView {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
+    @IBOutlet weak var retweetCountLabel: UILabel!
+    @IBOutlet weak var favouriteCountLabel: UILabel!
 
     public var tid: String = ""
 
@@ -24,18 +26,22 @@ class TweetUIView: UIView {
     }
 
     func update(_ json: JSON) {
+        print(json)
+
         self.tid = json["id_str"].string!
 
         let name = json["user"]["name"].string!
         let screenName = json["user"]["screen_name"].string!
         let tweetText = json["full_text"].string!
+        let retweetCount = json["retweet_count"].integer!
+        let favouriteCount = json["favorite_count"].integer!
         let profileImageURL = json["user"]["profile_image_url_https"].string!
-
-        print(json)
 
         self.nameLabel.text = name
         self.screenNameLabel.text = "@" + screenName
         self.tweetLabel.text = tweetText
+        self.retweetCountLabel.text = String(retweetCount)
+        self.favouriteCountLabel.text = String(favouriteCount)
 
         setProfileImage(from: profileImageURL)
     }
