@@ -239,23 +239,42 @@ Position Estimation</string>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WLb-dh-0bp">
                                         <rect key="frame" x="0.0" y="0.0" width="308" height="408"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8QM-ie-0jI">
-                                                <rect key="frame" x="0.0" y="0.0" width="308" height="204"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rh-QS-cqZ">
-                                                <rect key="frame" x="0.0" y="204" width="308" height="204"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="g4P-iy-FwZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="308" height="70"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Yqi-l5-8s1">
+                                                        <rect key="frame" x="0.0" y="1" width="70" height="68.666666666666671"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="70" id="eq1-TX-Urf"/>
+                                                            <constraint firstAttribute="width" constant="70" id="fVA-Rh-Yyz"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hkX-3w-yra">
+                                                        <rect key="frame" x="80" y="0.0" width="228" height="70"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="First Last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8QM-ie-0jI">
+                                                                <rect key="frame" x="0.0" y="0.0" width="228" height="49.666666666666664"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nuh-zp-akw">
+                                                                <rect key="frame" x="0.0" y="49.666666666666686" width="228" height="20.333333333333329"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" lineBreakMode="wordWrap" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rh-QS-cqZ">
+                                                <rect key="frame" x="0.0" y="70" width="308" height="338"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="2Rh-QS-cqZ" firstAttribute="height" secondItem="8QM-ie-0jI" secondAttribute="height" id="9g9-ZL-d3d"/>
-                                            <constraint firstItem="2Rh-QS-cqZ" firstAttribute="width" secondItem="8QM-ie-0jI" secondAttribute="width" id="IoS-ab-WR4"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -270,8 +289,10 @@ Position Estimation</string>
                                     <constraint firstItem="WLb-dh-0bp" firstAttribute="leading" secondItem="Dka-h1-UmX" secondAttribute="leading" id="vIZ-iZ-f1x"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="nameLabel" destination="8QM-ie-0jI" id="egP-eG-f6Q"/>
+                                    <outlet property="profileImage" destination="Yqi-l5-8s1" id="YgA-PF-AC8"/>
+                                    <outlet property="screenNameLabel" destination="Nuh-zp-akw" id="mfL-yz-hHx"/>
                                     <outlet property="tweetLabel" destination="2Rh-QS-cqZ" id="U3z-8T-7Mq"/>
-                                    <outlet property="usernameLabel" destination="8QM-ie-0jI" id="QHJ-PQ-L6q"/>
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rlJ-wj-UR6">
@@ -358,6 +379,7 @@ Position Estimation</string>
     </scenes>
     <resources>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
         <image name="retweet_black" width="170.66667175292969" height="170.66667175292969"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

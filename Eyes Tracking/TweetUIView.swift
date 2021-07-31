@@ -12,7 +12,9 @@ import Swifter
 
 class TweetUIView: UIView {
 
-    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
 
     public var tid: String = ""
@@ -24,12 +26,30 @@ class TweetUIView: UIView {
     func update(_ json: JSON) {
         self.tid = json["id_str"].string!
 
-        let username = json["user"]["screen_name"].string!
+        let name = json["user"]["name"].string!
+        let screenName = json["user"]["screen_name"].string!
         let tweetText = json["full_text"].string!
+        let profileImageURL = json["user"]["profile_image_url_https"].string!
 
-        print(tid, username, tweetText)
+        print(json)
 
-        self.usernameLabel.text = username
+        self.nameLabel.text = name
+        self.screenNameLabel.text = "@" + screenName
         self.tweetLabel.text = tweetText
+
+        setProfileImage(from: profileImageURL)
+    }
+
+    func setProfileImage(from url: String) {
+        guard let imageURL = URL(string: url) else { return }
+
+        DispatchQueue.global().async {
+            guard let imageData = try? Data(contentsOf: imageURL) else { return }
+
+            let image = UIImage(data: imageData)
+            DispatchQueue.main.async {
+                self.profileImage.image = image
+            }
+        }
     }
 }
