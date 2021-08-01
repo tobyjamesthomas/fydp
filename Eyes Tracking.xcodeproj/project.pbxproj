@@ -8,9 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		12BF964526A8AE4E0035E74B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 12BF964426A8AE4E0035E74B /* Podfile */; };
-		2CC5DE862679B1A800130F5F /* TweetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5DE852679B1A800130F5F /* TweetView.swift */; };
-		2CC5DE882679B21E00130F5F /* WidgetsJSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5DE872679B21E00130F5F /* WidgetsJSManager.swift */; };
 		99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99291A0C268157BC00227372 /* GazeUIButton.swift */; };
+		9940E46E26A8E817002E5974 /* TweetUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9940E46D26A8E817002E5974 /* TweetUIView.swift */; };
 		D0D25B8920C80F5500A25627 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D25B8820C80F5500A25627 /* Extensions.swift */; };
 		D0E5847A20C806050052967A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E5847920C806050052967A /* AppDelegate.swift */; };
 		D0E5847E20C806050052967A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E5847D20C806050052967A /* ViewController.swift */; };
@@ -24,10 +23,9 @@
 		12BF964426A8AE4E0035E74B /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2C7218E326A8BF67006BD7EB /* Swifter */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Swifter; sourceTree = "<group>"; };
 		2C7218E626A8BFF7006BD7EB /* Swifter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Swifter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2CC5DE852679B1A800130F5F /* TweetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetView.swift; sourceTree = "<group>"; };
-		2CC5DE872679B21E00130F5F /* WidgetsJSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsJSManager.swift; sourceTree = "<group>"; };
 		7133DFBF2E2031AA1BDB1BDC /* Pods-Eyes Tracking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyes Tracking.release.xcconfig"; path = "Target Support Files/Pods-Eyes Tracking/Pods-Eyes Tracking.release.xcconfig"; sourceTree = "<group>"; };
 		99291A0C268157BC00227372 /* GazeUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeUIButton.swift; sourceTree = "<group>"; };
+		9940E46D26A8E817002E5974 /* TweetUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetUIView.swift; sourceTree = "<group>"; };
 		D0D25B8820C80F5500A25627 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D0E5847620C806050052967A /* Eyes Tracking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Eyes Tracking.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0E5847920C806050052967A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,8 +73,6 @@
 			isa = PBXGroup;
 			children = (
 				12BF964426A8AE4E0035E74B /* Podfile */,
-				2CC5DE872679B21E00130F5F /* WidgetsJSManager.swift */,
-				2CC5DE852679B1A800130F5F /* TweetView.swift */,
 				D0E5847820C806050052967A /* Eyes Tracking */,
 				D0E5847720C806050052967A /* Products */,
 				2CC5DE89267A66EE00130F5F /* Frameworks */,
@@ -98,6 +94,7 @@
 				D0E5847920C806050052967A /* AppDelegate.swift */,
 				D0E5847D20C806050052967A /* ViewController.swift */,
 				99291A0C268157BC00227372 /* GazeUIButton.swift */,
+				9940E46D26A8E817002E5974 /* TweetUIView.swift */,
 				D0D25B8820C80F5500A25627 /* Extensions.swift */,
 				D0E5847F20C806050052967A /* Main.storyboard */,
 				D0E5848220C806050052967A /* Assets.xcassets */,
@@ -244,11 +241,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0D25B8920C80F5500A25627 /* Extensions.swift in Sources */,
-				2CC5DE882679B21E00130F5F /* WidgetsJSManager.swift in Sources */,
 				D0E5847E20C806050052967A /* ViewController.swift in Sources */,
-				2CC5DE862679B1A800130F5F /* TweetView.swift in Sources */,
 				99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */,
 				99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */,
+				9940E46E26A8E817002E5974 /* TweetUIView.swift in Sources */,
 				D0E5847A20C806050052967A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
