@@ -93,9 +93,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                           consumerSecret: "4MMG8Vi5pC7Sa22SHj1je6gLuprwdRFwW9uckLBptgqj8eSvTx")
 
     var gazeButtons: [GazeUIButton] = []
-    
+
     var isBlinking: Bool = false
-    
+    var lastBlinkDate: Date = Date()
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
@@ -208,28 +209,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
 
     // MARK: - update(ARFaceAnchor)
-
     func update(withFaceAnchor anchor: ARFaceAnchor) {
 
         eyeRNode.simdTransform = anchor.rightEyeTransform
         eyeLNode.simdTransform = anchor.leftEyeTransform
-<<<<<<< HEAD
-=======
-        
-        let blendShapes = anchor.blendShapes
-        let eyeBlinkLeft = blendShapes[.eyeBlinkLeft] as! Float
-        let eyeBlinkRight = blendShapes[.eyeBlinkRight] as! Float
-        
-        if (eyeBlinkRight > 0.9 || eyeBlinkLeft > 0.9)  {
-            isBlinking = true
-        }
-        if (eyeBlinkLeft < 0.2 && eyeBlinkRight < 0.2) {
-            if (isBlinking == true) {
-                print("Full blink detected!")
-            }
-            isBlinking = false
-        }
->>>>>>> Detect and print when user is blinking
+
+        handleBlink(withFaceAnchor: anchor)
 
         var eyeLLookAt = CGPoint()
         var eyeRLookAt = CGPoint()
@@ -464,6 +449,29 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             print("retweeted tweet!")
         } failure: { error in
             print(error.localizedDescription)
+        }
+    }
+
+    private func handleBlink(withFaceAnchor anchor: ARFaceAnchor) {
+        let blendShapes = anchor.blendShapes
+        if let eyeBlinkLeft = blendShapes[.eyeBlinkLeft] as? Float,
+           let eyeBlinkRight = blendShapes[.eyeBlinkRight] as? Float {
+            if eyeBlinkRight > 0.9 || eyeBlinkLeft > 0.9 {
+                isBlinking = true
+            }
+            if eyeBlinkLeft < 0.2 && eyeBlinkRight < 0.2 {
+                if isBlinking == true {
+                    let elapsed = Date().timeIntervalSince(lastBlinkDate)
+                    if elapsed < 1 {
+                        print("Double blink detected!")
+                    } else {
+                        print("Single blink detected")
+                    }
+                    lastBlinkDate = Date()
+                }
+                isBlinking = false
+
+            }
         }
     }
 }
