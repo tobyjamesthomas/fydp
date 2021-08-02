@@ -6,3 +6,7 @@
 .build/
 Pods/Pods.xcodeproj/xcuserdata/*
 
+*.xcworkspace/xcuserdata/*
+Pods/*.xcodeproj/xcuserdata/*
+
+*.swp
