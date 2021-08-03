@@ -200,6 +200,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         update(withFaceAnchor: faceAnchor)
     }
 
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard let key = presses.first?.key else { return }
+
+        switch key.keyCode {
+        case .keyboardD:
+            print("Detect double blink")
+            showMenuViewController()
+        default:
+            super.pressesEnded(presses, with: event)
+        }
+    }
+    
     // MARK: - update(ARFaceAnchor)
     func update(withFaceAnchor anchor: ARFaceAnchor) {
 
@@ -453,6 +465,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                     let elapsed = Date().timeIntervalSince(lastBlinkDate)
                     if elapsed < 1 {
                         print("Double blink detected!")
+                        showMenuViewController()
+
                     } else {
                         print("Single blink detected")
                     }
@@ -462,6 +476,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
             }
         }
+    }
+    
+    private func showMenuViewController() {
+        // Display a new view controller for the menu options
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "menuViewController")
+        
+//        This will make the menu screen behave as a real screen.
+//        newViewController.modalPresentationStyle = .fullScreen
+        self.present(newViewController, animated: true, completion: nil)
     }
 }
 
