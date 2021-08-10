@@ -335,7 +335,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
 
     func fetchHomeTimeline() {
-        // Load tweets from oauth authenticated user (currently @RenEddie)
+        // Load tweets from oauth authenticated user
         swifter.getHomeTimeline(count: 1, tweetMode: .extended) { json in
             // Successfully fetched timeline, we save the tweet id and create the tweet view
 
@@ -400,6 +400,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         } failure: { error in
             print(error.localizedDescription)
         }
+
+        self.unfollowAccount(userTag: UserTag.screenName("RenEddie"))
     }
 
     @objc func retweetAction() {
@@ -436,6 +438,45 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Retweet the tweet shown
         swifter.retweetTweet(forID: self.tweetUIView.tid) { _ in
             print("retweeted tweet!")
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+    
+    @objc func followAction() {
+        // Retweets the tweet that is currently visible on the screen
+        swifter.showUser() { json in
+            let jsonResult = json.object!
+            let isRetweeted = jsonResult["retweeted"] == true
+
+            // if the user has already retweeted the tweet then we unretweet it, otherwise we retweet it
+            if isRetweeted {
+                self.unretweetTweet()
+                self.retweetView.setImage(UIImage(named: "retweet_black"), animated: true)
+            } else {
+                self.retweetTweet()
+                self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
+
+            }
+
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+
+    private func followAccount(userTag: UserTag) {
+        // Follow user from user tag
+        swifter.followUser(userTag) { _ in
+            print("followed user!")
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+
+    private func unfollowAccount(userTag: UserTag) {
+        // unfollow user from user tag
+        swifter.unfollowUser(userTag) { _ in
+            print("unfollowed user!")
         } failure: { error in
             print(error.localizedDescription)
         }
