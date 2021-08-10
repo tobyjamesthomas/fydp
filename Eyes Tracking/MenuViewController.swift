@@ -14,6 +14,7 @@ import SafariServices
 import Swifter
 import AuthenticationServices
 
+// swiftlint:disable type_body_length file_length
 class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @IBOutlet weak var webView: WKWebView!
@@ -86,8 +87,7 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
 
     var eyeLookAtPositionYs: [CGFloat] = []
 
-    var swifter = Swifter(consumerKey: "QwA8u4qhODLCWKdd5eHR1yQYm",
-                          consumerSecret: "4MMG8Vi5pC7Sa22SHj1je6gLuprwdRFwW9uckLBptgqj8eSvTx")
+    var swifter = Swifter(consumerKey: "", consumerSecret: "")
 
     var gazeButtons: [GazeUIButton] = []
 
@@ -135,7 +135,7 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
 
     func setupTwitter() {
         // Get the first tweet from the authenticated user's timeline
-        authorizeWithWebLogin()
+        self.fetchHomeTimeline()
         view.bringSubviewToFront(eyePositionIndicatorView)
 
         // Add actions to buttons
@@ -326,23 +326,6 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         faceNode.transform = node.transform
         guard let faceAnchor = anchor as? ARFaceAnchor else { return }
         update(withFaceAnchor: faceAnchor)
-    }
-
-    // Authorize user using OAuth and call the function specified
-    private func authorizeWithWebLogin() {
-
-        // Must specify a callback url
-        let callbackUrl = URL(string: "eyestracking://")!
-
-        if #available(iOS 13.0, *) {
-            swifter.authorize(withProvider: self, callbackURL: callbackUrl) { _, _ in
-                self.fetchHomeTimeline()
-            } failure: { error in
-                print(error.localizedDescription)
-            }
-        } else {
-            // Fallback on earlier versions
-        }
     }
 
     func fetchHomeTimeline() {

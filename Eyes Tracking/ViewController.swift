@@ -193,6 +193,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         sceneView.session.pause()
     }
 
+<<<<<<< HEAD
     override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         guard let key = presses.first?.key else { return }
 
@@ -208,6 +209,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 retweetAction()
             default:
                 super.pressesEnded(presses, with: event)
+            }
+        }
+    }
+    
+    // Pass swfiter to next view
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "menu" {
+            if let menuViewController = segue.destination as? MenuViewController {
+                menuViewController.swifter = self.swifter
             }
         }
     }
