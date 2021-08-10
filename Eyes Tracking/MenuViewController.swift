@@ -189,6 +189,15 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         sceneView.session.pause()
     }
 
+    // Pass swifter to next view
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "userprofile" {
+            if let userProfileViewController = segue.destination as? UserProfileViewController {
+                userProfileViewController.swifter = self.swifter
+            }
+        }
+    }
+
     // MARK: - ARSCNViewDelegate
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -205,7 +214,7 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         switch key.keyCode {
         case .keyboardD:
             print("Detect double blink")
-            showMenuViewController()
+            showUserProfileViewController()
         default:
             super.pressesEnded(presses, with: event)
         }
@@ -448,7 +457,7 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
                     if elapsed < 1 {
                         print("Double blink detected!")
                         DispatchQueue.main.async {
-                            self.showMenuViewController()
+                            self.showUserProfileViewController()
                         }
 
                     } else {
@@ -462,21 +471,7 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         }
     }
 
-    private func showMenuViewController() {
-        self.performSegue(withIdentifier: "menu", sender: self)
-    }
-}
-
-extension MenuViewController: SFSafariViewControllerDelegate {
-    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        controller.dismiss(animated: true, completion: nil)
-    }
-}
-
-// This is need for ASWebAuthenticationSession
-@available(iOS 13.0, *)
-extension MenuViewController: ASWebAuthenticationPresentationContextProviding {
-    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-        return self.view.window!
+    private func showUserProfileViewController() {
+        self.performSegue(withIdentifier: "userprofile", sender: self)
     }
 }
