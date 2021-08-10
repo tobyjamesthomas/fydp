@@ -397,13 +397,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4BA7JNM5VD;
+				DEVELOPMENT_TEAM = 7JP2RVQ76A;
 				INFOPLIST_FILE = "Eyes Tracking/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.eddie.Eyes-Tracking";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tobyjamesthomas.Eyes-Tracking";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -416,13 +416,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4BA7JNM5VD;
+				DEVELOPMENT_TEAM = 7JP2RVQ76A;
 				INFOPLIST_FILE = "Eyes Tracking/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.eddie.Eyes-Tracking";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tobyjamesthomas.Eyes-Tracking";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
