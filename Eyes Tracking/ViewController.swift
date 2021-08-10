@@ -518,13 +518,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
 
     private func showMenuViewController() {
-        // Display a new view controller for the menu options
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "menuViewController")
-
-//        This will make the menu screen behave as a real screen.
-//        newViewController.modalPresentationStyle = .fullScreen
-        self.present(newViewController, animated: true, completion: nil)
+        self.performSegue(withIdentifier: "menu", sender: self)
     }
 }
 
