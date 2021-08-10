@@ -15,5 +15,5 @@ import Swifter
 import AuthenticationServices
 
 class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
-    
+
 }
