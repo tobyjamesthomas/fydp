@@ -668,6 +668,7 @@ Position Estimation</string>
                         <outlet property="rightButton" destination="WgV-D5-HRl" id="sc9-k8-Qsb"/>
                         <outlet property="sceneView" destination="juZ-xh-nY0" id="csF-LJ-ZCr"/>
                         <outlet property="upButton" destination="zyR-6j-gKH" id="Elp-z9-WA6"/>
+                        <outlet property="userLabel" destination="c2d-JQ-t1Z" id="ZNc-lk-5Z5"/>
                         <outlet property="webView" destination="4x6-fg-ki8" id="yzv-Nn-qd7"/>
                         <segue destination="06d-jr-jZ0" kind="presentation" identifier="userprofile" modalPresentationStyle="fullScreen" id="zwx-dW-CzO"/>
                     </connections>

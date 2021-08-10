@@ -20,6 +20,7 @@ class TweetUIView: UIView {
     @IBOutlet weak var favouriteCountLabel: UILabel!
 
     public var tid: String = ""
+    public var screenname: String = ""
 
     required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
@@ -29,16 +30,16 @@ class TweetUIView: UIView {
         print(json)
 
         self.tid = json["id_str"].string!
+        self.screenname = json["user"]["screen_name"].string!
 
         let name = json["user"]["name"].string!
-        let screenName = json["user"]["screen_name"].string!
         let tweetText = json["full_text"].string!
         let retweetCount = json["retweet_count"].integer!
         let favouriteCount = json["favorite_count"].integer!
         let profileImageURL = json["user"]["profile_image_url_https"].string!
 
         self.nameLabel.text = name
-        self.screenNameLabel.text = "@" + screenName
+        self.screenNameLabel.text = "@" + self.screenname
         self.tweetLabel.text = tweetText
         self.retweetCountLabel.text = String(retweetCount)
         self.favouriteCountLabel.text = String(favouriteCount)

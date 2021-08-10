@@ -217,6 +217,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         if segue.identifier == "menu" {
             if let menuViewController = segue.destination as? MenuViewController {
                 menuViewController.swifter = self.swifter
+                menuViewController.screenname = self.tweetUIView.screenname
             }
         }
     }

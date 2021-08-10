@@ -14,7 +14,7 @@ import SafariServices
 import Swifter
 import AuthenticationServices
 
-
+// swiftlint:disable type_body_length file_length
 class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @IBOutlet weak var webView: WKWebView!
@@ -31,6 +31,7 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
     @IBOutlet weak var rightButton: GazeUIButton!
     @IBOutlet weak var upButton: GazeUIButton!
     @IBOutlet weak var downButton: GazeUIButton!
+    @IBOutlet weak var userLabel: UILabel!
 
     var faceNode: SCNNode = SCNNode()
 
@@ -86,6 +87,8 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
 
     var swifter = Swifter(consumerKey: "", consumerSecret: "")
 
+    var screenname = ""
+
     var gazeButtons: [GazeUIButton] = []
 
     var isBlinking: Bool = false
@@ -134,12 +137,12 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         view.bringSubviewToFront(eyePositionIndicatorView)
 
         // Add actions to buttons
-        leftButton.addTarget(self, action: #selector(retweetAction), for: .primaryActionTriggered)
         if #available(iOS 13.0, *) {
-            rightButton.addTarget(self, action: #selector(likeAction), for: .primaryActionTriggered)
+            leftButton.addTarget(self, action: #selector(backAction), for: .primaryActionTriggered)
         } else {
             // Fallback on earlier versions
         }
+        rightButton.addTarget(self, action: #selector(selectAction), for: .primaryActionTriggered)
 
         // Group buttons
         gazeButtons.append(upButton)
@@ -150,6 +153,8 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         for gazeButton in gazeButtons {
             gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.0)
         }
+
+        userLabel.text = "Visit @" + self.screenname
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -170,7 +175,7 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         // Pause the view's session
         sceneView.session.pause()
     }
-    
+
     // Pass swifter to next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "userprofile" {
@@ -320,10 +325,11 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
     }
 
     @available(iOS 13.0, *)
-    @objc func likeAction() {
+    @objc func backAction() {
     }
 
-    @objc func retweetAction() {
+    @objc func selectAction() {
+        self.showUserProfileViewController()
     }
 
     private func handleBlink(withFaceAnchor anchor: ARFaceAnchor) {
