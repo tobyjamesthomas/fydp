@@ -14,7 +14,7 @@ import SafariServices
 import Swifter
 import AuthenticationServices
 
-// swiftlint:disable type_body_length file_length
+
 class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @IBOutlet weak var webView: WKWebView!
@@ -31,9 +31,6 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
     @IBOutlet weak var rightButton: GazeUIButton!
     @IBOutlet weak var upButton: GazeUIButton!
     @IBOutlet weak var downButton: GazeUIButton!
-    @IBOutlet weak var retweetView: UIImageView!
-    @IBOutlet weak var heartView: UIImageView!
-    @IBOutlet weak var tweetUIView: TweetUIView!
 
     var faceNode: SCNNode = SCNNode()
 
@@ -134,8 +131,6 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
     }
 
     func setupTwitter() {
-        // Get the first tweet from the authenticated user's timeline
-        self.fetchHomeTimeline()
         view.bringSubviewToFront(eyePositionIndicatorView)
 
         // Add actions to buttons
@@ -155,19 +150,6 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         for gazeButton in gazeButtons {
             gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.0)
         }
-        var tapLike = UITapGestureRecognizer()
-
-        if #available(iOS 13.0, *) {
-            tapLike = UITapGestureRecognizer(target: self, action: #selector(likeAction))
-        } else {
-            // Fallback on earlier versions
-        }
-        heartView.addGestureRecognizer(tapLike)
-        heartView.isUserInteractionEnabled = true
-
-        let tapRetweet = UITapGestureRecognizer(target: self, action: #selector(retweetAction))
-        retweetView.addGestureRecognizer(tapRetweet)
-        retweetView.isUserInteractionEnabled = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -188,7 +170,7 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         // Pause the view's session
         sceneView.session.pause()
     }
-
+    
     // Pass swifter to next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "userprofile" {
@@ -337,111 +319,11 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         update(withFaceAnchor: faceAnchor)
     }
 
-    func fetchHomeTimeline() {
-        // Load tweets from oauth authenticated user (currently @RenEddie)
-        swifter.getHomeTimeline(count: 1, tweetMode: .extended) { json in
-            // Successfully fetched timeline, we save the tweet id and create the tweet view
-
-            let jsonResult = json.array ?? []
-            let hearted = jsonResult[0]["favorited"] == true
-            let retweeted = jsonResult[0]["retweeted"] == true
-            print("Updating home timeline", jsonResult[0]["favorited"], jsonResult[0]["retweeted"])
-
-            self.tweetUIView.update(jsonResult[0])
-
-            if hearted {
-                if #available(iOS 13.0, *) {
-                    self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
-                } else {
-                    // Fallback on earlier versions
-                }
-            }
-            if retweeted {
-                self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
-            }
-
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
     @available(iOS 13.0, *)
     @objc func likeAction() {
-        // Likes or unlikes the tweet that is currently visible on the screen
-        swifter.getTweet(for: self.tweetUIView.tid) { json in
-            let jsonResult = json.object!
-            let isLiked = jsonResult["favorited"] == true
-
-            // if the user has already liked the tweet then we unlike it, otherwise we like it
-            if isLiked {
-                self.unfavoriteTweet()
-                self.heartView.setImage(UIImage(systemName: "heart"), animated: true)
-
-            } else {
-                self.favoriteTweet()
-                self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
-            }
-
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    private func unfavoriteTweet() {
-        // Unlike the tweet shown
-        swifter.unfavoriteTweet(forID: self.tweetUIView.tid) { _ in
-            print("unfavorited tweet!")
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    private func favoriteTweet() {
-        // Like the tweet shown
-        swifter.favoriteTweet(forID: self.tweetUIView.tid) { _ in
-            print("favorited tweet!")
-        } failure: { error in
-            print(error.localizedDescription)
-        }
     }
 
     @objc func retweetAction() {
-        // Retweets the tweet that is currently visible on the screen
-        swifter.getTweet(for: self.tweetUIView.tid) { json in
-            let jsonResult = json.object!
-            let isRetweeted = jsonResult["retweeted"] == true
-
-            // if the user has already retweeted the tweet then we unretweet it, otherwise we retweet it
-            if isRetweeted {
-                self.unretweetTweet()
-                self.retweetView.setImage(UIImage(named: "retweet_black"), animated: true)
-            } else {
-                self.retweetTweet()
-                self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
-
-            }
-
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    private func unretweetTweet() {
-        // Unretweet the tweet shown
-        swifter.unretweetTweet(forID: self.tweetUIView.tid) { _ in
-            print("unretweeted tweet!")
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    private func retweetTweet() {
-        // Retweet the tweet shown
-        swifter.retweetTweet(forID: self.tweetUIView.tid) { _ in
-            print("retweeted tweet!")
-        } failure: { error in
-            print(error.localizedDescription)
-        }
     }
 
     private func handleBlink(withFaceAnchor anchor: ARFaceAnchor) {
