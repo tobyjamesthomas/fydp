@@ -12,6 +12,7 @@
 		99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99291A0C268157BC00227372 /* GazeUIButton.swift */; };
 		9940E46E26A8E817002E5974 /* TweetUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9940E46D26A8E817002E5974 /* TweetUIView.swift */; };
 		9966DF6E26C3318100FDE38C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9966DF6D26C3318100FDE38C /* UserProfileViewController.swift */; };
+		9966DF7026C34E3E00FDE38C /* ProfileUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9966DF6F26C34E3E00FDE38C /* ProfileUIView.swift */; };
 		D0D25B8920C80F5500A25627 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D25B8820C80F5500A25627 /* Extensions.swift */; };
 		D0E5847A20C806050052967A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E5847920C806050052967A /* AppDelegate.swift */; };
 		D0E5847E20C806050052967A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E5847D20C806050052967A /* ViewController.swift */; };
@@ -30,6 +31,7 @@
 		99291A0C268157BC00227372 /* GazeUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeUIButton.swift; sourceTree = "<group>"; };
 		9940E46D26A8E817002E5974 /* TweetUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetUIView.swift; sourceTree = "<group>"; };
 		9966DF6D26C3318100FDE38C /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		9966DF6F26C34E3E00FDE38C /* ProfileUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUIView.swift; sourceTree = "<group>"; };
 		D0D25B8820C80F5500A25627 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D0E5847620C806050052967A /* Eyes Tracking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Eyes Tracking.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0E5847920C806050052967A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				9966DF6D26C3318100FDE38C /* UserProfileViewController.swift */,
 				99291A0C268157BC00227372 /* GazeUIButton.swift */,
 				9940E46D26A8E817002E5974 /* TweetUIView.swift */,
+				9966DF6F26C34E3E00FDE38C /* ProfileUIView.swift */,
 				D0D25B8820C80F5500A25627 /* Extensions.swift */,
 				D0E5847F20C806050052967A /* Main.storyboard */,
 				D0E5848220C806050052967A /* Assets.xcassets */,
@@ -246,6 +249,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9966DF7026C34E3E00FDE38C /* ProfileUIView.swift in Sources */,
 				D0D25B8920C80F5500A25627 /* Extensions.swift in Sources */,
 				9966DF6E26C3318100FDE38C /* UserProfileViewController.swift in Sources */,
 				D0E5847E20C806050052967A /* ViewController.swift in Sources */,

@@ -761,7 +761,7 @@ Position Estimation</string>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="AS9-xA-Upj"/>
                                         </constraints>
-                                        <state key="normal" title="Previous Tweet">
+                                        <state key="normal" title="Follow">
                                             <color key="titleColor" systemColor="systemGray6Color"/>
                                         </state>
                                     </button>
@@ -774,7 +774,7 @@ Position Estimation</string>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="wfz-NJ-KMq"/>
                                                 </constraints>
-                                                <state key="normal" title="Retweet">
+                                                <state key="normal" title="Mute">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
                                                 </state>
                                             </button>
@@ -784,7 +784,7 @@ Position Estimation</string>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="JaB-8q-r7Z"/>
                                                 </constraints>
-                                                <state key="normal" title="Like">
+                                                <state key="normal" title="Block">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
                                                 </state>
                                             </button>
@@ -793,7 +793,7 @@ Position Estimation</string>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2s5-Iv-oHm" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="600" width="390" height="200"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                        <state key="normal" title="Next Tweet">
+                                        <state key="normal" title="See Tweets">
                                             <color key="titleColor" systemColor="systemGray6Color"/>
                                         </state>
                                     </button>
@@ -901,14 +901,21 @@ Position Estimation</string>
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ix-Gg-242" customClass="TweetUIView" customModule="Eyes_Tracking" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ix-Gg-242" customClass="ProfileUIView" customModule="Eyes_Tracking" customModuleProvider="target">
                                 <rect key="frame" x="41" y="223" width="308" height="408"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZWh-gu-cGk">
                                         <rect key="frame" x="0.0" y="0.0" width="308" height="408"/>
                                         <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circles.hexagonpath.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="qW0-sU-gTL">
+                                                <rect key="frame" x="0.0" y="1.3333333333333357" width="308" height="97.666666666666671"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="S4a-vi-ro7"/>
+                                                </constraints>
+                                            </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qsi-uu-cm8">
-                                                <rect key="frame" x="0.0" y="0.0" width="308" height="70"/>
+                                                <rect key="frame" x="0.0" y="100" width="308" height="70"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="InR-Jy-VGO">
                                                         <rect key="frame" x="0.0" y="1" width="70" height="68.666666666666671"/>
@@ -937,41 +944,27 @@ Position Estimation</string>
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1Y-O5-cYi">
-                                                <rect key="frame" x="0.0" y="70" width="308" height="318"/>
+                                                <rect key="frame" x="0.0" y="170" width="308" height="217.66666666666663"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sE3-Ss-HhO">
-                                                <rect key="frame" x="0.0" y="388" width="308" height="20"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sE3-Ss-HhO">
+                                                <rect key="frame" x="0.0" y="387.66666666666663" width="308" height="20.333333333333314"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retweet_black" translatesAutoresizingMaskIntoConstraints="NO" id="CoA-Ei-qa7">
-                                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="20" id="6Pe-oV-8zh"/>
-                                                            <constraint firstAttribute="width" constant="20" id="hwN-fI-cSO"/>
-                                                        </constraints>
-                                                    </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Retweets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9On-a6-aAC">
-                                                        <rect key="frame" x="20" y="0.0" width="189.66666666666666" height="20"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4tl-4y-h88">
+                                                        <rect key="frame" x="0.0" y="0.0" width="154" height="20.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zXD-9j-I5y">
-                                                        <rect key="frame" x="209.66666666666666" y="1.9999999999999982" width="20" height="17"/>
-                                                    </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favourites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3k-gg-eUd">
-                                                        <rect key="frame" x="229.66666666666671" y="0.0" width="78.333333333333343" height="20"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3k-gg-eUd">
+                                                        <rect key="frame" x="154" y="0.0" width="154" height="20.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="zXD-9j-I5y" firstAttribute="width" secondItem="CoA-Ei-qa7" secondAttribute="width" id="JPE-CQ-HUd"/>
-                                                    <constraint firstItem="zXD-9j-I5y" firstAttribute="height" secondItem="CoA-Ei-qa7" secondAttribute="height" id="Rny-pi-GK3"/>
-                                                </constraints>
                                             </stackView>
                                         </subviews>
                                     </stackView>
@@ -988,39 +981,14 @@ Position Estimation</string>
                                     <constraint firstItem="ZWh-gu-cGk" firstAttribute="top" secondItem="6ix-Gg-242" secondAttribute="top" id="pfb-jJ-2R7"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="favouriteCountLabel" destination="Y3k-gg-eUd" id="Sqp-Hi-8Pg"/>
+                                    <outlet property="descriptionLabel" destination="M1Y-O5-cYi" id="vGj-fL-THK"/>
+                                    <outlet property="followerLabel" destination="Y3k-gg-eUd" id="wMg-Pv-OhR"/>
+                                    <outlet property="followingLabel" destination="4tl-4y-h88" id="uaD-tE-PrJ"/>
                                     <outlet property="nameLabel" destination="Xmf-Mx-ou3" id="TK5-ue-oM5"/>
+                                    <outlet property="profileBannerImage" destination="qW0-sU-gTL" id="F6c-Qr-X94"/>
                                     <outlet property="profileImage" destination="InR-Jy-VGO" id="h1u-Wx-xFZ"/>
-                                    <outlet property="retweetCountLabel" destination="9On-a6-aAC" id="ss5-bS-J8n"/>
                                     <outlet property="screenNameLabel" destination="PYn-I4-FcJ" id="mxS-xs-vfW"/>
-                                    <outlet property="tweetLabel" destination="M1Y-O5-cYi" id="ddW-FQ-LOq"/>
                                 </connections>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2KO-Qz-T6d">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retweet_black" translatesAutoresizingMaskIntoConstraints="NO" id="6ik-uy-8L3">
-                                        <rect key="frame" x="125" y="624" width="50" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="IuK-z7-tRI"/>
-                                            <constraint firstAttribute="height" constant="50" id="V5s-WX-MBp"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZZQ-58-aOE">
-                                        <rect key="frame" x="215" y="626" width="50" height="47"/>
-                                        <color key="tintColor" systemColor="systemRedColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="KT1-2V-Ilt"/>
-                                            <constraint firstAttribute="width" constant="50" id="fLu-nW-ISc"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="6ik-uy-8L3" firstAttribute="leading" secondItem="2KO-Qz-T6d" secondAttribute="leading" constant="125" id="Bnt-jc-cDI"/>
-                                    <constraint firstAttribute="bottom" secondItem="6ik-uy-8L3" secondAttribute="bottom" constant="170" id="Igy-zP-1XA"/>
-                                    <constraint firstAttribute="bottom" secondItem="ZZQ-58-aOE" secondAttribute="bottom" constant="170" id="YDQ-BS-AcM"/>
-                                    <constraint firstAttribute="trailing" secondItem="ZZQ-58-aOE" secondAttribute="trailing" constant="125" id="yae-Cr-Ac6"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Mry-sU-8u5"/>
@@ -1036,18 +1004,12 @@ Position Estimation</string>
                             <constraint firstItem="pLX-gh-cU5" firstAttribute="top" secondItem="Iyr-AZ-vKa" secondAttribute="top" constant="44" id="Qbe-Kh-7Aa"/>
                             <constraint firstItem="9B3-AS-aPn" firstAttribute="top" secondItem="m84-Hs-OXP" secondAttribute="top" id="TFM-pe-5DY"/>
                             <constraint firstAttribute="trailing" secondItem="K1M-sy-cXv" secondAttribute="trailing" id="TeT-qo-5bh"/>
-                            <constraint firstItem="2KO-Qz-T6d" firstAttribute="leading" secondItem="Mry-sU-8u5" secondAttribute="leading" id="UqQ-pp-eSw"/>
                             <constraint firstAttribute="bottom" secondItem="K1M-sy-cXv" secondAttribute="bottom" id="Uua-LB-v0j"/>
                             <constraint firstAttribute="bottom" secondItem="98J-XA-RhJ" secondAttribute="bottom" id="c0N-PY-jNc"/>
                             <constraint firstItem="pLX-gh-cU5" firstAttribute="leading" secondItem="Mry-sU-8u5" secondAttribute="leading" id="duO-sh-rbH"/>
-                            <constraint firstAttribute="trailing" secondItem="2KO-Qz-T6d" secondAttribute="trailing" id="fq5-re-pvA"/>
                             <constraint firstItem="K1M-sy-cXv" firstAttribute="top" secondItem="Mry-sU-8u5" secondAttribute="top" id="hvn-KM-MOW"/>
-                            <constraint firstItem="2KO-Qz-T6d" firstAttribute="top" secondItem="Iyr-AZ-vKa" secondAttribute="top" id="jNE-ve-5TG"/>
                             <constraint firstAttribute="trailing" secondItem="98J-XA-RhJ" secondAttribute="trailing" id="jOU-wg-Aay"/>
-                            <constraint firstAttribute="bottom" secondItem="2KO-Qz-T6d" secondAttribute="bottom" id="kc6-d1-z9i"/>
-                            <constraint firstItem="2KO-Qz-T6d" firstAttribute="leading" secondItem="Iyr-AZ-vKa" secondAttribute="leading" id="nTe-0D-82i"/>
                             <constraint firstAttribute="bottom" secondItem="m84-Hs-OXP" secondAttribute="bottom" constant="16" id="tDs-Fl-Avr"/>
-                            <constraint firstItem="2KO-Qz-T6d" firstAttribute="trailing" secondItem="Mry-sU-8u5" secondAttribute="trailing" id="uAs-Sm-oYd"/>
                             <constraint firstItem="9B3-AS-aPn" firstAttribute="leading" secondItem="Mry-sU-8u5" secondAttribute="leading" constant="24" id="uRK-6g-cMV"/>
                             <constraint firstItem="6ix-Gg-242" firstAttribute="centerX" secondItem="Mry-sU-8u5" secondAttribute="centerX" id="vyK-sR-vD0"/>
                             <constraint firstItem="K1M-sy-cXv" firstAttribute="leading" secondItem="Mry-sU-8u5" secondAttribute="leading" id="ydo-Ls-O25"/>
@@ -1061,15 +1023,13 @@ Position Estimation</string>
                         <outlet property="eyePositionIndicatorView" destination="8lr-uu-eaG" id="KYF-Yc-LeL"/>
                         <outlet property="gazeButtonsView" destination="pLX-gh-cU5" id="qms-GN-ZCv"/>
                         <outlet property="gazeLabel" destination="QS2-3O-5b4" id="W4X-CO-v40"/>
-                        <outlet property="heartView" destination="ZZQ-58-aOE" id="NRN-TH-iX9"/>
                         <outlet property="leftButton" destination="tIq-Lu-C4h" id="d3j-BM-3d4"/>
                         <outlet property="lookAtPositionXLabel" destination="TJ0-47-S9R" id="6KH-EJ-iTY"/>
                         <outlet property="lookAtPositionYLabel" destination="5TO-ck-eUr" id="WLY-bq-WtU"/>
-                        <outlet property="retweetView" destination="6ik-uy-8L3" id="bY8-C5-LMf"/>
                         <outlet property="rightButton" destination="ct3-IW-5nB" id="C1l-gC-k57"/>
                         <outlet property="sceneView" destination="m84-Hs-OXP" id="reb-WD-kde"/>
-                        <outlet property="tweetUIView" destination="6ix-Gg-242" id="RdM-nR-V6S"/>
                         <outlet property="upButton" destination="m6A-Jb-3jz" id="bbt-Nn-kld"/>
+                        <outlet property="userProfileUIView" destination="6ix-Gg-242" id="chB-7s-qR9"/>
                         <outlet property="webView" destination="K1M-sy-cXv" id="iPd-2M-vbf"/>
                     </connections>
                 </viewController>
@@ -1079,6 +1039,7 @@ Position Estimation</string>
         </scene>
     </scenes>
     <resources>
+        <image name="circles.hexagonpath.fill" catalog="system" width="128" height="112"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
         <image name="retweet_black" width="170.66667175292969" height="170.66667175292969"/>

@@ -181,6 +181,7 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         if segue.identifier == "userprofile" {
             if let userProfileViewController = segue.destination as? UserProfileViewController {
                 userProfileViewController.swifter = self.swifter
+                userProfileViewController.screenname = self.screenname
             }
         }
     }
