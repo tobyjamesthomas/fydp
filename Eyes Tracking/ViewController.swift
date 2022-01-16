@@ -94,6 +94,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     var isBlinking: Bool = false
     var lastBlinkDate: Date = Date()
+    var tweetNum: Int = 0
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -143,6 +144,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         leftButton.addTarget(self, action: #selector(retweetAction), for: .primaryActionTriggered)
         if #available(iOS 13.0, *) {
             rightButton.addTarget(self, action: #selector(likeAction), for: .primaryActionTriggered)
+            upButton.addTarget(self, action: #selector(decrementTweet), for: .primaryActionTriggered)
+            downButton.addTarget(self, action: #selector(incrementTweet), for: .primaryActionTriggered)
         } else {
             // Fallback on earlier versions
         }
@@ -334,17 +337,29 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
 
+    @available(iOS 13.0, *)
+    @objc func incrementTweet() {
+        self.tweetNum+=1
+        fetchHomeTimeline()
+    }
+
+    @available(iOS 13.0, *)
+    @objc func decrementTweet() {
+        self.tweetNum-=1
+        fetchHomeTimeline()
+    }
+    
     func fetchHomeTimeline() {
         // Load tweets from oauth authenticated user (currently @RenEddie)
-        swifter.getHomeTimeline(count: 1, tweetMode: .extended) { json in
+        swifter.getHomeTimeline(count: self.tweetNum+1, tweetMode: .extended) { json in
             // Successfully fetched timeline, we save the tweet id and create the tweet view
 
             let jsonResult = json.array ?? []
-            let hearted = jsonResult[0]["favorited"] == true
-            let retweeted = jsonResult[0]["retweeted"] == true
-            print("Updating home timeline", jsonResult[0]["favorited"], jsonResult[0]["retweeted"])
+            let hearted = jsonResult[self.tweetNum]["favorited"] == true
+            let retweeted = jsonResult[self.tweetNum]["retweeted"] == true
+            print("Updating home timeline", jsonResult[self.tweetNum]["favorited"], jsonResult[self.tweetNum]["retweeted"])
 
-            self.tweetUIView.update(jsonResult[0])
+            self.tweetUIView.update(jsonResult[self.tweetNum])
 
             if hearted {
                 if #available(iOS 13.0, *) {
