@@ -193,6 +193,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         sceneView.session.pause()
     }
 
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard let key = presses.first?.key else { return }
+
+        if #available(iOS 13.0, *) {
+            switch key.keyCode {
+            case .keyboardDownArrow:
+                incrementTweet()
+            case .keyboardUpArrow:
+                decrementTweet()
+            case .keyboardRightArrow:
+                likeAction()
+            case .keyboardLeftArrow:
+                retweetAction()
+            default:
+                super.pressesEnded(presses, with: event)
+            }
+        }
+    }
+    
     // MARK: - ARSCNViewDelegate
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -346,6 +365,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @available(iOS 13.0, *)
     @objc func decrementTweet() {
         self.tweetNum-=1
+        if self.tweetNum <= 0 {
+            self.tweetNum = 0
+        }
         fetchHomeTimeline()
     }
     
