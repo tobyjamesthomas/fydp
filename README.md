@@ -1,6 +1,9 @@
 # fydp
 Finesse Year Design Project
 
+# Building project
+Open the .xcworkspace file, then build.
+
 # Running on device:
 To run on a physical device, you will have to set a team in the target:
 Go to Eyes Tracking -> Targets -> Eyes Tracking -> Signing & Capabilities
