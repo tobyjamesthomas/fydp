@@ -447,6 +447,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Unlike the tweet shown
         swifter.unfavoriteTweet(forID: self.tweetUIView.tid) { _ in
             print("unfavorited tweet!")
+            self.tweetUIView.updateLike(delta: -1)
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -456,6 +457,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Like the tweet shown
         swifter.favoriteTweet(forID: self.tweetUIView.tid) { _ in
             print("favorited tweet!")
+            self.tweetUIView.updateLike(delta: 1)
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -486,6 +488,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Unretweet the tweet shown
         swifter.unretweetTweet(forID: self.tweetUIView.tid) { _ in
             print("unretweeted tweet!")
+            self.tweetUIView.updateRetweet(delta: -1)
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -495,6 +498,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Retweet the tweet shown
         swifter.retweetTweet(forID: self.tweetUIView.tid) { _ in
             print("retweeted tweet!")
+            self.tweetUIView.updateRetweet(delta: 1)
         } failure: { error in
             print(error.localizedDescription)
         }

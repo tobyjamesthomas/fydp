@@ -234,13 +234,13 @@ Position Estimation</string>
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dka-h1-UmX" customClass="TweetUIView" customModule="Eyes_Tracking" customModuleProvider="target">
-                                <rect key="frame" x="41" y="223" width="308" height="408"/>
+                                <rect key="frame" x="70" y="223" width="250" height="408"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WLb-dh-0bp">
-                                        <rect key="frame" x="0.0" y="0.0" width="308" height="408"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="408"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="g4P-iy-FwZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="308" height="70"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="250" height="70"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Yqi-l5-8s1">
                                                         <rect key="frame" x="0.0" y="1" width="70" height="68.666666666666671"/>
@@ -250,16 +250,16 @@ Position Estimation</string>
                                                         </constraints>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hkX-3w-yra">
-                                                        <rect key="frame" x="80" y="0.0" width="228" height="70"/>
+                                                        <rect key="frame" x="80" y="0.0" width="170" height="70"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="First Last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8QM-ie-0jI">
-                                                                <rect key="frame" x="0.0" y="0.0" width="228" height="49.666666666666664"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="170" height="49.666666666666664"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nuh-zp-akw">
-                                                                <rect key="frame" x="0.0" y="49.666666666666686" width="228" height="20.333333333333329"/>
+                                                                <rect key="frame" x="0.0" y="49.666666666666686" width="170" height="20.333333333333329"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -269,7 +269,7 @@ Position Estimation</string>
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rh-QS-cqZ">
-                                                <rect key="frame" x="0.0" y="70" width="308" height="338"/>
+                                                <rect key="frame" x="0.0" y="70" width="250" height="338"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -280,7 +280,7 @@ Position Estimation</string>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="WLb-dh-0bp" firstAttribute="leading" secondItem="Dka-h1-UmX" secondAttribute="leading" id="5vc-FD-Mra"/>
-                                    <constraint firstAttribute="width" constant="308" id="6BW-1Z-qlO"/>
+                                    <constraint firstAttribute="width" constant="250" id="6BW-1Z-qlO"/>
                                     <constraint firstAttribute="height" constant="408" id="Abd-fI-86h"/>
                                     <constraint firstAttribute="bottom" secondItem="WLb-dh-0bp" secondAttribute="bottom" id="emL-7b-E2p"/>
                                     <constraint firstItem="WLb-dh-0bp" firstAttribute="top" secondItem="Dka-h1-UmX" secondAttribute="top" id="ga5-LT-GDr"/>
@@ -303,7 +303,7 @@ Position Estimation</string>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" text="Retweets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZv-dI-APY">
                                         <rect key="frame" x="0.0" y="471" width="70" height="20.333333333333314"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retweet_black" translatesAutoresizingMaskIntoConstraints="NO" id="tO8-a1-4k8">
@@ -327,7 +327,7 @@ Position Estimation</string>
                                             <constraint firstAttribute="width" constant="72" id="yHA-ee-45A"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -902,20 +902,20 @@ Position Estimation</string>
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ix-Gg-242" customClass="ProfileUIView" customModule="Eyes_Tracking" customModuleProvider="target">
-                                <rect key="frame" x="41" y="223" width="308" height="408"/>
+                                <rect key="frame" x="70" y="223" width="250" height="408"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZWh-gu-cGk">
-                                        <rect key="frame" x="0.0" y="0.0" width="308" height="408"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="408"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circles.hexagonpath.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="qW0-sU-gTL">
-                                                <rect key="frame" x="0.0" y="1.3333333333333357" width="308" height="97.666666666666671"/>
+                                                <rect key="frame" x="0.0" y="1.3333333333333357" width="250" height="97.666666666666671"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="S4a-vi-ro7"/>
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qsi-uu-cm8">
-                                                <rect key="frame" x="0.0" y="100" width="308" height="70"/>
+                                                <rect key="frame" x="0.0" y="100" width="250" height="70"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="InR-Jy-VGO">
                                                         <rect key="frame" x="0.0" y="1" width="70" height="68.666666666666671"/>
@@ -925,16 +925,16 @@ Position Estimation</string>
                                                         </constraints>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9NU-5X-gkg">
-                                                        <rect key="frame" x="80" y="0.0" width="228" height="70"/>
+                                                        <rect key="frame" x="80" y="0.0" width="170" height="70"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="First Last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xmf-Mx-ou3">
-                                                                <rect key="frame" x="0.0" y="0.0" width="228" height="49.666666666666664"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="170" height="49.666666666666664"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYn-I4-FcJ">
-                                                                <rect key="frame" x="0.0" y="49.666666666666686" width="228" height="20.333333333333329"/>
+                                                                <rect key="frame" x="0.0" y="49.666666666666686" width="170" height="20.333333333333329"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -944,22 +944,22 @@ Position Estimation</string>
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1Y-O5-cYi">
-                                                <rect key="frame" x="0.0" y="170" width="308" height="217.66666666666663"/>
+                                                <rect key="frame" x="0.0" y="170" width="250" height="217.66666666666663"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sE3-Ss-HhO">
-                                                <rect key="frame" x="0.0" y="387.66666666666663" width="308" height="20.333333333333314"/>
+                                                <rect key="frame" x="0.0" y="387.66666666666663" width="250" height="20.333333333333314"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4tl-4y-h88">
-                                                        <rect key="frame" x="0.0" y="0.0" width="154" height="20.333333333333332"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="125" height="20.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3k-gg-eUd">
-                                                        <rect key="frame" x="154" y="0.0" width="154" height="20.333333333333332"/>
+                                                        <rect key="frame" x="125" y="0.0" width="125" height="20.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -971,7 +971,7 @@ Position Estimation</string>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="308" id="BF2-m5-D4e"/>
+                                    <constraint firstAttribute="width" constant="250" id="BF2-m5-D4e"/>
                                     <constraint firstAttribute="height" constant="408" id="Fzc-4q-mct"/>
                                     <constraint firstItem="ZWh-gu-cGk" firstAttribute="leading" secondItem="6ix-Gg-242" secondAttribute="leading" id="Hwe-x2-I3P"/>
                                     <constraint firstItem="ZWh-gu-cGk" firstAttribute="leading" secondItem="6ix-Gg-242" secondAttribute="leading" id="KyC-Db-Wkp"/>
