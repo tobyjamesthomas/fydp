@@ -232,18 +232,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         update(withFaceAnchor: faceAnchor)
     }
 
-    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        guard let key = presses.first?.key else { return }
-
-        switch key.keyCode {
-        case .keyboardD:
-            print("Detect double blink")
-            showMenuViewController()
-        default:
-            super.pressesEnded(presses, with: event)
-        }
-    }
-
     // MARK: - update(ARFaceAnchor)
     func update(withFaceAnchor anchor: ARFaceAnchor) {
 
