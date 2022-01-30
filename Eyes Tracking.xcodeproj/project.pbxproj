@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		12BF964526A8AE4E0035E74B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 12BF964426A8AE4E0035E74B /* Podfile */; };
+		2C08F0B226B87A0C00A82CD2 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C08F0B126B87A0C00A82CD2 /* MenuViewController.swift */; };
 		99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99291A0C268157BC00227372 /* GazeUIButton.swift */; };
 		9940E46E26A8E817002E5974 /* TweetUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9940E46D26A8E817002E5974 /* TweetUIView.swift */; };
+		9966DF6E26C3318100FDE38C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9966DF6D26C3318100FDE38C /* UserProfileViewController.swift */; };
+		9966DF7026C34E3E00FDE38C /* ProfileUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9966DF6F26C34E3E00FDE38C /* ProfileUIView.swift */; };
 		D0D25B8920C80F5500A25627 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D25B8820C80F5500A25627 /* Extensions.swift */; };
 		D0E5847A20C806050052967A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E5847920C806050052967A /* AppDelegate.swift */; };
 		D0E5847E20C806050052967A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E5847D20C806050052967A /* ViewController.swift */; };
@@ -21,11 +24,14 @@
 
 /* Begin PBXFileReference section */
 		12BF964426A8AE4E0035E74B /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		2C08F0B126B87A0C00A82CD2 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		2C7218E326A8BF67006BD7EB /* Swifter */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Swifter; sourceTree = "<group>"; };
 		2C7218E626A8BFF7006BD7EB /* Swifter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Swifter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7133DFBF2E2031AA1BDB1BDC /* Pods-Eyes Tracking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyes Tracking.release.xcconfig"; path = "Target Support Files/Pods-Eyes Tracking/Pods-Eyes Tracking.release.xcconfig"; sourceTree = "<group>"; };
 		99291A0C268157BC00227372 /* GazeUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeUIButton.swift; sourceTree = "<group>"; };
 		9940E46D26A8E817002E5974 /* TweetUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetUIView.swift; sourceTree = "<group>"; };
+		9966DF6D26C3318100FDE38C /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		9966DF6F26C34E3E00FDE38C /* ProfileUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUIView.swift; sourceTree = "<group>"; };
 		D0D25B8820C80F5500A25627 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D0E5847620C806050052967A /* Eyes Tracking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Eyes Tracking.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0E5847920C806050052967A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,13 +99,16 @@
 			children = (
 				D0E5847920C806050052967A /* AppDelegate.swift */,
 				D0E5847D20C806050052967A /* ViewController.swift */,
+				9966DF6D26C3318100FDE38C /* UserProfileViewController.swift */,
 				99291A0C268157BC00227372 /* GazeUIButton.swift */,
 				9940E46D26A8E817002E5974 /* TweetUIView.swift */,
+				9966DF6F26C34E3E00FDE38C /* ProfileUIView.swift */,
 				D0D25B8820C80F5500A25627 /* Extensions.swift */,
 				D0E5847F20C806050052967A /* Main.storyboard */,
 				D0E5848220C806050052967A /* Assets.xcassets */,
 				D0E5848420C806050052967A /* LaunchScreen.storyboard */,
 				D0E5848720C806050052967A /* Info.plist */,
+				2C08F0B126B87A0C00A82CD2 /* MenuViewController.swift */,
 			);
 			path = "Eyes Tracking";
 			sourceTree = "<group>";
@@ -240,9 +249,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9966DF7026C34E3E00FDE38C /* ProfileUIView.swift in Sources */,
 				D0D25B8920C80F5500A25627 /* Extensions.swift in Sources */,
+				9966DF6E26C3318100FDE38C /* UserProfileViewController.swift in Sources */,
 				D0E5847E20C806050052967A /* ViewController.swift in Sources */,
 				99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */,
+				2C08F0B226B87A0C00A82CD2 /* MenuViewController.swift in Sources */,
 				99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */,
 				9940E46E26A8E817002E5974 /* TweetUIView.swift in Sources */,
 				D0E5847A20C806050052967A /* AppDelegate.swift in Sources */,

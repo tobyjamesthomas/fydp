@@ -20,6 +20,9 @@ class TweetUIView: UIView {
     @IBOutlet weak var favouriteCountLabel: UILabel!
 
     public var tid: String = ""
+    public var screenname: String = ""
+    public var retweetCount = 0
+    public var favouriteCount = 0
 
     required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
@@ -29,21 +32,31 @@ class TweetUIView: UIView {
         print(json)
 
         self.tid = json["id_str"].string!
+        self.screenname = json["user"]["screen_name"].string!
+        self.retweetCount = json["retweet_count"].integer!
+        self.favouriteCount = json["favorite_count"].integer!
 
         let name = json["user"]["name"].string!
-        let screenName = json["user"]["screen_name"].string!
         let tweetText = json["full_text"].string!
-        let retweetCount = json["retweet_count"].integer!
-        let favouriteCount = json["favorite_count"].integer!
         let profileImageURL = json["user"]["profile_image_url_https"].string!
 
         self.nameLabel.text = name
-        self.screenNameLabel.text = "@" + screenName
+        self.screenNameLabel.text = "@" + self.screenname
         self.tweetLabel.text = tweetText
-        self.retweetCountLabel.text = String(retweetCount)
-        self.favouriteCountLabel.text = String(favouriteCount)
+        self.retweetCountLabel.text = String(self.retweetCount)
+        self.favouriteCountLabel.text = String(self.favouriteCount)
 
         setProfileImage(from: profileImageURL)
+    }
+    
+    func updateRetweet(delta: Int) {
+        retweetCount += delta
+        self.retweetCountLabel.text = String(self.retweetCount)
+    }
+    
+    func updateLike(delta: Int) {
+        favouriteCount += delta
+        self.favouriteCountLabel.text = String(self.favouriteCount)
     }
 
     func setProfileImage(from url: String) {

@@ -1,9 +1,9 @@
 //
-//  ViewController.swift
+//  MenuViewController.swift
 //  Eyes Tracking
 //
-//  Created by Virakri Jinangkul on 6/6/18.
-//  Copyright © 2018 virakri. All rights reserved.
+//  Created by Eddie Ren on 2021-08-02.
+//  Copyright © 2021 virakri. All rights reserved.
 //
 
 import UIKit
@@ -15,7 +15,7 @@ import Swifter
 import AuthenticationServices
 
 // swiftlint:disable type_body_length file_length
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
+class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet var sceneView: ARSCNView!
@@ -31,9 +31,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var rightButton: GazeUIButton!
     @IBOutlet weak var upButton: GazeUIButton!
     @IBOutlet weak var downButton: GazeUIButton!
-    @IBOutlet weak var retweetView: UIImageView!
-    @IBOutlet weak var heartView: UIImageView!
-    @IBOutlet weak var tweetUIView: TweetUIView!
+    @IBOutlet weak var userLabel: UILabel!
 
     var faceNode: SCNNode = SCNNode()
 
@@ -87,14 +85,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     var eyeLookAtPositionYs: [CGFloat] = []
 
-    var swifter = Swifter(consumerKey: "QwA8u4qhODLCWKdd5eHR1yQYm",
-                          consumerSecret: "4MMG8Vi5pC7Sa22SHj1je6gLuprwdRFwW9uckLBptgqj8eSvTx")
+    var swifter = Swifter(consumerKey: "", consumerSecret: "")
+
+    var screenname = ""
 
     var gazeButtons: [GazeUIButton] = []
 
     var isBlinking: Bool = false
     var lastBlinkDate: Date = Date()
-    var tweetNum: Int = 0
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -136,19 +134,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
 
     func setupTwitter() {
-        // Get the first tweet from the authenticated user's timeline
-        authorizeWithWebLogin()
         view.bringSubviewToFront(eyePositionIndicatorView)
 
         // Add actions to buttons
-        leftButton.addTarget(self, action: #selector(retweetAction), for: .primaryActionTriggered)
         if #available(iOS 13.0, *) {
-            rightButton.addTarget(self, action: #selector(likeAction), for: .primaryActionTriggered)
-            upButton.addTarget(self, action: #selector(decrementTweet), for: .primaryActionTriggered)
-            downButton.addTarget(self, action: #selector(incrementTweet), for: .primaryActionTriggered)
+            leftButton.addTarget(self, action: #selector(backAction), for: .primaryActionTriggered)
         } else {
             // Fallback on earlier versions
         }
+        rightButton.addTarget(self, action: #selector(selectAction), for: .primaryActionTriggered)
 
         // Group buttons
         gazeButtons.append(upButton)
@@ -159,19 +153,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         for gazeButton in gazeButtons {
             gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.0)
         }
-        var tapLike = UITapGestureRecognizer()
 
-        if #available(iOS 13.0, *) {
-            tapLike = UITapGestureRecognizer(target: self, action: #selector(likeAction))
-        } else {
-            // Fallback on earlier versions
-        }
-        heartView.addGestureRecognizer(tapLike)
-        heartView.isUserInteractionEnabled = true
-
-        let tapRetweet = UITapGestureRecognizer(target: self, action: #selector(retweetAction))
-        retweetView.addGestureRecognizer(tapRetweet)
-        retweetView.isUserInteractionEnabled = true
+        userLabel.text = "Visit @" + self.screenname
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -193,31 +176,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         sceneView.session.pause()
     }
 
-    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        guard let key = presses.first?.key else { return }
-
-        if #available(iOS 13.0, *) {
-            switch key.keyCode {
-            case .keyboardDownArrow:
-                incrementTweet()
-            case .keyboardUpArrow:
-                decrementTweet()
-            case .keyboardRightArrow:
-                likeAction()
-            case .keyboardLeftArrow:
-                retweetAction()
-            default:
-                super.pressesEnded(presses, with: event)
-            }
-        }
-    }
-    
-    // Pass swfiter to next view
+    // Pass swifter to next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "menu" {
-            if let menuViewController = segue.destination as? MenuViewController {
-                menuViewController.swifter = self.swifter
-                menuViewController.screenname = self.tweetUIView.screenname
+        if segue.identifier == "userprofile" {
+            if let userProfileViewController = segue.destination as? UserProfileViewController {
+                userProfileViewController.swifter = self.swifter
+                userProfileViewController.screenname = self.screenname
             }
         }
     }
@@ -230,6 +194,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         guard let faceAnchor = anchor as? ARFaceAnchor else { return }
 
         update(withFaceAnchor: faceAnchor)
+    }
+
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard let key = presses.first?.key else { return }
+
+        switch key.keyCode {
+        case .keyboardD:
+            print("Detect double blink")
+            showUserProfileViewController()
+        default:
+            super.pressesEnded(presses, with: event)
+        }
     }
 
     // MARK: - update(ARFaceAnchor)
@@ -349,147 +325,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         update(withFaceAnchor: faceAnchor)
     }
 
-    // Authorize user using OAuth and call the function specified
-    private func authorizeWithWebLogin() {
-
-        // Must specify a callback url
-        let callbackUrl = URL(string: "eyestracking://")!
-
-        if #available(iOS 13.0, *) {
-            swifter.authorize(withProvider: self, callbackURL: callbackUrl) { _, _ in
-                self.fetchHomeTimeline()
-            } failure: { error in
-                print(error.localizedDescription)
-            }
-        } else {
-            // Fallback on earlier versions
-        }
-    }
-
     @available(iOS 13.0, *)
-    @objc func incrementTweet() {
-        self.tweetNum+=1
-        fetchHomeTimeline()
+    @objc func backAction() {
     }
 
-    @available(iOS 13.0, *)
-    @objc func decrementTweet() {
-        self.tweetNum-=1
-        if self.tweetNum <= 0 {
-            self.tweetNum = 0
-        }
-        fetchHomeTimeline()
-    }
-
-    func fetchHomeTimeline() {
-        // Load tweets from oauth authenticated user (currently @RenEddie)
-        swifter.getHomeTimeline(count: self.tweetNum+1, tweetMode: .extended) { json in
-            // Successfully fetched timeline, we save the tweet id and create the tweet view
-
-            let jsonResult = json.array ?? []
-            let hearted = jsonResult[self.tweetNum]["favorited"] == true
-            let retweeted = jsonResult[self.tweetNum]["retweeted"] == true
-            print("Updating home timeline", jsonResult[self.tweetNum]["favorited"], jsonResult[self.tweetNum]["retweeted"])
-
-            self.tweetUIView.update(jsonResult[self.tweetNum])
-
-            if hearted {
-                if #available(iOS 13.0, *) {
-                    self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
-                } else {
-                    // Fallback on earlier versions
-                }
-            }
-            if retweeted {
-                self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
-            }
-
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    @available(iOS 13.0, *)
-    @objc func likeAction() {
-        // Likes or unlikes the tweet that is currently visible on the screen
-        swifter.getTweet(for: self.tweetUIView.tid) { json in
-            let jsonResult = json.object!
-            let isLiked = jsonResult["favorited"] == true
-
-            // if the user has already liked the tweet then we unlike it, otherwise we like it
-            if isLiked {
-                self.unfavoriteTweet()
-                self.heartView.setImage(UIImage(systemName: "heart"), animated: true)
-
-            } else {
-                self.favoriteTweet()
-                self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
-            }
-
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    private func unfavoriteTweet() {
-        // Unlike the tweet shown
-        swifter.unfavoriteTweet(forID: self.tweetUIView.tid) { _ in
-            print("unfavorited tweet!")
-            self.tweetUIView.updateLike(delta: -1)
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    private func favoriteTweet() {
-        // Like the tweet shown
-        swifter.favoriteTweet(forID: self.tweetUIView.tid) { _ in
-            print("favorited tweet!")
-            self.tweetUIView.updateLike(delta: 1)
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    @objc func retweetAction() {
-        // Retweets the tweet that is currently visible on the screen
-        swifter.getTweet(for: self.tweetUIView.tid) { json in
-            let jsonResult = json.object!
-            let isRetweeted = jsonResult["retweeted"] == true
-
-            // if the user has already retweeted the tweet then we unretweet it, otherwise we retweet it
-            if isRetweeted {
-                self.unretweetTweet()
-                self.retweetView.setImage(UIImage(named: "retweet_black"), animated: true)
-            } else {
-                self.retweetTweet()
-                self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
-
-            }
-
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    private func unretweetTweet() {
-        // Unretweet the tweet shown
-        swifter.unretweetTweet(forID: self.tweetUIView.tid) { _ in
-            print("unretweeted tweet!")
-            self.tweetUIView.updateRetweet(delta: -1)
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    private func retweetTweet() {
-        // Retweet the tweet shown
-        swifter.retweetTweet(forID: self.tweetUIView.tid) { _ in
-            print("retweeted tweet!")
-            self.tweetUIView.updateRetweet(delta: 1)
-        } failure: { error in
-            print(error.localizedDescription)
-        }
+    @objc func selectAction() {
+        self.showUserProfileViewController()
     }
 
     private func handleBlink(withFaceAnchor anchor: ARFaceAnchor) {
@@ -505,7 +346,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                     if elapsed < 1 {
                         print("Double blink detected!")
                         DispatchQueue.main.async {
-                            self.showMenuViewController()
+                            self.showUserProfileViewController()
                         }
 
                     } else {
@@ -519,30 +360,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
 
-    private func showMenuViewController() {
-        self.performSegue(withIdentifier: "menu", sender: self)
-    }
-}
-
-extension ViewController: SFSafariViewControllerDelegate {
-    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        controller.dismiss(animated: true, completion: nil)
-    }
-}
-
-extension UIImageView {
-    func setImage(_ image: UIImage?, animated: Bool = true) {
-        let duration = animated ? 0.2 : 0.0
-        UIView.transition(with: self, duration: duration, options: .transitionCrossDissolve, animations: {
-            self.image = image
-        }, completion: nil)
-    }
-}
-
-// This is need for ASWebAuthenticationSession
-@available(iOS 13.0, *)
-extension ViewController: ASWebAuthenticationPresentationContextProviding {
-    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-        return self.view.window!
+    private func showUserProfileViewController() {
+        self.performSegue(withIdentifier: "userprofile", sender: self)
     }
 }
