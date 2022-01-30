@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< Updated upstream
 		12BF964526A8AE4E0035E74B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 12BF964426A8AE4E0035E74B /* Podfile */; };
+=======
+		12AA28BF2681934600EA2CB4 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AA28B6268192A700EA2CB4 /* SwifteriOS.framework */; };
+		12AA28C02681934600EA2CB4 /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 12AA28B6268192A700EA2CB4 /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2CC5DE862679B1A800130F5F /* TweetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5DE852679B1A800130F5F /* TweetView.swift */; };
+		2CC5DE882679B21E00130F5F /* WidgetsJSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5DE872679B21E00130F5F /* WidgetsJSManager.swift */; };
+>>>>>>> Stashed changes
 		99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99291A0C268157BC00227372 /* GazeUIButton.swift */; };
 		9940E46E26A8E817002E5974 /* TweetUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9940E46D26A8E817002E5974 /* TweetUIView.swift */; };
 		D0D25B8920C80F5500A25627 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D25B8820C80F5500A25627 /* Extensions.swift */; };
@@ -20,10 +27,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+<<<<<<< Updated upstream
 		12BF964426A8AE4E0035E74B /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2C7218E326A8BF67006BD7EB /* Swifter */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Swifter; sourceTree = "<group>"; };
 		2C7218E626A8BFF7006BD7EB /* Swifter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Swifter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7133DFBF2E2031AA1BDB1BDC /* Pods-Eyes Tracking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyes Tracking.release.xcconfig"; path = "Target Support Files/Pods-Eyes Tracking/Pods-Eyes Tracking.release.xcconfig"; sourceTree = "<group>"; };
+=======
+		12AA28AD268192A700EA2CB4 /* Swifter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifter.xcodeproj; path = ../Swifter/Swifter.xcodeproj; sourceTree = "<group>"; };
+		2CC5DE852679B1A800130F5F /* TweetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetView.swift; sourceTree = "<group>"; };
+		2CC5DE872679B21E00130F5F /* WidgetsJSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsJSManager.swift; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
 		99291A0C268157BC00227372 /* GazeUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeUIButton.swift; sourceTree = "<group>"; };
 		9940E46D26A8E817002E5974 /* TweetUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetUIView.swift; sourceTree = "<group>"; };
 		D0D25B8820C80F5500A25627 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -242,6 +255,11 @@
 			files = (
 				D0D25B8920C80F5500A25627 /* Extensions.swift in Sources */,
 				D0E5847E20C806050052967A /* ViewController.swift in Sources */,
+<<<<<<< Updated upstream
+=======
+				2CC5DE862679B1A800130F5F /* TweetView.swift in Sources */,
+				99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */,
+>>>>>>> Stashed changes
 				99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */,
 				99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */,
 				9940E46E26A8E817002E5974 /* TweetUIView.swift in Sources */,
@@ -392,15 +410,18 @@
 			baseConfigurationReference = F736176A8A1644E0C3B3BB06 /* Pods-Eyes Tracking.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7JP2RVQ76A;
+				DEVELOPMENT_TEAM = 664WV77Z64;
 				INFOPLIST_FILE = "Eyes Tracking/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tobyjamesthomas.Eyes-Tracking";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mahshidbahrani.Eyes-Tracking";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -411,15 +432,18 @@
 			baseConfigurationReference = 7133DFBF2E2031AA1BDB1BDC /* Pods-Eyes Tracking.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7JP2RVQ76A;
+				DEVELOPMENT_TEAM = 664WV77Z64;
 				INFOPLIST_FILE = "Eyes Tracking/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tobyjamesthomas.Eyes-Tracking";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mahshidbahrani.Eyes-Tracking";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
