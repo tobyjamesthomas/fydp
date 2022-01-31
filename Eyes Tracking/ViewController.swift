@@ -207,6 +207,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 likeAction()
             case .keyboardLeftArrow:
                 retweetAction()
+            case .keyboardB:
+                // Simulate double (B)link
+                print("Double blink detected!")
+                DispatchQueue.main.async {
+                    self.showMenuViewController()
+                }
+                lastBlinkDate = Date()
+
             default:
                 super.pressesEnded(presses, with: event)
             }
