@@ -39,6 +39,7 @@ class TweetUIView: UIView {
         let name = json["user"]["name"].string!
         let tweetText = json["full_text"].string!
         let profileImageURL = json["user"]["profile_image_url_https"].string!
+        let imageURL = json["entities"]["media"][0]["media_url"].string!
 
         self.nameLabel.text = name
         self.screenNameLabel.text = "@" + self.screenname
@@ -71,4 +72,18 @@ class TweetUIView: UIView {
             }
         }
     }
+    
+    func setTweetImageView(from url: String) {
+        guard let imageURL = URL(string: url) else { return }
+
+        DispatchQueue.global().async {
+            guard let imageData = try? Data(contentsOf: imageURL) else { return }
+
+            let image = UIImage(data: imageData)
+            DispatchQueue.main.async {
+                self.profileImage.image = image
+            }
+        }
+    }
+    
 }
