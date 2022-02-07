@@ -15,6 +15,7 @@ import Swifter
 import AuthenticationServices
 
 // swiftlint:disable type_body_length file_length
+@available(iOS 13.0, *)
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @IBOutlet weak var webView: WKWebView!
@@ -206,6 +207,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 likeAction()
             case .keyboardLeftArrow:
                 retweetAction()
+            case .keyboardB:
+                // Simulate double (B)link
+                print("Double blink detected!")
+                DispatchQueue.main.async {
+                    self.showMenuViewController()
+                }
+                lastBlinkDate = Date()
+
             default:
                 super.pressesEnded(presses, with: event)
             }
@@ -394,14 +403,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             self.tweetUIView.update(jsonResult[self.tweetNum])
 
             if hearted {
-                if #available(iOS 13.0, *) {
-                    self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
-                } else {
-                    // Fallback on earlier versions
-                }
+                self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
+            } else if !hearted {
+                self.heartView.setImage(UIImage(systemName: "heart"), animated: true)
             }
             if retweeted {
                 self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
+            } else if !retweeted {
+                self.retweetView.setImage(UIImage(named: "retweet_black"), animated: true)
             }
 
         } failure: { error in
@@ -524,6 +533,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
 }
 
+@available(iOS 13.0, *)
 extension ViewController: SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         controller.dismiss(animated: true, completion: nil)
