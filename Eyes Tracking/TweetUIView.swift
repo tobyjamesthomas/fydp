@@ -13,6 +13,8 @@ import Swifter
 class TweetUIView: UIView {
 
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var tweetImage: UIImageView!
+    @IBOutlet weak var tweetImageHeight: NSLayoutConstraint!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
@@ -39,7 +41,6 @@ class TweetUIView: UIView {
         let name = json["user"]["name"].string!
         let tweetText = json["full_text"].string!
         let profileImageURL = json["user"]["profile_image_url_https"].string!
-        let imageURL = json["entities"]["media"][0]["media_url"].string!
 
         self.nameLabel.text = name
         self.screenNameLabel.text = "@" + self.screenname
@@ -48,6 +49,7 @@ class TweetUIView: UIView {
         self.favouriteCountLabel.text = String(self.favouriteCount)
 
         setProfileImage(from: profileImageURL)
+        parseTweetImageFromJson(from: json)
     }
     
     func updateRetweet(delta: Int) {
@@ -81,7 +83,31 @@ class TweetUIView: UIView {
 
             let image = UIImage(data: imageData)
             DispatchQueue.main.async {
-                self.profileImage.image = image
+                self.tweetImage.image = image
+            }
+        }
+    }
+    
+    func parseTweetImageFromJson(from json: JSON) {
+        self.tweetImage.image = nil
+        tweetImageHeight.constant = 0
+        if let entities = json["entities"] as? JSON {
+            if let media = entities["media"] as? JSON {
+                switch media {
+                case .invalid:
+                    break
+                default:
+                    if let picture = media[0] as? JSON {
+                        switch picture {
+                        case .invalid:
+                            break
+                        default:
+                            tweetImageHeight.constant = 175
+                            setTweetImageView(from: (picture["media_url_https"].string!))
+                        }
+
+                    }
+                }
             }
         }
     }
