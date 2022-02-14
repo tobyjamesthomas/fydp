@@ -40,7 +40,7 @@ class TweetUIView: UIView {
 
         let name = json["user"]["name"].string!
         let tweetText = json["full_text"].string!
-        let profileImageURL = json["user"]["profile_image_url_https"].string!
+        let profileImageURL = getBigProfileImageUrl(from: json["user"]["profile_image_url_https"].string!)
 
         self.nameLabel.text = name
         self.screenNameLabel.text = "@" + self.screenname
@@ -51,12 +51,12 @@ class TweetUIView: UIView {
         setProfileImage(from: profileImageURL)
         parseTweetImageFromJson(from: json)
     }
-    
+
     func updateRetweet(delta: Int) {
         retweetCount += delta
         self.retweetCountLabel.text = String(self.retweetCount)
     }
-    
+
     func updateLike(delta: Int) {
         favouriteCount += delta
         self.favouriteCountLabel.text = String(self.favouriteCount)
@@ -74,7 +74,7 @@ class TweetUIView: UIView {
             }
         }
     }
-    
+
     func setTweetImageView(from url: String) {
         guard let imageURL = URL(string: url) else { return }
 
@@ -87,29 +87,30 @@ class TweetUIView: UIView {
             }
         }
     }
-    
+
     func parseTweetImageFromJson(from json: JSON) {
         self.tweetImage.image = nil
         tweetImageHeight.constant = 0
-        if let entities = json["entities"] as? JSON {
-            if let media = entities["media"] as? JSON {
-                switch media {
-                case .invalid:
-                    break
-                default:
-                    if let picture = media[0] as? JSON {
-                        switch picture {
-                        case .invalid:
-                            break
-                        default:
-                            tweetImageHeight.constant = 175
-                            setTweetImageView(from: (picture["media_url_https"].string!))
-                        }
-
-                    }
-                }
+        let media = json["entities"]["media"]
+        switch media {
+        case .invalid:
+            break
+        default:
+            let picture = media[0]
+            switch picture {
+            case .invalid:
+                break
+            default:
+                tweetImageHeight.constant = 175
+                setTweetImageView(from: (picture["media_url_https"].string!))
             }
         }
     }
-    
+
+    func getBigProfileImageUrl(from url: String) -> String {
+        //https://media.giphy.com/media/dl8b48ULQRjBkRcmZZ/giphy.gif
+        // Upsize the profile picture image
+        return url.replacingOccurrences(of: "normal.jpg", with: "400x400.jpg")
+    }
+
 }

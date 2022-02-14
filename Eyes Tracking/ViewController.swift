@@ -135,11 +135,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         self.setupTwitter()
         self.beautifyTimeline()
     }
-    
+
     func beautifyTimeline() {
         self.tweetUIView.profileImage.layer.cornerRadius = self.tweetUIView.profileImage.frame.width/2.0
         self.tweetUIView.profileImage.clipsToBounds = true
-        self.tweetUIView.tweetLabel.textAlignment = NSTextAlignment.left
         self.tweetUIView.tweetImage.layer.cornerRadius = 10
 
     }
