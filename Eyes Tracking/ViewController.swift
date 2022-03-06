@@ -134,6 +134,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
         // Format TweetView to display single tweet
         self.setupTwitter()
+        self.beautifyTimeline()
+    }
+
+    func beautifyTimeline() {
+        // Modify the UI elements programatically at runtime to improve the aesthetic
+        self.tweetUIView.profileImage.layer.cornerRadius = self.tweetUIView.profileImage.frame.width/2.0
+        self.tweetUIView.profileImage.clipsToBounds = true
+        self.tweetUIView.tweetImage.layer.cornerRadius = 10
+
     }
 
     func setupTwitter() {

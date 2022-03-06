@@ -13,6 +13,8 @@ import Swifter
 class TweetUIView: UIView {
 
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var tweetImage: UIImageView!
+    @IBOutlet weak var tweetImageHeight: NSLayoutConstraint!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
@@ -38,7 +40,7 @@ class TweetUIView: UIView {
 
         let name = json["user"]["name"].string!
         let tweetText = json["full_text"].string!
-        let profileImageURL = json["user"]["profile_image_url_https"].string!
+        let profileImageURL = getBigProfileImageUrl(from: json["user"]["profile_image_url_https"].string!)
 
         self.nameLabel.text = name
         self.screenNameLabel.text = "@" + self.screenname
@@ -47,19 +49,21 @@ class TweetUIView: UIView {
         self.favouriteCountLabel.text = String(self.favouriteCount)
 
         setProfileImage(from: profileImageURL)
+        parseTweetImageFromJson(from: json)
     }
-    
+
     func updateRetweet(delta: Int) {
         retweetCount += delta
         self.retweetCountLabel.text = String(self.retweetCount)
     }
-    
+
     func updateLike(delta: Int) {
         favouriteCount += delta
         self.favouriteCountLabel.text = String(self.favouriteCount)
     }
 
     func setProfileImage(from url: String) {
+        // Assign an image to the profile picture from a valid image url.
         guard let imageURL = URL(string: url) else { return }
 
         DispatchQueue.global().async {
@@ -71,4 +75,45 @@ class TweetUIView: UIView {
             }
         }
     }
+
+    func setTweetImageView(from url: String) {
+        // Assign an image to the TweetUI from a valid image url.
+        guard let imageURL = URL(string: url) else { return }
+
+        DispatchQueue.global().async {
+            guard let imageData = try? Data(contentsOf: imageURL) else { return }
+
+            let image = UIImage(data: imageData)
+            DispatchQueue.main.async {
+                self.tweetImage.image = image
+            }
+        }
+    }
+
+    func parseTweetImageFromJson(from json: JSON) {
+        // Acquire teh tweet image if it exists from the Tweet JSON details
+        self.tweetImage.image = nil
+        tweetImageHeight.constant = 0
+        let media = json["entities"]["media"]
+        switch media {
+        case .invalid:
+            break
+        default:
+            let picture = media[0]
+            switch picture {
+            case .invalid:
+                break
+            default:
+                tweetImageHeight.constant = 175
+                setTweetImageView(from: (picture["media_url_https"].string!))
+            }
+        }
+    }
+
+    func getBigProfileImageUrl(from url: String) -> String {
+        // https://media.giphy.com/media/dl8b48ULQRjBkRcmZZ/giphy.gif
+        // Upsize the profile picture image for better display
+        return url.replacingOccurrences(of: "normal.jpg", with: "400x400.jpg")
+    }
+
 }
