@@ -92,6 +92,8 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     var lastBlinkDate: Date = Date()
 
     var screenname = ""
+    
+    var following = false
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -318,6 +320,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         // Load tweets from oauth authenticated user (currently @RenEddie)
         swifter.showUser(UserTag.screenName(screenname)) { json in
             self.userProfileUIView.update(json)
+            self.following = json["following"].bool!
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -332,23 +335,12 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     
     @available(iOS 13.0, *)
     @objc func followAction() {
-        // Follow or unfollow the user that you are currently viewing
-        swifter.getUserFollowers(for: UserTag.screenName(screenname)){ json,_,_  in
-            let jsonResult = json.array!
-            let arefollowing = jsonResult
-            
-            print(arefollowing)
-
-            // if you already follow the user you are v
-//            if arefollowing {
-//                self.unfollowAccount()
-//
-//            } else {
-//                self.followAccount()
-//            }
-
-        } failure: { error in
-            print(error.localizedDescription)
+        print("following", following)
+        // if you already follow the user you are v
+        if following {
+            self.unfollowAccount()
+        } else {
+            self.followAccount()
         }
     }
 
@@ -356,6 +348,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             // Follow user from user tag
             swifter.followUser(UserTag.screenName(screenname)) { _ in
                 print("followed user!")
+                self.following = true
             } failure: { error in
                 print(error.localizedDescription)
             }
@@ -365,6 +358,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             // unfollow user from user tag
             swifter.unfollowUser(UserTag.screenName(screenname)) { _ in
                 print("unfollowed user!")
+                self.following = false
             } failure: { error in
                 print(error.localizedDescription)
             }
