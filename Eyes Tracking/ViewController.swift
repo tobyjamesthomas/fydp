@@ -223,7 +223,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                     self.showMenuViewController()
                 }
                 lastBlinkDate = Date()
-
             default:
                 super.pressesEnded(presses, with: event)
             }
