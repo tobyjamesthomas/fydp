@@ -131,6 +131,13 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
 
         // Format TweetView to display single tweet
         self.setupTwitter()
+        self.beautifyUserProfile()
+    }
+
+    func beautifyUserProfile() {
+        // Modify the UI elements programatically at runtime to improve the aesthetic
+        self.userProfileUIView.profileImage.layer.cornerRadius = self.userProfileUIView.profileImage.frame.width/2.0
+        self.userProfileUIView.profileImage.clipsToBounds = true
     }
 
     func setupTwitter() {

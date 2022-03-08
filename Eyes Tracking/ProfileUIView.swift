@@ -41,8 +41,8 @@ class ProfileUIView: UIView {
         self.nameLabel.text = name
         self.screenNameLabel.text = "@" + self.screenname
         self.descriptionLabel.text = descriptionText
-        self.followingLabel.text = String(followingCount) + " Following"
-        self.followerLabel.text = String(followerCount) + " Followers"
+        self.followingLabel.text = self.formatCount(count: followingCount) + " Following"
+        self.followerLabel.text = self.formatCount(count: followerCount) + " Followers"
 
         setImage(from: profileImageURL, for: self.profileImage)
         setImage(from: profileBannerImageURL, for: self.profileBannerImage)
@@ -58,6 +58,25 @@ class ProfileUIView: UIView {
             DispatchQueue.main.async {
                 view.image = image
             }
+        }
+    }
+
+    func formatCount(count: Int) -> String {
+        if count < 1000 { return String(count) }
+
+        var count = Double(count)
+        var thousands = 0
+
+        while count / 1000 >= 1 {
+            count /= 1000
+            thousands += 1
+        }
+
+        let formattedCount = String(floor(count * 10) / 10.0)
+        switch thousands {
+        case 3: return formattedCount + "B"  // Billion
+        case 2: return formattedCount + "M"  // Million
+        default: return formattedCount + "K" // Thousand
         }
     }
 }
