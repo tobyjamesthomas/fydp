@@ -14,7 +14,6 @@ import SafariServices
 import Swifter
 import AuthenticationServices
 
-// swiftlint:disable type_body_length file_length
 class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @IBOutlet weak var webView: WKWebView!
@@ -93,6 +92,8 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     var lastBlinkDate: Date = Date()
 
     var screenname = ""
+    
+    var following = false
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -142,6 +143,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         leftButton.addTarget(self, action: #selector(retweetAction), for: .primaryActionTriggered)
         if #available(iOS 13.0, *) {
             rightButton.addTarget(self, action: #selector(likeAction), for: .primaryActionTriggered)
+            upButton.addTarget(self, action: #selector(followAction), for: .primaryActionTriggered)
         } else {
             // Fallback on earlier versions
         }
@@ -157,6 +159,19 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         }
     }
 
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard let key = presses.first?.key else { return }
+
+        if #available(iOS 13.0, *) {
+            switch key.keyCode {
+            case .keyboardUpArrow:
+                followAction()
+            default:
+                super.pressesEnded(presses, with: event)
+            }
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -305,6 +320,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         // Load tweets from oauth authenticated user (currently @RenEddie)
         swifter.showUser(UserTag.screenName(screenname)) { json in
             self.userProfileUIView.update(json)
+            self.following = json["following"].bool!
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -316,4 +332,35 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
 
     @objc func retweetAction() {
     }
+    
+    @available(iOS 13.0, *)
+    @objc func followAction() {
+        print("following", following)
+        // if you already follow the user you are v
+        if following {
+            self.unfollowAccount()
+        } else {
+            self.followAccount()
+        }
+    }
+
+    private func followAccount() {
+            // Follow user from user tag
+            swifter.followUser(UserTag.screenName(screenname)) { _ in
+                print("followed user!")
+                self.following = true
+            } failure: { error in
+                print(error.localizedDescription)
+            }
+        }
+
+        private func unfollowAccount() {
+            // unfollow user from user tag
+            swifter.unfollowUser(UserTag.screenName(screenname)) { _ in
+                print("unfollowed user!")
+                self.following = false
+            } failure: { error in
+                print(error.localizedDescription)
+            }
+        }
 }

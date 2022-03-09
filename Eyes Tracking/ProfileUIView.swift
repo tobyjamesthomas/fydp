@@ -36,7 +36,7 @@ class ProfileUIView: UIView {
         let followingCount = json["friends_count"].integer!
         let followerCount = json["followers_count"].integer!
         let profileImageURL = json["profile_image_url_https"].string!
-        let profileBannerImageURL = json["profile_banner_url"].string!
+        let profileBannerImageURL = json["profile_banner_url"].string ?? ""
 
         self.nameLabel.text = name
         self.screenNameLabel.text = "@" + self.screenname
