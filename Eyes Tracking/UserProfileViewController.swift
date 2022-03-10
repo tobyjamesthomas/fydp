@@ -14,6 +14,7 @@ import SafariServices
 import Swifter
 import AuthenticationServices
 
+// swiftlint:disable type_body_length file_length
 class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @IBOutlet weak var webView: WKWebView!
@@ -143,13 +144,13 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         view.bringSubviewToFront(eyePositionIndicatorView)
 
         // Add actions to buttons
-        if blocking {
-            upButton.addTarget(self, action: #selector(blockAction), for: .primaryActionTriggered)
-        } else {
+//        if blocking {
+//            upButton.addTarget(self, action: #selector(blockAction), for: .primaryActionTriggered)
+//        } else {
             rightButton.addTarget(self, action: #selector(blockAction), for: .primaryActionTriggered)
             leftButton.addTarget(self, action: #selector(muteAction), for: .primaryActionTriggered)
             upButton.addTarget(self, action: #selector(followAction), for: .primaryActionTriggered)
-        }
+//        }
       
         // Group buttons
         gazeButtons.append(upButton)
@@ -335,34 +336,45 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         swifter.showUser(UserTag.screenName(screenname)) { json in
             self.userProfileUIView.update(json)
             self.following = json["following"].bool!
+            if self.following {
+                self.upButton.setTitle("Unfollow", for: .normal)
+            }
         } failure: { error in
             print(error.localizedDescription)
         }
     }
-    
-    func isMuting(){
+
+    func isMuting() {
         swifter.getMutedUsers() { json, _, _ in
             let jsonResult = json.array!
             self.muting = jsonResult.contains(where: {$0["screen_name"].string! == self.screenname})
+            if self.muting {
+                self.leftButton.setTitle("Unmute", for: .normal)
+            }
         } failure: { error in
             print(error.localizedDescription)
         }
     }
-    
-    func isBlocking(){
-        swifter.getBlockedUsers() { json,_ ,_ in
+
+    func isBlocking() {
+        swifter.getBlockedUsers() { json, _, _ in
             let jsonResult = json.array!
             self.blocking = jsonResult.contains(where: {$0["screen_name"].string! == self.screenname})
+            if self.blocking {
+                self.upButton.setTitle("Unblock", for: .normal)
+            }
         } failure: { error in
             print(error.localizedDescription)
         }
     }
 
     @objc func muteAction() {
-        if muting {
-            self.unmuteAccount()
-        } else {
-            self.muteAccount()
+        if !blocking {
+            if muting {
+                self.unmuteAccount()
+            } else {
+                self.muteAccount()
+            }
         }
     }
 
@@ -371,6 +383,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         swifter.muteUser(UserTag.screenName(screenname)) { _ in
             print("muted user!")
             self.muting = true
+            self.leftButton.setTitle("Unmute", for: .normal)
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -381,15 +394,14 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         swifter.unmuteUser(for: UserTag.screenName(screenname)) { _ in
             print("unmuted user!")
             self.muting = false
+            self.leftButton.setTitle("Mute", for: .normal)
         } failure: { error in
             print(error.localizedDescription)
         }
     }
 
     @objc func blockAction() {
-        if blocking {
-            self.unblockAccount()
-        } else {
+        if !blocking {
             self.blockAccount()
         }
     }
@@ -400,6 +412,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             print("blocked user!")
             self.blocking = true
             self.following = false
+            self.upButton.setTitle("Unblock", for: .normal)
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -410,6 +423,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         swifter.unblockUser(for: UserTag.screenName(screenname)) { _ in
             print("unblock user!")
             self.blocking = false
+            self.upButton.setTitle("Follow", for: .normal)
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -418,7 +432,9 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     @objc func followAction() {
         print("following", following)
         // if you already follow the user you are v
-        if following {
+        if blocking {
+            self.unblockAccount()
+        } else if following {
             self.unfollowAccount()
         } else {
             self.followAccount()
@@ -430,6 +446,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         swifter.followUser(UserTag.screenName(screenname)) { _ in
             print("followed user!")
             self.following = true
+            self.upButton.setTitle("Unfollow", for: .normal)
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -440,6 +457,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         swifter.unfollowUser(UserTag.screenName(screenname)) { _ in
             print("unfollowed user!")
             self.following = false
+            self.upButton.setTitle("Follow", for: .normal)
         } failure: { error in
             print(error.localizedDescription)
         }
