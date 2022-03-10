@@ -207,25 +207,27 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         guard let key = presses.first?.key else { return }
 
         if #available(iOS 13.0, *) {
-            switch key.keyCode {
-            case .keyboardDownArrow:
-                incrementTweet()
-            case .keyboardUpArrow:
-                decrementTweet()
-            case .keyboardRightArrow:
-                likeAction()
-            case .keyboardLeftArrow:
-                retweetAction()
-            case .keyboardB:
-                // Simulate double (B)link
-                print("Double blink detected!")
-                DispatchQueue.main.async {
-                    self.showMenuViewController()
-                }
-                lastBlinkDate = Date()
+            if self.isViewLoaded && (self.view.window != nil) {
+                switch key.keyCode {
+                case .keyboardDownArrow:
+                    incrementTweet()
+                case .keyboardUpArrow:
+                    decrementTweet()
+                case .keyboardRightArrow:
+                    likeAction()
+                case .keyboardLeftArrow:
+                    retweetAction()
+                case .keyboardB:
+                    // Simulate double (B)link
+                    print("Double blink detected!")
+                    DispatchQueue.main.async {
+                        self.showMenuViewController()
+                    }
+                    lastBlinkDate = Date()
 
-            default:
-                super.pressesEnded(presses, with: event)
+                default:
+                    super.pressesEnded(presses, with: event)
+                }
             }
         }
     }
@@ -540,7 +542,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     private func showMenuViewController() {
         self.performSegue(withIdentifier: "menu", sender: self)
     }
+    
+    @IBAction func myUnwindActionHomeTimeline(unwindSegue: UIStoryboardSegue) {
+
+    }
 }
+
+
 
 @available(iOS 13.0, *)
 extension ViewController: SFSafariViewControllerDelegate {

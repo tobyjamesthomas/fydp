@@ -240,7 +240,7 @@ Position Estimation</string>
                                     <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="WLb-dh-0bp">
                                         <rect key="frame" x="0.0" y="-15" width="250" height="470.33333333333331"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N08-h9-8wT">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N08-h9-8wT" userLabel="HorizontalLine">
                                                 <rect key="frame" x="5" y="0.0" width="240" height="50"/>
                                                 <color key="backgroundColor" systemColor="secondaryLabelColor"/>
                                                 <constraints>
@@ -307,7 +307,7 @@ Position Estimation</string>
                                                 <imageReference key="image" image="Image" symbolScale="large"/>
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                                             </imageView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xHa-mx-oDt">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xHa-mx-oDt" userLabel="HorizontalLine">
                                                 <rect key="frame" x="5" y="469.33333333333337" width="240" height="1"/>
                                                 <color key="backgroundColor" systemColor="secondaryLabelColor"/>
                                                 <constraints>
@@ -479,12 +479,51 @@ Position Estimation</string>
                                     <constraint firstAttribute="width" secondItem="juZ-xh-nY0" secondAttribute="height" multiplier="3:4" id="iUc-eL-P0w"/>
                                 </constraints>
                             </arscnView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Visit @user Profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2d-JQ-t1Z">
-                                <rect key="frame" x="109" y="409" width="172" height="26.333333333333314"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="DhM-cP-vBa" userLabel="Menu View">
+                                <rect key="frame" x="75" y="301.33333333333331" width="240" height="241.33333333333331"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EAL-yi-oq6" userLabel="HorizontalLine">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="1"/>
+                                        <color key="backgroundColor" systemColor="secondaryLabelColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="240" id="7TB-qa-zfy"/>
+                                            <constraint firstAttribute="height" constant="1" id="7b4-fz-lDP"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Visit @user" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2d-JQ-t1Z">
+                                        <rect key="frame" x="0.0" y="31" width="240" height="25.666666666666671"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVP-91-GAg">
+                                        <rect key="frame" x="0.0" y="86.666666666666686" width="240" height="26.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home Timeline" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxe-n7-yJG">
+                                        <rect key="frame" x="0.0" y="143" width="240" height="18.666666666666657"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDg-KH-vKU">
+                                        <rect key="frame" x="0.0" y="191.66666666666669" width="240" height="18.666666666666657"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jw7-k0-aru" userLabel="HorizontalLine">
+                                        <rect key="frame" x="0.0" y="240.33333333333331" width="240" height="1"/>
+                                        <color key="backgroundColor" systemColor="secondaryLabelColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="240" id="Cy4-6Z-9yd"/>
+                                            <constraint firstAttribute="height" constant="1" id="X2b-4J-M7h"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LvM-WZ-L6i">
                                 <rect key="frame" x="131" y="358" width="128" height="128"/>
                                 <subviews>
@@ -551,6 +590,9 @@ Position Estimation</string>
                                                 <state key="normal" title="Back">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="ZoY-qx-X5M" kind="unwind" identifier="unwindHomeTimeline" unwindAction="myUnwindActionHomeTimelineWithUnwindSegue:" id="JZ4-Md-2nr"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WgV-D5-HRl" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                                 <rect key="frame" x="290" y="0.0" width="100" height="400"/>
@@ -686,7 +728,6 @@ Position Estimation</string>
                             <constraint firstItem="4x6-fg-ki8" firstAttribute="top" secondItem="Gsw-KU-AIW" secondAttribute="top" id="CDI-Uv-UVo"/>
                             <constraint firstItem="GgE-8f-S04" firstAttribute="leading" secondItem="Fz7-Oi-pXT" secondAttribute="leading" id="KUU-Cd-ymG"/>
                             <constraint firstItem="LvM-WZ-L6i" firstAttribute="centerX" secondItem="Fz7-Oi-pXT" secondAttribute="centerX" id="LgF-36-7sH"/>
-                            <constraint firstItem="c2d-JQ-t1Z" firstAttribute="centerY" secondItem="Fz7-Oi-pXT" secondAttribute="centerY" id="M4b-fC-f9g"/>
                             <constraint firstAttribute="bottom" secondItem="4x6-fg-ki8" secondAttribute="bottom" id="N72-70-17J"/>
                             <constraint firstItem="b0S-2y-UXS" firstAttribute="top" secondItem="Fz7-Oi-pXT" secondAttribute="top" constant="44" id="RxY-yk-DkI"/>
                             <constraint firstItem="dTW-sx-HM4" firstAttribute="top" secondItem="juZ-xh-nY0" secondAttribute="top" id="XyY-Re-zu9"/>
@@ -694,9 +735,10 @@ Position Estimation</string>
                             <constraint firstAttribute="trailing" secondItem="4x6-fg-ki8" secondAttribute="trailing" id="ZHK-k5-oRv"/>
                             <constraint firstItem="dTW-sx-HM4" firstAttribute="leading" secondItem="Gsw-KU-AIW" secondAttribute="leading" constant="24" id="aXX-6j-ppa"/>
                             <constraint firstItem="LvM-WZ-L6i" firstAttribute="centerY" secondItem="Fz7-Oi-pXT" secondAttribute="centerY" id="cbY-0o-LEg"/>
-                            <constraint firstItem="c2d-JQ-t1Z" firstAttribute="centerX" secondItem="Fz7-Oi-pXT" secondAttribute="centerX" id="lEe-Zq-BZa"/>
+                            <constraint firstItem="DhM-cP-vBa" firstAttribute="centerX" secondItem="Fz7-Oi-pXT" secondAttribute="centerX" id="dXT-Ep-TLd"/>
                             <constraint firstAttribute="bottom" secondItem="juZ-xh-nY0" secondAttribute="bottom" constant="16" id="lVQ-0x-K9W"/>
                             <constraint firstAttribute="trailing" secondItem="GgE-8f-S04" secondAttribute="trailing" id="tVT-20-eDz"/>
+                            <constraint firstItem="DhM-cP-vBa" firstAttribute="centerY" secondItem="Fz7-Oi-pXT" secondAttribute="centerY" id="yaZ-LJ-zAP"/>
                             <constraint firstItem="Gsw-KU-AIW" firstAttribute="trailing" secondItem="juZ-xh-nY0" secondAttribute="trailing" constant="16" id="zgR-qE-c74"/>
                         </constraints>
                     </view>
@@ -708,9 +750,11 @@ Position Estimation</string>
                         <outlet property="eyePositionIndicatorView" destination="LvM-WZ-L6i" id="glA-8i-0ZA"/>
                         <outlet property="gazeButtonsView" destination="b0S-2y-UXS" id="z2p-0i-jJd"/>
                         <outlet property="gazeLabel" destination="Gq7-zw-uhS" id="I5m-o2-qcA"/>
+                        <outlet property="homeTimelineLabel" destination="fxe-n7-yJG" id="gUs-z9-RJr"/>
                         <outlet property="leftButton" destination="NOs-8P-bvL" id="zhi-bA-rp8"/>
                         <outlet property="lookAtPositionXLabel" destination="JH9-1p-UWa" id="GtR-Ly-S1s"/>
                         <outlet property="lookAtPositionYLabel" destination="uho-mO-PjQ" id="35t-0W-JCT"/>
+                        <outlet property="personalProfileLabel" destination="tDg-KH-vKU" id="Wzb-Qb-0nz"/>
                         <outlet property="rightButton" destination="WgV-D5-HRl" id="sc9-k8-Qsb"/>
                         <outlet property="sceneView" destination="juZ-xh-nY0" id="csF-LJ-ZCr"/>
                         <outlet property="upButton" destination="zyR-6j-gKH" id="Elp-z9-WA6"/>
@@ -720,6 +764,7 @@ Position Estimation</string>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="euq-X2-WV6" sceneMemberID="firstResponder"/>
+                <exit id="ZoY-qx-X5M" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1035" y="114"/>
         </scene>

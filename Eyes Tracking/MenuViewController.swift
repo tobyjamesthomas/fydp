@@ -32,6 +32,8 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
     @IBOutlet weak var upButton: GazeUIButton!
     @IBOutlet weak var downButton: GazeUIButton!
     @IBOutlet weak var userLabel: UILabel!
+    @IBOutlet weak var homeTimelineLabel: UILabel!
+    @IBOutlet weak var personalProfileLabel: UILabel!
 
     var faceNode: SCNNode = SCNNode()
 
@@ -94,6 +96,9 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
     var isBlinking: Bool = false
     var lastBlinkDate: Date = Date()
 
+    var menuLabels: [UILabel] = []
+    var currentLabelIndex = 0
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
@@ -131,6 +136,10 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
 
         // Format TweetView to display single tweet
         self.setupTwitter()
+        
+        menuLabels.append(userLabel)
+        menuLabels.append(homeTimelineLabel)
+        menuLabels.append(personalProfileLabel)
     }
 
     func setupTwitter() {
@@ -139,10 +148,12 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         // Add actions to buttons
         if #available(iOS 13.0, *) {
             leftButton.addTarget(self, action: #selector(backAction), for: .primaryActionTriggered)
+            rightButton.addTarget(self, action: #selector(selectAction), for: .primaryActionTriggered)
+            upButton.addTarget(self, action: #selector(upMenuOptionAction), for: .primaryActionTriggered)
+            downButton.addTarget(self, action: #selector(downMenuOptionAction), for: .primaryActionTriggered)
         } else {
             // Fallback on earlier versions
         }
-        rightButton.addTarget(self, action: #selector(selectAction), for: .primaryActionTriggered)
 
         // Group buttons
         gazeButtons.append(upButton)
@@ -198,13 +209,26 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
 
     override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         guard let key = presses.first?.key else { return }
-
-        switch key.keyCode {
-        case .keyboardD:
-            print("Detect double blink")
-            showUserProfileViewController()
-        default:
-            super.pressesEnded(presses, with: event)
+        // Keypresses for debugging
+        
+        if #available(iOS 13.0, *) {
+            if self.isViewLoaded && (self.view.window != nil) {
+                switch key.keyCode {
+                case .keyboardD:
+                    print("Detect double blink")
+                    showUserProfileViewController()
+                case .keyboardUpArrow:
+                    upMenuOptionAction()
+                case .keyboardDownArrow:
+                    downMenuOptionAction()
+                case .keyboardLeftArrow:
+                    backAction()
+                case .keyboardRightArrow:
+                    selectAction()
+                default:
+                    super.pressesEnded(presses, with: event)
+                }
+            }
         }
     }
 
@@ -325,12 +349,59 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         update(withFaceAnchor: faceAnchor)
     }
 
-    @available(iOS 13.0, *)
+
     @objc func backAction() {
+        // Pop the current view controller to go back to previous controller
+        unwindToHome()
+
+    }
+
+    @objc func unwindToHome() {
+        // Pop the current view controller to go back to previous controller
+        self.performSegue(withIdentifier: "unwindHomeTimeline", sender: self)
+
     }
 
     @objc func selectAction() {
+        switch currentLabelIndex {
+        case 0:
+            self.showUserProfileViewController()
+        case 1:
+            unwindToHome()
+        case 2:
+            self.showUserProfileViewController()
+        default:
+            unwindToHome()
+        }
+        
         self.showUserProfileViewController()
+    }
+
+    @available(iOS 13.0, *)
+    @objc func downMenuOptionAction() {
+        // Reset fond size to default
+        menuLabels[currentLabelIndex].font = menuLabels[currentLabelIndex].font.withSize(16.0)
+
+        // Anime font size transition
+        currentLabelIndex = min(menuLabels.count-1, currentLabelIndex+1)
+        UIView.transition(with: menuLabels[currentLabelIndex], duration: 0.25,
+                          options: .transitionFlipFromTop, animations: { [self] in
+            menuLabels[self.currentLabelIndex].font = UIFont(name: "HelveticaNeue", size: 22.0)!
+        })
+    }
+
+    @available(iOS 13.0, *)
+    @objc func upMenuOptionAction() {
+        // Reset fond size to default
+        menuLabels[currentLabelIndex].font = menuLabels[currentLabelIndex].font.withSize(16.0)
+
+        // Anime font size transition
+        currentLabelIndex =  max(0, currentLabelIndex-1)
+        UIView.transition(with: menuLabels[currentLabelIndex], duration: 0.25,
+                          options: .transitionFlipFromBottom, animations: { [self] in
+            menuLabels[self.currentLabelIndex].font = UIFont(name: "HelveticaNeue", size: 22.0)!
+        })
+
     }
 
     private func handleBlink(withFaceAnchor anchor: ARFaceAnchor) {
