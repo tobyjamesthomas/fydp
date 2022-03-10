@@ -144,13 +144,9 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         view.bringSubviewToFront(eyePositionIndicatorView)
 
         // Add actions to buttons
-//        if blocking {
-//            upButton.addTarget(self, action: #selector(blockAction), for: .primaryActionTriggered)
-//        } else {
-            rightButton.addTarget(self, action: #selector(blockAction), for: .primaryActionTriggered)
-            leftButton.addTarget(self, action: #selector(muteAction), for: .primaryActionTriggered)
-            upButton.addTarget(self, action: #selector(followAction), for: .primaryActionTriggered)
-//        }
+        rightButton.addTarget(self, action: #selector(blockAction), for: .primaryActionTriggered)
+        leftButton.addTarget(self, action: #selector(muteAction), for: .primaryActionTriggered)
+        upButton.addTarget(self, action: #selector(followAction), for: .primaryActionTriggered)
       
         // Group buttons
         gazeButtons.append(upButton)
