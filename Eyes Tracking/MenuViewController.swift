@@ -90,6 +90,7 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
     var swifter = Swifter(consumerKey: "", consumerSecret: "")
 
     var screenname = ""
+    var authenticatedScreenName = ""
 
     var gazeButtons: [GazeUIButton] = []
 
@@ -98,6 +99,7 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
 
     var menuLabels: [UILabel] = []
     var currentLabelIndex = 0
+    var moveHome = false
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -192,7 +194,12 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         if segue.identifier == "userprofile" {
             if let userProfileViewController = segue.destination as? UserProfileViewController {
                 userProfileViewController.swifter = self.swifter
-                userProfileViewController.screenname = self.screenname
+                userProfileViewController.authenticatedScreenName = self.authenticatedScreenName
+                if !moveHome {
+                    userProfileViewController.screenname = self.screenname
+                } else {
+                    userProfileViewController.screenname = self.authenticatedScreenName
+                }
             }
         }
     }
@@ -365,10 +372,12 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
     @objc func selectAction() {
         switch currentLabelIndex {
         case 0:
+            moveHome = false
             self.showUserProfileViewController()
         case 1:
             unwindToHome()
         case 2:
+            moveHome = true
             self.showUserProfileViewController()
         default:
             unwindToHome()

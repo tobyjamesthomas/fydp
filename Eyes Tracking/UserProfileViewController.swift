@@ -93,6 +93,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     var lastBlinkDate: Date = Date()
 
     var screenname = ""
+    var authenticatedScreenName = ""
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent

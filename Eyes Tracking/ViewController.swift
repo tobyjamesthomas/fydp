@@ -96,6 +96,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var isBlinking: Bool = false
     var lastBlinkDate: Date = Date()
     var tweetNum: Int = 0
+    var authenticatedScreenName = ""
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -238,6 +239,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             if let menuViewController = segue.destination as? MenuViewController {
                 menuViewController.swifter = self.swifter
                 menuViewController.screenname = self.tweetUIView.screenname
+                menuViewController.authenticatedScreenName = self.authenticatedScreenName
             }
         }
     }
@@ -376,14 +378,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let callbackUrl = URL(string: "eyestracking://")!
 
         if #available(iOS 13.0, *) {
-            swifter.authorize(withProvider: self, callbackURL: callbackUrl) { _, _ in
+            swifter.authorize(withProvider: self, callbackURL: callbackUrl) { token, response in
                 self.fetchHomeTimeline()
+                
+                // Save username of authenticated user
+                self.authenticatedScreenName = token!.screenName!
             } failure: { error in
                 print(error.localizedDescription)
             }
+            
         } else {
             // Fallback on earlier versions
         }
+
     }
 
     @available(iOS 13.0, *)
