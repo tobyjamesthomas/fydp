@@ -95,6 +95,10 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     var screenname = ""
     var authenticatedScreenName = ""
 
+    var following = false
+    var muting = false
+    var blocking = false
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
@@ -132,21 +136,27 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
 
         // Format TweetView to display single tweet
         self.setupTwitter()
+        self.beautifyUserProfile()
+    }
+
+    func beautifyUserProfile() {
+        // Modify the UI elements programatically at runtime to improve the aesthetic
+        self.userProfileUIView.profileImage.layer.cornerRadius = self.userProfileUIView.profileImage.frame.width/2.0
+        self.userProfileUIView.profileImage.clipsToBounds = true
     }
 
     func setupTwitter() {
         // Get the first tweet from the authenticated user's timeline
         self.fetchUserProfile()
+        self.isMuting()
+        self.isBlocking()
         view.bringSubviewToFront(eyePositionIndicatorView)
 
         // Add actions to buttons
-        leftButton.addTarget(self, action: #selector(retweetAction), for: .primaryActionTriggered)
-        if #available(iOS 13.0, *) {
-            rightButton.addTarget(self, action: #selector(likeAction), for: .primaryActionTriggered)
-        } else {
-            // Fallback on earlier versions
-        }
-
+        rightButton.addTarget(self, action: #selector(blockAction), for: .primaryActionTriggered)
+        leftButton.addTarget(self, action: #selector(muteAction), for: .primaryActionTriggered)
+        upButton.addTarget(self, action: #selector(followAction), for: .primaryActionTriggered)
+      
         // Group buttons
         gazeButtons.append(upButton)
         gazeButtons.append(leftButton)
@@ -157,7 +167,31 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.0)
         }
     }
-
+    
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard let key = presses.first?.key else { return }
+        if #available(iOS 13.0, *) {
+            switch key.keyCode {
+            case .keyboardUpArrow:
+                if !blocking {
+                    followAction()
+                } else {
+                    blockAction()
+                }
+            case .keyboardLeftArrow:
+                if !blocking {
+                    muteAction()
+                }
+            case .keyboardRightArrow:
+                if !blocking {
+                    blockAction()
+                }
+            default:
+                super.pressesEnded(presses, with: event)
+            }
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -306,15 +340,131 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         // Load tweets from oauth authenticated user (currently @RenEddie)
         swifter.showUser(UserTag.screenName(screenname)) { json in
             self.userProfileUIView.update(json)
+            self.following = json["following"].bool!
+            if self.following {
+                self.upButton.setTitle("Unfollow", for: .normal)
+            }
         } failure: { error in
             print(error.localizedDescription)
         }
     }
 
-    @available(iOS 13.0, *)
-    @objc func likeAction() {
+    func isMuting() {
+        swifter.getMutedUsers() { json, _, _ in
+            let jsonResult = json.array!
+            self.muting = jsonResult.contains(where: {$0["screen_name"].string! == self.screenname})
+            if self.muting {
+                self.leftButton.setTitle("Unmute", for: .normal)
+            }
+        } failure: { error in
+            print(error.localizedDescription)
+        }
     }
 
-    @objc func retweetAction() {
+    func isBlocking() {
+        swifter.getBlockedUsers() { json, _, _ in
+            let jsonResult = json.array!
+            self.blocking = jsonResult.contains(where: {$0["screen_name"].string! == self.screenname})
+            if self.blocking {
+                self.upButton.setTitle("Unblock", for: .normal)
+            }
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+
+    @objc func muteAction() {
+        if !blocking {
+            if muting {
+                self.unmuteAccount()
+            } else {
+                self.muteAccount()
+            }
+        }
+    }
+
+    private func muteAccount() {
+        // Follow user from user tag
+        swifter.muteUser(UserTag.screenName(screenname)) { _ in
+            print("muted user!")
+            self.muting = true
+            self.leftButton.setTitle("Unmute", for: .normal)
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+
+    private func unmuteAccount() {
+        // unfollow user from user tag
+        swifter.unmuteUser(for: UserTag.screenName(screenname)) { _ in
+            print("unmuted user!")
+            self.muting = false
+            self.leftButton.setTitle("Mute", for: .normal)
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+
+    @objc func blockAction() {
+        if !blocking {
+            self.blockAccount()
+        }
+    }
+
+    private func blockAccount() {
+        // Follow user from user tag
+        swifter.blockUser(UserTag.screenName(screenname)) { _ in
+            print("blocked user!")
+            self.blocking = true
+            self.following = false
+            self.upButton.setTitle("Unblock", for: .normal)
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+
+    private func unblockAccount() {
+        // unfollow user from user tag
+        swifter.unblockUser(for: UserTag.screenName(screenname)) { _ in
+            print("unblock user!")
+            self.blocking = false
+            self.upButton.setTitle("Follow", for: .normal)
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+    
+    @objc func followAction() {
+        print("following", following)
+        // if you already follow the user you are v
+        if blocking {
+            self.unblockAccount()
+        } else if following {
+            self.unfollowAccount()
+        } else {
+            self.followAccount()
+        }
+    }
+
+    private func followAccount() {
+        // Follow user from user tag
+        swifter.followUser(UserTag.screenName(screenname)) { _ in
+            print("followed user!")
+            self.following = true
+            self.upButton.setTitle("Unfollow", for: .normal)
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+
+    private func unfollowAccount() {
+        // unfollow user from user tag
+        swifter.unfollowUser(UserTag.screenName(screenname)) { _ in
+            print("unfollowed user!")
+            self.following = false
+            self.upButton.setTitle("Follow", for: .normal)
+        } failure: { error in
+            print(error.localizedDescription)
+        }
     }
 }
