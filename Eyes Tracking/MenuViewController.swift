@@ -391,7 +391,7 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         // Reset fond size to default
         menuLabels[currentLabelIndex].font = menuLabels[currentLabelIndex].font.withSize(16.0)
 
-        // Anime font size transition
+        // Animate font size transition
         currentLabelIndex = min(menuLabels.count-1, currentLabelIndex+1)
         UIView.transition(with: menuLabels[currentLabelIndex], duration: 0.25,
                           options: .transitionFlipFromTop, animations: { [self] in
@@ -404,7 +404,7 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         // Reset fond size to default
         menuLabels[currentLabelIndex].font = menuLabels[currentLabelIndex].font.withSize(16.0)
 
-        // Anime font size transition
+        // Animate font size transition
         currentLabelIndex =  max(0, currentLabelIndex-1)
         UIView.transition(with: menuLabels[currentLabelIndex], duration: 0.25,
                           options: .transitionFlipFromBottom, animations: { [self] in

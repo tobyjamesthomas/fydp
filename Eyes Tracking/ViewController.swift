@@ -551,7 +551,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     @IBAction func myUnwindActionHomeTimeline(unwindSegue: UIStoryboardSegue) {
-
+        // Empty function that is needed to segue back to this view controller
     }
 }
 

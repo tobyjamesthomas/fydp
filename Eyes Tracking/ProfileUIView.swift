@@ -36,6 +36,8 @@ class ProfileUIView: UIView {
         let followingCount = json["friends_count"].integer!
         let followerCount = json["followers_count"].integer!
         let profileImageURL = json["profile_image_url_https"].string!
+        
+        // Parse profile banner image or use a default from Imgur
         let profileBannerImageURL = json["profile_banner_url"].string ?? "https://i.imgur.com/pDh2Ox7.png"
 
         self.nameLabel.text = name
