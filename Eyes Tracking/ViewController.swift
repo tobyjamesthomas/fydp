@@ -96,6 +96,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var isBlinking: Bool = false
     var lastBlinkDate: Date = Date()
     var tweetNum: Int = 0
+    var authenticatedScreenName = ""
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -207,24 +208,27 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         guard let key = presses.first?.key else { return }
 
         if #available(iOS 13.0, *) {
-            switch key.keyCode {
-            case .keyboardDownArrow:
-                incrementTweet()
-            case .keyboardUpArrow:
-                decrementTweet()
-            case .keyboardRightArrow:
-                likeAction()
-            case .keyboardLeftArrow:
-                retweetAction()
-            case .keyboardB:
-                // Simulate double (B)link
-                print("Double blink detected!")
-                DispatchQueue.main.async {
-                    self.showMenuViewController()
+            if self.isViewLoaded && (self.view.window != nil) {
+                switch key.keyCode {
+                case .keyboardDownArrow:
+                    incrementTweet()
+                case .keyboardUpArrow:
+                    decrementTweet()
+                case .keyboardRightArrow:
+                    likeAction()
+                case .keyboardLeftArrow:
+                    retweetAction()
+                case .keyboardB:
+                    // Simulate double (B)link
+                    print("Double blink detected!")
+                    DispatchQueue.main.async {
+                        self.showMenuViewController()
+                    }
+                    lastBlinkDate = Date()
+
+                default:
+                    super.pressesEnded(presses, with: event)
                 }
-                lastBlinkDate = Date()
-            default:
-                super.pressesEnded(presses, with: event)
             }
         }
     }
@@ -235,6 +239,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             if let menuViewController = segue.destination as? MenuViewController {
                 menuViewController.swifter = self.swifter
                 menuViewController.screenname = self.tweetUIView.screenname
+                menuViewController.authenticatedScreenName = self.authenticatedScreenName
             }
         }
     }
@@ -373,14 +378,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let callbackUrl = URL(string: "eyestracking://")!
 
         if #available(iOS 13.0, *) {
-            swifter.authorize(withProvider: self, callbackURL: callbackUrl) { _, _ in
+            swifter.authorize(withProvider: self, callbackURL: callbackUrl) { token, response in
                 self.fetchHomeTimeline()
+                
+                // Save username of authenticated user
+                self.authenticatedScreenName = token!.screenName!
             } failure: { error in
                 print(error.localizedDescription)
             }
+            
         } else {
             // Fallback on earlier versions
         }
+
     }
 
     @available(iOS 13.0, *)
@@ -539,7 +549,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     private func showMenuViewController() {
         self.performSegue(withIdentifier: "menu", sender: self)
     }
+    
+    @IBAction func myUnwindActionHomeTimeline(unwindSegue: UIStoryboardSegue) {
+        // Empty function that is needed to segue back to this view controller
+    }
 }
+
+
 
 @available(iOS 13.0, *)
 extension ViewController: SFSafariViewControllerDelegate {

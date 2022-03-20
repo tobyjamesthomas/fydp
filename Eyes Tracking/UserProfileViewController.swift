@@ -93,6 +93,8 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     var lastBlinkDate: Date = Date()
 
     var screenname = ""
+    var authenticatedScreenName = ""
+
     var following = false
     var muting = false
     var blocking = false
