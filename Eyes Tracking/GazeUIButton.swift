@@ -26,7 +26,7 @@ class GazeUIButton: UIButton {
 
         let displayLink = CADisplayLink(target: self, selector: #selector(linkDidFire))
         displayLink.preferredFramesPerSecond = 20
-        displayLink.add(to: .main, forMode: .common)
+        displayLink.add(to: .main, forMode: RunLoop.Mode.common)
 
         self.displayLink = displayLink
     }

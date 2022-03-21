@@ -33,6 +33,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var downButton: GazeUIButton!
     @IBOutlet weak var retweetView: UIImageView!
     @IBOutlet weak var heartView: UIImageView!
+    @IBOutlet weak var prevTweetView: UIImageView!
+    @IBOutlet weak var nextTweetView: UIImageView!
     @IBOutlet weak var tweetUIView: TweetUIView!
 
     var faceNode: SCNNode = SCNNode()
@@ -160,9 +162,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.0)
         }
         var tapLike = UITapGestureRecognizer()
+        var tapScrollUp = UITapGestureRecognizer()
 
         if #available(iOS 13.0, *) {
             tapLike = UITapGestureRecognizer(target: self, action: #selector(likeAction))
+            tapScrollUp = UITapGestureRecognizer(target: self, action: #selector(decrementTweet))
         } else {
             // Fallback on earlier versions
         }
@@ -172,6 +176,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let tapRetweet = UITapGestureRecognizer(target: self, action: #selector(retweetAction))
         retweetView.addGestureRecognizer(tapRetweet)
         retweetView.isUserInteractionEnabled = true
+        prevTweetView.addGestureRecognizer(tapScrollUp)
+        prevTweetView.isUserInteractionEnabled = true
+        let tapScrollDown = UITapGestureRecognizer(target: self, action: #selector(incrementTweet))
+        nextTweetView.addGestureRecognizer(tapScrollDown)
+        nextTweetView.isUserInteractionEnabled = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -211,7 +220,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             }
         }
     }
-    
     // MARK: - ARSCNViewDelegate
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -368,10 +376,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         if self.tweetNum <= 0 {
             self.tweetNum = 0
         }
+        self.prevTweetView.setImage(UIImage(systemName: "heart.fill"), animated: true)
         fetchHomeTimeline()
     }
     
-    func fetchHomeTimeline() {
+func fetchHomeTimeline() {
         // Load tweets from oauth authenticated user (currently @RenEddie)
         swifter.getHomeTimeline(count: self.tweetNum+1, tweetMode: .extended) { json in
             // Successfully fetched timeline, we save the tweet id and create the tweet view
@@ -380,7 +389,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             let hearted = jsonResult[self.tweetNum]["favorited"] == true
             let retweeted = jsonResult[self.tweetNum]["retweeted"] == true
             print("Updating home timeline", jsonResult[self.tweetNum]["favorited"], jsonResult[self.tweetNum]["retweeted"])
-
             self.tweetUIView.update(jsonResult[self.tweetNum])
 
             if hearted {
