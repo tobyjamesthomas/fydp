@@ -383,7 +383,6 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
             unwindToHome()
         }
         
-        self.showUserProfileViewController()
     }
 
     @available(iOS 13.0, *)
