@@ -15,7 +15,7 @@ import Swifter
 import AuthenticationServices
 
 // swiftlint:disable type_body_length file_length
-class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
+class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var eyePositionIndicatorView: UIView!
@@ -30,10 +30,16 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
     @IBOutlet weak var rightButton: GazeUIButton!
     @IBOutlet weak var upButton: GazeUIButton!
     @IBOutlet weak var downButton: GazeUIButton!
-    @IBOutlet weak var followersLabel: UILabel!
-    @IBOutlet weak var friendsLabel: UILabel!
-    @IBOutlet weak var homeTimelineLabel: UILabel!
-    @IBOutlet weak var personalProfileLabel: UILabel!
+
+    @IBOutlet weak var user1Label: UILabel!
+    @IBOutlet weak var user2Label: UILabel!
+    @IBOutlet weak var user3Label: UILabel!
+    @IBOutlet weak var user4Label: UILabel!
+    @IBOutlet weak var user5Label: UILabel!
+    @IBOutlet weak var user6Label: UILabel!
+    @IBOutlet weak var user7Label: UILabel!
+    @IBOutlet weak var user8Label: UILabel!
+
 
     var faceNode: SCNNode = SCNNode()
 
@@ -100,6 +106,8 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
     var menuLabels: [UILabel] = []
     var currentLabelIndex = 0
     var moveHome = false
+    var users: [JSON] = []
+    var userIndex: Int = 0
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -139,10 +147,17 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
         // Format TweetView to display single tweet
         self.setupTwitter()
         
-        menuLabels.append(followersLabel)
-        menuLabels.append(friendsLabel)
-        menuLabels.append(homeTimelineLabel)
-        menuLabels.append(personalProfileLabel)
+        menuLabels.append(user1Label)
+        menuLabels.append(user2Label)
+        menuLabels.append(user3Label)
+        menuLabels.append(user4Label)
+        menuLabels.append(user5Label)
+        menuLabels.append(user6Label)
+        menuLabels.append(user7Label)
+        menuLabels.append(user8Label)
+        
+        print("SETTING UP STUFF")
+        self.setupUserLabels()
     }
 
     func setupTwitter() {
@@ -169,6 +184,22 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
         }
 
     }
+    
+    func setupUserLabels() {
+        
+        self.swifter.getUserFollowers(for: UserTag.screenName(screenname)){ json,res2,res3  in
+            print("JSON_RESULTS: ", json)
+            self.users = json.array ?? []
+            self.userIndex = min(7, self.users.count-1)
+            for index in 0...self.userIndex {
+                self.menuLabels[index].text = self.users[index]["screen_name"].string
+            }
+            
+            
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -188,18 +219,21 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
         // Pause the view's session
         sceneView.session.pause()
     }
-    
+
     // Pass swifter to next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "userlist" {
-            if let userProfileViewController = segue.destination as? UserListViewController {
+        if segue.identifier == "userprofile" {
+            if let userProfileViewController = segue.destination as? UserProfileViewController {
                 userProfileViewController.swifter = self.swifter
                 userProfileViewController.authenticatedScreenName = self.authenticatedScreenName
-                userProfileViewController.screenname = self.screenname
+                if !moveHome {
+                    userProfileViewController.screenname = self.screenname
+                } else {
+                    userProfileViewController.screenname = self.authenticatedScreenName
+                }
             }
         }
     }
-
 
     // MARK: - ARSCNViewDelegate
 
@@ -353,7 +387,6 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
         update(withFaceAnchor: faceAnchor)
     }
 
-
     @objc func backAction() {
         // Pop the current view controller to go back to previous controller
         unwindToHome()
@@ -369,12 +402,7 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
     @objc func selectAction() {
         switch currentLabelIndex {
         case 0:
-//            self.swifter.getUserFollowers(for: UserTag.screenName(screenname)){ json,_,_  in
-////                print("JSON_RESULTS: ", json)
-//            } failure: { error in
-//                print(error.localizedDescription)
-//            }
-            self.showUserListProfileViewController()
+            print("select post")
         case 1:
             unwindToHome()
         case 2:
@@ -442,9 +470,5 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
 
     private func showUserProfileViewController() {
         self.performSegue(withIdentifier: "userprofile", sender: self)
-    }
-
-    private func showUserListProfileViewController() {
-        self.performSegue(withIdentifier: "userlist", sender: self)
     }
 }

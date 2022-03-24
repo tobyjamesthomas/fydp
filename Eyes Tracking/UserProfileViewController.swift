@@ -218,7 +218,6 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     // Pass swifter to next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "usermenu" {
-            print("TRANSITIONING USERMENU")
             if let userProfileViewController = segue.destination as? UserMenuViewController {
                 userProfileViewController.swifter = self.swifter
                 userProfileViewController.authenticatedScreenName = self.authenticatedScreenName
