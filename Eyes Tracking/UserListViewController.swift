@@ -105,7 +105,6 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
 
     var menuLabels: [UILabel] = []
     var currentLabelIndex = 0
-    var moveHome = false
     var users: [JSON] = []
     var userIndex: Int = 0
     var followerQuery: Bool = true
@@ -244,15 +243,11 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
 
     // Pass swifter to next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "userprofile" {
+        if segue.identifier == "userprofilefrommenu" {
             if let userProfileViewController = segue.destination as? UserProfileViewController {
                 userProfileViewController.swifter = self.swifter
                 userProfileViewController.authenticatedScreenName = self.authenticatedScreenName
-                if !moveHome {
-                    userProfileViewController.screenname = self.screenname
-                } else {
-                    userProfileViewController.screenname = self.authenticatedScreenName
-                }
+                userProfileViewController.screenname = self.menuLabels[self.currentLabelIndex].text ?? self.screenname
             }
         }
     }
@@ -275,7 +270,6 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
             if self.isViewLoaded && (self.view.window != nil) {
                 switch key.keyCode {
                 case .keyboardD:
-                    print("Detect double blink")
                     showUserProfileViewController()
                 case .keyboardUpArrow:
                     upMenuOptionAction()
@@ -422,18 +416,7 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
     }
 
     @objc func selectAction() {
-        switch currentLabelIndex {
-        case 0:
-            print("select post")
-        case 1:
-            unwindToHome()
-        case 2:
-            moveHome = true
-            self.showUserProfileViewController()
-        default:
-            unwindToHome()
-        }
-        
+        self.showUserProfileViewController()
     }
 
     @available(iOS 13.0, *)
@@ -491,6 +474,6 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
     }
 
     private func showUserProfileViewController() {
-        self.performSegue(withIdentifier: "userprofile", sender: self)
+        self.performSegue(withIdentifier: "userprofilefrommenu", sender: self)
     }
 }

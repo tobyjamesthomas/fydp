@@ -187,7 +187,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
                     if !blocking {
                         blockAction()
                     }
-                case .keyboardB:
+                case .keyboardD:
                     showUserMenuViewController()
                 default:
                     super.pressesEnded(presses, with: event)
