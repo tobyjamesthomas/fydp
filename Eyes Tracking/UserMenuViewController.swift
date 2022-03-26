@@ -104,6 +104,7 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
+    var followerQuery: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -192,10 +193,11 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
     // Pass swifter to next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "userlist" {
-            if let userProfileViewController = segue.destination as? UserListViewController {
-                userProfileViewController.swifter = self.swifter
-                userProfileViewController.authenticatedScreenName = self.authenticatedScreenName
-                userProfileViewController.screenname = self.screenname
+            if let userListViewController = segue.destination as? UserListViewController {
+                userListViewController.followerQuery = self.followerQuery
+                userListViewController.swifter = self.swifter
+                userListViewController.authenticatedScreenName = self.authenticatedScreenName
+                userListViewController.screenname = self.screenname
             }
         }
     }
@@ -369,14 +371,11 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
     @objc func selectAction() {
         switch currentLabelIndex {
         case 0:
-//            self.swifter.getUserFollowers(for: UserTag.screenName(screenname)){ json,_,_  in
-////                print("JSON_RESULTS: ", json)
-//            } failure: { error in
-//                print(error.localizedDescription)
-//            }
+            followerQuery = true
             self.showUserListProfileViewController()
         case 1:
-            unwindToHome()
+            followerQuery = false
+            self.showUserListProfileViewController()
         case 2:
             moveHome = true
             self.showUserProfileViewController()
