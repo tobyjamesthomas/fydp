@@ -99,7 +99,6 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
 
     var menuLabels: [UILabel] = []
     var currentLabelIndex = 0
-    var moveHome = false
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -199,6 +198,12 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
                 userListViewController.authenticatedScreenName = self.authenticatedScreenName
                 userListViewController.screenname = self.screenname
             }
+        } else if segue.identifier == "userprofilefromprofile" {
+            if let userProfileViewController = segue.destination as? UserProfileViewController {
+                userProfileViewController.swifter = self.swifter
+                userProfileViewController.authenticatedScreenName = self.authenticatedScreenName
+                userProfileViewController.screenname = self.authenticatedScreenName
+            }
         }
     }
 
@@ -220,9 +225,6 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
         if #available(iOS 13.0, *) {
             if self.isViewLoaded && (self.view.window != nil) {
                 switch key.keyCode {
-                case .keyboardD:
-                    print("Detect double blink")
-                    showUserProfileViewController()
                 case .keyboardUpArrow:
                     upMenuOptionAction()
                 case .keyboardDownArrow:
@@ -377,12 +379,10 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
             followerQuery = false
             self.showUserListProfileViewController()
         case 2:
-            moveHome = true
-            self.showUserProfileViewController()
-        default:
             unwindToHome()
+        default:
+            self.showUserProfileViewController()
         }
-        
     }
 
     @available(iOS 13.0, *)
@@ -440,7 +440,7 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
     }
 
     private func showUserProfileViewController() {
-        self.performSegue(withIdentifier: "userprofile", sender: self)
+        self.performSegue(withIdentifier: "userprofilefromprofile", sender: self)
     }
 
     private func showUserListProfileViewController() {

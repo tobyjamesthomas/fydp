@@ -1162,7 +1162,7 @@ Position Estimation</string>
         <!--User Menu View Controller-->
         <scene sceneID="5Qz-YT-jjQ">
             <objects>
-                <viewController id="53B-Rb-t80" customClass="UserMenuViewController" customModule="Eyes_Tracking" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="53B-Rb-t80" customClass="UserMenuViewController" customModule="Eyes_Tracking" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7nL-5E-Bjy">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1482,6 +1482,7 @@ Position Estimation</string>
                         <outlet property="upButton" destination="1lo-Sl-8ef" id="Y53-jL-vWn"/>
                         <outlet property="webView" destination="a0i-8x-Vdd" id="E3K-j7-xg6"/>
                         <segue destination="s7z-gE-2zk" kind="presentation" identifier="userlist" modalPresentationStyle="fullScreen" id="kvd-tf-wmo"/>
+                        <segue destination="06d-jr-jZ0" kind="presentation" identifier="userprofilefromprofile" id="mQg-ra-EXc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sqf-bM-A0d" sceneMemberID="firstResponder"/>
@@ -1843,7 +1844,7 @@ Position Estimation</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Phv-aM-mtg"/>
+        <segue reference="mQg-ra-EXc"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Image" width="266.66665649414062" height="400"/>
