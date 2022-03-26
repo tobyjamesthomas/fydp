@@ -189,12 +189,16 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
     }
     
     func setupUserFollowersLabels() {
+        // Grab all user followers from Swifter
         self.swifter.getUserFollowers(for: UserTag.screenName(screenname)){ json,res2,res3  in
             self.users = json.array ?? []
             self.userIndex = min(7, self.users.count-1)
+            
+            // Fill in menus with user screennames
             for index in 0...self.userIndex {
                 self.menuLabels[index].text = self.users[index]["screen_name"].string
             }
+            // If there are less than 8 labels, reset other labels to the empty string
             for index in self.userIndex...self.menuLabels.count-1 {
                 self.menuLabels[index].text = ""
             }
@@ -209,9 +213,12 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
         self.swifter.getUserFollowing(for: UserTag.screenName(screenname)){ json,res2,res3  in
             self.users = json.array ?? []
             self.userIndex = min(7, self.users.count-1)
+            
+            // Fill in menus with user screennames
             for index in 0...self.userIndex {
                 self.menuLabels[index].text = self.users[index]["screen_name"].string
             }
+            // If there are less than 8 labels, reset other labels to the empty string
             for index in self.userIndex...self.menuLabels.count-1 {
                 self.menuLabels[index].text = ""
             }
