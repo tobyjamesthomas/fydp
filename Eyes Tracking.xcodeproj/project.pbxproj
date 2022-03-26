@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		12BF964526A8AE4E0035E74B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 12BF964426A8AE4E0035E74B /* Podfile */; };
 		2C08F0B226B87A0C00A82CD2 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C08F0B126B87A0C00A82CD2 /* MenuViewController.swift */; };
+		67554ACE27EFBD5A00E2B04E /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67554ACD27EFBD5A00E2B04E /* UserListViewController.swift */; };
+		67554AD027EFBDB100E2B04E /* UserMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67554ACF27EFBDB100E2B04E /* UserMenuViewController.swift */; };
 		99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99291A0C268157BC00227372 /* GazeUIButton.swift */; };
 		9940E46E26A8E817002E5974 /* TweetUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9940E46D26A8E817002E5974 /* TweetUIView.swift */; };
 		9966DF6E26C3318100FDE38C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9966DF6D26C3318100FDE38C /* UserProfileViewController.swift */; };
@@ -27,6 +29,8 @@
 		2C08F0B126B87A0C00A82CD2 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		2C7218E326A8BF67006BD7EB /* Swifter */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Swifter; sourceTree = "<group>"; };
 		2C7218E626A8BFF7006BD7EB /* Swifter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Swifter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		67554ACD27EFBD5A00E2B04E /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
+		67554ACF27EFBDB100E2B04E /* UserMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMenuViewController.swift; sourceTree = "<group>"; };
 		7133DFBF2E2031AA1BDB1BDC /* Pods-Eyes Tracking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyes Tracking.release.xcconfig"; path = "Target Support Files/Pods-Eyes Tracking/Pods-Eyes Tracking.release.xcconfig"; sourceTree = "<group>"; };
 		99291A0C268157BC00227372 /* GazeUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeUIButton.swift; sourceTree = "<group>"; };
 		9940E46D26A8E817002E5974 /* TweetUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetUIView.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 				D0E5848420C806050052967A /* LaunchScreen.storyboard */,
 				D0E5848720C806050052967A /* Info.plist */,
 				2C08F0B126B87A0C00A82CD2 /* MenuViewController.swift */,
+				67554ACD27EFBD5A00E2B04E /* UserListViewController.swift */,
+				67554ACF27EFBDB100E2B04E /* UserMenuViewController.swift */,
 			);
 			path = "Eyes Tracking";
 			sourceTree = "<group>";
@@ -254,9 +260,11 @@
 				9966DF6E26C3318100FDE38C /* UserProfileViewController.swift in Sources */,
 				D0E5847E20C806050052967A /* ViewController.swift in Sources */,
 				99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */,
+				67554ACE27EFBD5A00E2B04E /* UserListViewController.swift in Sources */,
 				2C08F0B226B87A0C00A82CD2 /* MenuViewController.swift in Sources */,
 				99291A0D268157BC00227372 /* GazeUIButton.swift in Sources */,
 				9940E46E26A8E817002E5974 /* TweetUIView.swift in Sources */,
+				67554AD027EFBDB100E2B04E /* UserMenuViewController.swift in Sources */,
 				D0E5847A20C806050052967A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
