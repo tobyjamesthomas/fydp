@@ -1,8 +1,8 @@
 //
-//  UserProfileViewController.swift
+//  MenuViewController.swift
 //  Eyes Tracking
 //
-//  Created by Toby James Thomas on 2021-08-10.
+//  Created by Eddie Ren on 2021-08-02.
 //  Copyright © 2021 virakri. All rights reserved.
 //
 
@@ -15,8 +15,7 @@ import Swifter
 import AuthenticationServices
 
 // swiftlint:disable type_body_length file_length
-class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
-
+class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var eyePositionIndicatorView: UIView!
@@ -31,7 +30,16 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     @IBOutlet weak var rightButton: GazeUIButton!
     @IBOutlet weak var upButton: GazeUIButton!
     @IBOutlet weak var downButton: GazeUIButton!
-    @IBOutlet weak var userProfileUIView: ProfileUIView!
+
+    @IBOutlet weak var user1Label: UILabel!
+    @IBOutlet weak var user2Label: UILabel!
+    @IBOutlet weak var user3Label: UILabel!
+    @IBOutlet weak var user4Label: UILabel!
+    @IBOutlet weak var user5Label: UILabel!
+    @IBOutlet weak var user6Label: UILabel!
+    @IBOutlet weak var user7Label: UILabel!
+    @IBOutlet weak var user8Label: UILabel!
+
 
     var faceNode: SCNNode = SCNNode()
 
@@ -87,17 +95,19 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
 
     var swifter = Swifter(consumerKey: "", consumerSecret: "")
 
+    var screenname = ""
+    var authenticatedScreenName = ""
+
     var gazeButtons: [GazeUIButton] = []
 
     var isBlinking: Bool = false
     var lastBlinkDate: Date = Date()
 
-    var screenname = ""
-    var authenticatedScreenName = ""
-
-    var following = false
-    var muting = false
-    var blocking = false
+    var menuLabels: [UILabel] = []
+    var currentLabelIndex = 0
+    var users: [JSON] = []
+    var userIndex: Int = 0
+    var followerQuery: Bool = true
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -136,27 +146,36 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
 
         // Format TweetView to display single tweet
         self.setupTwitter()
-        self.beautifyUserProfile()
-    }
-
-    func beautifyUserProfile() {
-        // Modify the UI elements programatically at runtime to improve the aesthetic
-        self.userProfileUIView.profileImage.layer.cornerRadius = self.userProfileUIView.profileImage.frame.width/2.0
-        self.userProfileUIView.profileImage.clipsToBounds = true
+        
+        menuLabels.append(user1Label)
+        menuLabels.append(user2Label)
+        menuLabels.append(user3Label)
+        menuLabels.append(user4Label)
+        menuLabels.append(user5Label)
+        menuLabels.append(user6Label)
+        menuLabels.append(user7Label)
+        menuLabels.append(user8Label)
+        
+        if (followerQuery) {
+            self.setupUserFollowersLabels()
+        } else {
+            self.setupUserFriendsLabels()
+        }
     }
 
     func setupTwitter() {
-        // Get the first tweet from the authenticated user's timeline
-        self.fetchUserProfile()
-        self.isMuting()
-        self.isBlocking()
         view.bringSubviewToFront(eyePositionIndicatorView)
 
         // Add actions to buttons
-        rightButton.addTarget(self, action: #selector(blockAction), for: .primaryActionTriggered)
-        leftButton.addTarget(self, action: #selector(muteAction), for: .primaryActionTriggered)
-        upButton.addTarget(self, action: #selector(followAction), for: .primaryActionTriggered)
-      
+        if #available(iOS 13.0, *) {
+            leftButton.addTarget(self, action: #selector(backAction), for: .primaryActionTriggered)
+            rightButton.addTarget(self, action: #selector(selectAction), for: .primaryActionTriggered)
+            upButton.addTarget(self, action: #selector(upMenuOptionAction), for: .primaryActionTriggered)
+            downButton.addTarget(self, action: #selector(downMenuOptionAction), for: .primaryActionTriggered)
+        } else {
+            // Fallback on earlier versions
+        }
+
         // Group buttons
         gazeButtons.append(upButton)
         gazeButtons.append(leftButton)
@@ -166,33 +185,47 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         for gazeButton in gazeButtons {
             gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.0)
         }
+
     }
     
-    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        guard let key = presses.first?.key else { return }
-        if #available(iOS 13.0, *) {
-            if self.isViewLoaded && (self.view.window != nil) {
-                switch key.keyCode {
-                case .keyboardUpArrow:
-                    if !blocking {
-                        followAction()
-                    } else {
-                        blockAction()
-                    }
-                case .keyboardLeftArrow:
-                    if !blocking {
-                        muteAction()
-                    }
-                case .keyboardRightArrow:
-                    if !blocking {
-                        blockAction()
-                    }
-                case .keyboardD:
-                    showUserMenuViewController()
-                default:
-                    super.pressesEnded(presses, with: event)
-                }
+    func setupUserFollowersLabels() {
+        // Grab all user followers from Swifter
+        self.swifter.getUserFollowers(for: UserTag.screenName(screenname)){ json,res2,res3  in
+            self.users = json.array ?? []
+            self.userIndex = min(7, self.users.count-1)
+            
+            // Fill in menus with user screennames
+            for index in 0...self.userIndex {
+                self.menuLabels[index].text = self.users[index]["screen_name"].string
             }
+            // If there are less than 8 labels, reset other labels to the empty string
+            for index in self.userIndex...self.menuLabels.count-1 {
+                self.menuLabels[index].text = ""
+            }
+            
+            
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+
+    func setupUserFriendsLabels() {
+        self.swifter.getUserFollowing(for: UserTag.screenName(screenname)){ json,res2,res3  in
+            self.users = json.array ?? []
+            self.userIndex = min(7, self.users.count-1)
+            
+            // Fill in menus with user screennames
+            for index in 0...self.userIndex {
+                self.menuLabels[index].text = self.users[index]["screen_name"].string
+            }
+            // If there are less than 8 labels, reset other labels to the empty string
+            for index in self.userIndex...self.menuLabels.count-1 {
+                self.menuLabels[index].text = ""
+            }
+            
+            
+        } failure: { error in
+            print(error.localizedDescription)
         }
     }
     
@@ -217,15 +250,15 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
 
     // Pass swifter to next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "usermenu" {
-            if let userProfileViewController = segue.destination as? UserMenuViewController {
+        if segue.identifier == "userprofilefrommenu" {
+            if let userProfileViewController = segue.destination as? UserProfileViewController {
                 userProfileViewController.swifter = self.swifter
                 userProfileViewController.authenticatedScreenName = self.authenticatedScreenName
-                userProfileViewController.screenname = self.screenname
+                userProfileViewController.screenname = self.menuLabels[self.currentLabelIndex].text ?? self.screenname
             }
         }
     }
-    
+
     // MARK: - ARSCNViewDelegate
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -236,11 +269,37 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         update(withFaceAnchor: faceAnchor)
     }
 
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard let key = presses.first?.key else { return }
+        // Keypresses for debugging
+        
+        if #available(iOS 13.0, *) {
+            if self.isViewLoaded && (self.view.window != nil) {
+                switch key.keyCode {
+                case .keyboardD:
+                    showUserProfileViewController()
+                case .keyboardUpArrow:
+                    upMenuOptionAction()
+                case .keyboardDownArrow:
+                    downMenuOptionAction()
+                case .keyboardLeftArrow:
+                    backAction()
+                case .keyboardRightArrow:
+                    selectAction()
+                default:
+                    super.pressesEnded(presses, with: event)
+                }
+            }
+        }
+    }
+
     // MARK: - update(ARFaceAnchor)
     func update(withFaceAnchor anchor: ARFaceAnchor) {
 
         eyeRNode.simdTransform = anchor.rightEyeTransform
         eyeLNode.simdTransform = anchor.leftEyeTransform
+
+        handleBlink(withFaceAnchor: anchor)
 
         var eyeLLookAt = CGPoint()
         var eyeRLookAt = CGPoint()
@@ -351,139 +410,77 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         update(withFaceAnchor: faceAnchor)
     }
 
-    func fetchUserProfile() {
-        // Load tweets from oauth authenticated user (currently @RenEddie)
-        swifter.showUser(UserTag.screenName(screenname)) { json in
-            self.userProfileUIView.update(json)
-            self.following = json["following"].bool!
-            if self.following {
-                self.upButton.setTitle("Unfollow", for: .normal)
+    @objc func backAction() {
+        // Pop the current view controller to go back to previous controller
+        unwindToHome()
+
+    }
+
+    @objc func unwindToHome() {
+        // Pop the current view controller to go back to previous controller
+        self.performSegue(withIdentifier: "unwindHomeTimeline", sender: self)
+
+    }
+
+    @objc func selectAction() {
+        self.showUserProfileViewController()
+    }
+
+    @available(iOS 13.0, *)
+    @objc func downMenuOptionAction() {
+        // Reset fond size to default
+        menuLabels[currentLabelIndex].font = menuLabels[currentLabelIndex].font.withSize(16.0)
+
+        // Animate font size transition
+        currentLabelIndex = min(menuLabels.count-1, currentLabelIndex+1)
+        UIView.transition(with: menuLabels[currentLabelIndex], duration: 0.25,
+                          options: .transitionFlipFromTop, animations: { [self] in
+            menuLabels[self.currentLabelIndex].font = UIFont(name: "HelveticaNeue", size: 22.0)!
+        })
+    }
+
+    @available(iOS 13.0, *)
+    @objc func upMenuOptionAction() {
+        // Reset fond size to default
+        menuLabels[currentLabelIndex].font = menuLabels[currentLabelIndex].font.withSize(16.0)
+
+        // Animate font size transition
+        currentLabelIndex =  max(0, currentLabelIndex-1)
+        UIView.transition(with: menuLabels[currentLabelIndex], duration: 0.25,
+                          options: .transitionFlipFromBottom, animations: { [self] in
+            menuLabels[self.currentLabelIndex].font = UIFont(name: "HelveticaNeue", size: 22.0)!
+        })
+
+    }
+
+    private func handleBlink(withFaceAnchor anchor: ARFaceAnchor) {
+        let blendShapes = anchor.blendShapes
+        if let eyeBlinkLeft = blendShapes[.eyeBlinkLeft] as? Float,
+           let eyeBlinkRight = blendShapes[.eyeBlinkRight] as? Float {
+            if eyeBlinkRight > 0.9 || eyeBlinkLeft > 0.9 {
+                isBlinking = true
             }
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
+            if eyeBlinkLeft < 0.2 && eyeBlinkRight < 0.2 {
+                if isBlinking == true {
+                    let elapsed = Date().timeIntervalSince(lastBlinkDate)
+                    if elapsed < 1 {
+                        print("Double blink detected!")
+                        DispatchQueue.main.async {
+                            self.showUserProfileViewController()
+                        }
 
-    func isMuting() {
-        swifter.getMutedUsers() { json, _, _ in
-            let jsonResult = json.array!
-            self.muting = jsonResult.contains(where: {$0["screen_name"].string! == self.screenname})
-            if self.muting {
-                self.leftButton.setTitle("Unmute", for: .normal)
-            }
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
+                    } else {
+                        print("Single blink detected")
+                    }
+                    lastBlinkDate = Date()
+                }
+                isBlinking = false
 
-    func isBlocking() {
-        swifter.getBlockedUsers() { json, _, _ in
-            let jsonResult = json.array!
-            self.blocking = jsonResult.contains(where: {$0["screen_name"].string! == self.screenname})
-            if self.blocking {
-                self.upButton.setTitle("Unblock", for: .normal)
-            }
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    @objc func muteAction() {
-        if !blocking {
-            if muting {
-                self.unmuteAccount()
-            } else {
-                self.muteAccount()
             }
         }
     }
 
-    private func muteAccount() {
-        // Follow user from user tag
-        swifter.muteUser(UserTag.screenName(screenname)) { _ in
-            print("muted user!")
-            self.muting = true
-            self.leftButton.setTitle("Unmute", for: .normal)
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    private func unmuteAccount() {
-        // unfollow user from user tag
-        swifter.unmuteUser(for: UserTag.screenName(screenname)) { _ in
-            print("unmuted user!")
-            self.muting = false
-            self.leftButton.setTitle("Mute", for: .normal)
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    @objc func blockAction() {
-        if !blocking {
-            self.blockAccount()
-        }
-    }
-
-    private func blockAccount() {
-        // Follow user from user tag
-        swifter.blockUser(UserTag.screenName(screenname)) { _ in
-            print("blocked user!")
-            self.blocking = true
-            self.following = false
-            self.upButton.setTitle("Unblock", for: .normal)
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    private func unblockAccount() {
-        // unfollow user from user tag
-        swifter.unblockUser(for: UserTag.screenName(screenname)) { _ in
-            print("unblock user!")
-            self.blocking = false
-            self.upButton.setTitle("Follow", for: .normal)
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-    
-    @objc func followAction() {
-        print("following", following)
-        // if you already follow the user you are v
-        if blocking {
-            self.unblockAccount()
-        } else if following {
-            self.unfollowAccount()
-        } else {
-            self.followAccount()
-        }
-    }
-
-    private func followAccount() {
-        // Follow user from user tag
-        swifter.followUser(UserTag.screenName(screenname)) { _ in
-            print("followed user!")
-            self.following = true
-            self.upButton.setTitle("Unfollow", for: .normal)
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    private func unfollowAccount() {
-        // unfollow user from user tag
-        swifter.unfollowUser(UserTag.screenName(screenname)) { _ in
-            print("unfollowed user!")
-            self.following = false
-            self.upButton.setTitle("Follow", for: .normal)
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-    
-    private func showUserMenuViewController() {
-        self.performSegue(withIdentifier: "usermenu", sender: self)
+    private func showUserProfileViewController() {
+        self.performSegue(withIdentifier: "userprofilefrommenu", sender: self)
     }
 }
