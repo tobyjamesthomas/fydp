@@ -412,14 +412,7 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
 
     @objc func backAction() {
         // Pop the current view controller to go back to previous controller
-        unwindToHome()
-
-    }
-
-    @objc func unwindToHome() {
-        // Pop the current view controller to go back to previous controller
-        self.performSegue(withIdentifier: "unwindHomeTimeline", sender: self)
-
+        self.dismiss(animated: true, completion: nil)
     }
 
     @objc func selectAction() {
