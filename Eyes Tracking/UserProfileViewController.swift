@@ -395,7 +395,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             let jsonResult = json.array!
             self.blocking = jsonResult.contains(where: {$0["screen_name"].string! == self.screenname})
             if self.blocking {
-                self.upButton.setTitle("Unblock", for: .normal)
+                self.followButton.setTitle("Unblock", for: .normal)
             }
         } failure: { error in
             print(error.localizedDescription)
@@ -456,7 +456,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             print("blocked user!")
             self.blocking = true
             self.following = false
-            self.upButton.setTitle("Unblock", for: .normal)
+            self.followButton.setTitle("Unblock", for: .normal)
         } failure: { error in
             print(error.localizedDescription)
         }
