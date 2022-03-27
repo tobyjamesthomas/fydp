@@ -146,20 +146,20 @@
                                         <rect key="frame" x="0.0" y="200" width="390" height="400"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVp-K1-7Xd" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="400"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="400"/>
                                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="zJY-lC-PVH"/>
+                                                    <constraint firstAttribute="width" constant="70" id="zJY-lC-PVH"/>
                                                 </constraints>
                                                 <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lau-LN-wqR" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="290" y="0.0" width="100" height="400"/>
+                                                <rect key="frame" x="320" y="0.0" width="70" height="400"/>
                                                 <color key="backgroundColor" systemColor="systemPinkColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="JZe-p3-Jzz"/>
+                                                    <constraint firstAttribute="width" constant="70" id="JZe-p3-Jzz"/>
                                                 </constraints>
                                                 <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
