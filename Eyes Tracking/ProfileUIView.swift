@@ -17,6 +17,7 @@ class ProfileUIView: UIView {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var joinDate: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followerLabel: UILabel!
 
@@ -43,10 +44,13 @@ class ProfileUIView: UIView {
         self.nameLabel.text = name
         self.screenNameLabel.text = "@" + self.screenname
         self.descriptionLabel.text = descriptionText
-        self.followingLabel.text = self.formatCount(count: followingCount) + " Following"
-        self.followerLabel.text = self.formatCount(count: followerCount) + " Followers"
+        if #available(iOS 13.0, *) {
+            self.followingLabel.attributedText = self.attributedText(withString: self.formatCount(count: followingCount), userType: " Following")
+            self.followerLabel.attributedText = self.attributedText(withString: self.formatCount(count: followerCount), userType: " Followers")
+        }
+        self.joinDate.text = self.getJoinDate(from: json["created_at"].string!)
 
-        setImage(from: profileImageURL, for: self.profileImage)
+        setImage(from: self.getBigProfileImageUrl(from: profileImageURL), for: self.profileImage)
         setImage(from: profileBannerImageURL, for: self.profileBannerImage)
     }
 
@@ -80,5 +84,32 @@ class ProfileUIView: UIView {
         case 2: return formattedCount + "M"  // Million
         default: return formattedCount + "K" // Thousand
         }
+    }
+
+    @available(iOS 13.0, *)
+    func attributedText(withString userCount: String, userType: String) -> NSAttributedString {
+        // Set the UI label to use an AttributedString so that the number text can be bolded.
+        let boldText = userCount
+        let attrs = [NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Bold", size: 15)!, NSAttributedString.Key.foregroundColor: UIColor.black]
+        let attributedString = NSMutableAttributedString(string:boldText, attributes:attrs)
+
+        let normalText = userType
+        let attrsNormal = [NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Thin", size: 15)!, NSAttributedString.Key.foregroundColor: UIColor.black]
+        let normalString = NSMutableAttributedString(string:normalText, attributes: attrsNormal)
+
+        attributedString.append(normalString)
+        return attributedString
+    }
+
+    func getBigProfileImageUrl(from url: String) -> String {
+        // https://media.giphy.com/media/dl8b48ULQRjBkRcmZZ/giphy.gif
+        // Upsize the profile picture image for better display
+        return url.replacingOccurrences(of: "normal.jpg", with: "400x400.jpg")
+    }
+    
+    func getJoinDate(from url: String) -> String {
+        // Parse the join date from the json object
+        var dateItems = url.components(separatedBy: " ")
+        return "Joined " + dateItems[1] + " " + dateItems[5]
     }
 }
