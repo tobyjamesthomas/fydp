@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -26,6 +26,50 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IY1-NM-Y8Y" userLabel="Blue Buttons View">
+                                <rect key="frame" x="0.0" y="44" width="390" height="800"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="500" translatesAutoresizingMaskIntoConstraints="NO" id="crr-we-LFl">
+                                        <rect key="frame" x="45" y="70" width="300" height="660"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7iO-1h-pzw" userLabel="TopButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="300" id="00f-Sf-Sjm"/>
+                                                    <constraint firstAttribute="height" constant="80" id="aSf-ec-PLI"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="filled" image="chevron.up" catalog="system">
+                                                    <backgroundConfiguration key="background" cornerRadius="20"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30" scale="default"/>
+                                                    <color key="baseBackgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rQ7-Cf-Qdz" userLabel="BottomButton">
+                                                <rect key="frame" x="0.0" y="580" width="300" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="80" id="3Io-0W-FYG"/>
+                                                    <constraint firstAttribute="width" constant="300" id="h3w-o6-HLH"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="filled" image="chevron.down" catalog="system">
+                                                    <backgroundConfiguration key="background" cornerRadius="20"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30" scale="default"/>
+                                                    <color key="baseBackgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="rQ7-Cf-Qdz" firstAttribute="width" secondItem="7iO-1h-pzw" secondAttribute="width" id="OOk-Q2-Tqa"/>
+                                            <constraint firstItem="rQ7-Cf-Qdz" firstAttribute="height" secondItem="7iO-1h-pzw" secondAttribute="height" id="Q82-Jw-ouG"/>
+                                            <constraint firstItem="rQ7-Cf-Qdz" firstAttribute="centerX" secondItem="crr-we-LFl" secondAttribute="centerX" id="jcV-2O-MR5"/>
+                                            <constraint firstItem="7iO-1h-pzw" firstAttribute="centerX" secondItem="crr-we-LFl" secondAttribute="centerX" id="qyA-9u-fuL"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="crr-we-LFl" firstAttribute="centerX" secondItem="IY1-NM-Y8Y" secondAttribute="centerX" id="1Gd-i1-9PQ"/>
+                                    <constraint firstItem="crr-we-LFl" firstAttribute="centerY" secondItem="IY1-NM-Y8Y" secondAttribute="centerY" id="WC0-dD-Y4Z"/>
+                                </constraints>
+                            </view>
                             <visualEffectView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vT5-6S-UTW">
                                 <rect key="frame" x="0.0" y="684" width="390" height="160"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KW7-5O-3pA">
@@ -398,12 +442,14 @@ Position Estimation</string>
                             <constraint firstItem="saK-eH-dzW" firstAttribute="leading" secondItem="9i0-fu-tQr" secondAttribute="leading" id="2ZC-Fp-hnP"/>
                             <constraint firstItem="rlJ-wj-UR6" firstAttribute="top" secondItem="75x-hB-b3v" secondAttribute="top" id="7GA-Cb-Olq"/>
                             <constraint firstItem="Dka-h1-UmX" firstAttribute="centerX" secondItem="9i0-fu-tQr" secondAttribute="centerX" id="8Oa-OV-N8O"/>
+                            <constraint firstItem="IY1-NM-Y8Y" firstAttribute="centerY" secondItem="75x-hB-b3v" secondAttribute="centerY" id="9la-lm-HzX"/>
                             <constraint firstAttribute="bottom" secondItem="3po-Km-irV" secondAttribute="bottom" id="A0i-nG-krs"/>
                             <constraint firstItem="Aaq-uW-sX7" firstAttribute="leading" secondItem="9i0-fu-tQr" secondAttribute="leading" constant="24" id="CFb-fd-ubf"/>
                             <constraint firstItem="3po-Km-irV" firstAttribute="leading" secondItem="9i0-fu-tQr" secondAttribute="leading" id="FXE-B8-B7W"/>
                             <constraint firstItem="Wol-sx-K7a" firstAttribute="centerX" secondItem="75x-hB-b3v" secondAttribute="centerX" id="Huc-TB-BkR"/>
                             <constraint firstAttribute="bottom" secondItem="rlJ-wj-UR6" secondAttribute="bottom" id="IhV-73-bV9"/>
                             <constraint firstItem="3po-Km-irV" firstAttribute="trailing" secondItem="9i0-fu-tQr" secondAttribute="trailing" id="J0x-X1-xrn"/>
+                            <constraint firstItem="IY1-NM-Y8Y" firstAttribute="centerX" secondItem="75x-hB-b3v" secondAttribute="centerX" id="LCK-qa-T0i"/>
                             <constraint firstAttribute="bottom" secondItem="W9c-Gg-veJ" secondAttribute="bottom" constant="16" id="Li7-fA-cKy"/>
                             <constraint firstItem="rlJ-wj-UR6" firstAttribute="leading" secondItem="75x-hB-b3v" secondAttribute="leading" id="Lv9-Dd-jUJ"/>
                             <constraint firstAttribute="trailing" secondItem="saK-eH-dzW" secondAttribute="trailing" id="W76-Ug-zLd"/>
@@ -411,8 +457,10 @@ Position Estimation</string>
                             <constraint firstItem="Dka-h1-UmX" firstAttribute="centerY" secondItem="9i0-fu-tQr" secondAttribute="centerY" id="YE7-ND-C0l"/>
                             <constraint firstItem="Wol-sx-K7a" firstAttribute="centerY" secondItem="75x-hB-b3v" secondAttribute="centerY" id="ZYK-RP-cx2"/>
                             <constraint firstItem="Aaq-uW-sX7" firstAttribute="top" secondItem="W9c-Gg-veJ" secondAttribute="top" id="a81-FD-F9y"/>
+                            <constraint firstItem="3po-Km-irV" firstAttribute="bottom" secondItem="IY1-NM-Y8Y" secondAttribute="bottom" id="afn-9K-rgV"/>
                             <constraint firstItem="vT5-6S-UTW" firstAttribute="leading" secondItem="75x-hB-b3v" secondAttribute="leading" id="bjE-73-Gct"/>
                             <constraint firstItem="rlJ-wj-UR6" firstAttribute="leading" secondItem="9i0-fu-tQr" secondAttribute="leading" id="cGP-Ck-rx3"/>
+                            <constraint firstItem="3po-Km-irV" firstAttribute="top" secondItem="IY1-NM-Y8Y" secondAttribute="top" id="fIu-yi-2a0"/>
                             <constraint firstAttribute="bottom" secondItem="vT5-6S-UTW" secondAttribute="bottom" id="fhr-Jr-BHz"/>
                             <constraint firstAttribute="bottom" secondItem="saK-eH-dzW" secondAttribute="bottom" id="jMP-GB-EOC"/>
                             <constraint firstItem="rlJ-wj-UR6" firstAttribute="trailing" secondItem="9i0-fu-tQr" secondAttribute="trailing" id="jfV-BY-tmd"/>
@@ -778,7 +826,7 @@ Position Estimation</string>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <wkWebView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1M-sy-cXv">
-                                <rect key="frame" x="0.0" y="44" width="390" height="746"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -994,7 +1042,7 @@ Position Estimation</string>
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ix-Gg-242" customClass="ProfileUIView" customModule="Eyes_Tracking" customModuleProvider="target">
-                                <rect key="frame" x="70" y="213" width="250" height="408"/>
+                                <rect key="frame" x="70" y="174" width="250" height="408"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="U2w-UA-f63">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="408"/>
@@ -1034,13 +1082,13 @@ Position Estimation</string>
                                                                         <rect key="frame" x="80" y="0.0" width="170" height="70"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" ambiguous="YES" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5L-mw-QMM">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="12" height="25.333333333333332"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="12" height="32.333333333333336"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                                                                 <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="First Last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scQ-JB-BNS">
-                                                                                <rect key="frame" x="0.0" y="20.333333333333314" width="80.666666666666671" height="30"/>
+                                                                                <rect key="frame" x="0.0" y="27.333333333333314" width="80.666666666666671" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="30" id="ehw-CC-KSM"/>
                                                                                 </constraints>
@@ -1049,13 +1097,13 @@ Position Estimation</string>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="@Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUJ-8R-Yp3">
-                                                                                <rect key="frame" x="0.0" y="45.333333333333314" width="70.333333333333329" height="15.333333333333336"/>
+                                                                                <rect key="frame" x="0.0" y="52.333333333333314" width="70.333333333333329" height="15.333333333333329"/>
                                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                                                 <color key="textColor" systemColor="secondaryLabelColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CcF-iO-BTp">
-                                                                                <rect key="frame" x="0.0" y="55.666666666666686" width="5.666666666666667" height="14.333333333333329"/>
+                                                                                <rect key="frame" x="0.0" y="62.666666666666693" width="5.666666666666667" height="7.3333333333333357"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                 <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
@@ -1925,6 +1973,8 @@ Position Estimation</string>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Image" width="266.66665649414062" height="400"/>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="chevron.up" catalog="system" width="128" height="72"/>
         <image name="circles.hexagonpath.fill" catalog="system" width="128" height="112"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
