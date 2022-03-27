@@ -1089,7 +1089,7 @@ Position Estimation</string>
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ix-Gg-242" customClass="ProfileUIView" customModule="Eyes_Tracking" customModuleProvider="target">
-                                <rect key="frame" x="70" y="174" width="250" height="408"/>
+                                <rect key="frame" x="70" y="213" width="250" height="408"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="U2w-UA-f63">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="408"/>
@@ -1140,13 +1140,13 @@ Position Estimation</string>
                                                                                     <constraint firstAttribute="height" constant="30" id="ehw-CC-KSM"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
-                                                                                <nil key="textColor"/>
+                                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="@Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUJ-8R-Yp3">
                                                                                 <rect key="frame" x="0.0" y="45.333333333333314" width="70.333333333333329" height="15.333333333333336"/>
                                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CcF-iO-BTp">
@@ -1164,7 +1164,7 @@ Position Estimation</string>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Tweet" lineBreakMode="wordWrap" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1Y-O5-cYi">
                                                         <rect key="frame" x="0.0" y="139" width="250" height="190.33333333333337"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nFZ-V9-O1T">
@@ -1237,7 +1237,7 @@ Position Estimation</string>
                                                                     </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fzl-zQ-DNB">
                                                                         <rect key="frame" x="163.66666666666666" y="0.0" width="86.333333333333343" height="30"/>
-                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="30" id="26O-xY-nKw"/>
                                                                         </constraints>
@@ -1262,7 +1262,6 @@ Position Estimation</string>
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="BF2-m5-D4e"/>
                                     <constraint firstAttribute="height" constant="408" id="Fzc-4q-mct"/>
@@ -1289,7 +1288,7 @@ Position Estimation</string>
                             <constraint firstItem="8lr-uu-eaG" firstAttribute="centerY" secondItem="Iyr-AZ-vKa" secondAttribute="centerY" id="0y4-hu-tYe"/>
                             <constraint firstItem="pLX-gh-cU5" firstAttribute="trailing" secondItem="Mry-sU-8u5" secondAttribute="trailing" id="227-vb-DAz"/>
                             <constraint firstItem="Mry-sU-8u5" firstAttribute="trailing" secondItem="m84-Hs-OXP" secondAttribute="trailing" constant="16" id="4QT-Ve-hm3"/>
-                            <constraint firstItem="6ix-Gg-242" firstAttribute="centerY" secondItem="Mry-sU-8u5" secondAttribute="centerY" id="9YR-4F-Wpj"/>
+                            <constraint firstItem="6ix-Gg-242" firstAttribute="centerY" secondItem="pLX-gh-cU5" secondAttribute="centerY" id="9YR-4F-Wpj"/>
                             <constraint firstAttribute="bottom" secondItem="pLX-gh-cU5" secondAttribute="bottom" id="9ez-aX-vpB"/>
                             <constraint firstItem="98J-XA-RhJ" firstAttribute="leading" secondItem="Iyr-AZ-vKa" secondAttribute="leading" id="MXi-6O-CL2"/>
                             <constraint firstItem="8lr-uu-eaG" firstAttribute="centerX" secondItem="Iyr-AZ-vKa" secondAttribute="centerX" id="NvH-UD-y13"/>
@@ -2124,9 +2123,6 @@ Position Estimation</string>
         <image name="retweet_black" width="170.66667175292969" height="170.66667175292969"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
