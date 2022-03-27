@@ -526,10 +526,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             if eyeBlinkRight > 0.9 || eyeBlinkLeft > 0.9 {
                 isBlinking = true
             }
-            if eyeBlinkLeft < 0.2 && eyeBlinkRight < 0.2 {
+            if eyeBlinkLeft < 0.4 && eyeBlinkRight < 0.4 {
                 if isBlinking == true {
                     let elapsed = Date().timeIntervalSince(lastBlinkDate)
-                    if elapsed < 1 {
+                    if elapsed < 1.5 {
                         print("Double blink detected!")
                         DispatchQueue.main.async {
                             self.showMenuViewController()
