@@ -674,26 +674,42 @@ Position Estimation</string>
                                         <rect key="frame" x="0.0" y="200" width="390" height="400"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NOs-8P-bvL" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="400"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="400"/>
+                                                <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="mpI-Et-v1A"/>
+                                                    <constraint firstAttribute="width" constant="70" id="mpI-Et-v1A"/>
                                                 </constraints>
-                                                <state key="normal" title="Back">
+                                                <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
+                                                    <imageReference key="image" image="xmark" catalog="system" symbolScale="large" renderingMode="hierarchical">
+                                                        <hierarchicalColors>
+                                                            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color systemColor="secondaryLabelColor"/>
+                                                            <color systemColor="tertiaryLabelColor"/>
+                                                        </hierarchicalColors>
+                                                    </imageReference>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
                                                 <connections>
                                                     <segue destination="ZoY-qx-X5M" kind="unwind" identifier="unwindHomeTimeline" unwindAction="myUnwindActionHomeTimelineWithUnwindSegue:" id="JZ4-Md-2nr"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WgV-D5-HRl" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="290" y="0.0" width="100" height="400"/>
-                                                <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                                <rect key="frame" x="320" y="0.0" width="70" height="400"/>
+                                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="PuL-Ii-gbM"/>
+                                                    <constraint firstAttribute="width" constant="70" id="PuL-Ii-gbM"/>
                                                 </constraints>
-                                                <state key="normal" title="Select">
+                                                <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
+                                                    <imageReference key="image" image="arrow.right" catalog="system" symbolScale="large" renderingMode="hierarchical">
+                                                        <hierarchicalColors>
+                                                            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color systemColor="secondaryLabelColor"/>
+                                                            <color systemColor="tertiaryLabelColor"/>
+                                                        </hierarchicalColors>
+                                                    </imageReference>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
                                             </button>
                                         </subviews>
@@ -1564,26 +1580,42 @@ Position Estimation</string>
                                         <rect key="frame" x="0.0" y="200" width="390" height="400"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uum-tY-Gji" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="400"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="400"/>
+                                                <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="ol6-c2-0Md"/>
+                                                    <constraint firstAttribute="width" constant="70" id="ol6-c2-0Md"/>
                                                 </constraints>
-                                                <state key="normal" title="Back">
+                                                <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
+                                                    <imageReference key="image" image="xmark" catalog="system" symbolScale="large" renderingMode="hierarchical">
+                                                        <hierarchicalColors>
+                                                            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color systemColor="secondaryLabelColor"/>
+                                                            <color systemColor="tertiaryLabelColor"/>
+                                                        </hierarchicalColors>
+                                                    </imageReference>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
                                                 <connections>
                                                     <segue destination="CtC-GX-eJh" kind="unwind" identifier="unwindHomeTimeline" unwindAction="myUnwindActionHomeTimelineWithUnwindSegue:" id="S2F-it-fYr"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HGS-pP-W0M" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="290" y="0.0" width="100" height="400"/>
-                                                <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                                <rect key="frame" x="320" y="0.0" width="70" height="400"/>
+                                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="Ej5-H4-aJj"/>
+                                                    <constraint firstAttribute="width" constant="70" id="Ej5-H4-aJj"/>
                                                 </constraints>
-                                                <state key="normal" title="Select">
+                                                <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
+                                                    <imageReference key="image" image="arrow.right" catalog="system" symbolScale="large" renderingMode="hierarchical">
+                                                        <hierarchicalColors>
+                                                            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color systemColor="secondaryLabelColor"/>
+                                                            <color systemColor="tertiaryLabelColor"/>
+                                                        </hierarchicalColors>
+                                                    </imageReference>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
                                             </button>
                                         </subviews>
@@ -1961,26 +1993,42 @@ Position Estimation</string>
                                         <rect key="frame" x="0.0" y="200" width="390" height="400"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7sJ-DC-WaF" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="400"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="400"/>
+                                                <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="WhV-bc-4Vy"/>
+                                                    <constraint firstAttribute="width" constant="70" id="WhV-bc-4Vy"/>
                                                 </constraints>
-                                                <state key="normal" title="Back">
+                                                <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
+                                                    <imageReference key="image" image="xmark" catalog="system" symbolScale="large" renderingMode="hierarchical">
+                                                        <hierarchicalColors>
+                                                            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color systemColor="secondaryLabelColor"/>
+                                                            <color systemColor="tertiaryLabelColor"/>
+                                                        </hierarchicalColors>
+                                                    </imageReference>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
                                                 <connections>
                                                     <segue destination="bDY-bn-FLq" kind="unwind" identifier="unwindHomeTimeline" unwindAction="myUnwindActionHomeTimelineWithUnwindSegue:" id="mz0-ir-EkZ"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="joj-di-k3P" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="290" y="0.0" width="100" height="400"/>
-                                                <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                                <rect key="frame" x="320" y="0.0" width="70" height="400"/>
+                                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="vrI-9r-Oh5"/>
+                                                    <constraint firstAttribute="width" constant="70" id="vrI-9r-Oh5"/>
                                                 </constraints>
-                                                <state key="normal" title="Select">
+                                                <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
+                                                    <imageReference key="image" image="arrow.right" catalog="system" symbolScale="large" renderingMode="hierarchical">
+                                                        <hierarchicalColors>
+                                                            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color systemColor="secondaryLabelColor"/>
+                                                            <color systemColor="tertiaryLabelColor"/>
+                                                        </hierarchicalColors>
+                                                    </imageReference>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
                                             </button>
                                         </subviews>
@@ -2158,22 +2206,26 @@ Position Estimation</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="h4N-9q-wrL"/>
         <segue reference="Phv-aM-mtg"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Image" width="266.66665649414062" height="400"/>
+        <image name="arrow.right" catalog="system" width="128" height="98"/>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="chevron.up" catalog="system" width="128" height="72"/>
         <image name="circles.hexagonpath.fill" catalog="system" width="128" height="112"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
         <image name="retweet_black" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2183,6 +2235,9 @@ Position Estimation</string>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
