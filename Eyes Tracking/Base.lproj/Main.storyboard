@@ -439,6 +439,7 @@ Position Estimation</string>
                         <outlet property="upButton" destination="OHF-vT-SOc" id="okQ-0a-ps9"/>
                         <outlet property="webView" destination="saK-eH-dzW" id="phT-GD-Fie"/>
                         <segue destination="Cv5-gR-iVi" kind="presentation" identifier="menu" modalPresentationStyle="fullScreen" id="b8z-Ya-P9N"/>
+                        <segue destination="06d-jr-jZ0" kind="presentation" identifier="userprofile" modalPresentationStyle="fullScreen" id="qy5-pF-03c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -773,11 +774,11 @@ Position Estimation</string>
             <objects>
                 <viewController id="06d-jr-jZ0" customClass="UserProfileViewController" customModule="Eyes_Tracking" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iyr-AZ-vKa">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <wkWebView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1M-sy-cXv">
-                                <rect key="frame" x="0.0" y="44" width="390" height="746"/>
+                                <rect key="frame" x="0.0" y="44" width="390" height="800"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -785,7 +786,7 @@ Position Estimation</string>
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <visualEffectView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="98J-XA-RhJ">
-                                <rect key="frame" x="0.0" y="630" width="390" height="160"/>
+                                <rect key="frame" x="0.0" y="684" width="390" height="160"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="spY-Ej-8Al">
                                     <rect key="frame" x="0.0" y="0.0" width="390" height="160"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -796,14 +797,14 @@ Position Estimation</string>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m84-Hs-OXP">
-                                <rect key="frame" x="278" y="646" width="96" height="128"/>
+                                <rect key="frame" x="278" y="700" width="96" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="m84-Hs-OXP" secondAttribute="height" multiplier="3:4" id="yPB-Wi-HQp"/>
                                     <constraint firstAttribute="width" constant="96" id="ykd-Qo-GaR"/>
                                 </constraints>
                             </arscnView>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8lr-uu-eaG">
-                                <rect key="frame" x="131" y="331" width="128" height="128"/>
+                                <rect key="frame" x="131" y="358" width="128" height="128"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cxP-Dx-sa1">
                                         <rect key="frame" x="20" y="63.666666666666686" width="88" height="1"/>
@@ -844,7 +845,7 @@ Position Estimation</string>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pLX-gh-cU5">
-                                <rect key="frame" x="0.0" y="44" width="390" height="746"/>
+                                <rect key="frame" x="0.0" y="44" width="390" height="800"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6A-Jb-3jz" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="200"/>
@@ -857,10 +858,10 @@ Position Estimation</string>
                                         </state>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="2gD-4v-Qgj">
-                                        <rect key="frame" x="0.0" y="200" width="390" height="346"/>
+                                        <rect key="frame" x="0.0" y="200" width="390" height="400"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIq-Lu-C4h" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="346"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="400"/>
                                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="wfz-NJ-KMq"/>
@@ -870,7 +871,7 @@ Position Estimation</string>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ct3-IW-5nB" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="290" y="0.0" width="100" height="346"/>
+                                                <rect key="frame" x="290" y="0.0" width="100" height="400"/>
                                                 <color key="backgroundColor" systemColor="systemPinkColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="JaB-8q-r7Z"/>
@@ -882,7 +883,7 @@ Position Estimation</string>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2s5-Iv-oHm" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="546" width="390" height="200"/>
+                                        <rect key="frame" x="0.0" y="600" width="390" height="200"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                         <state key="normal" title="See Tweets">
                                             <color key="titleColor" systemColor="systemGray6Color"/>
@@ -895,7 +896,7 @@ Position Estimation</string>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9B3-AS-aPn">
-                                <rect key="frame" x="24" y="646" width="154" height="120.66666666666663"/>
+                                <rect key="frame" x="24" y="700" width="154" height="120.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kmn-3e-3hI">
                                         <rect key="frame" x="0.0" y="0.0" width="111.33333333333333" height="28.666666666666668"/>
@@ -1153,6 +1154,7 @@ Position Estimation</string>
                         <outlet property="userProfileUIView" destination="6ix-Gg-242" id="chB-7s-qR9"/>
                         <outlet property="webView" destination="K1M-sy-cXv" id="iPd-2M-vbf"/>
                         <segue destination="53B-Rb-t80" kind="presentation" identifier="usermenu" modalPresentationStyle="fullScreen" id="h4N-9q-wrL"/>
+                        <segue destination="BV1-FR-VrT" kind="presentation" identifier="usertimeline" modalPresentationStyle="fullScreen" id="W2G-S5-6eF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IaZ-Nk-Epp" sceneMemberID="firstResponder"/>
@@ -1845,6 +1847,7 @@ Position Estimation</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="mQg-ra-EXc"/>
+        <segue reference="qy5-pF-03c"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Image" width="266.66665649414062" height="400"/>
