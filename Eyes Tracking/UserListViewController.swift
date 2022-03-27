@@ -187,13 +187,13 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
         }
 
     }
-    
+
     func setupUserFollowersLabels() {
         // Grab all user followers from Swifter
         self.swifter.getUserFollowers(for: UserTag.screenName(screenname)){ json,res2,res3  in
             self.users = json.array ?? []
-            self.userIndex = min(7, self.users.count-1)
-            
+            self.userIndex = max(min(7, self.users.count-1), 0)
+
             // Fill in menus with user screennames
             for index in 0...self.userIndex {
                 self.menuLabels[index].text = self.users[index]["screen_name"].string
@@ -202,8 +202,7 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
             for index in self.userIndex...self.menuLabels.count-1 {
                 self.menuLabels[index].text = ""
             }
-            
-            
+
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -213,7 +212,7 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
         self.swifter.getUserFollowing(for: UserTag.screenName(screenname)){ json,res2,res3  in
             self.users = json.array ?? []
             self.userIndex = min(7, self.users.count-1)
-            
+
             // Fill in menus with user screennames
             for index in 0...self.userIndex {
                 self.menuLabels[index].text = self.users[index]["screen_name"].string
@@ -222,13 +221,12 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
             for index in self.userIndex...self.menuLabels.count-1 {
                 self.menuLabels[index].text = ""
             }
-            
-            
+
         } failure: { error in
             print(error.localizedDescription)
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -272,12 +270,9 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
     override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         guard let key = presses.first?.key else { return }
         // Keypresses for debugging
-        
         if #available(iOS 13.0, *) {
             if self.isViewLoaded && (self.view.window != nil) {
                 switch key.keyCode {
-                case .keyboardD:
-                    showUserProfileViewController()
                 case .keyboardUpArrow:
                     upMenuOptionAction()
                 case .keyboardDownArrow:
@@ -298,8 +293,6 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
 
         eyeRNode.simdTransform = anchor.rightEyeTransform
         eyeLNode.simdTransform = anchor.leftEyeTransform
-
-        handleBlink(withFaceAnchor: anchor)
 
         var eyeLLookAt = CGPoint()
         var eyeRLookAt = CGPoint()
@@ -451,33 +444,6 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
             menuLabels[self.currentLabelIndex].font = UIFont(name: "HelveticaNeue", size: 22.0)!
         })
 
-    }
-
-    private func handleBlink(withFaceAnchor anchor: ARFaceAnchor) {
-        let blendShapes = anchor.blendShapes
-        if let eyeBlinkLeft = blendShapes[.eyeBlinkLeft] as? Float,
-           let eyeBlinkRight = blendShapes[.eyeBlinkRight] as? Float {
-            if eyeBlinkRight > 0.9 || eyeBlinkLeft > 0.9 {
-                isBlinking = true
-            }
-            if eyeBlinkLeft < 0.2 && eyeBlinkRight < 0.2 {
-                if isBlinking == true {
-                    let elapsed = Date().timeIntervalSince(lastBlinkDate)
-                    if elapsed < 1 {
-                        print("Double blink detected!")
-                        DispatchQueue.main.async {
-                            self.showUserProfileViewController()
-                        }
-
-                    } else {
-                        print("Single blink detected")
-                    }
-                    lastBlinkDate = Date()
-                }
-                isBlinking = false
-
-            }
-        }
     }
 
     private func showUserProfileViewController() {

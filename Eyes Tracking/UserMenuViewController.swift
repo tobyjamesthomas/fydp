@@ -99,7 +99,6 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
 
     var menuLabels: [UILabel] = []
     var currentLabelIndex = 0
-    var moveHome = false
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -199,6 +198,12 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
                 userListViewController.authenticatedScreenName = self.authenticatedScreenName
                 userListViewController.screenname = self.screenname
             }
+        } else if segue.identifier == "userprofilefromprofile" {
+            if let userProfileViewController = segue.destination as? UserProfileViewController {
+                userProfileViewController.swifter = self.swifter
+                userProfileViewController.authenticatedScreenName = self.authenticatedScreenName
+                userProfileViewController.screenname = self.authenticatedScreenName
+            }
         }
     }
 
@@ -220,9 +225,6 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
         if #available(iOS 13.0, *) {
             if self.isViewLoaded && (self.view.window != nil) {
                 switch key.keyCode {
-                case .keyboardD:
-                    print("Detect double blink")
-                    showUserProfileViewController()
                 case .keyboardUpArrow:
                     upMenuOptionAction()
                 case .keyboardDownArrow:
@@ -243,8 +245,6 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
 
         eyeRNode.simdTransform = anchor.rightEyeTransform
         eyeLNode.simdTransform = anchor.leftEyeTransform
-
-        handleBlink(withFaceAnchor: anchor)
 
         var eyeLLookAt = CGPoint()
         var eyeRLookAt = CGPoint()
@@ -377,12 +377,10 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
             followerQuery = false
             self.showUserListProfileViewController()
         case 2:
-            moveHome = true
-            self.showUserProfileViewController()
-        default:
             unwindToHome()
+        default:
+            self.showUserProfileViewController()
         }
-        
     }
 
     @available(iOS 13.0, *)
@@ -412,35 +410,8 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
 
     }
 
-    private func handleBlink(withFaceAnchor anchor: ARFaceAnchor) {
-        let blendShapes = anchor.blendShapes
-        if let eyeBlinkLeft = blendShapes[.eyeBlinkLeft] as? Float,
-           let eyeBlinkRight = blendShapes[.eyeBlinkRight] as? Float {
-            if eyeBlinkRight > 0.9 || eyeBlinkLeft > 0.9 {
-                isBlinking = true
-            }
-            if eyeBlinkLeft < 0.2 && eyeBlinkRight < 0.2 {
-                if isBlinking == true {
-                    let elapsed = Date().timeIntervalSince(lastBlinkDate)
-                    if elapsed < 1 {
-                        print("Double blink detected!")
-                        DispatchQueue.main.async {
-                            self.showUserProfileViewController()
-                        }
-
-                    } else {
-                        print("Single blink detected")
-                    }
-                    lastBlinkDate = Date()
-                }
-                isBlinking = false
-
-            }
-        }
-    }
-
     private func showUserProfileViewController() {
-        self.performSegue(withIdentifier: "userprofile", sender: self)
+        self.performSegue(withIdentifier: "userprofilefromprofile", sender: self)
     }
 
     private func showUserListProfileViewController() {

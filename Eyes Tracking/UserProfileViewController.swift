@@ -242,6 +242,8 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         eyeRNode.simdTransform = anchor.rightEyeTransform
         eyeLNode.simdTransform = anchor.leftEyeTransform
 
+        handleBlink(withFaceAnchor: anchor)
+
         var eyeLLookAt = CGPoint()
         var eyeRLookAt = CGPoint()
 
@@ -480,6 +482,33 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             self.upButton.setTitle("Follow", for: .normal)
         } failure: { error in
             print(error.localizedDescription)
+        }
+    }
+    
+    private func handleBlink(withFaceAnchor anchor: ARFaceAnchor) {
+        let blendShapes = anchor.blendShapes
+        if let eyeBlinkLeft = blendShapes[.eyeBlinkLeft] as? Float,
+           let eyeBlinkRight = blendShapes[.eyeBlinkRight] as? Float {
+            if eyeBlinkRight > 0.8 || eyeBlinkLeft > 0.8 {
+                isBlinking = true
+            }
+            if eyeBlinkLeft < 0.4 && eyeBlinkRight < 0.4 {
+                if isBlinking == true {
+                    let elapsed = Date().timeIntervalSince(lastBlinkDate)
+                    if elapsed < 1 {
+                        print("Double blink detected!")
+                        DispatchQueue.main.async {
+                            self.showUserMenuViewController()
+                        }
+
+                    } else {
+                        print("Single blink detected")
+                    }
+                    lastBlinkDate = Date()
+                }
+                isBlinking = false
+
+            }
         }
     }
     
