@@ -273,8 +273,6 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
         if #available(iOS 13.0, *) {
             if self.isViewLoaded && (self.view.window != nil) {
                 switch key.keyCode {
-                case .keyboardD:
-                    showUserProfileViewController()
                 case .keyboardUpArrow:
                     upMenuOptionAction()
                 case .keyboardDownArrow:

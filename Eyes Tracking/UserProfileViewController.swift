@@ -489,10 +489,10 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         let blendShapes = anchor.blendShapes
         if let eyeBlinkLeft = blendShapes[.eyeBlinkLeft] as? Float,
            let eyeBlinkRight = blendShapes[.eyeBlinkRight] as? Float {
-            if eyeBlinkRight > 0.9 || eyeBlinkLeft > 0.9 {
+            if eyeBlinkRight > 0.8 || eyeBlinkLeft > 0.8 {
                 isBlinking = true
             }
-            if eyeBlinkLeft < 0.2 && eyeBlinkRight < 0.2 {
+            if eyeBlinkLeft < 0.4 && eyeBlinkRight < 0.4 {
                 if isBlinking == true {
                     let elapsed = Date().timeIntervalSince(lastBlinkDate)
                     if elapsed < 1 {

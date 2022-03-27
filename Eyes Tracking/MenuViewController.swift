@@ -221,9 +221,6 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         if #available(iOS 13.0, *) {
             if self.isViewLoaded && (self.view.window != nil) {
                 switch key.keyCode {
-                case .keyboardD:
-                    print("Detect double blink")
-                    showUserProfileViewController()
                 case .keyboardUpArrow:
                     upMenuOptionAction()
                 case .keyboardDownArrow:
