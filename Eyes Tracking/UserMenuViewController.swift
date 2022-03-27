@@ -246,8 +246,6 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
         eyeRNode.simdTransform = anchor.rightEyeTransform
         eyeLNode.simdTransform = anchor.leftEyeTransform
 
-        handleBlink(withFaceAnchor: anchor)
-
         var eyeLLookAt = CGPoint()
         var eyeRLookAt = CGPoint()
 
@@ -410,33 +408,6 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
             menuLabels[self.currentLabelIndex].font = UIFont(name: "HelveticaNeue", size: 22.0)!
         })
 
-    }
-
-    private func handleBlink(withFaceAnchor anchor: ARFaceAnchor) {
-        let blendShapes = anchor.blendShapes
-        if let eyeBlinkLeft = blendShapes[.eyeBlinkLeft] as? Float,
-           let eyeBlinkRight = blendShapes[.eyeBlinkRight] as? Float {
-            if eyeBlinkRight > 0.9 || eyeBlinkLeft > 0.9 {
-                isBlinking = true
-            }
-            if eyeBlinkLeft < 0.2 && eyeBlinkRight < 0.2 {
-                if isBlinking == true {
-                    let elapsed = Date().timeIntervalSince(lastBlinkDate)
-                    if elapsed < 1 {
-                        print("Double blink detected!")
-                        DispatchQueue.main.async {
-                            self.showUserProfileViewController()
-                        }
-
-                    } else {
-                        print("Single blink detected")
-                    }
-                    lastBlinkDate = Date()
-                }
-                isBlinking = false
-
-            }
-        }
     }
 
     private func showUserProfileViewController() {
