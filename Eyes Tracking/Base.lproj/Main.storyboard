@@ -880,6 +880,48 @@ Position Estimation</string>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tzT-cT-u9l" userLabel="Blue Buttons View">
+                                <rect key="frame" x="0.0" y="44" width="390" height="746"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="500" translatesAutoresizingMaskIntoConstraints="NO" id="6WB-A6-Mlx">
+                                        <rect key="frame" x="45" y="43" width="300" height="660"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RmJ-Cy-GjE" userLabel="TopButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="300" id="KfC-NO-VNK"/>
+                                                    <constraint firstAttribute="height" constant="80" id="U6p-Xd-RhB"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="filled" title="Follow">
+                                                    <backgroundConfiguration key="background" cornerRadius="20"/>
+                                                    <color key="baseBackgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ce-Bd-S8T" userLabel="BottomButton">
+                                                <rect key="frame" x="0.0" y="580" width="300" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="80" id="JFh-xA-oJA"/>
+                                                    <constraint firstAttribute="width" constant="300" id="zdt-iR-wbC"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="filled" title="See Tweets">
+                                                    <backgroundConfiguration key="background" cornerRadius="20"/>
+                                                    <color key="baseBackgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="0ce-Bd-S8T" firstAttribute="height" secondItem="RmJ-Cy-GjE" secondAttribute="height" id="1La-e0-4QX"/>
+                                            <constraint firstItem="RmJ-Cy-GjE" firstAttribute="centerX" secondItem="6WB-A6-Mlx" secondAttribute="centerX" id="XeQ-dD-mSn"/>
+                                            <constraint firstItem="0ce-Bd-S8T" firstAttribute="centerX" secondItem="6WB-A6-Mlx" secondAttribute="centerX" id="juR-Ti-uez"/>
+                                            <constraint firstItem="0ce-Bd-S8T" firstAttribute="width" secondItem="RmJ-Cy-GjE" secondAttribute="width" id="o5d-qz-N4s"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="6WB-A6-Mlx" firstAttribute="centerY" secondItem="tzT-cT-u9l" secondAttribute="centerY" id="1Jm-h6-0hz"/>
+                                    <constraint firstItem="6WB-A6-Mlx" firstAttribute="centerX" secondItem="tzT-cT-u9l" secondAttribute="centerX" id="l2Y-BO-XYY"/>
+                                </constraints>
+                            </view>
                             <visualEffectView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="98J-XA-RhJ">
                                 <rect key="frame" x="0.0" y="630" width="390" height="160"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="spY-Ej-8Al">
@@ -948,28 +990,28 @@ Position Estimation</string>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="AS9-xA-Upj"/>
                                         </constraints>
-                                        <state key="normal" title="Follow">
-                                            <color key="titleColor" systemColor="systemGray6Color"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="2gD-4v-Qgj">
                                         <rect key="frame" x="0.0" y="200" width="390" height="346"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIq-Lu-C4h" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="346"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="346"/>
                                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="wfz-NJ-KMq"/>
+                                                    <constraint firstAttribute="width" constant="70" id="wfz-NJ-KMq"/>
                                                 </constraints>
                                                 <state key="normal" title="Mute">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ct3-IW-5nB" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="290" y="0.0" width="100" height="346"/>
+                                                <rect key="frame" x="320" y="0.0" width="70" height="346"/>
                                                 <color key="backgroundColor" systemColor="systemPinkColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="JaB-8q-r7Z"/>
+                                                    <constraint firstAttribute="width" constant="70" id="JaB-8q-r7Z"/>
                                                 </constraints>
                                                 <state key="normal" title="Block">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
@@ -980,8 +1022,8 @@ Position Estimation</string>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2s5-Iv-oHm" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="546" width="390" height="200"/>
                                         <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="See Tweets">
-                                            <color key="titleColor" systemColor="systemGray6Color"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                 </subviews>
@@ -1237,7 +1279,7 @@ Position Estimation</string>
                                                                     </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fzl-zQ-DNB">
                                                                         <rect key="frame" x="163.66666666666666" y="0.0" width="86.333333333333343" height="30"/>
-                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="30" id="26O-xY-nKw"/>
                                                                         </constraints>
@@ -1287,9 +1329,11 @@ Position Estimation</string>
                         <constraints>
                             <constraint firstItem="8lr-uu-eaG" firstAttribute="centerY" secondItem="Iyr-AZ-vKa" secondAttribute="centerY" id="0y4-hu-tYe"/>
                             <constraint firstItem="pLX-gh-cU5" firstAttribute="trailing" secondItem="Mry-sU-8u5" secondAttribute="trailing" id="227-vb-DAz"/>
+                            <constraint firstItem="pLX-gh-cU5" firstAttribute="top" secondItem="tzT-cT-u9l" secondAttribute="top" id="3dq-dz-EZ5"/>
                             <constraint firstItem="Mry-sU-8u5" firstAttribute="trailing" secondItem="m84-Hs-OXP" secondAttribute="trailing" constant="16" id="4QT-Ve-hm3"/>
                             <constraint firstItem="6ix-Gg-242" firstAttribute="centerY" secondItem="pLX-gh-cU5" secondAttribute="centerY" id="9YR-4F-Wpj"/>
                             <constraint firstAttribute="bottom" secondItem="pLX-gh-cU5" secondAttribute="bottom" id="9ez-aX-vpB"/>
+                            <constraint firstItem="pLX-gh-cU5" firstAttribute="bottom" secondItem="tzT-cT-u9l" secondAttribute="bottom" id="AlF-Qr-FsN"/>
                             <constraint firstItem="98J-XA-RhJ" firstAttribute="leading" secondItem="Iyr-AZ-vKa" secondAttribute="leading" id="MXi-6O-CL2"/>
                             <constraint firstItem="8lr-uu-eaG" firstAttribute="centerX" secondItem="Iyr-AZ-vKa" secondAttribute="centerX" id="NvH-UD-y13"/>
                             <constraint firstItem="pLX-gh-cU5" firstAttribute="top" secondItem="Iyr-AZ-vKa" secondAttribute="top" constant="44" id="Qbe-Kh-7Aa"/>
@@ -1297,11 +1341,13 @@ Position Estimation</string>
                             <constraint firstAttribute="trailing" secondItem="K1M-sy-cXv" secondAttribute="trailing" id="TeT-qo-5bh"/>
                             <constraint firstAttribute="bottom" secondItem="K1M-sy-cXv" secondAttribute="bottom" id="Uua-LB-v0j"/>
                             <constraint firstAttribute="bottom" secondItem="98J-XA-RhJ" secondAttribute="bottom" id="c0N-PY-jNc"/>
+                            <constraint firstItem="tzT-cT-u9l" firstAttribute="centerX" secondItem="Iyr-AZ-vKa" secondAttribute="centerX" id="cDf-DA-OzX"/>
                             <constraint firstItem="pLX-gh-cU5" firstAttribute="leading" secondItem="Mry-sU-8u5" secondAttribute="leading" id="duO-sh-rbH"/>
                             <constraint firstItem="K1M-sy-cXv" firstAttribute="top" secondItem="Mry-sU-8u5" secondAttribute="top" id="hvn-KM-MOW"/>
                             <constraint firstAttribute="trailing" secondItem="98J-XA-RhJ" secondAttribute="trailing" id="jOU-wg-Aay"/>
                             <constraint firstAttribute="bottom" secondItem="m84-Hs-OXP" secondAttribute="bottom" constant="16" id="tDs-Fl-Avr"/>
                             <constraint firstItem="9B3-AS-aPn" firstAttribute="leading" secondItem="Mry-sU-8u5" secondAttribute="leading" constant="24" id="uRK-6g-cMV"/>
+                            <constraint firstItem="tzT-cT-u9l" firstAttribute="centerY" secondItem="Iyr-AZ-vKa" secondAttribute="centerY" id="veF-92-lY7"/>
                             <constraint firstItem="6ix-Gg-242" firstAttribute="centerX" secondItem="Mry-sU-8u5" secondAttribute="centerX" id="vyK-sR-vD0"/>
                             <constraint firstItem="K1M-sy-cXv" firstAttribute="leading" secondItem="Mry-sU-8u5" secondAttribute="leading" id="ydo-Ls-O25"/>
                         </constraints>
@@ -1312,6 +1358,7 @@ Position Estimation</string>
                         <outlet property="downButton" destination="2s5-Iv-oHm" id="YBf-gO-d9P"/>
                         <outlet property="eyePositionIndicatorCenterView" destination="Qa0-8c-Goo" id="JcW-Lo-lKg"/>
                         <outlet property="eyePositionIndicatorView" destination="8lr-uu-eaG" id="KYF-Yc-LeL"/>
+                        <outlet property="followButton" destination="RmJ-Cy-GjE" id="FNK-Re-sKI"/>
                         <outlet property="gazeButtonsView" destination="pLX-gh-cU5" id="qms-GN-ZCv"/>
                         <outlet property="gazeLabel" destination="QS2-3O-5b4" id="W4X-CO-v40"/>
                         <outlet property="leftButton" destination="tIq-Lu-C4h" id="d3j-BM-3d4"/>
@@ -2111,6 +2158,7 @@ Position Estimation</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="h4N-9q-wrL"/>
         <segue reference="Phv-aM-mtg"/>
     </inferredMetricsTieBreakers>
     <resources>

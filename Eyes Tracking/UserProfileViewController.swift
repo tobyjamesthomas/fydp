@@ -32,6 +32,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     @IBOutlet weak var upButton: GazeUIButton!
     @IBOutlet weak var downButton: GazeUIButton!
     @IBOutlet weak var userProfileUIView: ProfileUIView!
+    @IBOutlet weak var followButton: UIButton!
 
     var faceNode: SCNNode = SCNNode()
 
@@ -365,7 +366,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             self.userProfileUIView.update(json)
             self.following = json["following"].bool!
             if self.following {
-                self.upButton.setTitle("Unfollow", for: .normal)
+                self.followButton.setTitle("Unfollow", for: .normal)
             }
         } failure: { error in
             print(error.localizedDescription)
@@ -451,7 +452,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         swifter.unblockUser(for: UserTag.screenName(screenname)) { _ in
             print("unblock user!")
             self.blocking = false
-            self.upButton.setTitle("Follow", for: .normal)
+            self.followButton.setTitle("Follow", for: .normal)
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -474,7 +475,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         swifter.followUser(UserTag.screenName(screenname)) { _ in
             print("followed user!")
             self.following = true
-            self.upButton.setTitle("Unfollow", for: .normal)
+            self.followButton.setTitle("Unfollow", for: .normal)
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -485,7 +486,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         swifter.unfollowUser(UserTag.screenName(screenname)) { _ in
             print("unfollowed user!")
             self.following = false
-            self.upButton.setTitle("Follow", for: .normal)
+            self.followButton.setTitle("Follow", for: .normal)
         } failure: { error in
             print(error.localizedDescription)
         }
