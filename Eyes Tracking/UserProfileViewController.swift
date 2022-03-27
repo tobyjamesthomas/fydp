@@ -144,6 +144,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         self.userProfileUIView.profileImage.layer.cornerRadius = self.userProfileUIView.profileImage.frame.width/2.0
         self.userProfileUIView.profileImage.layer.borderWidth = 2
         self.userProfileUIView.profileImage.layer.borderColor = UIColor.white.cgColor
+        self.userProfileUIView.profileBannerImage.layer.cornerRadius = 3
     }
 
     func setupTwitter() {
