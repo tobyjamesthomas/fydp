@@ -156,6 +156,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         rightButton.addTarget(self, action: #selector(blockAction), for: .primaryActionTriggered)
         leftButton.addTarget(self, action: #selector(muteAction), for: .primaryActionTriggered)
         upButton.addTarget(self, action: #selector(followAction), for: .primaryActionTriggered)
+        downButton.addTarget(self, action: #selector(showTimeline), for: .primaryActionTriggered)
       
         // Group buttons
         gazeButtons.append(upButton)
@@ -174,21 +175,15 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             if self.isViewLoaded && (self.view.window != nil) {
                 switch key.keyCode {
                 case .keyboardUpArrow:
-                    if !blocking {
-                        followAction()
-                    } else {
-                        blockAction()
-                    }
+                    followAction()
                 case .keyboardLeftArrow:
-                    if !blocking {
-                        muteAction()
-                    }
+                    muteAction()
                 case .keyboardRightArrow:
-                    if !blocking {
-                        blockAction()
-                    }
+                    blockAction()
+                case .keyboardDownArrow:
+                    showUserTimelineViewController()
                 case .keyboardD:
-                    showUserMenuViewController()
+                    showTimeline()
                 default:
                     super.pressesEnded(presses, with: event)
                 }
@@ -217,11 +212,20 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
 
     // Pass swifter to next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "usermenu" {
-            if let userProfileViewController = segue.destination as? UserMenuViewController {
-                userProfileViewController.swifter = self.swifter
-                userProfileViewController.authenticatedScreenName = self.authenticatedScreenName
-                userProfileViewController.screenname = self.screenname
+        if #available(iOS 13.0, *) {
+            if segue.identifier == "usermenu" {
+                if let userProfileViewController = segue.destination as? UserMenuViewController {
+                    userProfileViewController.swifter = self.swifter
+                    userProfileViewController.authenticatedScreenName = self.authenticatedScreenName
+                    userProfileViewController.screenname = self.screenname
+                }
+            } else if segue.identifier == "usertimeline" {
+                if let userTimelineViewController = segue.destination as? ViewController {
+                    userTimelineViewController.swifter = self.swifter
+                    userTimelineViewController.authenticatedScreenName = self.authenticatedScreenName
+                    userTimelineViewController.screenName = self.screenname
+                    userTimelineViewController.isUserTimeline = true
+                }
             }
         }
     }
@@ -512,7 +516,15 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         }
     }
     
+    @objc func showTimeline() {
+        self.showUserTimelineViewController()
+    }
+    
     private func showUserMenuViewController() {
         self.performSegue(withIdentifier: "usermenu", sender: self)
+    }
+    
+    private func showUserTimelineViewController() {
+        self.performSegue(withIdentifier: "usertimeline", sender: self)
     }
 }
