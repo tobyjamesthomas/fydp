@@ -279,7 +279,7 @@ Position Estimation</string>
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dka-h1-UmX" customClass="TweetUIView" customModule="Eyes_Tracking" customModuleProvider="target">
-                                <rect key="frame" x="70" y="207" width="250" height="440"/>
+                                <rect key="frame" x="70" y="224" width="250" height="440"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="WLb-dh-0bp">
                                         <rect key="frame" x="0.0" y="-15" width="250" height="470.33333333333331"/>
@@ -454,7 +454,7 @@ Position Estimation</string>
                             <constraint firstItem="rlJ-wj-UR6" firstAttribute="leading" secondItem="75x-hB-b3v" secondAttribute="leading" id="Lv9-Dd-jUJ"/>
                             <constraint firstAttribute="trailing" secondItem="saK-eH-dzW" secondAttribute="trailing" id="W76-Ug-zLd"/>
                             <constraint firstItem="3po-Km-irV" firstAttribute="top" secondItem="75x-hB-b3v" secondAttribute="top" constant="44" id="XOh-fv-1if"/>
-                            <constraint firstItem="Dka-h1-UmX" firstAttribute="centerY" secondItem="9i0-fu-tQr" secondAttribute="centerY" id="YE7-ND-C0l"/>
+                            <constraint firstItem="Dka-h1-UmX" firstAttribute="centerY" secondItem="3po-Km-irV" secondAttribute="centerY" id="YE7-ND-C0l"/>
                             <constraint firstItem="Wol-sx-K7a" firstAttribute="centerY" secondItem="75x-hB-b3v" secondAttribute="centerY" id="ZYK-RP-cx2"/>
                             <constraint firstItem="Aaq-uW-sX7" firstAttribute="top" secondItem="W9c-Gg-veJ" secondAttribute="top" id="a81-FD-F9y"/>
                             <constraint firstItem="3po-Km-irV" firstAttribute="bottom" secondItem="IY1-NM-Y8Y" secondAttribute="bottom" id="afn-9K-rgV"/>
