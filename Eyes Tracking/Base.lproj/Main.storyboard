@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -26,6 +26,50 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IY1-NM-Y8Y" userLabel="Blue Buttons View">
+                                <rect key="frame" x="0.0" y="44" width="390" height="800"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="500" translatesAutoresizingMaskIntoConstraints="NO" id="crr-we-LFl">
+                                        <rect key="frame" x="45" y="70" width="300" height="660"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7iO-1h-pzw" userLabel="TopButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="300" id="00f-Sf-Sjm"/>
+                                                    <constraint firstAttribute="height" constant="80" id="aSf-ec-PLI"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="filled" image="chevron.up" catalog="system">
+                                                    <backgroundConfiguration key="background" cornerRadius="20"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30" scale="default"/>
+                                                    <color key="baseBackgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rQ7-Cf-Qdz" userLabel="BottomButton">
+                                                <rect key="frame" x="0.0" y="580" width="300" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="80" id="3Io-0W-FYG"/>
+                                                    <constraint firstAttribute="width" constant="300" id="h3w-o6-HLH"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="filled" image="chevron.down" catalog="system">
+                                                    <backgroundConfiguration key="background" cornerRadius="20"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30" scale="default"/>
+                                                    <color key="baseBackgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="rQ7-Cf-Qdz" firstAttribute="width" secondItem="7iO-1h-pzw" secondAttribute="width" id="OOk-Q2-Tqa"/>
+                                            <constraint firstItem="rQ7-Cf-Qdz" firstAttribute="height" secondItem="7iO-1h-pzw" secondAttribute="height" id="Q82-Jw-ouG"/>
+                                            <constraint firstItem="rQ7-Cf-Qdz" firstAttribute="centerX" secondItem="crr-we-LFl" secondAttribute="centerX" id="jcV-2O-MR5"/>
+                                            <constraint firstItem="7iO-1h-pzw" firstAttribute="centerX" secondItem="crr-we-LFl" secondAttribute="centerX" id="qyA-9u-fuL"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="crr-we-LFl" firstAttribute="centerX" secondItem="IY1-NM-Y8Y" secondAttribute="centerX" id="1Gd-i1-9PQ"/>
+                                    <constraint firstItem="crr-we-LFl" firstAttribute="centerY" secondItem="IY1-NM-Y8Y" secondAttribute="centerY" id="WC0-dD-Y4Z"/>
+                                </constraints>
+                            </view>
                             <visualEffectView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vT5-6S-UTW">
                                 <rect key="frame" x="0.0" y="684" width="390" height="160"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KW7-5O-3pA">
@@ -90,11 +134,11 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OHF-vT-SOc" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="200"/>
-                                        <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="Z1h-kx-eSO"/>
                                         </constraints>
-                                        <state key="normal" title="Previous Tweet">
+                                        <state key="normal">
                                             <color key="titleColor" systemColor="systemGray6Color"/>
                                         </state>
                                     </button>
@@ -102,20 +146,20 @@
                                         <rect key="frame" x="0.0" y="200" width="390" height="400"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVp-K1-7Xd" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="400"/>
-                                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="400"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="zJY-lC-PVH"/>
+                                                    <constraint firstAttribute="width" constant="70" id="zJY-lC-PVH"/>
                                                 </constraints>
                                                 <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lau-LN-wqR" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="290" y="0.0" width="100" height="400"/>
+                                                <rect key="frame" x="320" y="0.0" width="70" height="400"/>
                                                 <color key="backgroundColor" systemColor="systemPinkColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="JZe-p3-Jzz"/>
+                                                    <constraint firstAttribute="width" constant="70" id="JZe-p3-Jzz"/>
                                                 </constraints>
                                                 <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
@@ -125,8 +169,8 @@
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOp-Sk-37u" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="600" width="390" height="200"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                        <state key="normal" title="Next Tweet">
+                                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal">
                                             <color key="titleColor" systemColor="systemGray6Color"/>
                                         </state>
                                     </button>
@@ -235,7 +279,7 @@ Position Estimation</string>
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dka-h1-UmX" customClass="TweetUIView" customModule="Eyes_Tracking" customModuleProvider="target">
-                                <rect key="frame" x="70" y="207" width="250" height="440"/>
+                                <rect key="frame" x="70" y="224" width="250" height="440"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="WLb-dh-0bp">
                                         <rect key="frame" x="0.0" y="-15" width="250" height="470.33333333333331"/>
@@ -273,13 +317,13 @@ Position Estimation</string>
                                                                     <constraint firstAttribute="height" constant="30" id="2b0-6J-kct"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
-                                                                <nil key="textColor"/>
+                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="@Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nuh-zp-akw">
                                                                 <rect key="frame" x="0.0" y="40.333333333333314" width="170" height="15.333333333333336"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0qG-hI-E0z">
@@ -296,7 +340,7 @@ Position Estimation</string>
                                                 <rect key="frame" x="1" y="150" width="248.33333333333334" height="114.33333333333331"/>
                                                 <string key="text">Unlike Swift 2, Swift 3 imports Objective-C's id as Any? instead of AnyObject? (see this Swift evolution proposal). To fix your error, you need to cast all of your variables to AnyObject. This may look something like the following:</string>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Nj-pc-X1J">
@@ -323,7 +367,6 @@ Position Estimation</string>
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="WLb-dh-0bp" firstAttribute="leading" secondItem="Dka-h1-UmX" secondAttribute="leading" id="5vc-FD-Mra"/>
                                     <constraint firstAttribute="width" constant="250" id="6BW-1Z-qlO"/>
@@ -398,21 +441,25 @@ Position Estimation</string>
                             <constraint firstItem="saK-eH-dzW" firstAttribute="leading" secondItem="9i0-fu-tQr" secondAttribute="leading" id="2ZC-Fp-hnP"/>
                             <constraint firstItem="rlJ-wj-UR6" firstAttribute="top" secondItem="75x-hB-b3v" secondAttribute="top" id="7GA-Cb-Olq"/>
                             <constraint firstItem="Dka-h1-UmX" firstAttribute="centerX" secondItem="9i0-fu-tQr" secondAttribute="centerX" id="8Oa-OV-N8O"/>
+                            <constraint firstItem="IY1-NM-Y8Y" firstAttribute="centerY" secondItem="75x-hB-b3v" secondAttribute="centerY" id="9la-lm-HzX"/>
                             <constraint firstAttribute="bottom" secondItem="3po-Km-irV" secondAttribute="bottom" id="A0i-nG-krs"/>
                             <constraint firstItem="Aaq-uW-sX7" firstAttribute="leading" secondItem="9i0-fu-tQr" secondAttribute="leading" constant="24" id="CFb-fd-ubf"/>
                             <constraint firstItem="3po-Km-irV" firstAttribute="leading" secondItem="9i0-fu-tQr" secondAttribute="leading" id="FXE-B8-B7W"/>
                             <constraint firstItem="Wol-sx-K7a" firstAttribute="centerX" secondItem="75x-hB-b3v" secondAttribute="centerX" id="Huc-TB-BkR"/>
                             <constraint firstAttribute="bottom" secondItem="rlJ-wj-UR6" secondAttribute="bottom" id="IhV-73-bV9"/>
                             <constraint firstItem="3po-Km-irV" firstAttribute="trailing" secondItem="9i0-fu-tQr" secondAttribute="trailing" id="J0x-X1-xrn"/>
+                            <constraint firstItem="IY1-NM-Y8Y" firstAttribute="centerX" secondItem="75x-hB-b3v" secondAttribute="centerX" id="LCK-qa-T0i"/>
                             <constraint firstAttribute="bottom" secondItem="W9c-Gg-veJ" secondAttribute="bottom" constant="16" id="Li7-fA-cKy"/>
                             <constraint firstItem="rlJ-wj-UR6" firstAttribute="leading" secondItem="75x-hB-b3v" secondAttribute="leading" id="Lv9-Dd-jUJ"/>
                             <constraint firstAttribute="trailing" secondItem="saK-eH-dzW" secondAttribute="trailing" id="W76-Ug-zLd"/>
                             <constraint firstItem="3po-Km-irV" firstAttribute="top" secondItem="75x-hB-b3v" secondAttribute="top" constant="44" id="XOh-fv-1if"/>
-                            <constraint firstItem="Dka-h1-UmX" firstAttribute="centerY" secondItem="9i0-fu-tQr" secondAttribute="centerY" id="YE7-ND-C0l"/>
+                            <constraint firstItem="Dka-h1-UmX" firstAttribute="centerY" secondItem="3po-Km-irV" secondAttribute="centerY" id="YE7-ND-C0l"/>
                             <constraint firstItem="Wol-sx-K7a" firstAttribute="centerY" secondItem="75x-hB-b3v" secondAttribute="centerY" id="ZYK-RP-cx2"/>
                             <constraint firstItem="Aaq-uW-sX7" firstAttribute="top" secondItem="W9c-Gg-veJ" secondAttribute="top" id="a81-FD-F9y"/>
+                            <constraint firstItem="3po-Km-irV" firstAttribute="bottom" secondItem="IY1-NM-Y8Y" secondAttribute="bottom" id="afn-9K-rgV"/>
                             <constraint firstItem="vT5-6S-UTW" firstAttribute="leading" secondItem="75x-hB-b3v" secondAttribute="leading" id="bjE-73-Gct"/>
                             <constraint firstItem="rlJ-wj-UR6" firstAttribute="leading" secondItem="9i0-fu-tQr" secondAttribute="leading" id="cGP-Ck-rx3"/>
+                            <constraint firstItem="3po-Km-irV" firstAttribute="top" secondItem="IY1-NM-Y8Y" secondAttribute="top" id="fIu-yi-2a0"/>
                             <constraint firstAttribute="bottom" secondItem="vT5-6S-UTW" secondAttribute="bottom" id="fhr-Jr-BHz"/>
                             <constraint firstAttribute="bottom" secondItem="saK-eH-dzW" secondAttribute="bottom" id="jMP-GB-EOC"/>
                             <constraint firstItem="rlJ-wj-UR6" firstAttribute="trailing" secondItem="9i0-fu-tQr" secondAttribute="trailing" id="jfV-BY-tmd"/>
@@ -462,6 +509,50 @@ Position Estimation</string>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RgS-Fm-9ky" userLabel="Blue Buttons View">
+                                <rect key="frame" x="0.0" y="44" width="390" height="800"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="500" translatesAutoresizingMaskIntoConstraints="NO" id="T9P-QT-rgo">
+                                        <rect key="frame" x="45" y="70" width="300" height="660"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMe-Yt-NDF" userLabel="TopButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="80" id="IZ0-8R-oEM"/>
+                                                    <constraint firstAttribute="width" constant="300" id="kpk-7x-hXc"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="filled" image="chevron.up" catalog="system">
+                                                    <backgroundConfiguration key="background" cornerRadius="20"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30" scale="default"/>
+                                                    <color key="baseBackgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBU-Rt-8Lx" userLabel="BottomButton">
+                                                <rect key="frame" x="0.0" y="580" width="300" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="80" id="1dB-bA-lSC"/>
+                                                    <constraint firstAttribute="width" constant="300" id="k2v-u1-teT"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="filled" image="chevron.down" catalog="system">
+                                                    <backgroundConfiguration key="background" cornerRadius="20"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30" scale="default"/>
+                                                    <color key="baseBackgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="cMe-Yt-NDF" firstAttribute="centerX" secondItem="T9P-QT-rgo" secondAttribute="centerX" id="2ZR-YQ-7qM"/>
+                                            <constraint firstItem="vBU-Rt-8Lx" firstAttribute="width" secondItem="cMe-Yt-NDF" secondAttribute="width" id="4qK-2z-zVw"/>
+                                            <constraint firstItem="vBU-Rt-8Lx" firstAttribute="centerX" secondItem="T9P-QT-rgo" secondAttribute="centerX" id="Edf-xn-BwV"/>
+                                            <constraint firstItem="vBU-Rt-8Lx" firstAttribute="height" secondItem="cMe-Yt-NDF" secondAttribute="height" id="IrN-xS-o6K"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="T9P-QT-rgo" firstAttribute="centerY" secondItem="RgS-Fm-9ky" secondAttribute="centerY" id="3N1-MN-5mk"/>
+                                    <constraint firstItem="T9P-QT-rgo" firstAttribute="centerX" secondItem="RgS-Fm-9ky" secondAttribute="centerX" id="fRG-my-vqM"/>
+                                </constraints>
+                            </view>
                             <visualEffectView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GgE-8f-S04">
                                 <rect key="frame" x="0.0" y="684" width="390" height="160"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="kkq-1E-IA0">
@@ -481,7 +572,7 @@ Position Estimation</string>
                                 </constraints>
                             </arscnView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="DhM-cP-vBa" userLabel="Menu View">
-                                <rect key="frame" x="75" y="301.33333333333331" width="240" height="241.33333333333331"/>
+                                <rect key="frame" x="75" y="323.33333333333331" width="240" height="241.33333333333331"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EAL-yi-oq6" userLabel="HorizontalLine">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="1"/>
@@ -571,11 +662,11 @@ Position Estimation</string>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyR-6j-gKH" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="200"/>
-                                        <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="zMR-T2-IDP"/>
                                         </constraints>
-                                        <state key="normal" title="Up">
+                                        <state key="normal">
                                             <color key="titleColor" systemColor="systemGray6Color"/>
                                         </state>
                                     </button>
@@ -583,34 +674,50 @@ Position Estimation</string>
                                         <rect key="frame" x="0.0" y="200" width="390" height="400"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NOs-8P-bvL" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="400"/>
-                                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="400"/>
+                                                <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="mpI-Et-v1A"/>
+                                                    <constraint firstAttribute="width" constant="70" id="mpI-Et-v1A"/>
                                                 </constraints>
-                                                <state key="normal" title="Back">
+                                                <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
+                                                    <imageReference key="image" image="xmark" catalog="system" symbolScale="large" renderingMode="hierarchical">
+                                                        <hierarchicalColors>
+                                                            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color systemColor="secondaryLabelColor"/>
+                                                            <color systemColor="tertiaryLabelColor"/>
+                                                        </hierarchicalColors>
+                                                    </imageReference>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
                                                 <connections>
                                                     <segue destination="ZoY-qx-X5M" kind="unwind" identifier="unwindHomeTimeline" unwindAction="myUnwindActionHomeTimelineWithUnwindSegue:" id="JZ4-Md-2nr"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WgV-D5-HRl" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="290" y="0.0" width="100" height="400"/>
-                                                <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                                <rect key="frame" x="320" y="0.0" width="70" height="400"/>
+                                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="PuL-Ii-gbM"/>
+                                                    <constraint firstAttribute="width" constant="70" id="PuL-Ii-gbM"/>
                                                 </constraints>
-                                                <state key="normal" title="Select">
+                                                <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
+                                                    <imageReference key="image" image="arrow.right" catalog="system" symbolScale="large" renderingMode="hierarchical">
+                                                        <hierarchicalColors>
+                                                            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color systemColor="secondaryLabelColor"/>
+                                                            <color systemColor="tertiaryLabelColor"/>
+                                                        </hierarchicalColors>
+                                                    </imageReference>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8I-FP-bYH" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="600" width="390" height="200"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                        <state key="normal" title="Down">
+                                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal">
                                             <color key="titleColor" systemColor="systemGray6Color"/>
                                         </state>
                                     </button>
@@ -724,22 +831,26 @@ Position Estimation</string>
                         <constraints>
                             <constraint firstItem="4x6-fg-ki8" firstAttribute="leading" secondItem="Gsw-KU-AIW" secondAttribute="leading" id="0AD-X1-Zy7"/>
                             <constraint firstAttribute="bottom" secondItem="b0S-2y-UXS" secondAttribute="bottom" id="4Rt-0B-5HS"/>
+                            <constraint firstItem="b0S-2y-UXS" firstAttribute="top" secondItem="RgS-Fm-9ky" secondAttribute="top" id="5ff-as-bBA"/>
                             <constraint firstAttribute="bottom" secondItem="GgE-8f-S04" secondAttribute="bottom" id="6Gn-r1-DGo"/>
                             <constraint firstItem="b0S-2y-UXS" firstAttribute="trailing" secondItem="Gsw-KU-AIW" secondAttribute="trailing" id="CCR-XA-wCa"/>
                             <constraint firstItem="4x6-fg-ki8" firstAttribute="top" secondItem="Gsw-KU-AIW" secondAttribute="top" id="CDI-Uv-UVo"/>
+                            <constraint firstItem="b0S-2y-UXS" firstAttribute="bottom" secondItem="RgS-Fm-9ky" secondAttribute="bottom" id="IYI-dJ-qGk"/>
                             <constraint firstItem="GgE-8f-S04" firstAttribute="leading" secondItem="Fz7-Oi-pXT" secondAttribute="leading" id="KUU-Cd-ymG"/>
                             <constraint firstItem="LvM-WZ-L6i" firstAttribute="centerX" secondItem="Fz7-Oi-pXT" secondAttribute="centerX" id="LgF-36-7sH"/>
                             <constraint firstAttribute="bottom" secondItem="4x6-fg-ki8" secondAttribute="bottom" id="N72-70-17J"/>
+                            <constraint firstItem="RgS-Fm-9ky" firstAttribute="centerY" secondItem="Fz7-Oi-pXT" secondAttribute="centerY" id="Q3W-mq-wGA"/>
                             <constraint firstItem="b0S-2y-UXS" firstAttribute="top" secondItem="Fz7-Oi-pXT" secondAttribute="top" constant="44" id="RxY-yk-DkI"/>
                             <constraint firstItem="dTW-sx-HM4" firstAttribute="top" secondItem="juZ-xh-nY0" secondAttribute="top" id="XyY-Re-zu9"/>
                             <constraint firstItem="b0S-2y-UXS" firstAttribute="leading" secondItem="Gsw-KU-AIW" secondAttribute="leading" id="Y3q-rI-gNA"/>
                             <constraint firstAttribute="trailing" secondItem="4x6-fg-ki8" secondAttribute="trailing" id="ZHK-k5-oRv"/>
                             <constraint firstItem="dTW-sx-HM4" firstAttribute="leading" secondItem="Gsw-KU-AIW" secondAttribute="leading" constant="24" id="aXX-6j-ppa"/>
+                            <constraint firstItem="RgS-Fm-9ky" firstAttribute="centerX" secondItem="Fz7-Oi-pXT" secondAttribute="centerX" id="c2d-2B-pWg"/>
                             <constraint firstItem="LvM-WZ-L6i" firstAttribute="centerY" secondItem="Fz7-Oi-pXT" secondAttribute="centerY" id="cbY-0o-LEg"/>
                             <constraint firstItem="DhM-cP-vBa" firstAttribute="centerX" secondItem="Fz7-Oi-pXT" secondAttribute="centerX" id="dXT-Ep-TLd"/>
                             <constraint firstAttribute="bottom" secondItem="juZ-xh-nY0" secondAttribute="bottom" constant="16" id="lVQ-0x-K9W"/>
                             <constraint firstAttribute="trailing" secondItem="GgE-8f-S04" secondAttribute="trailing" id="tVT-20-eDz"/>
-                            <constraint firstItem="DhM-cP-vBa" firstAttribute="centerY" secondItem="Fz7-Oi-pXT" secondAttribute="centerY" id="yaZ-LJ-zAP"/>
+                            <constraint firstItem="DhM-cP-vBa" firstAttribute="centerY" secondItem="b0S-2y-UXS" secondAttribute="centerY" id="yaZ-LJ-zAP"/>
                             <constraint firstItem="Gsw-KU-AIW" firstAttribute="trailing" secondItem="juZ-xh-nY0" secondAttribute="trailing" constant="16" id="zgR-qE-c74"/>
                         </constraints>
                     </view>
@@ -778,13 +889,55 @@ Position Estimation</string>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <wkWebView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1M-sy-cXv">
-                                <rect key="frame" x="0.0" y="44" width="390" height="746"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tzT-cT-u9l" userLabel="Blue Buttons View">
+                                <rect key="frame" x="0.0" y="44" width="390" height="746"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="500" translatesAutoresizingMaskIntoConstraints="NO" id="6WB-A6-Mlx">
+                                        <rect key="frame" x="45" y="43" width="300" height="660"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RmJ-Cy-GjE" userLabel="TopButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="300" id="KfC-NO-VNK"/>
+                                                    <constraint firstAttribute="height" constant="80" id="U6p-Xd-RhB"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="filled" title="Follow">
+                                                    <backgroundConfiguration key="background" cornerRadius="20"/>
+                                                    <color key="baseBackgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ce-Bd-S8T" userLabel="BottomButton">
+                                                <rect key="frame" x="0.0" y="580" width="300" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="80" id="JFh-xA-oJA"/>
+                                                    <constraint firstAttribute="width" constant="300" id="zdt-iR-wbC"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="filled" title="See Tweets">
+                                                    <backgroundConfiguration key="background" cornerRadius="20"/>
+                                                    <color key="baseBackgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="0ce-Bd-S8T" firstAttribute="height" secondItem="RmJ-Cy-GjE" secondAttribute="height" id="1La-e0-4QX"/>
+                                            <constraint firstItem="RmJ-Cy-GjE" firstAttribute="centerX" secondItem="6WB-A6-Mlx" secondAttribute="centerX" id="XeQ-dD-mSn"/>
+                                            <constraint firstItem="0ce-Bd-S8T" firstAttribute="centerX" secondItem="6WB-A6-Mlx" secondAttribute="centerX" id="juR-Ti-uez"/>
+                                            <constraint firstItem="0ce-Bd-S8T" firstAttribute="width" secondItem="RmJ-Cy-GjE" secondAttribute="width" id="o5d-qz-N4s"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="6WB-A6-Mlx" firstAttribute="centerY" secondItem="tzT-cT-u9l" secondAttribute="centerY" id="1Jm-h6-0hz"/>
+                                    <constraint firstItem="6WB-A6-Mlx" firstAttribute="centerX" secondItem="tzT-cT-u9l" secondAttribute="centerX" id="l2Y-BO-XYY"/>
+                                </constraints>
+                            </view>
                             <visualEffectView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="98J-XA-RhJ">
                                 <rect key="frame" x="0.0" y="630" width="390" height="160"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="spY-Ej-8Al">
@@ -849,44 +1002,60 @@ Position Estimation</string>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6A-Jb-3jz" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="200"/>
-                                        <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="AS9-xA-Upj"/>
                                         </constraints>
-                                        <state key="normal" title="Follow">
-                                            <color key="titleColor" systemColor="systemGray6Color"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="2gD-4v-Qgj">
                                         <rect key="frame" x="0.0" y="200" width="390" height="346"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIq-Lu-C4h" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="346"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="346"/>
                                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="wfz-NJ-KMq"/>
+                                                    <constraint firstAttribute="width" constant="70" id="wfz-NJ-KMq"/>
                                                 </constraints>
-                                                <state key="normal" title="Mute">
+                                                <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
+                                                    <imageReference key="image" image="speaker.3.fill" catalog="system" symbolScale="large" renderingMode="hierarchical">
+                                                        <hierarchicalColors>
+                                                            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color systemColor="tertiaryLabelColor"/>
+                                                        </hierarchicalColors>
+                                                    </imageReference>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ct3-IW-5nB" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="290" y="0.0" width="100" height="346"/>
+                                                <rect key="frame" x="320" y="0.0" width="70" height="346"/>
                                                 <color key="backgroundColor" systemColor="systemPinkColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="JaB-8q-r7Z"/>
+                                                    <constraint firstAttribute="width" constant="70" id="JaB-8q-r7Z"/>
                                                 </constraints>
-                                                <state key="normal" title="Block">
+                                                <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
+                                                    <imageReference key="image" image="circle.slash" catalog="system" symbolScale="large" renderingMode="hierarchical">
+                                                        <hierarchicalColors>
+                                                            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color systemColor="tertiaryLabelColor"/>
+                                                        </hierarchicalColors>
+                                                    </imageReference>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2s5-Iv-oHm" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="546" width="390" height="200"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                        <state key="normal" title="See Tweets">
-                                            <color key="titleColor" systemColor="systemGray6Color"/>
+                                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                 </subviews>
@@ -1045,13 +1214,13 @@ Position Estimation</string>
                                                                                     <constraint firstAttribute="height" constant="30" id="ehw-CC-KSM"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
-                                                                                <nil key="textColor"/>
+                                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="@Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUJ-8R-Yp3">
                                                                                 <rect key="frame" x="0.0" y="45.333333333333314" width="70.333333333333329" height="15.333333333333336"/>
                                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CcF-iO-BTp">
@@ -1069,7 +1238,7 @@ Position Estimation</string>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Tweet" lineBreakMode="wordWrap" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1Y-O5-cYi">
                                                         <rect key="frame" x="0.0" y="139" width="250" height="190.33333333333337"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nFZ-V9-O1T">
@@ -1142,7 +1311,7 @@ Position Estimation</string>
                                                                     </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fzl-zQ-DNB">
                                                                         <rect key="frame" x="163.66666666666666" y="0.0" width="86.333333333333343" height="30"/>
-                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="30" id="26O-xY-nKw"/>
                                                                         </constraints>
@@ -1167,7 +1336,6 @@ Position Estimation</string>
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="BF2-m5-D4e"/>
                                     <constraint firstAttribute="height" constant="408" id="Fzc-4q-mct"/>
@@ -1193,9 +1361,11 @@ Position Estimation</string>
                         <constraints>
                             <constraint firstItem="8lr-uu-eaG" firstAttribute="centerY" secondItem="Iyr-AZ-vKa" secondAttribute="centerY" id="0y4-hu-tYe"/>
                             <constraint firstItem="pLX-gh-cU5" firstAttribute="trailing" secondItem="Mry-sU-8u5" secondAttribute="trailing" id="227-vb-DAz"/>
+                            <constraint firstItem="pLX-gh-cU5" firstAttribute="top" secondItem="tzT-cT-u9l" secondAttribute="top" id="3dq-dz-EZ5"/>
                             <constraint firstItem="Mry-sU-8u5" firstAttribute="trailing" secondItem="m84-Hs-OXP" secondAttribute="trailing" constant="16" id="4QT-Ve-hm3"/>
-                            <constraint firstItem="6ix-Gg-242" firstAttribute="centerY" secondItem="Mry-sU-8u5" secondAttribute="centerY" id="9YR-4F-Wpj"/>
+                            <constraint firstItem="6ix-Gg-242" firstAttribute="centerY" secondItem="pLX-gh-cU5" secondAttribute="centerY" id="9YR-4F-Wpj"/>
                             <constraint firstAttribute="bottom" secondItem="pLX-gh-cU5" secondAttribute="bottom" id="9ez-aX-vpB"/>
+                            <constraint firstItem="pLX-gh-cU5" firstAttribute="bottom" secondItem="tzT-cT-u9l" secondAttribute="bottom" id="AlF-Qr-FsN"/>
                             <constraint firstItem="98J-XA-RhJ" firstAttribute="leading" secondItem="Iyr-AZ-vKa" secondAttribute="leading" id="MXi-6O-CL2"/>
                             <constraint firstItem="8lr-uu-eaG" firstAttribute="centerX" secondItem="Iyr-AZ-vKa" secondAttribute="centerX" id="NvH-UD-y13"/>
                             <constraint firstItem="pLX-gh-cU5" firstAttribute="top" secondItem="Iyr-AZ-vKa" secondAttribute="top" constant="44" id="Qbe-Kh-7Aa"/>
@@ -1203,11 +1373,13 @@ Position Estimation</string>
                             <constraint firstAttribute="trailing" secondItem="K1M-sy-cXv" secondAttribute="trailing" id="TeT-qo-5bh"/>
                             <constraint firstAttribute="bottom" secondItem="K1M-sy-cXv" secondAttribute="bottom" id="Uua-LB-v0j"/>
                             <constraint firstAttribute="bottom" secondItem="98J-XA-RhJ" secondAttribute="bottom" id="c0N-PY-jNc"/>
+                            <constraint firstItem="tzT-cT-u9l" firstAttribute="centerX" secondItem="Iyr-AZ-vKa" secondAttribute="centerX" id="cDf-DA-OzX"/>
                             <constraint firstItem="pLX-gh-cU5" firstAttribute="leading" secondItem="Mry-sU-8u5" secondAttribute="leading" id="duO-sh-rbH"/>
                             <constraint firstItem="K1M-sy-cXv" firstAttribute="top" secondItem="Mry-sU-8u5" secondAttribute="top" id="hvn-KM-MOW"/>
                             <constraint firstAttribute="trailing" secondItem="98J-XA-RhJ" secondAttribute="trailing" id="jOU-wg-Aay"/>
                             <constraint firstAttribute="bottom" secondItem="m84-Hs-OXP" secondAttribute="bottom" constant="16" id="tDs-Fl-Avr"/>
                             <constraint firstItem="9B3-AS-aPn" firstAttribute="leading" secondItem="Mry-sU-8u5" secondAttribute="leading" constant="24" id="uRK-6g-cMV"/>
+                            <constraint firstItem="tzT-cT-u9l" firstAttribute="centerY" secondItem="Iyr-AZ-vKa" secondAttribute="centerY" id="veF-92-lY7"/>
                             <constraint firstItem="6ix-Gg-242" firstAttribute="centerX" secondItem="Mry-sU-8u5" secondAttribute="centerX" id="vyK-sR-vD0"/>
                             <constraint firstItem="K1M-sy-cXv" firstAttribute="leading" secondItem="Mry-sU-8u5" secondAttribute="leading" id="ydo-Ls-O25"/>
                         </constraints>
@@ -1218,6 +1390,7 @@ Position Estimation</string>
                         <outlet property="downButton" destination="2s5-Iv-oHm" id="YBf-gO-d9P"/>
                         <outlet property="eyePositionIndicatorCenterView" destination="Qa0-8c-Goo" id="JcW-Lo-lKg"/>
                         <outlet property="eyePositionIndicatorView" destination="8lr-uu-eaG" id="KYF-Yc-LeL"/>
+                        <outlet property="followButton" destination="RmJ-Cy-GjE" id="FNK-Re-sKI"/>
                         <outlet property="gazeButtonsView" destination="pLX-gh-cU5" id="qms-GN-ZCv"/>
                         <outlet property="gazeLabel" destination="QS2-3O-5b4" id="W4X-CO-v40"/>
                         <outlet property="leftButton" destination="tIq-Lu-C4h" id="d3j-BM-3d4"/>
@@ -1252,6 +1425,50 @@ Position Estimation</string>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="44t-pU-mPl" userLabel="Blue Buttons View">
+                                <rect key="frame" x="0.0" y="44" width="390" height="800"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="500" translatesAutoresizingMaskIntoConstraints="NO" id="5Hz-F3-7sC">
+                                        <rect key="frame" x="45" y="70" width="300" height="660"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="koC-Y8-fiP" userLabel="TopButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="80" id="VBu-eZ-qFl"/>
+                                                    <constraint firstAttribute="width" constant="300" id="vzP-9Q-y1O"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="filled" image="chevron.up" catalog="system">
+                                                    <backgroundConfiguration key="background" cornerRadius="20"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30" scale="default"/>
+                                                    <color key="baseBackgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRj-0d-hkH" userLabel="BottomButton">
+                                                <rect key="frame" x="0.0" y="580" width="300" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="80" id="7dc-Gl-tBc"/>
+                                                    <constraint firstAttribute="width" constant="300" id="Yup-wL-OQw"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="filled" image="chevron.down" catalog="system">
+                                                    <backgroundConfiguration key="background" cornerRadius="20"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30" scale="default"/>
+                                                    <color key="baseBackgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="koC-Y8-fiP" firstAttribute="centerX" secondItem="5Hz-F3-7sC" secondAttribute="centerX" id="Bgx-TC-oZe"/>
+                                            <constraint firstItem="eRj-0d-hkH" firstAttribute="width" secondItem="koC-Y8-fiP" secondAttribute="width" id="Y7d-nP-6ou"/>
+                                            <constraint firstItem="eRj-0d-hkH" firstAttribute="height" secondItem="koC-Y8-fiP" secondAttribute="height" id="kCa-s2-U17"/>
+                                            <constraint firstItem="eRj-0d-hkH" firstAttribute="centerX" secondItem="5Hz-F3-7sC" secondAttribute="centerX" id="kPg-Cc-2WJ"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="5Hz-F3-7sC" firstAttribute="centerY" secondItem="44t-pU-mPl" secondAttribute="centerY" id="SfD-jW-Rfh"/>
+                                    <constraint firstItem="5Hz-F3-7sC" firstAttribute="centerX" secondItem="44t-pU-mPl" secondAttribute="centerX" id="eco-6D-ane"/>
+                                </constraints>
+                            </view>
                             <visualEffectView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTS-hU-1Hd">
                                 <rect key="frame" x="0.0" y="684" width="390" height="160"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2fi-4N-mwj">
@@ -1271,7 +1488,7 @@ Position Estimation</string>
                                 </constraints>
                             </arscnView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="eJW-21-jvL" userLabel="Menu View">
-                                <rect key="frame" x="75" y="277" width="240" height="290"/>
+                                <rect key="frame" x="75" y="299" width="240" height="290"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0rj-IK-MSV" userLabel="HorizontalLine">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="1"/>
@@ -1367,11 +1584,11 @@ Position Estimation</string>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1lo-Sl-8ef" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="200"/>
-                                        <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="nVb-pD-xNI"/>
                                         </constraints>
-                                        <state key="normal" title="Up">
+                                        <state key="normal">
                                             <color key="titleColor" systemColor="systemGray6Color"/>
                                         </state>
                                     </button>
@@ -1379,34 +1596,50 @@ Position Estimation</string>
                                         <rect key="frame" x="0.0" y="200" width="390" height="400"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uum-tY-Gji" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="400"/>
-                                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="400"/>
+                                                <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="ol6-c2-0Md"/>
+                                                    <constraint firstAttribute="width" constant="70" id="ol6-c2-0Md"/>
                                                 </constraints>
-                                                <state key="normal" title="Back">
+                                                <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
+                                                    <imageReference key="image" image="xmark" catalog="system" symbolScale="large" renderingMode="hierarchical">
+                                                        <hierarchicalColors>
+                                                            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color systemColor="secondaryLabelColor"/>
+                                                            <color systemColor="tertiaryLabelColor"/>
+                                                        </hierarchicalColors>
+                                                    </imageReference>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
                                                 <connections>
                                                     <segue destination="CtC-GX-eJh" kind="unwind" identifier="unwindHomeTimeline" unwindAction="myUnwindActionHomeTimelineWithUnwindSegue:" id="S2F-it-fYr"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HGS-pP-W0M" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="290" y="0.0" width="100" height="400"/>
-                                                <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                                <rect key="frame" x="320" y="0.0" width="70" height="400"/>
+                                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="Ej5-H4-aJj"/>
+                                                    <constraint firstAttribute="width" constant="70" id="Ej5-H4-aJj"/>
                                                 </constraints>
-                                                <state key="normal" title="Select">
+                                                <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
+                                                    <imageReference key="image" image="arrow.right" catalog="system" symbolScale="large" renderingMode="hierarchical">
+                                                        <hierarchicalColors>
+                                                            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color systemColor="secondaryLabelColor"/>
+                                                            <color systemColor="tertiaryLabelColor"/>
+                                                        </hierarchicalColors>
+                                                    </imageReference>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vc8-4W-x9t" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="600" width="390" height="200"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                        <state key="normal" title="Down">
+                                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal">
                                             <color key="titleColor" systemColor="systemGray6Color"/>
                                         </state>
                                     </button>
@@ -1518,22 +1751,26 @@ Position Estimation</string>
                         <viewLayoutGuide key="safeArea" id="LMj-D8-dqa"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="44t-pU-mPl" firstAttribute="centerX" secondItem="7nL-5E-Bjy" secondAttribute="centerX" id="0nG-E8-bvv"/>
                             <constraint firstItem="a0i-8x-Vdd" firstAttribute="leading" secondItem="LMj-D8-dqa" secondAttribute="leading" id="3NP-Sg-yb1"/>
                             <constraint firstItem="w64-xG-QHX" firstAttribute="leading" secondItem="LMj-D8-dqa" secondAttribute="leading" id="4fJ-Sk-zta"/>
                             <constraint firstAttribute="bottom" secondItem="fTS-hU-1Hd" secondAttribute="bottom" id="9X2-a0-wQi"/>
                             <constraint firstAttribute="bottom" secondItem="w64-xG-QHX" secondAttribute="bottom" id="Enx-UE-1hv"/>
+                            <constraint firstItem="w64-xG-QHX" firstAttribute="bottom" secondItem="44t-pU-mPl" secondAttribute="bottom" id="Err-pm-eNo"/>
                             <constraint firstItem="a0i-8x-Vdd" firstAttribute="top" secondItem="LMj-D8-dqa" secondAttribute="top" id="HSQ-gg-rij"/>
                             <constraint firstItem="CBM-uI-se8" firstAttribute="top" secondItem="YwY-GL-Gv4" secondAttribute="top" id="Iie-IC-FC8"/>
                             <constraint firstItem="CBM-uI-se8" firstAttribute="leading" secondItem="LMj-D8-dqa" secondAttribute="leading" constant="24" id="MPz-x6-hjU"/>
+                            <constraint firstItem="w64-xG-QHX" firstAttribute="top" secondItem="44t-pU-mPl" secondAttribute="top" id="SvB-wV-qA3"/>
                             <constraint firstAttribute="bottom" secondItem="a0i-8x-Vdd" secondAttribute="bottom" id="Vvp-Lj-cEB"/>
                             <constraint firstItem="LMj-D8-dqa" firstAttribute="trailing" secondItem="YwY-GL-Gv4" secondAttribute="trailing" constant="16" id="YWo-Gp-EUW"/>
                             <constraint firstItem="eJW-21-jvL" firstAttribute="centerX" secondItem="7nL-5E-Bjy" secondAttribute="centerX" id="a7w-rN-2EU"/>
                             <constraint firstItem="fTS-hU-1Hd" firstAttribute="leading" secondItem="7nL-5E-Bjy" secondAttribute="leading" id="b98-cV-v2A"/>
+                            <constraint firstItem="44t-pU-mPl" firstAttribute="centerY" secondItem="7nL-5E-Bjy" secondAttribute="centerY" id="bAR-vC-Jvi"/>
                             <constraint firstAttribute="trailing" secondItem="a0i-8x-Vdd" secondAttribute="trailing" id="fvv-5r-fZe"/>
                             <constraint firstAttribute="bottom" secondItem="YwY-GL-Gv4" secondAttribute="bottom" constant="16" id="lRW-vW-NkZ"/>
                             <constraint firstItem="w64-xG-QHX" firstAttribute="trailing" secondItem="LMj-D8-dqa" secondAttribute="trailing" id="mnS-JP-duv"/>
                             <constraint firstAttribute="trailing" secondItem="fTS-hU-1Hd" secondAttribute="trailing" id="nog-QG-pJf"/>
-                            <constraint firstItem="eJW-21-jvL" firstAttribute="centerY" secondItem="7nL-5E-Bjy" secondAttribute="centerY" id="pIV-tA-sXU"/>
+                            <constraint firstItem="eJW-21-jvL" firstAttribute="centerY" secondItem="w64-xG-QHX" secondAttribute="centerY" id="pIV-tA-sXU"/>
                             <constraint firstItem="08M-kh-wuv" firstAttribute="centerX" secondItem="7nL-5E-Bjy" secondAttribute="centerX" id="vlt-uc-OES"/>
                             <constraint firstItem="w64-xG-QHX" firstAttribute="top" secondItem="7nL-5E-Bjy" secondAttribute="top" constant="44" id="wJL-FH-U68"/>
                             <constraint firstItem="08M-kh-wuv" firstAttribute="centerY" secondItem="7nL-5E-Bjy" secondAttribute="centerY" id="zcN-K1-nQ1"/>
@@ -1583,6 +1820,50 @@ Position Estimation</string>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IF8-KI-jn7" userLabel="Blue Buttons View">
+                                <rect key="frame" x="0.0" y="44" width="390" height="800"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="500" translatesAutoresizingMaskIntoConstraints="NO" id="i6I-gr-xNf">
+                                        <rect key="frame" x="45" y="70" width="300" height="660"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5d-aU-Dpc" userLabel="TopButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="300" id="RaI-kM-GZj"/>
+                                                    <constraint firstAttribute="height" constant="80" id="VPU-dT-rwh"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="filled" image="chevron.up" catalog="system">
+                                                    <backgroundConfiguration key="background" cornerRadius="20"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30" scale="default"/>
+                                                    <color key="baseBackgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1s-61-Vok" userLabel="BottomButton">
+                                                <rect key="frame" x="0.0" y="580" width="300" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="300" id="Fj7-SB-MHa"/>
+                                                    <constraint firstAttribute="height" constant="80" id="Gft-Y9-zhd"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="filled" image="chevron.down" catalog="system">
+                                                    <backgroundConfiguration key="background" cornerRadius="20"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30" scale="default"/>
+                                                    <color key="baseBackgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="K1s-61-Vok" firstAttribute="width" secondItem="b5d-aU-Dpc" secondAttribute="width" id="V3d-g8-K5b"/>
+                                            <constraint firstItem="K1s-61-Vok" firstAttribute="height" secondItem="b5d-aU-Dpc" secondAttribute="height" id="f7I-gQ-zhb"/>
+                                            <constraint firstItem="b5d-aU-Dpc" firstAttribute="centerX" secondItem="i6I-gr-xNf" secondAttribute="centerX" id="vSk-mh-Sxn"/>
+                                            <constraint firstItem="K1s-61-Vok" firstAttribute="centerX" secondItem="i6I-gr-xNf" secondAttribute="centerX" id="w8b-m3-zvj"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="i6I-gr-xNf" firstAttribute="centerY" secondItem="IF8-KI-jn7" secondAttribute="centerY" id="Qed-so-JYK"/>
+                                    <constraint firstItem="i6I-gr-xNf" firstAttribute="centerX" secondItem="IF8-KI-jn7" secondAttribute="centerX" id="TMg-uI-WFs"/>
+                                </constraints>
+                            </view>
                             <visualEffectView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eCC-4O-afg">
                                 <rect key="frame" x="0.0" y="684" width="390" height="160"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dV4-hV-Clx">
@@ -1602,7 +1883,7 @@ Position Estimation</string>
                                 </constraints>
                             </arscnView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="WLE-PT-UfX" userLabel="Menu View">
-                                <rect key="frame" x="75" y="207.66666666666663" width="240" height="429"/>
+                                <rect key="frame" x="75" y="229.66666666666663" width="240" height="429"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Ql-HG-bbY" userLabel="HorizontalLine">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="1"/>
@@ -1613,7 +1894,7 @@ Position Estimation</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qNm-EB-7mP">
-                                        <rect key="frame" x="0.0" y="31" width="240" height="25.666666666666671"/>
+                                        <rect key="frame" x="0.0" y="31.000000000000028" width="240" height="25.666666666666671"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1716,11 +1997,11 @@ Position Estimation</string>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRj-D9-6os" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="200"/>
-                                        <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="Zqo-Fv-mrZ"/>
                                         </constraints>
-                                        <state key="normal" title="Up">
+                                        <state key="normal">
                                             <color key="titleColor" systemColor="systemGray6Color"/>
                                         </state>
                                     </button>
@@ -1728,34 +2009,50 @@ Position Estimation</string>
                                         <rect key="frame" x="0.0" y="200" width="390" height="400"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7sJ-DC-WaF" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="400"/>
-                                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="400"/>
+                                                <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="WhV-bc-4Vy"/>
+                                                    <constraint firstAttribute="width" constant="70" id="WhV-bc-4Vy"/>
                                                 </constraints>
-                                                <state key="normal" title="Back">
+                                                <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
+                                                    <imageReference key="image" image="xmark" catalog="system" symbolScale="large" renderingMode="hierarchical">
+                                                        <hierarchicalColors>
+                                                            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color systemColor="secondaryLabelColor"/>
+                                                            <color systemColor="tertiaryLabelColor"/>
+                                                        </hierarchicalColors>
+                                                    </imageReference>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
                                                 <connections>
                                                     <segue destination="bDY-bn-FLq" kind="unwind" identifier="unwindHomeTimeline" unwindAction="myUnwindActionHomeTimelineWithUnwindSegue:" id="mz0-ir-EkZ"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="joj-di-k3P" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
-                                                <rect key="frame" x="290" y="0.0" width="100" height="400"/>
-                                                <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                                <rect key="frame" x="320" y="0.0" width="70" height="400"/>
+                                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="vrI-9r-Oh5"/>
+                                                    <constraint firstAttribute="width" constant="70" id="vrI-9r-Oh5"/>
                                                 </constraints>
-                                                <state key="normal" title="Select">
+                                                <state key="normal">
                                                     <color key="titleColor" systemColor="systemGray6Color"/>
+                                                    <imageReference key="image" image="arrow.right" catalog="system" symbolScale="large" renderingMode="hierarchical">
+                                                        <hierarchicalColors>
+                                                            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color systemColor="secondaryLabelColor"/>
+                                                            <color systemColor="tertiaryLabelColor"/>
+                                                        </hierarchicalColors>
+                                                    </imageReference>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WN1-S4-KyI" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="600" width="390" height="200"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                        <state key="normal" title="Down">
+                                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal">
                                             <color key="titleColor" systemColor="systemGray6Color"/>
                                         </state>
                                     </button>
@@ -1874,17 +2171,21 @@ Position Estimation</string>
                             <constraint firstItem="eCC-4O-afg" firstAttribute="leading" secondItem="HBU-Bf-PVy" secondAttribute="leading" id="770-fI-B9d"/>
                             <constraint firstAttribute="trailing" secondItem="eCC-4O-afg" secondAttribute="trailing" id="8ON-oi-vDY"/>
                             <constraint firstItem="hFg-a6-JxS" firstAttribute="top" secondItem="HBU-Bf-PVy" secondAttribute="top" constant="44" id="BEF-0l-cHX"/>
+                            <constraint firstItem="IF8-KI-jn7" firstAttribute="centerY" secondItem="HBU-Bf-PVy" secondAttribute="centerY" id="FDm-fX-AqX"/>
                             <constraint firstItem="NLl-0E-WOg" firstAttribute="top" secondItem="Vqv-sN-SWC" secondAttribute="top" id="NM5-4r-rwr"/>
                             <constraint firstAttribute="bottom" secondItem="Vqv-sN-SWC" secondAttribute="bottom" constant="16" id="NoA-TD-z56"/>
                             <constraint firstItem="hFg-a6-JxS" firstAttribute="trailing" secondItem="cPn-bg-2Xi" secondAttribute="trailing" id="ORt-A1-b1o"/>
                             <constraint firstAttribute="bottom" secondItem="eCC-4O-afg" secondAttribute="bottom" id="Svh-66-bMt"/>
-                            <constraint firstItem="WLE-PT-UfX" firstAttribute="centerY" secondItem="HBU-Bf-PVy" secondAttribute="centerY" id="USj-XU-ffw"/>
+                            <constraint firstItem="WLE-PT-UfX" firstAttribute="centerY" secondItem="hFg-a6-JxS" secondAttribute="centerY" id="USj-XU-ffw"/>
                             <constraint firstItem="liu-dQ-MGO" firstAttribute="top" secondItem="cPn-bg-2Xi" secondAttribute="top" id="Zox-1i-24N"/>
+                            <constraint firstItem="hFg-a6-JxS" firstAttribute="bottom" secondItem="IF8-KI-jn7" secondAttribute="bottom" id="drf-KV-PaM"/>
                             <constraint firstItem="zkd-9p-N0f" firstAttribute="centerY" secondItem="HBU-Bf-PVy" secondAttribute="centerY" id="gEe-qj-QmX"/>
                             <constraint firstItem="NLl-0E-WOg" firstAttribute="leading" secondItem="cPn-bg-2Xi" secondAttribute="leading" constant="24" id="phI-05-ewG"/>
                             <constraint firstAttribute="bottom" secondItem="liu-dQ-MGO" secondAttribute="bottom" id="pn0-ZE-I5b"/>
                             <constraint firstItem="liu-dQ-MGO" firstAttribute="leading" secondItem="cPn-bg-2Xi" secondAttribute="leading" id="r3h-qn-7a0"/>
+                            <constraint firstItem="IF8-KI-jn7" firstAttribute="centerX" secondItem="HBU-Bf-PVy" secondAttribute="centerX" id="s6o-uc-JIe"/>
                             <constraint firstItem="hFg-a6-JxS" firstAttribute="leading" secondItem="cPn-bg-2Xi" secondAttribute="leading" id="suu-eE-k4t"/>
+                            <constraint firstItem="hFg-a6-JxS" firstAttribute="top" secondItem="IF8-KI-jn7" secondAttribute="top" id="wmm-r3-TQn"/>
                             <constraint firstItem="WLE-PT-UfX" firstAttribute="centerX" secondItem="HBU-Bf-PVy" secondAttribute="centerX" id="xuG-th-N5g"/>
                         </constraints>
                     </view>
@@ -1921,28 +2222,32 @@ Position Estimation</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="h4N-9q-wrL"/>
         <segue reference="Phv-aM-mtg"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Image" width="266.66665649414062" height="400"/>
+        <image name="arrow.right" catalog="system" width="128" height="98"/>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="chevron.up" catalog="system" width="128" height="72"/>
+        <image name="circle.slash" catalog="system" width="128" height="121"/>
         <image name="circles.hexagonpath.fill" catalog="system" width="128" height="112"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
         <image name="retweet_black" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="speaker.3.fill" catalog="system" width="128" height="86"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1952,6 +2257,9 @@ Position Estimation</string>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

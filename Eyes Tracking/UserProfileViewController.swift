@@ -32,6 +32,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     @IBOutlet weak var upButton: GazeUIButton!
     @IBOutlet weak var downButton: GazeUIButton!
     @IBOutlet weak var userProfileUIView: ProfileUIView!
+    @IBOutlet weak var followButton: UIButton!
 
     var faceNode: SCNNode = SCNNode()
 
@@ -365,7 +366,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             self.userProfileUIView.update(json)
             self.following = json["following"].bool!
             if self.following {
-                self.upButton.setTitle("Unfollow", for: .normal)
+                self.followButton.setTitle("Unfollow", for: .normal)
             }
         } failure: { error in
             print(error.localizedDescription)
@@ -377,7 +378,12 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             let jsonResult = json.array!
             self.muting = jsonResult.contains(where: {$0["screen_name"].string! == self.screenname})
             if self.muting {
-                self.leftButton.setTitle("Unmute", for: .normal)
+                if #available(iOS 13.0, *) {
+                    let config = self.leftButton.currentImage!.symbolConfiguration!
+                    self.leftButton.setImage(UIImage(systemName: "speaker.slash.fill")?.applyingSymbolConfiguration(config), for: .normal)
+                } else {
+                    // Fallback on earlier versions
+                }
             }
         } failure: { error in
             print(error.localizedDescription)
@@ -389,7 +395,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             let jsonResult = json.array!
             self.blocking = jsonResult.contains(where: {$0["screen_name"].string! == self.screenname})
             if self.blocking {
-                self.upButton.setTitle("Unblock", for: .normal)
+                self.followButton.setTitle("Unblock", for: .normal)
             }
         } failure: { error in
             print(error.localizedDescription)
@@ -411,7 +417,12 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         swifter.muteUser(UserTag.screenName(screenname)) { _ in
             print("muted user!")
             self.muting = true
-            self.leftButton.setTitle("Unmute", for: .normal)
+            if #available(iOS 13.0, *) {
+                let config = self.leftButton.currentImage!.symbolConfiguration!
+                self.leftButton.setImage(UIImage(systemName: "speaker.slash.fill")?.applyingSymbolConfiguration(config), for: .normal)
+            } else {
+                // Fallback on earlier versions
+            }
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -422,7 +433,12 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         swifter.unmuteUser(for: UserTag.screenName(screenname)) { _ in
             print("unmuted user!")
             self.muting = false
-            self.leftButton.setTitle("Mute", for: .normal)
+            if #available(iOS 13.0, *) {
+                let config = self.leftButton.currentImage!.symbolConfiguration!
+                self.leftButton.setImage(UIImage(systemName: "speaker.3.fill")?.applyingSymbolConfiguration(config), for: .normal)
+            } else {
+                // Fallback on earlier versions
+            }
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -440,7 +456,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             print("blocked user!")
             self.blocking = true
             self.following = false
-            self.upButton.setTitle("Unblock", for: .normal)
+            self.followButton.setTitle("Unblock", for: .normal)
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -451,7 +467,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         swifter.unblockUser(for: UserTag.screenName(screenname)) { _ in
             print("unblock user!")
             self.blocking = false
-            self.upButton.setTitle("Follow", for: .normal)
+            self.followButton.setTitle("Follow", for: .normal)
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -474,7 +490,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         swifter.followUser(UserTag.screenName(screenname)) { _ in
             print("followed user!")
             self.following = true
-            self.upButton.setTitle("Unfollow", for: .normal)
+            self.followButton.setTitle("Unfollow", for: .normal)
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -485,7 +501,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         swifter.unfollowUser(UserTag.screenName(screenname)) { _ in
             print("unfollowed user!")
             self.following = false
-            self.upButton.setTitle("Follow", for: .normal)
+            self.followButton.setTitle("Follow", for: .normal)
         } failure: { error in
             print(error.localizedDescription)
         }
