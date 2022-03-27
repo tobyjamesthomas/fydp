@@ -96,9 +96,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var isBlinking: Bool = false
     var lastBlinkDate: Date = Date()
     var tweetNum: Int = 0
+    var globalTweetNum: Int = 0
     var authenticatedScreenName = ""
     var screenName = ""
     var isUserTimeline = false
+    var tweets: [JSON] = []
+    var maxTweetId: Int = Int.max
+    var sinceTweetId: Int = 0
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -151,7 +155,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     func setupTwitter() {
         // Get the first tweet from the authenticated user's timeline
         if self.isUserTimeline {
-            fetchTimeline()
+            fetchTimelineTweet()
         } else {
             authorizeWithWebLogin()
         }
@@ -391,7 +395,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
         if #available(iOS 13.0, *) {
             swifter.authorize(withProvider: self, callbackURL: callbackUrl) { token, response in
-                self.fetchTimeline()
+                self.fetchTimelineTweet()
                 
                 // Save username of authenticated user
                 self.authenticatedScreenName = token!.screenName!
@@ -408,83 +412,164 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @available(iOS 13.0, *)
     @objc func incrementTweet() {
         self.tweetNum+=1
-        fetchTimeline()
+        self.globalTweetNum+=1
+        fetchNextTimelineTweet()
     }
 
     @available(iOS 13.0, *)
     @objc func decrementTweet() {
         self.tweetNum-=1
-        if self.tweetNum < 0 && self.isUserTimeline {
+        self.globalTweetNum-=1
+        if self.globalTweetNum < 0 && self.isUserTimeline {
             self.showUserProfileViewController()
-        } else if self.tweetNum < 0 {
+        } else if self.globalTweetNum < 0 {
+            self.globalTweetNum = 0
             self.tweetNum = 0
         } else {
-            fetchTimeline()
+            fetchPrevTimelineTweet()
         }
     }
     
-    func fetchTimeline() {
+    func fetchTimelineTweet() {
         if self.isUserTimeline {
-            fetchUserTimeline()
+            fetchUserTimelineTweets()
         } else {
-            fetchHomeTimeline()
+            fetchHomeTimelineTweets()
         }
     }
-
-    func fetchHomeTimeline() {
+    
+    func fetchNextTimelineTweet() {
+        if self.isUserTimeline {
+            fetchNextUserTimelineTweets()
+        } else {
+            fetchNextHomeTimelineTweets()
+        }
+    }
+    
+    func fetchPrevTimelineTweet() {
+        if self.isUserTimeline {
+            fetchPrevUserTimelineTweets()
+        } else {
+            fetchPrevHomeTimelineTweets()
+        }
+    }
+    
+    func fetchHomeTimelineTweets() {
         // Load tweets from oauth authenticated user (currently @RenEddie)
-        let tweetId = tweetUIView.tid == "" ? nil : tweetUIView.tid
-        swifter.getHomeTimeline(count: tweetNum+1, tweetMode: .extended) { json in
+        swifter.getHomeTimeline(tweetMode: .extended) { json in
             // Successfully fetched timeline, we save the tweet id and create the tweet view
 
-            let jsonResult = json.array ?? []
-            let hearted = jsonResult[self.tweetNum]["favorited"] == true
-            let retweeted = jsonResult[self.tweetNum]["retweeted"] == true
-            print("Updating home timeline", jsonResult[self.tweetNum]["favorited"], jsonResult[self.tweetNum]["retweeted"])
-
-            self.tweetUIView.update(jsonResult[self.tweetNum])
-
-            if hearted {
-                self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
-            } else if !hearted {
-                self.heartView.setImage(UIImage(systemName: "heart"), animated: true)
-            }
-            if retweeted {
-                self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
-            } else if !retweeted {
-                self.retweetView.setImage(UIImage(named: "retweet_black"), animated: true)
-            }
+            self.tweets = json.array ?? []
+            self.loadTweetDetails()
 
         } failure: { error in
             print(error.localizedDescription)
         }
     }
     
-    func fetchUserTimeline() {
-        let tweetId = tweetUIView.tid == "" ? nil : tweetUIView.tid
-        swifter.getTimeline(for: UserTag.screenName(self.screenName), count: tweetNum+1, tweetMode: .extended) { json in
+    func fetchUserTimelineTweets() {
+        swifter.getTimeline(for: UserTag.screenName(self.screenName), tweetMode: .extended) { json in
             // Successfully fetched timeline, we save the tweet id and create the tweet view
 
-            let jsonResult = json.array ?? []
-            let hearted = jsonResult[self.tweetNum]["favorited"] == true
-            let retweeted = jsonResult[self.tweetNum]["retweeted"] == true
-            print("Updating user timeline", jsonResult[self.tweetNum]["favorited"], jsonResult[self.tweetNum]["retweeted"])
-
-            self.tweetUIView.update(jsonResult[self.tweetNum])
-
-            if hearted {
-                self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
-            } else if !hearted {
-                self.heartView.setImage(UIImage(systemName: "heart"), animated: true)
-            }
-            if retweeted {
-                self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
-            } else if !retweeted {
-                self.retweetView.setImage(UIImage(named: "retweet_black"), animated: true)
-            }
+            self.tweets = json.array ?? []
+            self.loadTweetDetails()
 
         } failure: { error in
             print(error.localizedDescription)
+        }
+    }
+
+    func fetchNextHomeTimelineTweets() {
+        // Load tweets from oauth authenticated user (currently @RenEddie)
+        if self.tweetNum < self.tweets.count {
+            loadTweetDetails()
+        } else {
+            swifter.getHomeTimeline(maxID: String(self.maxTweetId - 1), tweetMode: .extended) { json in
+                // Successfully fetched timeline, we save the tweet id and create the tweet view
+
+                self.tweets = json.array ?? []
+                self.tweetNum = 0
+                self.sinceTweetId = 0
+                self.loadTweetDetails()
+
+            } failure: { error in
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func fetchNextUserTimelineTweets() {
+        if self.tweetNum < self.tweets.count {
+            loadTweetDetails()
+        } else {
+            swifter.getTimeline(for: UserTag.screenName(self.screenName), maxID: String(self.maxTweetId - 1), tweetMode: .extended) { json in
+                // Successfully fetched timeline, we save the tweet id and create the tweet view
+
+                self.tweets = json.array ?? []
+                self.tweetNum = 0
+                self.sinceTweetId = 0
+                self.loadTweetDetails()
+
+            } failure: { error in
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func fetchPrevHomeTimelineTweets() {
+        // Load tweets from oauth authenticated user (currently @RenEddie)
+        if self.tweetNum >= 0 {
+            loadTweetDetails()
+        } else {
+            swifter.getHomeTimeline(sinceID: String(self.sinceTweetId), tweetMode: .extended) { json in
+                // Successfully fetched timeline, we save the tweet id and create the tweet view
+
+                self.tweets = json.array ?? []
+                self.tweetNum = self.tweets.count - 1
+                self.loadTweetDetails()
+                
+            } failure: { error in
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func fetchPrevUserTimelineTweets() {
+        if self.tweetNum >= 0 {
+            loadTweetDetails()
+        } else {
+            swifter.getTimeline(for: UserTag.screenName(self.screenName), sinceID: String(self.sinceTweetId), tweetMode: .extended) { json in
+                // Successfully fetched timeline, we save the tweet id and create the tweet view
+
+                self.tweets = json.array ?? []
+                self.tweetNum = self.tweets.count - 1
+                self.loadTweetDetails()
+
+            } failure: { error in
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func loadTweetDetails() {
+        let hearted = self.tweets[self.tweetNum]["favorited"] == true
+        let retweeted = self.tweets[self.tweetNum]["retweeted"] == true
+        print("Updating user timeline", self.tweets[self.tweetNum]["favorited"], self.tweets[self.tweetNum]["retweeted"])
+
+        self.tweetUIView.update(self.tweets[self.tweetNum])
+        
+        self.maxTweetId = min(self.maxTweetId, Int(tweetUIView.tid)!)
+        self.sinceTweetId = max(self.sinceTweetId, Int(tweetUIView.tid)!)
+
+        if hearted {
+            self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
+        } else if !hearted {
+            self.heartView.setImage(UIImage(systemName: "heart"), animated: true)
+        }
+        if retweeted {
+            self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
+        } else if !retweeted {
+            self.retweetView.setImage(UIImage(named: "retweet_black"), animated: true)
         }
     }
 
