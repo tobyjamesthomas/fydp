@@ -102,6 +102,8 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
     var tweets: [JSON] = []
     var maxTweetId: Int = Int.max
     var sinceTweetId: Int = 0
+    var overridenLikes: [String: Bool] = [:]
+    var overridenRetweets: [String: Bool] = [:]
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -444,11 +446,10 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
     }
     
     func loadTweetDetails() {
-        let hearted = self.tweets[self.tweetNum]["favorited"] == true
-        let retweeted = self.tweets[self.tweetNum]["retweeted"] == true
-        print("Updating user timeline", self.tweets[self.tweetNum]["favorited"], self.tweets[self.tweetNum]["retweeted"])
-
         self.tweetUIView.update(self.tweets[self.tweetNum])
+
+        let hearted = self.overridenLikes[tweetUIView.tid] ?? (self.tweets[tweetNum]["favorited"] == true)
+        let retweeted = self.overridenRetweets[tweetUIView.tid] ?? (self.tweets[tweetNum]["retweeted"] == true)
         
         self.maxTweetId = min(self.maxTweetId, Int(tweetUIView.tid)!)
         self.sinceTweetId = max(self.sinceTweetId, Int(tweetUIView.tid)!)
@@ -468,22 +469,13 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
     @available(iOS 13.0, *)
     @objc func likeAction() {
         // Likes or unlikes the tweet that is currently visible on the screen
-        swifter.getTweet(for: self.tweetUIView.tid) { json in
-            let jsonResult = json.object!
-            let isLiked = jsonResult["favorited"] == true
+        let isLiked = self.overridenLikes[tweetUIView.tid] ?? (self.tweets[tweetNum]["favorited"] == true)
 
-            // if the user has already liked the tweet then we unlike it, otherwise we like it
-            if isLiked {
-                self.unfavoriteTweet()
-                self.heartView.setImage(UIImage(systemName: "heart"), animated: true)
-
-            } else {
-                self.favoriteTweet()
-                self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
-            }
-
-        } failure: { error in
-            print(error.localizedDescription)
+        // if the user has already liked the tweet then we unlike it, otherwise we like it
+        if isLiked {
+            self.unfavoriteTweet()
+        } else {
+            self.favoriteTweet()
         }
     }
 
@@ -492,6 +484,8 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
         swifter.unfavoriteTweet(forID: self.tweetUIView.tid) { _ in
             print("unfavorited tweet!")
             self.tweetUIView.updateLike(delta: -1)
+            self.heartView.setImage(UIImage(systemName: "heart"), animated: true)
+            self.overridenLikes[self.tweetUIView.tid] = false
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -502,6 +496,8 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
         swifter.favoriteTweet(forID: self.tweetUIView.tid) { _ in
             print("favorited tweet!")
             self.tweetUIView.updateLike(delta: 1)
+            self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
+            self.overridenLikes[self.tweetUIView.tid] = true
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -509,22 +505,13 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
 
     @objc func retweetAction() {
         // Retweets the tweet that is currently visible on the screen
-        swifter.getTweet(for: self.tweetUIView.tid) { json in
-            let jsonResult = json.object!
-            let isRetweeted = jsonResult["retweeted"] == true
+        let isRetweeted = self.overridenRetweets[tweetUIView.tid] ?? (self.tweets[tweetNum]["retweeted"] == true)
 
-            // if the user has already retweeted the tweet then we unretweet it, otherwise we retweet it
-            if isRetweeted {
-                self.unretweetTweet()
-                self.retweetView.setImage(UIImage(named: "retweet_black"), animated: true)
-            } else {
-                self.retweetTweet()
-                self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
-
-            }
-
-        } failure: { error in
-            print(error.localizedDescription)
+        // if the user has already retweeted the tweet then we unretweet it, otherwise we retweet it
+        if isRetweeted {
+            self.unretweetTweet()
+        } else {
+            self.retweetTweet()
         }
     }
 
@@ -533,6 +520,8 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
         swifter.unretweetTweet(forID: self.tweetUIView.tid) { _ in
             print("unretweeted tweet!")
             self.tweetUIView.updateRetweet(delta: -1)
+            self.retweetView.setImage(UIImage(named: "retweet_black"), animated: true)
+            self.overridenRetweets[self.tweetUIView.tid] = false
         } failure: { error in
             print(error.localizedDescription)
         }
@@ -543,6 +532,8 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
         swifter.retweetTweet(forID: self.tweetUIView.tid) { _ in
             print("retweeted tweet!")
             self.tweetUIView.updateRetweet(delta: 1)
+            self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
+            self.overridenRetweets[self.tweetUIView.tid] = true
         } failure: { error in
             print(error.localizedDescription)
         }
