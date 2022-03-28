@@ -20,6 +20,7 @@ class TweetUIView: UIView {
     @IBOutlet weak var tweetLabel: UILabel!
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var favouriteCountLabel: UILabel!
+    @IBOutlet weak var tweetDateLabel: UILabel!
 
     public var tid: String = ""
     public var screenname: String = ""
@@ -41,12 +42,14 @@ class TweetUIView: UIView {
         let name = json["user"]["name"].string!
         let tweetText = json["full_text"].string!
         let profileImageURL = getBigProfileImageUrl(from: json["user"]["profile_image_url_https"].string!)
+        let date = json["created_at"].string!.components(separatedBy: " ")
 
         self.nameLabel.text = name
         self.screenNameLabel.text = "@" + self.screenname
         self.tweetLabel.text = tweetText
         self.retweetCountLabel.text = String(self.retweetCount)
         self.favouriteCountLabel.text = String(self.favouriteCount)
+        self.tweetDateLabel.text = [date[0], date[1], date[2], date[5]].joined(separator: " ")
 
         setProfileImage(from: profileImageURL)
         parseTweetImageFromJson(from: json)
