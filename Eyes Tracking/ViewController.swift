@@ -487,10 +487,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             swifter.getHomeTimeline(maxID: String(self.maxTweetId - 1), tweetMode: .extended) { json in
                 // Successfully fetched timeline, we save the tweet id and create the tweet view
 
-                self.tweets = json.array ?? []
-                self.tweetNum = 0
-                self.sinceTweetId = 0
-                self.loadTweetDetails()
+                let jsonArray = json.array ?? []
+                
+                if jsonArray.count == 0 {
+                    self.tweetNum -= 1
+                    self.globalTweetNum -= 1
+                } else {
+                    self.tweets = jsonArray
+                    self.tweetNum = 0
+                    self.sinceTweetId = 0
+                    self.loadTweetDetails()
+                }
 
             } failure: { error in
                 print(error.localizedDescription)
@@ -505,11 +512,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             swifter.getTimeline(for: UserTag.screenName(self.screenName), maxID: String(self.maxTweetId - 1), tweetMode: .extended) { json in
                 // Successfully fetched timeline, we save the tweet id and create the tweet view
 
-                self.tweets = json.array ?? []
-                self.tweetNum = 0
-                self.sinceTweetId = 0
-                self.loadTweetDetails()
-
+                let jsonArray = json.array ?? []
+                
+                if jsonArray.count == 0 {
+                    self.tweetNum -= 1
+                    self.globalTweetNum -= 1
+                } else {
+                    self.tweets = jsonArray
+                    self.tweetNum = 0
+                    self.sinceTweetId = 0
+                    self.loadTweetDetails()
+                }
+                
             } failure: { error in
                 print(error.localizedDescription)
             }
