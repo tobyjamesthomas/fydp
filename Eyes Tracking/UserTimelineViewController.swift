@@ -1,9 +1,9 @@
 //
-//  UserProfileViewController.swift
+//  ViewController.swift
 //  Eyes Tracking
 //
-//  Created by Toby James Thomas on 2021-08-10.
-//  Copyright © 2021 virakri. All rights reserved.
+//  Created by Virakri Jinangkul on 6/6/18.
+//  Copyright © 2018 virakri. All rights reserved.
 //
 
 import UIKit
@@ -15,7 +15,8 @@ import Swifter
 import AuthenticationServices
 
 // swiftlint:disable type_body_length file_length
-class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
+@available(iOS 13.0, *)
+class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet var sceneView: ARSCNView!
@@ -31,8 +32,9 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     @IBOutlet weak var rightButton: GazeUIButton!
     @IBOutlet weak var upButton: GazeUIButton!
     @IBOutlet weak var downButton: GazeUIButton!
-    @IBOutlet weak var userProfileUIView: ProfileUIView!
-    @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var retweetView: UIImageView!
+    @IBOutlet weak var heartView: UIImageView!
+    @IBOutlet weak var tweetUIView: TweetUIView!
 
     var faceNode: SCNNode = SCNNode()
 
@@ -86,19 +88,20 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
 
     var eyeLookAtPositionYs: [CGFloat] = []
 
-    var swifter = Swifter(consumerKey: "", consumerSecret: "")
+    var swifter = Swifter(consumerKey: "QwA8u4qhODLCWKdd5eHR1yQYm",
+                          consumerSecret: "4MMG8Vi5pC7Sa22SHj1je6gLuprwdRFwW9uckLBptgqj8eSvTx")
 
     var gazeButtons: [GazeUIButton] = []
 
     var isBlinking: Bool = false
     var lastBlinkDate: Date = Date()
-
-    var screenname = ""
+    var tweetNum: Int = 0
+    var globalTweetNum: Int = 0
     var authenticatedScreenName = ""
-
-    var following = false
-    var muting = false
-    var blocking = false
+    var screenName = ""
+    var tweets: [JSON] = []
+    var maxTweetId: Int = Int.max
+    var sinceTweetId: Int = 0
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -137,30 +140,33 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
 
         // Format TweetView to display single tweet
         self.setupTwitter()
-        self.beautifyUserProfile()
+        self.beautifyTimeline()
     }
 
-    func beautifyUserProfile() {
+    func beautifyTimeline() {
         // Modify the UI elements programatically at runtime to improve the aesthetic
-        self.userProfileUIView.profileImage.layer.cornerRadius = self.userProfileUIView.profileImage.frame.width/2.0
-        self.userProfileUIView.profileImage.layer.borderWidth = 2
-        self.userProfileUIView.profileImage.layer.borderColor = UIColor.white.cgColor
-        self.userProfileUIView.profileBannerImage.layer.cornerRadius = 3
+        self.tweetUIView.profileImage.layer.cornerRadius = self.tweetUIView.profileImage.frame.width/2.0
+        self.tweetUIView.profileImage.clipsToBounds = true
+        self.tweetUIView.tweetImage.layer.cornerRadius = 10
+
     }
 
     func setupTwitter() {
         // Get the first tweet from the authenticated user's timeline
-        self.fetchUserProfile()
-        self.isMuting()
-        self.isBlocking()
+        fetchTimelineTweets()
+        
         view.bringSubviewToFront(eyePositionIndicatorView)
 
         // Add actions to buttons
-        rightButton.addTarget(self, action: #selector(blockAction), for: .primaryActionTriggered)
-        leftButton.addTarget(self, action: #selector(muteAction), for: .primaryActionTriggered)
-        upButton.addTarget(self, action: #selector(followAction), for: .primaryActionTriggered)
-        downButton.addTarget(self, action: #selector(showTimeline), for: .primaryActionTriggered)
-      
+        leftButton.addTarget(self, action: #selector(retweetAction), for: .primaryActionTriggered)
+        if #available(iOS 13.0, *) {
+            rightButton.addTarget(self, action: #selector(likeAction), for: .primaryActionTriggered)
+            upButton.addTarget(self, action: #selector(decrementTweet), for: .primaryActionTriggered)
+            downButton.addTarget(self, action: #selector(incrementTweet), for: .primaryActionTriggered)
+        } else {
+            // Fallback on earlier versions
+        }
+
         // Group buttons
         gazeButtons.append(upButton)
         gazeButtons.append(leftButton)
@@ -170,30 +176,21 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         for gazeButton in gazeButtons {
             gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.0)
         }
-    }
-    
-    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        guard let key = presses.first?.key else { return }
+        var tapLike = UITapGestureRecognizer()
+
         if #available(iOS 13.0, *) {
-            if self.isViewLoaded && (self.view.window != nil) {
-                switch key.keyCode {
-                case .keyboardUpArrow:
-                    followAction()
-                case .keyboardLeftArrow:
-                    muteAction()
-                case .keyboardRightArrow:
-                    blockAction()
-                case .keyboardDownArrow:
-                    showUserTimelineViewController()
-                case .keyboardD:
-                    showTimeline()
-                default:
-                    super.pressesEnded(presses, with: event)
-                }
-            }
+            tapLike = UITapGestureRecognizer(target: self, action: #selector(likeAction))
+        } else {
+            // Fallback on earlier versions
         }
+        heartView.addGestureRecognizer(tapLike)
+        heartView.isUserInteractionEnabled = true
+
+        let tapRetweet = UITapGestureRecognizer(target: self, action: #selector(retweetAction))
+        retweetView.addGestureRecognizer(tapRetweet)
+        retweetView.isUserInteractionEnabled = true
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -213,25 +210,46 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         sceneView.session.pause()
     }
 
-    // Pass swifter to next view
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard let key = presses.first?.key else { return }
+
         if #available(iOS 13.0, *) {
-            if segue.identifier == "usermenu" {
-                if let userProfileViewController = segue.destination as? UserMenuViewController {
-                    userProfileViewController.swifter = self.swifter
-                    userProfileViewController.authenticatedScreenName = self.authenticatedScreenName
-                    userProfileViewController.screenname = self.screenname
-                }
-            } else if segue.identifier == "usertimeline" {
-                if let userTimelineViewController = segue.destination as? UserTimelineViewController {
-                    userTimelineViewController.swifter = self.swifter
-                    userTimelineViewController.authenticatedScreenName = self.authenticatedScreenName
-                    userTimelineViewController.screenName = self.screenname
+            if self.isViewLoaded && (self.view.window != nil) {
+                switch key.keyCode {
+                case .keyboardDownArrow:
+                    incrementTweet()
+                case .keyboardUpArrow:
+                    decrementTweet()
+                case .keyboardRightArrow:
+                    likeAction()
+                case .keyboardLeftArrow:
+                    retweetAction()
+                case .keyboardB:
+                    // Simulate double (B)link
+                    print("Double blink detected!")
+                    DispatchQueue.main.async {
+                        self.showMenuViewController()
+                    }
+                    lastBlinkDate = Date()
+
+                default:
+                    super.pressesEnded(presses, with: event)
                 }
             }
         }
     }
     
+    // Pass swfiter to next view
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "timelinemenu" {
+            if let menuViewController = segue.destination as? MenuViewController {
+                menuViewController.swifter = self.swifter
+                menuViewController.screenname = self.tweetUIView.screenname
+                menuViewController.authenticatedScreenName = self.authenticatedScreenName
+            }
+        }
+    }
+
     // MARK: - ARSCNViewDelegate
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -359,153 +377,177 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         update(withFaceAnchor: faceAnchor)
     }
 
-    func fetchUserProfile() {
-        // Load tweets from oauth authenticated user (currently @RenEddie)
-        swifter.showUser(UserTag.screenName(screenname)) { json in
-            self.userProfileUIView.update(json)
-            self.following = json["following"].bool!
-            if self.following {
-                self.followButton.setTitle("Unfollow", for: .normal)
-            }
-        } failure: { error in
-            print(error.localizedDescription)
-        }
+
+    @available(iOS 13.0, *)
+    @objc func incrementTweet() {
+        self.tweetNum+=1
+        self.globalTweetNum+=1
+        fetchNextTimelineTweet()
     }
 
-    func isMuting() {
-        swifter.getMutedUsers() { json, _, _ in
-            let jsonResult = json.array!
-            self.muting = jsonResult.contains(where: {$0["screen_name"].string! == self.screenname})
-            if self.muting {
-                if #available(iOS 13.0, *) {
-                    let config = self.leftButton.currentImage!.symbolConfiguration!
-                    self.leftButton.setImage(UIImage(systemName: "speaker.slash.fill")?.applyingSymbolConfiguration(config), for: .normal)
-                } else {
-                    // Fallback on earlier versions
-                }
-            }
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    func isBlocking() {
-        swifter.getBlockedUsers() { json, _, _ in
-            let jsonResult = json.array!
-            self.blocking = jsonResult.contains(where: {$0["screen_name"].string! == self.screenname})
-            if self.blocking {
-                self.followButton.setTitle("Unblock", for: .normal)
-            }
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    @objc func muteAction() {
-        if !blocking {
-            if muting {
-                self.unmuteAccount()
-            } else {
-                self.muteAccount()
-            }
-        }
-    }
-
-    private func muteAccount() {
-        // Follow user from user tag
-        swifter.muteUser(UserTag.screenName(screenname)) { _ in
-            print("muted user!")
-            self.muting = true
-            if #available(iOS 13.0, *) {
-                let config = self.leftButton.currentImage!.symbolConfiguration!
-                self.leftButton.setImage(UIImage(systemName: "speaker.slash.fill")?.applyingSymbolConfiguration(config), for: .normal)
-            } else {
-                // Fallback on earlier versions
-            }
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    private func unmuteAccount() {
-        // unfollow user from user tag
-        swifter.unmuteUser(for: UserTag.screenName(screenname)) { _ in
-            print("unmuted user!")
-            self.muting = false
-            if #available(iOS 13.0, *) {
-                let config = self.leftButton.currentImage!.symbolConfiguration!
-                self.leftButton.setImage(UIImage(systemName: "speaker.3.fill")?.applyingSymbolConfiguration(config), for: .normal)
-            } else {
-                // Fallback on earlier versions
-            }
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    @objc func blockAction() {
-        if !blocking {
-            self.blockAccount()
-        }
-    }
-
-    private func blockAccount() {
-        // Follow user from user tag
-        swifter.blockUser(UserTag.screenName(screenname)) { _ in
-            print("blocked user!")
-            self.blocking = true
-            self.following = false
-            self.followButton.setTitle("Unblock", for: .normal)
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    private func unblockAccount() {
-        // unfollow user from user tag
-        swifter.unblockUser(for: UserTag.screenName(screenname)) { _ in
-            print("unblock user!")
-            self.blocking = false
-            self.followButton.setTitle("Follow", for: .normal)
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-    
-    @objc func followAction() {
-        print("following", following)
-        // if you already follow the user you are v
-        if blocking {
-            self.unblockAccount()
-        } else if following {
-            self.unfollowAccount()
+    @available(iOS 13.0, *)
+    @objc func decrementTweet() {
+        self.tweetNum-=1
+        self.globalTweetNum-=1
+        if self.globalTweetNum < 0 {
+            self.unwindToUserProfile()
         } else {
-            self.followAccount()
+            fetchPrevTimelineTweet()
         }
     }
+    
+    func fetchTimelineTweets() {
+        swifter.getTimeline(for: UserTag.screenName(self.screenName), tweetMode: .extended) { json in
+            // Successfully fetched timeline, we save the tweet id and create the tweet view
 
-    private func followAccount() {
-        // Follow user from user tag
-        swifter.followUser(UserTag.screenName(screenname)) { _ in
-            print("followed user!")
-            self.following = true
-            self.followButton.setTitle("Unfollow", for: .normal)
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
+            self.tweets = json.array ?? []
+            self.loadTweetDetails()
 
-    private func unfollowAccount() {
-        // unfollow user from user tag
-        swifter.unfollowUser(UserTag.screenName(screenname)) { _ in
-            print("unfollowed user!")
-            self.following = false
-            self.followButton.setTitle("Follow", for: .normal)
         } failure: { error in
             print(error.localizedDescription)
         }
     }
     
+    func fetchNextTimelineTweet() {
+        if self.tweetNum < self.tweets.count {
+            loadTweetDetails()
+        } else {
+            swifter.getTimeline(for: UserTag.screenName(self.screenName), maxID: String(self.maxTweetId - 1), tweetMode: .extended) { json in
+                // Successfully fetched timeline, we save the tweet id and create the tweet view
+
+                self.tweets = json.array ?? []
+                self.tweetNum = 0
+                self.sinceTweetId = 0
+                self.loadTweetDetails()
+
+            } failure: { error in
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func fetchPrevTimelineTweet() {
+        if self.tweetNum >= 0 {
+            loadTweetDetails()
+        } else {
+            swifter.getTimeline(for: UserTag.screenName(self.screenName), sinceID: String(self.sinceTweetId), tweetMode: .extended) { json in
+                // Successfully fetched timeline, we save the tweet id and create the tweet view
+
+                self.tweets = json.array ?? []
+                self.tweetNum = self.tweets.count - 1
+                self.loadTweetDetails()
+
+            } failure: { error in
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func loadTweetDetails() {
+        let hearted = self.tweets[self.tweetNum]["favorited"] == true
+        let retweeted = self.tweets[self.tweetNum]["retweeted"] == true
+        print("Updating user timeline", self.tweets[self.tweetNum]["favorited"], self.tweets[self.tweetNum]["retweeted"])
+
+        self.tweetUIView.update(self.tweets[self.tweetNum])
+        
+        self.maxTweetId = min(self.maxTweetId, Int(tweetUIView.tid)!)
+        self.sinceTweetId = max(self.sinceTweetId, Int(tweetUIView.tid)!)
+
+        if hearted {
+            self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
+        } else if !hearted {
+            self.heartView.setImage(UIImage(systemName: "heart"), animated: true)
+        }
+        if retweeted {
+            self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
+        } else if !retweeted {
+            self.retweetView.setImage(UIImage(named: "retweet_black"), animated: true)
+        }
+    }
+
+    @available(iOS 13.0, *)
+    @objc func likeAction() {
+        // Likes or unlikes the tweet that is currently visible on the screen
+        swifter.getTweet(for: self.tweetUIView.tid) { json in
+            let jsonResult = json.object!
+            let isLiked = jsonResult["favorited"] == true
+
+            // if the user has already liked the tweet then we unlike it, otherwise we like it
+            if isLiked {
+                self.unfavoriteTweet()
+                self.heartView.setImage(UIImage(systemName: "heart"), animated: true)
+
+            } else {
+                self.favoriteTweet()
+                self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
+            }
+
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+
+    private func unfavoriteTweet() {
+        // Unlike the tweet shown
+        swifter.unfavoriteTweet(forID: self.tweetUIView.tid) { _ in
+            print("unfavorited tweet!")
+            self.tweetUIView.updateLike(delta: -1)
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+
+    private func favoriteTweet() {
+        // Like the tweet shown
+        swifter.favoriteTweet(forID: self.tweetUIView.tid) { _ in
+            print("favorited tweet!")
+            self.tweetUIView.updateLike(delta: 1)
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+
+    @objc func retweetAction() {
+        // Retweets the tweet that is currently visible on the screen
+        swifter.getTweet(for: self.tweetUIView.tid) { json in
+            let jsonResult = json.object!
+            let isRetweeted = jsonResult["retweeted"] == true
+
+            // if the user has already retweeted the tweet then we unretweet it, otherwise we retweet it
+            if isRetweeted {
+                self.unretweetTweet()
+                self.retweetView.setImage(UIImage(named: "retweet_black"), animated: true)
+            } else {
+                self.retweetTweet()
+                self.retweetView.setImage(UIImage(named: "retweet_color"), animated: true)
+
+            }
+
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+
+    private func unretweetTweet() {
+        // Unretweet the tweet shown
+        swifter.unretweetTweet(forID: self.tweetUIView.tid) { _ in
+            print("unretweeted tweet!")
+            self.tweetUIView.updateRetweet(delta: -1)
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+
+    private func retweetTweet() {
+        // Retweet the tweet shown
+        swifter.retweetTweet(forID: self.tweetUIView.tid) { _ in
+            print("retweeted tweet!")
+            self.tweetUIView.updateRetweet(delta: 1)
+        } failure: { error in
+            print(error.localizedDescription)
+        }
+    }
+
     private func handleBlink(withFaceAnchor anchor: ARFaceAnchor) {
         let blendShapes = anchor.blendShapes
         if let eyeBlinkLeft = blendShapes[.eyeBlinkLeft] as? Float,
@@ -516,10 +558,10 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             if eyeBlinkLeft < 0.4 && eyeBlinkRight < 0.4 {
                 if isBlinking == true {
                     let elapsed = Date().timeIntervalSince(lastBlinkDate)
-                    if elapsed < 1 {
+                    if elapsed < 1.5 {
                         print("Double blink detected!")
                         DispatchQueue.main.async {
-                            self.showUserMenuViewController()
+                            self.showMenuViewController()
                         }
 
                     } else {
@@ -532,20 +574,13 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             }
         }
     }
-    
-    @objc func showTimeline() {
-        self.showUserTimelineViewController()
+
+    private func showMenuViewController() {
+        self.performSegue(withIdentifier: "timelinemenu", sender: self)
     }
     
-    private func showUserMenuViewController() {
-        self.performSegue(withIdentifier: "usermenu", sender: self)
-    }
-    
-    private func showUserTimelineViewController() {
-        self.performSegue(withIdentifier: "usertimeline", sender: self)
-    }
-    
-    @IBAction func myUnwindActionUserProfile(unwindSegue: UIStoryboardSegue) {
-        // Empty function that is needed to segue back to this view controller
+    @objc func unwindToUserProfile() {
+        // Pop the current view controller to go back to previous controller
+        self.performSegue(withIdentifier: "unwindUserProfile", sender: self)
     }
 }
