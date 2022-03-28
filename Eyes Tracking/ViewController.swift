@@ -99,7 +99,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var globalTweetNum: Int = 0
     var authenticatedScreenName = ""
     var screenName = ""
-    var isUserTimeline = false
     var tweets: [JSON] = []
     var maxTweetId: Int = Int.max
     var sinceTweetId: Int = 0
@@ -154,11 +153,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     func setupTwitter() {
         // Get the first tweet from the authenticated user's timeline
-        if self.isUserTimeline {
-            fetchTimelineTweet()
-        } else {
-            authorizeWithWebLogin()
-        }
+        authorizeWithWebLogin()
+        
         view.bringSubviewToFront(eyePositionIndicatorView)
 
         // Add actions to buttons
@@ -250,12 +246,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 menuViewController.swifter = self.swifter
                 menuViewController.screenname = self.tweetUIView.screenname
                 menuViewController.authenticatedScreenName = self.authenticatedScreenName
-            }
-        } else if segue.identifier == "userprofile" {
-            if let userProfileViewController = segue.destination as? UserProfileViewController {
-                userProfileViewController.swifter = self.swifter
-                userProfileViewController.authenticatedScreenName = self.authenticatedScreenName
-                userProfileViewController.screenname = self.screenName
             }
         }
     }
@@ -420,9 +410,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @objc func decrementTweet() {
         self.tweetNum-=1
         self.globalTweetNum-=1
-        if self.globalTweetNum < 0 && self.isUserTimeline {
-            self.showUserProfileViewController()
-        } else if self.globalTweetNum < 0 {
+        if self.globalTweetNum < 0 {
             self.globalTweetNum = 0
             self.tweetNum = 0
         } else {
@@ -431,30 +419,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     func fetchTimelineTweet() {
-        if self.isUserTimeline {
-            fetchUserTimelineTweets()
-        } else {
-            fetchHomeTimelineTweets()
-        }
-    }
-    
-    func fetchNextTimelineTweet() {
-        if self.isUserTimeline {
-            fetchNextUserTimelineTweets()
-        } else {
-            fetchNextHomeTimelineTweets()
-        }
-    }
-    
-    func fetchPrevTimelineTweet() {
-        if self.isUserTimeline {
-            fetchPrevUserTimelineTweets()
-        } else {
-            fetchPrevHomeTimelineTweets()
-        }
-    }
-    
-    func fetchHomeTimelineTweets() {
         // Load tweets from oauth authenticated user (currently @RenEddie)
         swifter.getHomeTimeline(tweetMode: .extended) { json in
             // Successfully fetched timeline, we save the tweet id and create the tweet view
@@ -466,20 +430,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             print(error.localizedDescription)
         }
     }
-    
-    func fetchUserTimelineTweets() {
-        swifter.getTimeline(for: UserTag.screenName(self.screenName), tweetMode: .extended) { json in
-            // Successfully fetched timeline, we save the tweet id and create the tweet view
 
-            self.tweets = json.array ?? []
-            self.loadTweetDetails()
-
-        } failure: { error in
-            print(error.localizedDescription)
-        }
-    }
-
-    func fetchNextHomeTimelineTweets() {
+    func fetchNextTimelineTweet() {
         // Load tweets from oauth authenticated user (currently @RenEddie)
         if self.tweetNum < self.tweets.count {
             loadTweetDetails()
@@ -505,32 +457,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
     
-    func fetchNextUserTimelineTweets() {
-        if self.tweetNum < self.tweets.count {
-            loadTweetDetails()
-        } else {
-            swifter.getTimeline(for: UserTag.screenName(self.screenName), maxID: String(self.maxTweetId - 1), tweetMode: .extended) { json in
-                // Successfully fetched timeline, we save the tweet id and create the tweet view
-
-                let jsonArray = json.array ?? []
-                
-                if jsonArray.count == 0 {
-                    self.tweetNum -= 1
-                    self.globalTweetNum -= 1
-                } else {
-                    self.tweets = jsonArray
-                    self.tweetNum = 0
-                    self.sinceTweetId = 0
-                    self.loadTweetDetails()
-                }
-                
-            } failure: { error in
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func fetchPrevHomeTimelineTweets() {
+    func fetchPrevTimelineTweet() {
         // Load tweets from oauth authenticated user (currently @RenEddie)
         if self.tweetNum >= 0 {
             loadTweetDetails()
@@ -542,23 +469,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 self.tweetNum = self.tweets.count - 1
                 self.loadTweetDetails()
                 
-            } failure: { error in
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func fetchPrevUserTimelineTweets() {
-        if self.tweetNum >= 0 {
-            loadTweetDetails()
-        } else {
-            swifter.getTimeline(for: UserTag.screenName(self.screenName), sinceID: String(self.sinceTweetId), tweetMode: .extended) { json in
-                // Successfully fetched timeline, we save the tweet id and create the tweet view
-
-                self.tweets = json.array ?? []
-                self.tweetNum = self.tweets.count - 1
-                self.loadTweetDetails()
-
             } failure: { error in
                 print(error.localizedDescription)
             }
@@ -699,10 +609,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     private func showMenuViewController() {
         self.performSegue(withIdentifier: "menu", sender: self)
-    }
-    
-    private func showUserProfileViewController() {
-        self.performSegue(withIdentifier: "userprofile", sender: self)
     }
     
     @IBAction func myUnwindActionHomeTimeline(unwindSegue: UIStoryboardSegue) {
