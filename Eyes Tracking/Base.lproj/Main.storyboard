@@ -1796,7 +1796,7 @@ Position Estimation</string>
                         <outlet property="upButton" destination="1lo-Sl-8ef" id="Y53-jL-vWn"/>
                         <outlet property="webView" destination="a0i-8x-Vdd" id="E3K-j7-xg6"/>
                         <segue destination="s7z-gE-2zk" kind="presentation" identifier="userlist" modalPresentationStyle="fullScreen" id="kvd-tf-wmo"/>
-                        <segue destination="06d-jr-jZ0" kind="presentation" identifier="userprofilefromprofile" id="mQg-ra-EXc"/>
+                        <segue destination="06d-jr-jZ0" kind="presentation" identifier="userprofilefromprofile" modalPresentationStyle="fullScreen" id="mQg-ra-EXc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sqf-bM-A0d" sceneMemberID="firstResponder"/>
@@ -2212,7 +2212,7 @@ Position Estimation</string>
                         <outlet property="user7Label" destination="KQj-QK-fTk" id="TaQ-Ww-REg"/>
                         <outlet property="user8Label" destination="Enu-1R-Orm" id="aK2-vE-fRj"/>
                         <outlet property="webView" destination="liu-dQ-MGO" id="A12-Ww-mQj"/>
-                        <segue destination="06d-jr-jZ0" kind="presentation" identifier="userprofilefrommenu" id="Phv-aM-mtg"/>
+                        <segue destination="06d-jr-jZ0" kind="presentation" identifier="userprofilefrommenu" modalPresentationStyle="fullScreen" id="Phv-aM-mtg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kck-nk-5Of" sceneMemberID="firstResponder"/>
