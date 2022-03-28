@@ -209,6 +209,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // Pause the view's session
         sceneView.session.pause()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tweetNum = 0
+        globalTweetNum = 0
+        maxTweetId = Int.max
+        sinceTweetId = 0
+        fetchTimelineTweet()
+    }
 
     override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         guard let key = presses.first?.key else { return }
