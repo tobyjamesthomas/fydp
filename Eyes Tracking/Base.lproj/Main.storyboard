@@ -697,9 +697,6 @@ Position Estimation</string>
                                                     </imageReference>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
-                                                <connections>
-                                                    <segue destination="ZoY-qx-X5M" kind="unwind" identifier="unwindHomeTimeline" unwindAction="myUnwindActionHomeTimelineWithUnwindSegue:" id="JZ4-Md-2nr"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WgV-D5-HRl" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                                 <rect key="frame" x="320" y="0.0" width="70" height="400"/>
@@ -880,6 +877,7 @@ Position Estimation</string>
                         <outlet property="userLabel" destination="c2d-JQ-t1Z" id="ZNc-lk-5Z5"/>
                         <outlet property="webView" destination="4x6-fg-ki8" id="yzv-Nn-qd7"/>
                         <segue destination="06d-jr-jZ0" kind="presentation" identifier="userprofile" modalPresentationStyle="fullScreen" id="zwx-dW-CzO"/>
+                        <segue destination="ZoY-qx-X5M" kind="unwind" identifier="unwindHomeTimeline" unwindAction="myUnwindActionHomeTimelineWithUnwindSegue:" id="3JV-ld-Iuy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="euq-X2-WV6" sceneMemberID="firstResponder"/>
@@ -1619,9 +1617,6 @@ Position Estimation</string>
                                                     </imageReference>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
-                                                <connections>
-                                                    <segue destination="CtC-GX-eJh" kind="unwind" identifier="unwindHomeTimeline" unwindAction="myUnwindActionHomeTimelineWithUnwindSegue:" id="S2F-it-fYr"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HGS-pP-W0M" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                                 <rect key="frame" x="320" y="0.0" width="70" height="400"/>
@@ -1804,6 +1799,7 @@ Position Estimation</string>
                         <outlet property="webView" destination="a0i-8x-Vdd" id="E3K-j7-xg6"/>
                         <segue destination="s7z-gE-2zk" kind="presentation" identifier="userlist" modalPresentationStyle="fullScreen" id="kvd-tf-wmo"/>
                         <segue destination="06d-jr-jZ0" kind="presentation" identifier="userprofilefromprofile" modalPresentationStyle="fullScreen" id="mQg-ra-EXc"/>
+                        <segue destination="CtC-GX-eJh" kind="unwind" identifier="unwindHomeTimeline" unwindAction="myUnwindActionHomeTimelineWithUnwindSegue:" id="vms-Jd-bWX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sqf-bM-A0d" sceneMemberID="firstResponder"/>
@@ -2032,9 +2028,6 @@ Position Estimation</string>
                                                     </imageReference>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                 </state>
-                                                <connections>
-                                                    <segue destination="bDY-bn-FLq" kind="unwind" identifier="unwindHomeTimeline" unwindAction="myUnwindActionHomeTimelineWithUnwindSegue:" id="mz0-ir-EkZ"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="joj-di-k3P" customClass="GazeUIButton" customModule="Eyes_Tracking" customModuleProvider="target">
                                                 <rect key="frame" x="320" y="0.0" width="70" height="400"/>
@@ -2223,7 +2216,6 @@ Position Estimation</string>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kck-nk-5Of" sceneMemberID="firstResponder"/>
-                <exit id="bDY-bn-FLq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3854" y="114"/>
         </scene>
@@ -2720,8 +2712,8 @@ Position Estimation</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="zwx-dW-CzO"/>
-        <segue reference="nTT-5B-z5v"/>
+        <segue reference="Phv-aM-mtg"/>
+        <segue reference="b8z-Ya-P9N"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Image" width="266.66665649414062" height="400"/>
