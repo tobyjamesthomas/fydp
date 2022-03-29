@@ -354,7 +354,7 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
 
     @objc func backAction() {
         // Pop the current view controller to go back to previous controller
-        unwindToHome()
+        self.dismiss(animated: true, completion: nil)
 
     }
 
