@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1210,13 +1210,13 @@ Position Estimation</string>
                                                                         <rect key="frame" x="80" y="0.0" width="170" height="70"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" ambiguous="YES" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5L-mw-QMM">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="12" height="32.333333333333336"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="12" height="25.333333333333332"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                                                                 <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="First Last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scQ-JB-BNS">
-                                                                                <rect key="frame" x="0.0" y="27.333333333333314" width="80.666666666666671" height="30"/>
+                                                                                <rect key="frame" x="0.0" y="20.333333333333314" width="80.666666666666671" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="30" id="ehw-CC-KSM"/>
                                                                                 </constraints>
@@ -1225,13 +1225,13 @@ Position Estimation</string>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="@Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUJ-8R-Yp3">
-                                                                                <rect key="frame" x="0.0" y="52.333333333333314" width="70.333333333333329" height="15.333333333333329"/>
+                                                                                <rect key="frame" x="0.0" y="45.333333333333314" width="70.333333333333329" height="15.333333333333336"/>
                                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CcF-iO-BTp">
-                                                                                <rect key="frame" x="0.0" y="62.666666666666693" width="5.666666666666667" height="7.3333333333333357"/>
+                                                                                <rect key="frame" x="0.0" y="55.666666666666686" width="5.666666666666667" height="14.333333333333329"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                 <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
@@ -2499,7 +2499,7 @@ Position Estimation</string>
                                 <rect key="frame" x="70" y="224" width="250" height="440"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yTY-Cg-Wpp">
-                                        <rect key="frame" x="0.0" y="-15" width="250" height="470.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="-30.333333333333343" width="250" height="500.66666666666674"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FIJ-ol-nPs" userLabel="HorizontalLine">
                                                 <rect key="frame" x="5" y="0.0" width="240" height="50"/>
@@ -2510,7 +2510,7 @@ Position Estimation</string>
                                                 </constraints>
                                             </view>
                                             <stackView autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3p0-UW-DKh">
-                                                <rect key="frame" x="0.0" y="65" width="250" height="70"/>
+                                                <rect key="frame" x="0.0" y="65.000000000000028" width="250" height="70"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="frh-Vn-p6w">
                                                         <rect key="frame" x="0.0" y="1" width="70" height="68.666666666666671"/>
@@ -2544,7 +2544,7 @@ Position Estimation</string>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVC-x1-I2z">
-                                                                <rect key="frame" x="0.0" y="55.666666666666686" width="170" height="14.333333333333329"/>
+                                                                <rect key="frame" x="0.0" y="55.666666666666629" width="170" height="14.333333333333329"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -2554,22 +2554,28 @@ Position Estimation</string>
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5H0-gY-hg6">
-                                                <rect key="frame" x="1" y="150" width="248.33333333333334" height="114.33333333333331"/>
+                                                <rect key="frame" x="1" y="150.00000000000003" width="248.33333333333334" height="114.33333333333334"/>
                                                 <string key="text">Unlike Swift 2, Swift 3 imports Objective-C's id as Any? instead of AnyObject? (see this Swift evolution proposal). To fix your error, you need to cast all of your variables to AnyObject. This may look something like the following:</string>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cx1-k9-FNn">
-                                                <rect key="frame" x="0.0" y="279.33333333333331" width="250" height="175"/>
+                                                <rect key="frame" x="0.0" y="279.33333333333337" width="250" height="175"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="175" id="Q0V-v3-NuD"/>
                                                 </constraints>
                                                 <imageReference key="image" image="Image" symbolScale="large"/>
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                                             </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zrv-hK-ZXY">
+                                                <rect key="frame" x="111.33333333333334" y="469.33333333333337" width="27.333333333333343" height="15.333333333333314"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yr2-NW-NXS" userLabel="HorizontalLine">
-                                                <rect key="frame" x="5" y="469.33333333333337" width="240" height="1"/>
+                                                <rect key="frame" x="5" y="499.66666666666674" width="240" height="1"/>
                                                 <color key="backgroundColor" systemColor="secondaryLabelColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="GkT-TV-UCh"/>
@@ -2598,6 +2604,7 @@ Position Estimation</string>
                                     <outlet property="profileImage" destination="frh-Vn-p6w" id="pIe-oI-7sO"/>
                                     <outlet property="retweetCountLabel" destination="7TJ-VD-ajD" id="esH-WV-Td9"/>
                                     <outlet property="screenNameLabel" destination="s1N-sz-zvM" id="cUr-yN-5bD"/>
+                                    <outlet property="tweetDateLabel" destination="Zrv-hK-ZXY" id="i6f-5o-QQf"/>
                                     <outlet property="tweetImage" destination="cx1-k9-FNn" id="C1F-3m-TMQ"/>
                                     <outlet property="tweetImageHeight" destination="Q0V-v3-NuD" id="UI9-M9-5cl"/>
                                     <outlet property="tweetLabel" destination="5H0-gY-hg6" id="X3F-lz-Ekk"/>
@@ -2714,7 +2721,7 @@ Position Estimation</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="zwx-dW-CzO"/>
-        <segue reference="b8z-Ya-P9N"/>
+        <segue reference="nTT-5B-z5v"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Image" width="266.66665649414062" height="400"/>

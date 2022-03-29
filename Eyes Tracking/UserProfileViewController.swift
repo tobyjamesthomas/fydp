@@ -186,7 +186,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
                 case .keyboardDownArrow:
                     showUserTimelineViewController()
                 case .keyboardD:
-                    showTimeline()
+                    showUserMenuViewController()
                 default:
                     super.pressesEnded(presses, with: event)
                 }
