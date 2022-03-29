@@ -565,7 +565,7 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
             if eyeBlinkLeft < 0.4 && eyeBlinkRight < 0.4 {
                 if isBlinking == true {
                     let elapsed = Date().timeIntervalSince(lastBlinkDate)
-                    if elapsed < 1.5 {
+                    if elapsed < 1.0 {
                         print("Double blink detected!")
                         DispatchQueue.main.async {
                             self.showMenuViewController()
