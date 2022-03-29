@@ -453,6 +453,22 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
         
         self.maxTweetId = min(self.maxTweetId, Int(tweetUIView.tid)!)
         self.sinceTweetId = max(self.sinceTweetId, Int(tweetUIView.tid)!)
+        
+        if let overridenLikes = self.overridenLikes[tweetUIView.tid] {
+            if overridenLikes && self.tweets[tweetNum]["favorited"] == false {
+                self.tweetUIView.updateLike(delta: 1)
+            } else if !overridenLikes && self.tweets[tweetNum]["favorited"] == true {
+                self.tweetUIView.updateLike(delta: -1)
+            }
+        }
+        
+        if let overridenRetweets = self.overridenRetweets[tweetUIView.tid] {
+            if overridenRetweets && self.tweets[tweetNum]["retweeted"] == false {
+                self.tweetUIView.updateRetweet(delta: 1)
+            } else if !overridenRetweets && self.tweets[tweetNum]["retweeted"] == true {
+                self.tweetUIView.updateRetweet(delta: -1)
+            }
+        }
 
         if hearted {
             self.heartView.setImage(UIImage(systemName: "heart.fill"), animated: true)
