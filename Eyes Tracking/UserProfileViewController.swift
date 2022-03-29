@@ -160,7 +160,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
         leftButton.addTarget(self, action: #selector(muteAction), for: .primaryActionTriggered)
         upButton.addTarget(self, action: #selector(followAction), for: .primaryActionTriggered)
         downButton.addTarget(self, action: #selector(showTimeline), for: .primaryActionTriggered)
-      
+
         // Group buttons
         gazeButtons.append(upButton)
         gazeButtons.append(leftButton)
@@ -171,7 +171,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.0)
         }
     }
-    
+
     override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         guard let key = presses.first?.key else { return }
         if #available(iOS 13.0, *) {
@@ -193,7 +193,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             }
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -231,7 +231,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             }
         }
     }
-    
+
     // MARK: - ARSCNViewDelegate
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -471,7 +471,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             print(error.localizedDescription)
         }
     }
-    
+
     @objc func followAction() {
         print("following", following)
         // if you already follow the user you are v
@@ -505,7 +505,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             print(error.localizedDescription)
         }
     }
-    
+
     private func handleBlink(withFaceAnchor anchor: ARFaceAnchor) {
         let blendShapes = anchor.blendShapes
         if let eyeBlinkLeft = blendShapes[.eyeBlinkLeft] as? Float,
@@ -516,7 +516,7 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             if eyeBlinkLeft < 0.4 && eyeBlinkRight < 0.4 {
                 if isBlinking == true {
                     let elapsed = Date().timeIntervalSince(lastBlinkDate)
-                    if elapsed < 1 {
+                    if elapsed < 0.7 {
                         print("Double blink detected!")
                         DispatchQueue.main.async {
                             self.showUserMenuViewController()
@@ -532,11 +532,11 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             }
         }
     }
-    
+
     @objc func showTimeline() {
         self.showUserTimelineViewController()
     }
-    
+
     private func showUserMenuViewController() {
         self.performSegue(withIdentifier: "usermenu", sender: self)
     }
