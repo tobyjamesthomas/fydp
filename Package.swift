@@ -17,6 +17,6 @@ let package = Package(
             exclude: ["Info.plist", "Base.lproj", "Assets.xcassets"]),
         .testTarget(
             name: "fydpTests",
-            dependencies: ["fydp"])
+            dependencies: ["Eyes Tracking"])
     ]
 )
