@@ -10,3 +10,4 @@ Pods/Pods.xcodeproj/xcuserdata/*
 Pods/*.xcodeproj/xcuserdata/*
 
 *.swp
+.DS_Store

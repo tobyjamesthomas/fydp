@@ -17,7 +17,7 @@ final class fydpTests: XCTestCase {
         // Mac Catalyst won't have `Process`, but it is supported for executables.
         #if !targetEnvironment(macCatalyst)
 
-        let fooBinary = productsDirectory.appendingPathComponent("fydp")
+        let fooBinary = productsDirectory.appendingPathComponent("Eyes Tracking")
 
         let process = Process()
         process.executableURL = fooBinary
