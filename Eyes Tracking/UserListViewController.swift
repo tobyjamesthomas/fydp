@@ -40,7 +40,6 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
     @IBOutlet weak var user7Label: UILabel!
     @IBOutlet weak var user8Label: UILabel!
 
-
     var faceNode: SCNNode = SCNNode()
 
     var eyeLNode: SCNNode = {
@@ -146,7 +145,7 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
 
         // Format TweetView to display single tweet
         self.setupTwitter()
-        
+
         menuLabels.append(user1Label)
         menuLabels.append(user2Label)
         menuLabels.append(user3Label)
@@ -155,8 +154,8 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
         menuLabels.append(user6Label)
         menuLabels.append(user7Label)
         menuLabels.append(user8Label)
-        
-        if (followerQuery) {
+
+        if followerQuery {
             self.setupUserFollowersLabels()
         } else {
             self.setupUserFriendsLabels()
@@ -190,7 +189,7 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
 
     func setupUserFollowersLabels() {
         // Grab all user followers from Swifter
-        self.swifter.getUserFollowers(for: UserTag.screenName(screenname)){ json,res2,res3  in
+        self.swifter.getUserFollowers(for: UserTag.screenName(screenname)) { json, _, _  in
             self.users = json.array ?? []
             self.userIndex = max(min(7, self.users.count-1), 0)
             // If there are less than 8 labels, reset other labels to the empty string
@@ -198,7 +197,7 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
                 self.menuLabels[index].text = "-"
             }
 
-            if (self.userIndex > 0) {
+            if self.userIndex > 0 {
                 // Fill in menus with user screennames
                 for index in 0...self.userIndex {
                     self.menuLabels[index].text = self.users[index]["screen_name"].string
@@ -211,7 +210,7 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
     }
 
     func setupUserFriendsLabels() {
-        self.swifter.getUserFollowing(for: UserTag.screenName(screenname)){ json,res2,res3  in
+        self.swifter.getUserFollowing(for: UserTag.screenName(screenname)) { json, _, _  in
             self.users = json.array ?? []
             self.userIndex = max(min(7, self.users.count-1), 0)
 
@@ -220,7 +219,7 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
                 self.menuLabels[index].text = "-"
             }
 
-            if (self.userIndex > 0) {
+            if self.userIndex > 0 {
                 // Fill in menus with user screennames
                 for index in 0...self.userIndex {
                     self.menuLabels[index].text = self.users[index]["screen_name"].string
@@ -413,7 +412,7 @@ class UserListViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
     }
 
     @objc func selectAction() {
-        if (self.menuLabels[self.currentLabelIndex].text! != "-") {
+        if self.menuLabels[self.currentLabelIndex].text! != "-" {
             self.showUserProfileViewController()
         }
     }

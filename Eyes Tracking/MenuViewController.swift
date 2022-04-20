@@ -138,7 +138,6 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
 
         // Format TweetView to display single tweet
         self.setupTwitter()
-        
         menuLabels.append(userLabel)
         menuLabels.append(homeTimelineLabel)
         menuLabels.append(personalProfileLabel)
@@ -217,7 +216,6 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
     override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         guard let key = presses.first?.key else { return }
         // Keypresses for debugging
-        
         if #available(iOS 13.0, *) {
             if self.isViewLoaded && (self.view.window != nil) {
                 switch key.keyCode {
@@ -351,7 +349,6 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         update(withFaceAnchor: faceAnchor)
     }
 
-
     @objc func backAction() {
         // Pop the current view controller to go back to previous controller
         self.dismiss(animated: true, completion: nil)
@@ -377,7 +374,6 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         default:
             unwindToHome()
         }
-        
     }
 
     @available(iOS 13.0, *)
@@ -406,7 +402,6 @@ class MenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         })
 
     }
-
 
     private func showUserProfileViewController() {
         self.performSegue(withIdentifier: "userprofile", sender: self)

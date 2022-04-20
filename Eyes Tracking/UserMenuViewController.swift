@@ -138,7 +138,7 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
 
         // Format TweetView to display single tweet
         self.setupTwitter()
-        
+
         menuLabels.append(followersLabel)
         menuLabels.append(friendsLabel)
         menuLabels.append(homeTimelineLabel)
@@ -188,7 +188,7 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
         // Pause the view's session
         sceneView.session.pause()
     }
-    
+
     // Pass swifter to next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "userlist" {
@@ -207,7 +207,6 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
         }
     }
 
-
     // MARK: - ARSCNViewDelegate
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -221,7 +220,7 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
     override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         guard let key = presses.first?.key else { return }
         // Keypresses for debugging
-        
+
         if #available(iOS 13.0, *) {
             if self.isViewLoaded && (self.view.window != nil) {
                 switch key.keyCode {
@@ -354,7 +353,6 @@ class UserMenuViewController: UIViewController, ARSCNViewDelegate, ARSessionDele
         guard let faceAnchor = anchor as? ARFaceAnchor else { return }
         update(withFaceAnchor: faceAnchor)
     }
-
 
     @objc func backAction() {
         // Pop the current view controller to go back to previous controller

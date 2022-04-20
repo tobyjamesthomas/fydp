@@ -156,18 +156,14 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
     func setupTwitter() {
         // Get the first tweet from the authenticated user's timeline
         fetchTimelineTweets()
-        
+
         view.bringSubviewToFront(eyePositionIndicatorView)
 
         // Add actions to buttons
         leftButton.addTarget(self, action: #selector(retweetAction), for: .primaryActionTriggered)
-        if #available(iOS 13.0, *) {
-            rightButton.addTarget(self, action: #selector(likeAction), for: .primaryActionTriggered)
-            upButton.addTarget(self, action: #selector(decrementTweet), for: .primaryActionTriggered)
-            downButton.addTarget(self, action: #selector(incrementTweet), for: .primaryActionTriggered)
-        } else {
-            // Fallback on earlier versions
-        }
+        rightButton.addTarget(self, action: #selector(likeAction), for: .primaryActionTriggered)
+        upButton.addTarget(self, action: #selector(decrementTweet), for: .primaryActionTriggered)
+        downButton.addTarget(self, action: #selector(incrementTweet), for: .primaryActionTriggered)
 
         // Group buttons
         gazeButtons.append(upButton)
@@ -178,13 +174,8 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
         for gazeButton in gazeButtons {
             gazeButton.backgroundColor = gazeButton.backgroundColor?.withAlphaComponent(0.0)
         }
-        var tapLike = UITapGestureRecognizer()
+        let tapLike = UITapGestureRecognizer(target: self, action: #selector(likeAction))
 
-        if #available(iOS 13.0, *) {
-            tapLike = UITapGestureRecognizer(target: self, action: #selector(likeAction))
-        } else {
-            // Fallback on earlier versions
-        }
         heartView.addGestureRecognizer(tapLike)
         heartView.isUserInteractionEnabled = true
 
@@ -215,32 +206,30 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
     override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         guard let key = presses.first?.key else { return }
 
-        if #available(iOS 13.0, *) {
-            if self.isViewLoaded && (self.view.window != nil) {
-                switch key.keyCode {
-                case .keyboardDownArrow:
-                    incrementTweet()
-                case .keyboardUpArrow:
-                    decrementTweet()
-                case .keyboardRightArrow:
-                    likeAction()
-                case .keyboardLeftArrow:
-                    retweetAction()
-                case .keyboardB:
-                    // Simulate double (B)link
-                    print("Double blink detected!")
-                    DispatchQueue.main.async {
-                        self.showMenuViewController()
-                    }
-                    lastBlinkDate = Date()
-
-                default:
-                    super.pressesEnded(presses, with: event)
+        if self.isViewLoaded && (self.view.window != nil) {
+            switch key.keyCode {
+            case .keyboardDownArrow:
+                incrementTweet()
+            case .keyboardUpArrow:
+                decrementTweet()
+            case .keyboardRightArrow:
+                likeAction()
+            case .keyboardLeftArrow:
+                retweetAction()
+            case .keyboardB:
+                // Simulate double (B)link
+                print("Double blink detected!")
+                DispatchQueue.main.async {
+                    self.showMenuViewController()
                 }
+                lastBlinkDate = Date()
+
+            default:
+                super.pressesEnded(presses, with: event)
             }
         }
     }
-    
+
     // Pass swfiter to next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "timelinemenu" {
@@ -379,7 +368,6 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
         update(withFaceAnchor: faceAnchor)
     }
 
-
     @available(iOS 13.0, *)
     @objc func incrementTweet() {
         self.tweetNum+=1
@@ -397,7 +385,7 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
             fetchPrevTimelineTweet()
         }
     }
-    
+
     func fetchTimelineTweets() {
         swifter.getTimeline(for: UserTag.screenName(self.screenName), tweetMode: .extended) { json in
             // Successfully fetched timeline, we save the tweet id and create the tweet view
@@ -409,12 +397,13 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
             print(error.localizedDescription)
         }
     }
-    
+
     func fetchNextTimelineTweet() {
         if self.tweetNum < self.tweets.count {
             loadTweetDetails()
         } else {
-            swifter.getTimeline(for: UserTag.screenName(self.screenName), maxID: String(self.maxTweetId - 1), tweetMode: .extended) { json in
+            swifter.getTimeline(for: UserTag.screenName(self.screenName),
+                                maxID: String(self.maxTweetId - 1), tweetMode: .extended) { json in
                 // Successfully fetched timeline, we save the tweet id and create the tweet view
 
                 self.tweets = json.array ?? []
@@ -427,12 +416,13 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
             }
         }
     }
-    
+
     func fetchPrevTimelineTweet() {
         if self.tweetNum >= 0 {
             loadTweetDetails()
         } else {
-            swifter.getTimeline(for: UserTag.screenName(self.screenName), sinceID: String(self.sinceTweetId), tweetMode: .extended) { json in
+            swifter.getTimeline(for: UserTag.screenName(self.screenName),
+                                sinceID: String(self.sinceTweetId), tweetMode: .extended) { json in
                 // Successfully fetched timeline, we save the tweet id and create the tweet view
 
                 self.tweets = json.array ?? []
@@ -444,16 +434,16 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
             }
         }
     }
-    
+
     func loadTweetDetails() {
         self.tweetUIView.update(self.tweets[self.tweetNum])
 
         let hearted = self.overridenLikes[tweetUIView.tid] ?? (self.tweets[tweetNum]["favorited"] == true)
         let retweeted = self.overridenRetweets[tweetUIView.tid] ?? (self.tweets[tweetNum]["retweeted"] == true)
-        
+
         self.maxTweetId = min(self.maxTweetId, Int(tweetUIView.tid)!)
         self.sinceTweetId = max(self.sinceTweetId, Int(tweetUIView.tid)!)
-        
+
         if let overridenLikes = self.overridenLikes[tweetUIView.tid] {
             if overridenLikes && self.tweets[tweetNum]["favorited"] == false {
                 self.tweetUIView.updateLike(delta: 1)
@@ -461,7 +451,7 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
                 self.tweetUIView.updateLike(delta: -1)
             }
         }
-        
+
         if let overridenRetweets = self.overridenRetweets[tweetUIView.tid] {
             if overridenRetweets && self.tweets[tweetNum]["retweeted"] == false {
                 self.tweetUIView.updateRetweet(delta: 1)
@@ -585,7 +575,7 @@ class UserTimelineViewController: UIViewController, ARSCNViewDelegate, ARSession
     private func showMenuViewController() {
         self.performSegue(withIdentifier: "timelinemenu", sender: self)
     }
-    
+
     @objc func unwindToUserProfile() {
         // Pop the current view controller to go back to previous controller
         self.performSegue(withIdentifier: "unwindUserProfile", sender: self)

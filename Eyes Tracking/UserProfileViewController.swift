@@ -379,7 +379,8 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             if self.muting {
                 if #available(iOS 13.0, *) {
                     let config = self.leftButton.currentImage!.symbolConfiguration!
-                    self.leftButton.setImage(UIImage(systemName: "speaker.slash.fill")?.applyingSymbolConfiguration(config), for: .normal)
+                    self.leftButton.setImage(UIImage(systemName:
+                                            "speaker.slash.fill")?.applyingSymbolConfiguration(config), for: .normal)
                 } else {
                     // Fallback on earlier versions
                 }
@@ -418,7 +419,8 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             self.muting = true
             if #available(iOS 13.0, *) {
                 let config = self.leftButton.currentImage!.symbolConfiguration!
-                self.leftButton.setImage(UIImage(systemName: "speaker.slash.fill")?.applyingSymbolConfiguration(config), for: .normal)
+                self.leftButton.setImage(UIImage(systemName:
+                                        "speaker.slash.fill")?.applyingSymbolConfiguration(config), for: .normal)
             } else {
                 // Fallback on earlier versions
             }
@@ -434,7 +436,8 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
             self.muting = false
             if #available(iOS 13.0, *) {
                 let config = self.leftButton.currentImage!.symbolConfiguration!
-                self.leftButton.setImage(UIImage(systemName: "speaker.3.fill")?.applyingSymbolConfiguration(config), for: .normal)
+                self.leftButton.setImage(UIImage(systemName:
+                                        "speaker.3.fill")?.applyingSymbolConfiguration(config), for: .normal)
             } else {
                 // Fallback on earlier versions
             }
@@ -540,11 +543,11 @@ class UserProfileViewController: UIViewController, ARSCNViewDelegate, ARSessionD
     private func showUserMenuViewController() {
         self.performSegue(withIdentifier: "usermenu", sender: self)
     }
-    
+
     private func showUserTimelineViewController() {
         self.performSegue(withIdentifier: "usertimeline", sender: self)
     }
-    
+
     @IBAction func myUnwindActionUserProfile(unwindSegue: UIStoryboardSegue) {
         // Empty function that is needed to segue back to this view controller
     }
