@@ -37,7 +37,7 @@ class ProfileUIView: UIView {
         let followingCount = json["friends_count"].integer!
         let followerCount = json["followers_count"].integer!
         let profileImageURL = json["profile_image_url_https"].string!
-        
+
         // Parse profile banner image or use a default from Imgur
         let profileBannerImageURL = json["profile_banner_url"].string ?? "https://i.imgur.com/pDh2Ox7.png"
 
@@ -45,8 +45,10 @@ class ProfileUIView: UIView {
         self.screenNameLabel.text = "@" + self.screenname
         self.descriptionLabel.text = descriptionText
         if #available(iOS 13.0, *) {
-            self.followingLabel.attributedText = self.attributedText(withString: self.formatCount(count: followingCount), userType: " Following")
-            self.followerLabel.attributedText = self.attributedText(withString: self.formatCount(count: followerCount), userType: " Followers")
+            self.followingLabel.attributedText = self.attributedText(withString:
+                                                    self.formatCount(count: followingCount), userType: " Following")
+            self.followerLabel.attributedText = self.attributedText(withString:
+                                                    self.formatCount(count: followerCount), userType: " Followers")
         }
         self.joinDate.text = self.getJoinDate(from: json["created_at"].string!)
 
@@ -90,12 +92,14 @@ class ProfileUIView: UIView {
     func attributedText(withString userCount: String, userType: String) -> NSAttributedString {
         // Set the UI label to use an AttributedString so that the number text can be bolded.
         let boldText = userCount
-        let attrs = [NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Bold", size: 15)!, NSAttributedString.Key.foregroundColor: UIColor.black]
-        let attributedString = NSMutableAttributedString(string:boldText, attributes:attrs)
+        let attrs = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 15)!,
+                     NSAttributedString.Key.foregroundColor: UIColor.black]
+        let attributedString = NSMutableAttributedString(string: boldText, attributes: attrs)
 
         let normalText = userType
-        let attrsNormal = [NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Thin", size: 15)!, NSAttributedString.Key.foregroundColor: UIColor.black]
-        let normalString = NSMutableAttributedString(string:normalText, attributes: attrsNormal)
+        let attrsNormal = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Thin", size: 15)!,
+                           NSAttributedString.Key.foregroundColor: UIColor.black]
+        let normalString = NSMutableAttributedString(string: normalText, attributes: attrsNormal)
 
         attributedString.append(normalString)
         return attributedString
@@ -106,10 +110,10 @@ class ProfileUIView: UIView {
         // Upsize the profile picture image for better display
         return url.replacingOccurrences(of: "normal.jpg", with: "400x400.jpg")
     }
-    
+
     func getJoinDate(from url: String) -> String {
         // Parse the join date from the json object
-        var dateItems = url.components(separatedBy: " ")
+        let dateItems = url.components(separatedBy: " ")
         return "Joined " + dateItems[1] + " " + dateItems[5]
     }
 }
